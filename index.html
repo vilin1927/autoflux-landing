@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autoflux – AI Automation Agency</title>
+    <meta
+      name="description"
+      content="Autoflux builds bespoke AI automation systems, optimizing operations, routing leads, and integrating AI copilots into your stack."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="primary-header">
+        <div class="logo">Autoflux</div>
+        <nav class="primary-nav" aria-label="Primary">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#process">Process</a>
+          <a href="#results">Results</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="btn btn-outline" href="#contact">Book intro call</a>
+      </header>
+
+      <main>
+        <section id="hero" class="hero">
+          <div class="hero__content">
+            <p class="eyebrow">Elite AI Automation Studio</p>
+            <h1>
+              Automate operations, expand capacity, and ship AI copilots in
+              weeks—not quarters.
+            </h1>
+            <p class="lede">
+              We blend strategy, automation engineering, and generative AI so
+              you close leads faster, keep teams lean, and give customers the
+              instant responses they expect.
+            </p>
+            <div class="metrics">
+              <article>
+                <h2>$12M+</h2>
+                <p>Pipeline value unlocked with AI qualification.</p>
+              </article>
+              <article>
+                <h2>320 hrs</h2>
+                <p>Average monthly labor time returned to teams.</p>
+              </article>
+              <article>
+                <h2>18 days</h2>
+                <p>Median time from audit to live automation.</p>
+              </article>
+            </div>
+            <div class="cta-group">
+              <a class="btn" href="#contact">Get a free automation blueprint</a>
+              <button class="btn btn-ghost" data-scroll="#capabilities">
+                See how we build
+              </button>
+            </div>
+          </div>
+          <form class="hero__form" id="scope-form">
+            <p>Request a 72-hour audit</p>
+            <label>
+              Work email
+              <input type="email" name="email" required placeholder="you@company.com" />
+            </label>
+            <label>
+              Team size
+              <select name="team" required>
+                <option value="">Select</option>
+                <option value="startup">1-20</option>
+                <option value="growth">21-100</option>
+                <option value="enterprise">101+</option>
+              </select>
+            </label>
+            <label>
+              Biggest bottleneck
+              <textarea
+                name="bottleneck"
+                rows="3"
+                placeholder="Lead routing, support, onboarding..."
+                required
+              ></textarea>
+            </label>
+            <button type="submit" class="btn">Send my audit</button>
+            <p class="form-footnote">No spam. We reply within one business day.</p>
+            <p class="form-success" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="logos" aria-label="Client logos">
+          <p>Trusted by GTM and operations teams at</p>
+          <div class="logos__marquee">
+            <span>CarbonSight</span>
+            <span>Volt CRM</span>
+            <span>Beacon Support</span>
+            <span>Atlas MedTech</span>
+            <span>Northwind Labs</span>
+            <span>Lumina Retail</span>
+          </div>
+        </section>
+
+        <section id="capabilities" class="capabilities">
+          <div class="section-heading">
+            <p class="eyebrow">Capabilities</p>
+            <h2>Full-stack automation without the internal overhead.</h2>
+            <p>
+              From whiteboard to production, we audit, design, and ship AI copilots that
+              plug directly into your CRM, ticketing system, and ops stack.
+            </p>
+          </div>
+          <div class="grid">
+            <article>
+              <h3>GTM & revenue operations</h3>
+              <ul>
+                <li>Lead enrichment and routing in under 30 seconds.</li>
+                <li>Deal desk copilots that surface blockers instantly.</li>
+                <li>CRM hygiene automations that keep data audit-ready.</li>
+              </ul>
+            </article>
+            <article>
+              <h3>Customer success copilots</h3>
+              <ul>
+                <li>Tier-1 AI agents resolving 70% of inbound requests.</li>
+                <li>Knowledge graph orchestration across help centers.</li>
+                <li>Escalation workflows that sync with live agents.</li>
+              </ul>
+            </article>
+            <article>
+              <h3>Internal operations</h3>
+              <ul>
+                <li>Invoice and procurement automations with approval loops.</li>
+                <li>Intelligent onboarding sequences for staff and clients.</li>
+                <li>Monitoring dashboards for compliance and uptime.</li>
+              </ul>
+            </article>
+            <article>
+              <h3>Custom AI copilots</h3>
+              <ul>
+                <li>Domain-tuned LLMs aligned with your security policies.</li>
+                <li>Retrieval pipelines that blend proprietary + public data.</li>
+                <li>Voice, chat, and workspace-native assistant surfaces.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="process" class="process">
+          <div class="section-heading">
+            <p class="eyebrow">Delivery process</p>
+            <h2>Plug into a proven, low-lift engagement.</h2>
+          </div>
+          <ol class="process__steps">
+            <li>
+              <h3>Discovery & audit</h3>
+              <p>We map current workflows, data, and tools, then document automation wins.</p>
+            </li>
+            <li>
+              <h3>Systems architecture</h3>
+              <p>Solution architects blueprint integrations, guardrails, and observability.</p>
+            </li>
+            <li>
+              <h3>Build & validation</h3>
+              <p>Engineers implement automations with weekly demos and test suites.</p>
+            </li>
+            <li>
+              <h3>Launch & optimization</h3>
+              <p>We train your team, hand over playbooks, and keep iterating on KPIs.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section id="results" class="results">
+          <div class="section-heading">
+            <p class="eyebrow">Results</p>
+            <h2>Compounding gains once the first automation ships.</h2>
+          </div>
+          <div class="results__grid">
+            <article>
+              <p class="stat">92%</p>
+              <h3>Ticket auto-resolution</h3>
+              <p>
+                Support org saw human escalations drop overnight after deploying Autoflux
+                copilots across Zendesk and Slack.
+              </p>
+            </article>
+            <article>
+              <p class="stat">4.3x</p>
+              <h3>Faster revenue follow-up</h3>
+              <p>
+                AI qualification bots route ICP-ready leads instantly and trigger human
+                hand-offs with the context sellers need.
+              </p>
+            </article>
+            <article>
+              <p class="stat">$380k</p>
+              <h3>Annual team savings</h3>
+              <p>
+                Finance automations eliminated repetitive reconciliation and freed up headcount
+                for strategic initiatives.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="contact">
+          <div class="section-heading">
+            <p class="eyebrow">Contact</p>
+            <h2>Ready to explore your automation roadmap?</h2>
+            <p>
+              Share your domain name so we can configure the custom domain on GitHub Pages
+              while it propagates.
+            </p>
+          </div>
+          <div class="contact__grid">
+            <article>
+              <h3>Direct line</h3>
+              <p>hello@autoflux.ai</p>
+              <p>+1 (415) 555-0113</p>
+              <p>Mon–Fri · 8a–6p Pacific</p>
+            </article>
+            <article>
+              <h3>Deployment support</h3>
+              <ul>
+                <li>Custom domain + SSL configuration</li>
+                <li>On-call engineering during launch week</li>
+                <li>Documentation and training resources</li>
+              </ul>
+            </article>
+            <form id="contact-form">
+              <label>
+                Your name
+                <input type="text" name="name" required placeholder="Full name" />
+              </label>
+              <label>
+                Company
+                <input type="text" name="company" required placeholder="Company" />
+              </label>
+              <label>
+                Domain for Pages
+                <input type="text" name="domain" required placeholder="autoflux.ai" />
+              </label>
+              <label>
+                Message
+                <textarea name="message" rows="3" required placeholder="Tell us about your stack"></textarea>
+              </label>
+              <button class="btn" type="submit">Send message</button>
+              <p class="form-success" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© <span id="year"></span> Autoflux Automation. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="mailto:hello@autoflux.ai">Email</a>
+          <a href="https://cal.com" target="_blank" rel="noreferrer">Book a session</a>
+          <a href="#process">Process</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="scripts/main.js" defer></script>
+  </body>
+</html>
