@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Automated Reporting from MongoDB – AutoFlux Case Study</title>
+  <meta name="description" content="How AutoFlux eliminated 100% of manual reporting work with automated MongoDB data pulls, aggregation, and scheduled Excel/CSV delivery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    .case-hero { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: white; padding: 4rem 2rem; border-radius: 2rem; margin-bottom: 3rem; }
+    .case-hero h1 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); }
+    .case-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 700px; }
+    .case-section { margin-bottom: 3rem; }
+    .case-video-placeholder { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(103, 200, 255, 0.1), rgba(26, 79, 246, 0.1)); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--text-muted); border: 2px dashed var(--card-border); margin: 2rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .stat-box { background: var(--cloud-white); padding: 2rem; border-radius: 1rem; border: 1px solid var(--card-border); text-align: center; }
+    .stat-box h3 { font-size: 2.5rem; color: var(--primary-blue); margin: 0 0 0.5rem; }
+    .stat-box p { margin: 0; color: var(--text-muted); }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0; }
+    .tech-badge { padding: 0.6rem 1.2rem; background: var(--accent-soft); color: var(--primary-blue); border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="primary-header">
+      <div class="logo">
+        <div class="logo__icon">AF</div>
+        <span>AutoFlux</span>
+      </div>
+      <nav class="primary-nav">
+        <a href="../index.html">← Back to Home</a>
+        <a href="../index.html#case-studies">All Case Studies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="btn btn-outline" href="../index.html#contact">Get Your Blueprint</a>
+    </header>
+
+    <main>
+      <div class="case-hero fade-in">
+        <span class="eyebrow" style="color: rgba(255,255,255,0.9);">Reporting & Analytics</span>
+        <h1>Automated Reporting from MongoDB</h1>
+        <p>100% automated communication reporting: pulls data from MongoDB, aggregates by owner/channel/status, and sends Excel/CSV reports daily, weekly, and monthly—zero manual work.</p>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Challenge</h2>
+        <p>
+          A lead generation company using Masterleads (ThatApp.io + MongoDB) was manually exporting communication data
+          every week to create reports for clients and internal ops reviews.
+        </p>
+        <p><strong>Their reporting pain points:</strong></p>
+        <ul style="line-height: 1.8; color: var(--text-muted);">
+          <li>1-2 hours per week pulling data from MongoDB and formatting in Excel</li>
+          <li>Inconsistent metrics across reports (human error in formulas)</li>
+          <li>No daily or monthly reporting cadence—only weekly (clients wanted more visibility)</li>
+          <li>Ops managers couldn't self-serve reports—had to ask data team every time</li>
+          <li>No aggregation by owner, channel, or call outcome (missed, answered, voicemail)</li>
+        </ul>
+        <p>
+          They needed an automated system that pulled data on schedule, aggregated it correctly every time, and emailed
+          formatted reports to stakeholders without manual intervention.
+        </p>
+      </section>
+
+      <div class="case-video-placeholder fade-in">
+        📹 Video Demo Placeholder
+        <br/><small style="font-size: 0.9rem;">(Will show: scheduled trigger → MongoDB query → aggregation → email delivery)</small>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Solution</h2>
+        <p>
+          AutoFlux built a fully automated reporting pipeline using n8n, ThatApp.io (MongoDB connector), and scheduled
+          triggers to generate and deliver reports daily, weekly, and monthly:
+        </p>
+
+        <h3 style="margin-top: 2rem;">How It Works:</h3>
+        <ol style="line-height: 1.8; color: var(--text-muted);">
+          <li><strong>Scheduled Triggers (n8n Cron):</strong>
+            <ul>
+              <li>Daily report: 8 AM every day</li>
+              <li>Weekly report: Monday 8 AM</li>
+              <li>Monthly report: 1st of month, 8 AM</li>
+            </ul>
+          </li>
+          <li><strong>Data Pull (ThatApp.io + MongoDB):</strong>
+            <ul>
+              <li>Connects to Masterleads MongoDB via ThatApp.io API</li>
+              <li>Queries communication logs for date range (yesterday, last 7 days, last month)</li>
+              <li>Pulls: call/text records, owner, channel (inbound/outbound), status (missed, answered, voicemail), timestamp</li>
+            </ul>
+          </li>
+          <li><strong>Data Aggregation (n8n + JavaScript):</strong>
+            <ul>
+              <li>Groups by owner (sales rep or account manager)</li>
+              <li>Aggregates by channel (calls vs texts)</li>
+              <li>Counts by status:
+                <ul>
+                  <li>Missed calls</li>
+                  <li>Answered calls</li>
+                  <li>Voicemails</li>
+                  <li>Texts sent/received</li>
+                </ul>
+              </li>
+              <li>Calculates key metrics:
+                <ul>
+                  <li>Answer rate % (answered / total calls)</li>
+                  <li>Response time (avg time to answer/reply)</li>
+                  <li>Volume trends (compared to previous period)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><strong>Report Generation:</strong>
+            <ul>
+              <li>Formats data into clean Excel spreadsheet (separate tabs for daily/weekly/monthly)</li>
+              <li>OR exports as CSV for import into other tools</li>
+              <li>Includes summary dashboard: total calls, answer rate, top performers</li>
+            </ul>
+          </li>
+          <li><strong>Email Delivery:</strong>
+            <ul>
+              <li>Sends report via email to:
+                <ul>
+                  <li>Ops managers (daily + weekly)</li>
+                  <li>Client stakeholders (weekly + monthly)</li>
+                  <li>Sales reps (individual performance only)</li>
+                </ul>
+              </li>
+              <li>Email body includes quick summary + attachment</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3 style="margin-top: 2rem;">Tech Stack:</h3>
+        <div class="tech-stack">
+          <span class="tech-badge">MongoDB (data source)</span>
+          <span class="tech-badge">ThatApp.io (MongoDB connector)</span>
+          <span class="tech-badge">n8n (workflow + scheduling)</span>
+          <span class="tech-badge">JavaScript (aggregation logic)</span>
+          <span class="tech-badge">Excel/CSV export</span>
+          <span class="tech-badge">Email (SMTP / SendGrid)</span>
+        </div>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Results</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3>100%</h3>
+            <p>Manual reporting eliminated</p>
+          </div>
+          <div class="stat-box">
+            <h3>6 hrs/week</h3>
+            <p>Time saved (across team)</p>
+          </div>
+          <div class="stat-box">
+            <h3>3 cadences</h3>
+            <p>Daily, weekly, monthly reports (vs 1)</p>
+          </div>
+          <div class="stat-box">
+            <h3>Zero errors</h3>
+            <p>Consistent metrics every time</p>
+          </div>
+        </div>
+
+        <blockquote style="background: var(--cloud-white); padding: 2rem; border-left: 4px solid var(--primary-blue); border-radius: 0.5rem; margin: 2rem 0; font-style: italic; color: var(--text-muted);">
+          "This automation completely eliminated a huge weekly bottleneck. Our clients love getting daily visibility into
+          call performance, and our ops team can make faster decisions because they don't have to wait for someone to pull
+          a report. It just works."
+          <br/><br/>
+          <strong style="color: var(--text);">– Operations Director, Lead Gen Company</strong>
+        </blockquote>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Key Takeaways</h2>
+        <ul style="line-height: 1.8;">
+          <li><strong>Scheduled Automation = Predictable Ops:</strong> Automating reporting on a fixed schedule ensures stakeholders always have fresh data without asking.</li>
+          <li><strong>Aggregation Logic is Critical:</strong> Correctly grouping by owner, channel, and status required careful spec work upfront—but once built, it ran perfectly every time.</li>
+          <li><strong>Multiple Cadences Add Value:</strong> Offering daily, weekly, and monthly reports gave different stakeholders the granularity they needed (clients wanted monthly trends, ops wanted daily pulse checks).</li>
+        </ul>
+      </section>
+
+      <section class="contact fade-in" style="margin-top: 4rem;">
+        <div class="section-heading" style="text-align: center;">
+          <p class="eyebrow">Tired of manual reporting work?</p>
+          <h2>Let's automate your reporting pipeline.</h2>
+          <p>Book a free blueprint call to see how we can eliminate manual data pulls and report generation.</p>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a class="btn pulse-glow" href="../index.html#contact" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">
+            Get Your Free Automation Blueprint
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> AutoFlux. Built for profit-first automation.</p>
+      <div class="footer-links">
+        <a href="mailto:hello@autoflux.ai">Email</a>
+        <a href="../index.html#case-studies">Case Studies</a>
+        <a href="../index.html">Home</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../scripts/main.js" defer></script>
+</body>
+</html>

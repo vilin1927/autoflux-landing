@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TikTok Slideshow Automation Platform – AutoFlux Case Study</title>
+  <meta name="description" content="How AutoFlux cut creative production time from 60 to 15 minutes with AI-powered TikTok slideshow automation using n8n, OpenAI GPT, and computer vision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    .case-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 2rem;
+      margin-bottom: 3rem;
+    }
+    .case-hero h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+    .case-hero p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      max-width: 700px;
+    }
+    .case-section {
+      margin-bottom: 3rem;
+    }
+    .case-video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, rgba(103, 200, 255, 0.1), rgba(26, 79, 246, 0.1));
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      border: 2px dashed var(--card-border);
+      margin: 2rem 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .stat-box {
+      background: var(--cloud-white);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--card-border);
+      text-align: center;
+    }
+    .stat-box h3 {
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      margin: 0 0 0.5rem;
+    }
+    .stat-box p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .tech-badge {
+      padding: 0.6rem 1.2rem;
+      background: var(--accent-soft);
+      color: var(--primary-blue);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="primary-header">
+      <div class="logo">
+        <div class="logo__icon">AF</div>
+        <span>AutoFlux</span>
+      </div>
+      <nav class="primary-nav">
+        <a href="../index.html">← Back to Home</a>
+        <a href="../index.html#case-studies">All Case Studies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="btn btn-outline" href="../index.html#contact">Get Your Blueprint</a>
+    </header>
+
+    <main>
+      <div class="case-hero fade-in">
+        <span class="eyebrow" style="color: rgba(255,255,255,0.9);">Creative Automation</span>
+        <h1>TikTok Slideshow Automation Platform</h1>
+        <p>AI-powered creative production that scrapes viral TikTok slideshows, analyzes patterns with GPT, and generates multiple text/image variants—cutting campaign time by 75%.</p>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Challenge</h2>
+        <p>
+          Our client, an e-commerce brand running high-volume TikTok ad campaigns, was spending 60+ minutes per campaign
+          manually researching viral slideshow trends, downloading assets, and creating variations for A/B testing.
+        </p>
+        <p>
+          Their creative team was bottlenecked—unable to scale ad production without hiring more designers. They needed
+          a way to automate the research, extraction, and variant generation process while maintaining creative quality.
+        </p>
+      </section>
+
+      <div class="case-video-placeholder fade-in">
+        📹 Video Demo Placeholder
+        <br/><small style="font-size: 0.9rem;">(Will show platform in action: scraping → analysis → generation)</small>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Solution</h2>
+        <p>
+          AutoFlux built a fully automated TikTok creative production platform using n8n, OpenAI GPT-4, and custom
+          computer vision logic:
+        </p>
+
+        <h3 style="margin-top: 2rem;">How It Works:</h3>
+        <ol style="line-height: 1.8; color: var(--text-muted);">
+          <li><strong>Viral Content Scraping:</strong> Automatically scrapes TikTok for top-performing slideshow ads in target niches using TikTok API + Apify.</li>
+          <li><strong>Pattern Analysis (GPT-4):</strong> Sends scraped content to GPT-4 to analyze:
+            <ul>
+              <li>Winning text hooks and messaging patterns</li>
+              <li>Image composition and visual themes</li>
+              <li>Timing, pacing, and transitions</li>
+            </ul>
+          </li>
+          <li><strong>Variant Generation:</strong> Creates 5-10 slideshow variants per viral template:
+            <ul>
+              <li>Generates multiple text overlays (different hooks, CTAs)</li>
+              <li>Applies smart text placement rules using computer vision logic</li>
+              <li>Outputs different product/image combinations</li>
+            </ul>
+          </li>
+          <li><strong>Asset Delivery:</strong> Automatically organizes and delivers all variants to Google Drive, ready for the media buyer to launch.</li>
+        </ol>
+
+        <h3 style="margin-top: 2rem;">Tech Stack:</h3>
+        <div class="tech-stack">
+          <span class="tech-badge">n8n (workflow orchestration)</span>
+          <span class="tech-badge">OpenAI GPT-4 (pattern analysis)</span>
+          <span class="tech-badge">TikTok API</span>
+          <span class="tech-badge">Apify (web scraping)</span>
+          <span class="tech-badge">Google Drive API</span>
+          <span class="tech-badge">Custom CV Logic</span>
+        </div>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Results</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3>60 → 15 min</h3>
+            <p>Creative production time per campaign</p>
+          </div>
+          <div class="stat-box">
+            <h3>75%</h3>
+            <p>Time savings on creative workflow</p>
+          </div>
+          <div class="stat-box">
+            <h3>5-10x</h3>
+            <p>More variants per campaign for testing</p>
+          </div>
+          <div class="stat-box">
+            <h3>$0</h3>
+            <p>Additional designer costs</p>
+          </div>
+        </div>
+
+        <blockquote style="background: var(--cloud-white); padding: 2rem; border-left: 4px solid var(--primary-blue); border-radius: 0.5rem; margin: 2rem 0; font-style: italic; color: var(--text-muted);">
+          "This platform completely changed how we approach creative production. What used to take an hour now takes 15 minutes,
+          and we're testing way more variants than we ever could manually. Our ROAS improved because we're always using
+          fresh, data-backed creative angles."
+          <br/><br/>
+          <strong style="color: var(--text);">– Head of Growth, E-Commerce Brand</strong>
+        </blockquote>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Key Takeaways</h2>
+        <ul style="line-height: 1.8;">
+          <li><strong>AI + Automation = Scalable Creativity:</strong> By combining LLMs with workflow automation, creative production can scale without linear headcount growth.</li>
+          <li><strong>Spec-Driven Development:</strong> We documented exact text placement rules, scraping parameters, and output formats before building—no scope creep.</li>
+          <li><strong>Fast ROI:</strong> The system paid for itself within the first month through time savings and increased test velocity.</li>
+        </ul>
+      </section>
+
+      <section class="contact fade-in" style="margin-top: 4rem;">
+        <div class="section-heading" style="text-align: center;">
+          <p class="eyebrow">Ready to automate your creative production?</p>
+          <h2>Let's build your custom automation system.</h2>
+          <p>Book a free blueprint call to see how we can automate your biggest bottlenecks.</p>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a class="btn pulse-glow" href="../index.html#contact" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">
+            Get Your Free Automation Blueprint
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> AutoFlux. Built for profit-first automation.</p>
+      <div class="footer-links">
+        <a href="mailto:hello@autoflux.ai">Email</a>
+        <a href="../index.html#case-studies">Case Studies</a>
+        <a href="../index.html">Home</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../scripts/main.js" defer></script>
+</body>
+</html>

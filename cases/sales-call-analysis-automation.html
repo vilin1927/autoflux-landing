@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI-Powered Call Analysis & Coaching – AutoFlux Case Study</title>
+  <meta name="description" content="How AutoFlux cut call review time from 45 to 5 minutes using LLM-powered scorecards, BigQuery analytics, and GoHighLevel CRM sync." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    .case-hero { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 4rem 2rem; border-radius: 2rem; margin-bottom: 3rem; }
+    .case-hero h1 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); }
+    .case-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 700px; }
+    .case-section { margin-bottom: 3rem; }
+    .case-video-placeholder { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(103, 200, 255, 0.1), rgba(26, 79, 246, 0.1)); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--text-muted); border: 2px dashed var(--card-border); margin: 2rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .stat-box { background: var(--cloud-white); padding: 2rem; border-radius: 1rem; border: 1px solid var(--card-border); text-align: center; }
+    .stat-box h3 { font-size: 2.5rem; color: var(--primary-blue); margin: 0 0 0.5rem; }
+    .stat-box p { margin: 0; color: var(--text-muted); }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0; }
+    .tech-badge { padding: 0.6rem 1.2rem; background: var(--accent-soft); color: var(--primary-blue); border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="primary-header">
+      <div class="logo">
+        <div class="logo__icon">AF</div>
+        <span>AutoFlux</span>
+      </div>
+      <nav class="primary-nav">
+        <a href="../index.html">← Back to Home</a>
+        <a href="../index.html#case-studies">All Case Studies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="btn btn-outline" href="../index.html#contact">Get Your Blueprint</a>
+    </header>
+
+    <main>
+      <div class="case-hero fade-in">
+        <span class="eyebrow" style="color: rgba(255,255,255,0.9);">Sales Operations</span>
+        <h1>AI-Powered Call Analysis & Coaching System</h1>
+        <p>Automated sales call scorecards, objection tracking, and coaching notes using LLMs—cutting review time from 45 minutes to 5 minutes per call.</p>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Challenge</h2>
+        <p>
+          A high-ticket sales team was recording every call for quality assurance and coaching, but managers had no time
+          to actually review them. Each call took 45+ minutes to listen to, score, and write coaching notes.
+        </p>
+        <p>
+          With 50+ calls per week, manual review was impossible. Critical coaching opportunities were being missed, and
+          there was no systematic way to identify top objections, red flags, or winning talk tracks.
+        </p>
+        <p><strong>They needed:</strong></p>
+        <ul style="line-height: 1.8; color: var(--text-muted);">
+          <li>Consistent, multi-dimensional scoring for every call</li>
+          <li>Automated objection and red/green flag extraction</li>
+          <li>Coaching notes synced directly into their CRM (GoHighLevel)</li>
+          <li>Aggregate analytics to spot trends across reps and campaigns</li>
+        </ul>
+      </section>
+
+      <div class="case-video-placeholder fade-in">
+        📹 Video Demo Placeholder
+        <br/><small style="font-size: 0.9rem;">(Will show: transcript upload → LLM analysis → CRM sync)</small>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Solution</h2>
+        <p>
+          AutoFlux built an AI-powered call analysis pipeline that watches for new transcripts, scores them with GPT-4,
+          writes structured data to BigQuery, and syncs actionable notes into GoHighLevel:
+        </p>
+
+        <h3 style="margin-top: 2rem;">Workflow Steps:</h3>
+        <ol style="line-height: 1.8; color: var(--text-muted);">
+          <li><strong>Transcript Monitoring:</strong>
+            <ul>
+              <li>n8n watches Google Drive folder for new call transcripts (uploaded by call recording tool)</li>
+              <li>Triggers immediately when new file is detected</li>
+            </ul>
+          </li>
+          <li><strong>LLM Analysis (OpenAI GPT-4):</strong>
+            <ul>
+              <li>Sends full transcript to GPT-4 with custom scoring prompt</li>
+              <li>Generates:
+                <ul>
+                  <li><strong>Scorecard:</strong> Rapport (1-10), Objection Handling (1-10), Closing Strength (1-10), Overall Performance (1-10)</li>
+                  <li><strong>Summary:</strong> 2-3 sentence call summary</li>
+                  <li><strong>Objections:</strong> List of all objections raised by prospect</li>
+                  <li><strong>Red Flags:</strong> Warning signs (price sensitivity, stalling, competitor mentions)</li>
+                  <li><strong>Green Flags:</strong> Positive signals (budget confirmed, decision-maker present, urgency)</li>
+                  <li><strong>Coaching Notes:</strong> Specific feedback for the rep (2-3 actionable items)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><strong>Data Storage (BigQuery):</strong>
+            <ul>
+              <li>Writes structured scorecard data to BigQuery for long-term analytics</li>
+              <li>Enables reporting on: avg scores by rep, common objections, red flag frequency, etc.</li>
+            </ul>
+          </li>
+          <li><strong>CRM Sync (GoHighLevel):</strong>
+            <ul>
+              <li>Updates contact record in GHL with:
+                <ul>
+                  <li>Overall score</li>
+                  <li>Summary + coaching notes in activity feed</li>
+                  <li>Custom fields: red flags, objections</li>
+                </ul>
+              </li>
+              <li>Sales manager sees notes immediately without leaving CRM</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3 style="margin-top: 2rem;">Tech Stack:</h3>
+        <div class="tech-stack">
+          <span class="tech-badge">OpenAI GPT-4 (call analysis)</span>
+          <span class="tech-badge">BigQuery (analytics storage)</span>
+          <span class="tech-badge">GoHighLevel API (CRM sync)</span>
+          <span class="tech-badge">n8n (workflow orchestration)</span>
+          <span class="tech-badge">Google Drive API (transcript monitoring)</span>
+        </div>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Results</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3>45 → 5 min</h3>
+            <p>Call review time per recording</p>
+          </div>
+          <div class="stat-box">
+            <h3>100%</h3>
+            <p>Calls reviewed (vs ~10% manual)</p>
+          </div>
+          <div class="stat-box">
+            <h3>90%</h3>
+            <p>Manager time saved on QA</p>
+          </div>
+          <div class="stat-box">
+            <h3>Instant</h3>
+            <p>Coaching notes available in CRM</p>
+          </div>
+        </div>
+
+        <blockquote style="background: var(--cloud-white); padding: 2rem; border-left: 4px solid var(--primary-blue); border-radius: 0.5rem; margin: 2rem 0; font-style: italic; color: var(--text-muted);">
+          "This changed our entire coaching process. Before, I could only review 5-6 calls per week. Now every single call
+          gets scored and I can quickly scan for red flags or coaching opportunities. Our reps are improving faster because
+          feedback is immediate and consistent."
+          <br/><br/>
+          <strong style="color: var(--text);">– Sales Director, High-Ticket B2B Company</strong>
+        </blockquote>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Key Takeaways</h2>
+        <ul style="line-height: 1.8;">
+          <li><strong>LLMs Excel at Structured Analysis:</strong> GPT-4's ability to extract objections, flags, and coaching points from unstructured transcripts is game-changing for sales ops.</li>
+          <li><strong>Consistent Scoring Beats Subjective Review:</strong> The LLM applies the same criteria to every call, eliminating manager bias and ensuring fair feedback.</li>
+          <li><strong>CRM Integration is Critical:</strong> Syncing insights directly into GHL meant managers actually used the data—no separate dashboards or exports needed.</li>
+        </ul>
+      </section>
+
+      <section class="contact fade-in" style="margin-top: 4rem;">
+        <div class="section-heading" style="text-align: center;">
+          <p class="eyebrow">Ready to automate call analysis?</p>
+          <h2>Let's build your AI coaching system.</h2>
+          <p>Book a free blueprint call to see how we can automate your sales ops workflows.</p>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a class="btn pulse-glow" href="../index.html#contact" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">
+            Get Your Free Automation Blueprint
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> AutoFlux. Built for profit-first automation.</p>
+      <div class="footer-links">
+        <a href="mailto:hello@autoflux.ai">Email</a>
+        <a href="../index.html#case-studies">Case Studies</a>
+        <a href="../index.html">Home</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../scripts/main.js" defer></script>
+</body>
+</html>

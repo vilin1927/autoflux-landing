@@ -3,265 +3,437 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Autoflux – AI Automation Agency</title>
+    <title>AutoFlux – Profit-Driven AI Automation for Lead Gen, Calls & Ops</title>
     <meta
       name="description"
-      content="Autoflux builds bespoke AI automation systems, optimizing operations, routing leads, and integrating AI copilots into your stack."
+      content="Stop losing time and money to manual work. AutoFlux builds profit-first AI automation systems that turn messy lead gen, fragmented data, and slow processes into clean, automated pipelines."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
     <div class="page">
+      <!-- HEADER -->
       <header class="primary-header">
-        <div class="logo">Autoflux</div>
+        <div class="logo">
+          <div class="logo__icon">AF</div>
+          <span>AutoFlux</span>
+        </div>
         <nav class="primary-nav" aria-label="Primary">
-          <a href="#capabilities">Capabilities</a>
-          <a href="#process">Process</a>
-          <a href="#results">Results</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#case-studies">Case Studies</a>
+          <a href="#who-we-serve">Who We Serve</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a class="btn btn-outline" href="#contact">Book intro call</a>
+        <a class="btn btn-outline" href="#contact">Get Your Blueprint</a>
       </header>
 
       <main>
-        <section id="hero" class="hero">
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero fade-in">
           <div class="hero__content">
-            <p class="eyebrow">Elite AI Automation Studio</p>
+            <p class="eyebrow">Profit-First AI Automation Agency</p>
             <h1>
-              Automate operations, expand capacity, and ship AI copilots in
-              weeks—not quarters.
+              Turn manual chaos into automated revenue—without breaking your stack.
             </h1>
             <p class="lede">
-              We blend strategy, automation engineering, and generative AI so
-              you close leads faster, keep teams lean, and give customers the
-              instant responses they expect.
+              Stop losing time and money to spreadsheets, fragmented data, and manual follow-ups.
+              We build custom AI automation systems that clean your lead gen, sync your tools,
+              and unlock capacity—so you can scale without hiring.
             </p>
+
+            <!-- Key Metrics -->
             <div class="metrics">
-              <article>
-                <h2>$12M+</h2>
-                <p>Pipeline value unlocked with AI qualification.</p>
+              <article class="fade-in-up delay-100">
+                <h2 class="counter" data-target="320">0</h2>
+                <p>Hours saved monthly (avg per client)</p>
               </article>
-              <article>
-                <h2>320 hrs</h2>
-                <p>Average monthly labor time returned to teams.</p>
+              <article class="fade-in-up delay-200">
+                <h2>60→10 min</h2>
+                <p>Call review time cut dramatically</p>
               </article>
-              <article>
-                <h2>18 days</h2>
-                <p>Median time from audit to live automation.</p>
+              <article class="fade-in-up delay-300">
+                <h2>Days, not months</h2>
+                <p>From audit to live automation</p>
               </article>
             </div>
+
             <div class="cta-group">
-              <a class="btn" href="#contact">Get a free automation blueprint</a>
-              <button class="btn btn-ghost" data-scroll="#capabilities">
+              <a class="btn pulse-glow" href="#contact">Get a Free Automation Blueprint</a>
+              <button class="btn btn-ghost" data-scroll="#how-it-works">
                 See how we build
               </button>
             </div>
           </div>
-          <form class="hero__form" id="scope-form">
-            <p>Request a 72-hour audit</p>
+
+          <!-- BLUEPRINT FORM -->
+          <form class="hero__form fade-in-up delay-400" id="scope-form">
+            <p style="font-weight: 600; font-size: 1.1rem; color: var(--dark-navy);">
+              Book your free automation blueprint call
+            </p>
             <label>
               Work email
               <input type="email" name="email" required placeholder="you@company.com" />
             </label>
             <label>
-              Team size
-              <select name="team" required>
-                <option value="">Select</option>
-                <option value="startup">1-20</option>
-                <option value="growth">21-100</option>
-                <option value="enterprise">101+</option>
-              </select>
-            </label>
-            <label>
-              Biggest bottleneck
+              Your biggest bottleneck
               <textarea
                 name="bottleneck"
                 rows="3"
-                placeholder="Lead routing, support, onboarding..."
+                placeholder="e.g., Manual lead enrichment, messy CRM data, slow call analysis..."
                 required
               ></textarea>
             </label>
-            <button type="submit" class="btn">Send my audit</button>
-            <p class="form-footnote">No spam. We reply within one business day.</p>
+            <label>
+              Current monthly cost (time or $)
+              <input
+                type="text"
+                name="cost"
+                placeholder="e.g., 40 hours/month, $5K in VA costs"
+                required
+              />
+            </label>
+            <button type="submit" class="btn">Book My Blueprint Call</button>
+            <p class="form-footnote">
+              We'll audit your process and outline 1-3 concrete automations—no pitch, just value.
+            </p>
             <p class="form-success" role="status" aria-live="polite"></p>
           </form>
         </section>
 
-        <section class="logos" aria-label="Client logos">
-          <p>Trusted by GTM and operations teams at</p>
+        <!-- SOCIAL PROOF / CLIENT LOGOS -->
+        <section class="logos slide-in-left" aria-label="Client industries">
+          <p>Trusted by teams in</p>
           <div class="logos__marquee">
-            <span>CarbonSight</span>
-            <span>Volt CRM</span>
-            <span>Beacon Support</span>
-            <span>Atlas MedTech</span>
-            <span>Northwind Labs</span>
-            <span>Lumina Retail</span>
+            <span>SaaS & Tech</span>
+            <span>Real Estate</span>
+            <span>Wellness & Fitness</span>
+            <span>Veterinary Services</span>
+            <span>E-Commerce</span>
+            <span>Financial Services</span>
           </div>
         </section>
 
-        <section id="capabilities" class="capabilities">
+        <!-- HOW IT WORKS -->
+        <section id="how-it-works" class="process fade-in">
           <div class="section-heading">
-            <p class="eyebrow">Capabilities</p>
-            <h2>Full-stack automation without the internal overhead.</h2>
+            <p class="eyebrow">How We Work</p>
+            <h2>Fast, spec-driven automation builds—not fragile hacks.</h2>
             <p>
-              From whiteboard to production, we audit, design, and ship AI copilots that
-              plug directly into your CRM, ticketing system, and ops stack.
+              We don't sell templates or "quick zaps." Every AutoFlux system is custom-built,
+              documented, and designed to scale with your business.
             </p>
           </div>
-          <div class="grid">
-            <article>
-              <h3>GTM & revenue operations</h3>
-              <ul>
-                <li>Lead enrichment and routing in under 30 seconds.</li>
-                <li>Deal desk copilots that surface blockers instantly.</li>
-                <li>CRM hygiene automations that keep data audit-ready.</li>
-              </ul>
-            </article>
-            <article>
-              <h3>Customer success copilots</h3>
-              <ul>
-                <li>Tier-1 AI agents resolving 70% of inbound requests.</li>
-                <li>Knowledge graph orchestration across help centers.</li>
-                <li>Escalation workflows that sync with live agents.</li>
-              </ul>
-            </article>
-            <article>
-              <h3>Internal operations</h3>
-              <ul>
-                <li>Invoice and procurement automations with approval loops.</li>
-                <li>Intelligent onboarding sequences for staff and clients.</li>
-                <li>Monitoring dashboards for compliance and uptime.</li>
-              </ul>
-            </article>
-            <article>
-              <h3>Custom AI copilots</h3>
-              <ul>
-                <li>Domain-tuned LLMs aligned with your security policies.</li>
-                <li>Retrieval pipelines that blend proprietary + public data.</li>
-                <li>Voice, chat, and workspace-native assistant surfaces.</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section id="process" class="process">
-          <div class="section-heading">
-            <p class="eyebrow">Delivery process</p>
-            <h2>Plug into a proven, low-lift engagement.</h2>
-          </div>
           <ol class="process__steps">
-            <li>
-              <h3>Discovery & audit</h3>
-              <p>We map current workflows, data, and tools, then document automation wins.</p>
+            <li class="fade-in-up delay-100">
+              <h3>1. Free Automation Blueprint (30-45 min call)</h3>
+              <p>
+                We audit your current workflow, identify high-ROI automations, and outline 1-3
+                concrete systems that would save time or unlock revenue.
+              </p>
             </li>
-            <li>
-              <h3>Systems architecture</h3>
-              <p>Solution architects blueprint integrations, guardrails, and observability.</p>
+            <li class="fade-in-up delay-200">
+              <h3>2. Spec & Architecture (if you move forward)</h3>
+              <p>
+                We map integrations, data flows, and edge cases—then deliver a clear technical
+                spec with diagrams, milestones, and a fixed timeline.
+              </p>
             </li>
-            <li>
-              <h3>Build & validation</h3>
-              <p>Engineers implement automations with weekly demos and test suites.</p>
+            <li class="fade-in-up delay-300">
+              <h3>3. Build & Weekly Demos</h3>
+              <p>
+                Our engineers build in n8n, Make, GHL, Apify, and custom APIs. You see progress
+                weekly with live demos and can request tweaks before launch.
+              </p>
             </li>
-            <li>
-              <h3>Launch & optimization</h3>
-              <p>We train your team, hand over playbooks, and keep iterating on KPIs.</p>
+            <li class="fade-in-up delay-400">
+              <h3>4. Launch, Handover & Iteration</h3>
+              <p>
+                We deploy to production, train your team, hand over clean docs and error logs,
+                and stay available for optimizations as you scale.
+              </p>
             </li>
           </ol>
         </section>
 
-        <section id="results" class="results">
+        <!-- WHO WE SERVE -->
+        <section id="who-we-serve" class="capabilities section-dark fade-in">
           <div class="section-heading">
-            <p class="eyebrow">Results</p>
-            <h2>Compounding gains once the first automation ships.</h2>
+            <p class="eyebrow">Who We Serve</p>
+            <h2>Built for teams drowning in manual work and messy data.</h2>
+            <p>
+              Whether you're a growth team, agency, or ops leader, if your processes are
+              spreadsheet-driven and you're losing deals to slow follow-up—we can help.
+            </p>
           </div>
-          <div class="results__grid">
-            <article>
-              <p class="stat">92%</p>
-              <h3>Ticket auto-resolution</h3>
-              <p>
-                Support org saw human escalations drop overnight after deploying Autoflux
-                copilots across Zendesk and Slack.
-              </p>
+          <div class="grid">
+            <article class="fade-in-up delay-100">
+              <h3>Lead Gen & Sales Teams</h3>
+              <ul>
+                <li>Automated scraping, enrichment, and CRM sync (no more bad emails)</li>
+                <li>Instant lead routing and qualification pipelines</li>
+                <li>Call analysis, scorecards, and rep coaching—auto-generated</li>
+              </ul>
             </article>
-            <article>
-              <p class="stat">4.3x</p>
-              <h3>Faster revenue follow-up</h3>
-              <p>
-                AI qualification bots route ICP-ready leads instantly and trigger human
-                hand-offs with the context sellers need.
-              </p>
+            <article class="fade-in-up delay-200">
+              <h3>Growth & Marketing Ops</h3>
+              <ul>
+                <li>Multi-source data pipelines (Maps, Instagram, reviews, ads)</li>
+                <li>Automated creative production (TikTok slideshows, ad variants)</li>
+                <li>Competitor intelligence dashboards (live, shareable, no manual work)</li>
+              </ul>
             </article>
-            <article>
-              <p class="stat">$380k</p>
-              <h3>Annual team savings</h3>
-              <p>
-                Finance automations eliminated repetitive reconciliation and freed up headcount
-                for strategic initiatives.
-              </p>
+            <article class="fade-in-up delay-300">
+              <h3>Service & Agency Operations</h3>
+              <ul>
+                <li>Automated reporting (daily/weekly/monthly from any data source)</li>
+                <li>Client deliverable pipelines (research → enrichment → handoff)</li>
+                <li>Unified dashboards pulling from fragmented tools (CRMs, call logs, docs)</li>
+              </ul>
+            </article>
+            <article class="fade-in-up delay-400">
+              <h3>Any Team With Fragmented Data</h3>
+              <ul>
+                <li>Cross-platform integrations (GHL, HubSpot, BigQuery, Sheets, MongoDB)</li>
+                <li>LLM-powered insights from raw transcripts, creatives, or reviews</li>
+                <li>Custom AI copilots tailored to your business logic</li>
+              </ul>
             </article>
           </div>
         </section>
 
-        <section id="contact" class="contact">
+        <!-- CASE STUDIES -->
+        <section id="case-studies" class="results fade-in">
           <div class="section-heading">
-            <p class="eyebrow">Contact</p>
-            <h2>Ready to explore your automation roadmap?</h2>
+            <p class="eyebrow">Case Studies</p>
+            <h2>Real automations, real results—profit-first builds that pay for themselves.</h2>
             <p>
-              Share your domain name so we can configure the custom domain on GitHub Pages
-              while it propagates.
+              These aren't vanity metrics. Every system below saved measurable time, unlocked revenue,
+              or cut costs within weeks of launch.
+            </p>
+          </div>
+
+          <div class="results__grid">
+            <!-- Case 1: TikTok Slideshow -->
+            <a href="cases/tiktok-slideshow-automation.html" class="case-card fade-in-up delay-100">
+              <div class="case-card__video" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <!-- Video placeholder - will be replaced with actual video -->
+              </div>
+              <div class="case-card__content">
+                <span class="case-card__tag">Creative Automation</span>
+                <h3 class="case-card__title">TikTok Slideshow Automation Platform</h3>
+                <p class="case-card__description">
+                  AI-powered creative production: scrapes viral TikTok slideshows, analyzes patterns
+                  with GPT, and generates multiple text/image variants—delivered to Google Drive.
+                </p>
+                <p class="case-card__metric">60 → 15 min</p>
+                <p class="case-card__metric-label">Per campaign creative time</p>
+                <div class="case-card__tools">
+                  <span class="tool-badge">n8n</span>
+                  <span class="tool-badge">OpenAI GPT</span>
+                  <span class="tool-badge">TikTok API</span>
+                  <span class="tool-badge">Google Drive</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Case 2: Lead Enrichment -->
+            <a href="cases/wellness-vet-lead-enrichment.html" class="case-card fade-in-up delay-200">
+              <div class="case-card__video" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <!-- Video placeholder -->
+              </div>
+              <div class="case-card__content">
+                <span class="case-card__tag">Lead Gen</span>
+                <h3 class="case-card__title">Multi-Source Lead Enrichment Pipeline</h3>
+                <p class="case-card__description">
+                  Scrapes businesses from Google Maps + Yelp, normalizes data, enriches contacts
+                  with emails + firmographics, and outputs clean, de-duped leads for outreach.
+                </p>
+                <p class="case-card__metric">3,000+</p>
+                <p class="case-card__metric-label">Enriched, verified contacts delivered</p>
+                <div class="case-card__tools">
+                  <span class="tool-badge">Apify</span>
+                  <span class="tool-badge">Google Maps API</span>
+                  <span class="tool-badge">Snov.io</span>
+                  <span class="tool-badge">n8n</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Case 3: Call Analysis -->
+            <a href="cases/sales-call-analysis-automation.html" class="case-card fade-in-up delay-300">
+              <div class="case-card__video" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <!-- Video placeholder -->
+              </div>
+              <div class="case-card__content">
+                <span class="case-card__tag">Sales Ops</span>
+                <h3 class="case-card__title">AI-Powered Call Analysis & Coaching</h3>
+                <p class="case-card__description">
+                  Watches Google Drive for call transcripts, generates LLM scorecards (objections,
+                  flags, coaching notes), writes to BigQuery, and syncs into GoHighLevel CRM.
+                </p>
+                <p class="case-card__metric">45 → 5 min</p>
+                <p class="case-card__metric-label">Call review time per recording</p>
+                <div class="case-card__tools">
+                  <span class="tool-badge">OpenAI</span>
+                  <span class="tool-badge">BigQuery</span>
+                  <span class="tool-badge">GoHighLevel</span>
+                  <span class="tool-badge">n8n</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Case 4: Competitor Intel -->
+            <a href="cases/vet-clinic-competitor-intelligence.html" class="case-card fade-in-up delay-400">
+              <div class="case-card__video" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <!-- Video placeholder -->
+              </div>
+              <div class="case-card__content">
+                <span class="case-card__tag">Competitive Intelligence</span>
+                <h3 class="case-card__title">Vet Clinic Competitor Intelligence Tool</h3>
+                <p class="case-card__description">
+                  Input: clinic website. Output: interactive map + dashboard showing competitors in
+                  20-mile radius, review analysis, and Google/Facebook ad presence—live on sales calls.
+                </p>
+                <p class="case-card__metric">1-click</p>
+                <p class="case-card__metric-label">Competitive landscape in seconds</p>
+                <div class="case-card__tools">
+                  <span class="tool-badge">n8n</span>
+                  <span class="tool-badge">Lovable</span>
+                  <span class="tool-badge">Google Maps</span>
+                  <span class="tool-badge">Apify</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Case 5: Lead Gen Pipeline -->
+            <a href="cases/lead-gen-automation-pipeline.html" class="case-card fade-in-up delay-500">
+              <div class="case-card__video" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                <!-- Video placeholder -->
+              </div>
+              <div class="case-card__content">
+                <span class="case-card__tag">End-to-End Automation</span>
+                <h3 class="case-card__title">Spec-Driven Lead Gen Pipeline</h3>
+                <p class="case-card__description">
+                  Scrapes sites & Instagram, applies hard ICP filters + tier logic (D/A/B/C/F), enriches
+                  via Snov/Dropcontact, verifies emails, and creates contacts in HubSpot—only if qualified.
+                </p>
+                <p class="case-card__metric">Zero guesswork</p>
+                <p class="case-card__metric-label">Sheet → scrape → tier → CRM pipeline</p>
+                <div class="case-card__tools">
+                  <span class="tool-badge">Apify</span>
+                  <span class="tool-badge">Snov.io</span>
+                  <span class="tool-badge">Dropcontact</span>
+                  <span class="tool-badge">HubSpot</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Case 6: Reporting Automation -->
+            <a href="cases/automated-reporting-masterleads.html" class="case-card fade-in-up delay-600">
+              <div class="case-card__video" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                <!-- Video placeholder -->
+              </div>
+              <div class="case-card__content">
+                <span class="case-card__tag">Reporting & Analytics</span>
+                <h3 class="case-card__title">Automated Reporting from MongoDB</h3>
+                <p class="case-card__description">
+                  Pulls communication data from MongoDB via ThatApp.io, aggregates by owner/channel/status
+                  (missed, answered, voicemail), and sends Excel/CSV reports daily, weekly, monthly.
+                </p>
+                <p class="case-card__metric">100% automated</p>
+                <p class="case-card__metric-label">Zero manual reporting work</p>
+                <div class="case-card__tools">
+                  <span class="tool-badge">MongoDB</span>
+                  <span class="tool-badge">ThatApp.io</span>
+                  <span class="tool-badge">n8n</span>
+                  <span class="tool-badge">Excel/CSV</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- CTA after case studies -->
+          <div style="text-align: center; margin-top: 3rem;">
+            <a class="btn pulse-glow" href="#contact" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">
+              Get Your Free Automation Blueprint
+            </a>
+            <p style="margin-top: 1rem; color: var(--text-muted);">
+              See exactly which automations would save you the most time and money.
+            </p>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="contact fade-in">
+          <div class="section-heading">
+            <p class="eyebrow">Let's Talk</p>
+            <h2>Ready to turn manual chaos into automated profit?</h2>
+            <p>
+              Book a free 30-45 minute blueprint call. We'll audit your workflow and outline
+              1-3 automations that could save you serious time or unlock revenue—no pitch,
+              just actionable value.
             </p>
           </div>
           <div class="contact__grid">
-            <article>
-              <h3>Direct line</h3>
-              <p>hello@autoflux.ai</p>
-              <p>+1 (415) 555-0113</p>
-              <p>Mon–Fri · 8a–6p Pacific</p>
-            </article>
-            <article>
-              <h3>Deployment support</h3>
+            <article class="fade-in-up delay-100">
+              <h3>What to expect on the call:</h3>
               <ul>
-                <li>Custom domain + SSL configuration</li>
-                <li>On-call engineering during launch week</li>
-                <li>Documentation and training resources</li>
+                <li>Quick walkthrough of your current bottlenecks</li>
+                <li>1-3 concrete automation ideas tailored to your stack</li>
+                <li>Ballpark timeline and ROI estimate</li>
+                <li>Zero pressure—just clear next steps if it makes sense</li>
               </ul>
             </article>
-            <form id="contact-form">
+            <article class="fade-in-up delay-200">
+              <h3>Direct contact</h3>
+              <p style="margin: 0.5rem 0;"><strong>Email:</strong> hello@autoflux.ai</p>
+              <p style="margin: 0.5rem 0;"><strong>Response time:</strong> Within 1 business day</p>
+              <p style="margin: 0.5rem 0; color: var(--text-muted);">
+                We work with teams of all sizes—from lean startups to 100+ person ops teams.
+              </p>
+            </article>
+            <form id="contact-form" class="fade-in-up delay-300">
               <label>
                 Your name
                 <input type="text" name="name" required placeholder="Full name" />
               </label>
               <label>
-                Company
-                <input type="text" name="company" required placeholder="Company" />
+                Work email
+                <input type="email" name="email" required placeholder="you@company.com" />
               </label>
               <label>
-                Domain for Pages
-                <input type="text" name="domain" required placeholder="autoflux.ai" />
+                Company / Website
+                <input type="text" name="company" required placeholder="acme.com" />
               </label>
               <label>
-                Message
-                <textarea name="message" rows="3" required placeholder="Tell us about your stack"></textarea>
+                What's your biggest bottleneck?
+                <textarea
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="e.g., We're spending 20 hours/week manually enriching leads from Instagram scrapes, and our CRM is full of duplicates..."
+                ></textarea>
               </label>
-              <button class="btn" type="submit">Send message</button>
+              <button class="btn" type="submit">Send Message & Book Blueprint Call</button>
               <p class="form-success" role="status" aria-live="polite"></p>
             </form>
           </div>
         </section>
       </main>
 
+      <!-- FOOTER -->
       <footer class="site-footer">
-        <p>© <span id="year"></span> Autoflux Automation. All rights reserved.</p>
+        <p>© <span id="year"></span> AutoFlux. Built for profit-first automation.</p>
         <div class="footer-links">
           <a href="mailto:hello@autoflux.ai">Email</a>
-          <a href="https://cal.com" target="_blank" rel="noreferrer">Book a session</a>
-          <a href="#process">Process</a>
+          <a href="#case-studies">Case Studies</a>
+          <a href="#how-it-works">How We Work</a>
         </div>
       </footer>
     </div>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-Source Lead Enrichment Pipeline – AutoFlux Case Study</title>
+  <meta name="description" content="How AutoFlux delivered 3,000+ enriched, verified contacts for a wellness & vet directory using Google Maps, Yelp scraping, and multi-step enrichment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    .case-hero { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 4rem 2rem; border-radius: 2rem; margin-bottom: 3rem; }
+    .case-hero h1 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); }
+    .case-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 700px; }
+    .case-section { margin-bottom: 3rem; }
+    .case-video-placeholder { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(103, 200, 255, 0.1), rgba(26, 79, 246, 0.1)); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--text-muted); border: 2px dashed var(--card-border); margin: 2rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .stat-box { background: var(--cloud-white); padding: 2rem; border-radius: 1rem; border: 1px solid var(--card-border); text-align: center; }
+    .stat-box h3 { font-size: 2.5rem; color: var(--primary-blue); margin: 0 0 0.5rem; }
+    .stat-box p { margin: 0; color: var(--text-muted); }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0; }
+    .tech-badge { padding: 0.6rem 1.2rem; background: var(--accent-soft); color: var(--primary-blue); border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="primary-header">
+      <div class="logo">
+        <div class="logo__icon">AF</div>
+        <span>AutoFlux</span>
+      </div>
+      <nav class="primary-nav">
+        <a href="../index.html">← Back to Home</a>
+        <a href="../index.html#case-studies">All Case Studies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="btn btn-outline" href="../index.html#contact">Get Your Blueprint</a>
+    </header>
+
+    <main>
+      <div class="case-hero fade-in">
+        <span class="eyebrow" style="color: rgba(255,255,255,0.9);">Lead Generation</span>
+        <h1>Multi-Source Lead Enrichment Pipeline</h1>
+        <p>Automated lead sourcing, enrichment, and deduplication system that delivered 3,000+ verified contacts for wellness and veterinary directories.</p>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Challenge</h2>
+        <p>
+          A wellness and veterinary services directory startup needed to build their initial database of businesses to list on their platform.
+          Manual research was taking 10-15 minutes per business, and they needed thousands of contacts enriched with:
+        </p>
+        <ul style="line-height: 1.8; color: var(--text-muted);">
+          <li>Verified business emails</li>
+          <li>Phone numbers</li>
+          <li>Owner/decision-maker contact info</li>
+          <li>Firmographic data (revenue estimates, employee count, etc.)</li>
+          <li>Social media profiles</li>
+        </ul>
+        <p>
+          Outsourcing to VAs was inconsistent and expensive. They needed a scalable, repeatable system that could pull from
+          multiple sources and deliver clean, de-duplicated data.
+        </p>
+      </section>
+
+      <div class="case-video-placeholder fade-in">
+        📹 Video Demo Placeholder
+        <br/><small style="font-size: 0.9rem;">(Will show: scraping → normalization → enrichment → output)</small>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Solution</h2>
+        <p>
+          AutoFlux built a multi-source lead enrichment pipeline that automated the entire research → enrichment → verification workflow:
+        </p>
+
+        <h3 style="margin-top: 2rem;">Workflow Steps:</h3>
+        <ol style="line-height: 1.8; color: var(--text-muted);">
+          <li><strong>Multi-Source Scraping:</strong>
+            <ul>
+              <li>Google Maps API: Pull businesses by category + location (wellness centers, vet clinics, etc.)</li>
+              <li>Yelp Scraper (Apify): Cross-reference with Yelp for reviews and additional contact data</li>
+              <li>Extract: business name, address, phone, website, ratings, review count</li>
+            </ul>
+          </li>
+          <li><strong>Data Normalization:</strong>
+            <ul>
+              <li>Deduplicate based on business name + address fuzzy matching</li>
+              <li>Standardize phone formats, clean addresses</li>
+              <li>Merge data from Maps + Yelp into unified records</li>
+            </ul>
+          </li>
+          <li><strong>Email Enrichment (Multi-Step):</strong>
+            <ul>
+              <li>Primary: Snov.io domain search for business emails</li>
+              <li>Fallback: Dropcontact enrichment for missing emails</li>
+              <li>Email verification via Snov/Hunter to filter invalid addresses</li>
+            </ul>
+          </li>
+          <li><strong>Firmographic Enrichment:</strong>
+            <ul>
+              <li>Clearbit/similar APIs to pull employee count, revenue estimates, tech stack</li>
+              <li>Social profiles (LinkedIn, Facebook, Instagram) via custom scrapers</li>
+            </ul>
+          </li>
+          <li><strong>Output & Delivery:</strong>
+            <ul>
+              <li>Clean, de-duplicated CSV with all enriched fields</li>
+              <li>Segmented by: verified email status, business size, location</li>
+              <li>Ready for import into CRM or outreach tools</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3 style="margin-top: 2rem;">Tech Stack:</h3>
+        <div class="tech-stack">
+          <span class="tech-badge">Apify (Google Maps + Yelp scraping)</span>
+          <span class="tech-badge">Snov.io (email finding + verification)</span>
+          <span class="tech-badge">Dropcontact (fallback enrichment)</span>
+          <span class="tech-badge">n8n (workflow orchestration)</span>
+          <span class="tech-badge">Google Sheets (data output)</span>
+          <span class="tech-badge">Clearbit API</span>
+        </div>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Results</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3>3,000+</h3>
+            <p>Enriched, verified contacts delivered</p>
+          </div>
+          <div class="stat-box">
+            <h3>78%</h3>
+            <p>Valid email rate (vs ~40% manual)</p>
+          </div>
+          <div class="stat-box">
+            <h3>95%</h3>
+            <p>Time saved vs manual research</p>
+          </div>
+          <div class="stat-box">
+            <h3>$0</h3>
+            <p>VA costs (previously $2K+/month)</p>
+          </div>
+        </div>
+
+        <blockquote style="background: var(--cloud-white); padding: 2rem; border-left: 4px solid var(--primary-blue); border-radius: 0.5rem; margin: 2rem 0; font-style: italic; color: var(--text-muted);">
+          "AutoFlux turned what would have been months of manual work into a 2-week automated build. We now have a repeatable system
+          we can run anytime we expand into new markets. The email quality is way better than what we were getting from VAs."
+          <br/><br/>
+          <strong style="color: var(--text);">– Founder, Wellness Directory Platform</strong>
+        </blockquote>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Key Takeaways</h2>
+        <ul style="line-height: 1.8;">
+          <li><strong>Multi-Source = Higher Quality:</strong> Combining Google Maps, Yelp, and email enrichment APIs resulted in richer, more accurate data than any single source.</li>
+          <li><strong>Deduplication is Critical:</strong> Fuzzy matching on name + address prevented duplicate records and saved hours of manual cleanup.</li>
+          <li><strong>Scalable & Repeatable:</strong> The client can now run this pipeline for any new city or vertical in minutes, not weeks.</li>
+        </ul>
+      </section>
+
+      <section class="contact fade-in" style="margin-top: 4rem;">
+        <div class="section-heading" style="text-align: center;">
+          <p class="eyebrow">Need clean, enriched leads at scale?</p>
+          <h2>Let's build your automated lead pipeline.</h2>
+          <p>Book a free blueprint call to see how we can automate your lead sourcing and enrichment.</p>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a class="btn pulse-glow" href="../index.html#contact" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">
+            Get Your Free Automation Blueprint
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> AutoFlux. Built for profit-first automation.</p>
+      <div class="footer-links">
+        <a href="mailto:hello@autoflux.ai">Email</a>
+        <a href="../index.html#case-studies">Case Studies</a>
+        <a href="../index.html">Home</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../scripts/main.js" defer></script>
+</body>
+</html>

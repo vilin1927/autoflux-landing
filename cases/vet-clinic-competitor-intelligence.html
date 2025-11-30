@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vet Clinic Competitor Intelligence Tool – AutoFlux Case Study</title>
+  <meta name="description" content="How AutoFlux built a 1-click competitor intelligence dashboard for vet clinics using n8n, Lovable, Google Maps, and review scraping." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    .case-hero { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 4rem 2rem; border-radius: 2rem; margin-bottom: 3rem; }
+    .case-hero h1 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); }
+    .case-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 700px; }
+    .case-section { margin-bottom: 3rem; }
+    .case-video-placeholder { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(103, 200, 255, 0.1), rgba(26, 79, 246, 0.1)); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--text-muted); border: 2px dashed var(--card-border); margin: 2rem 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+    .stat-box { background: var(--cloud-white); padding: 2rem; border-radius: 1rem; border: 1px solid var(--card-border); text-align: center; }
+    .stat-box h3 { font-size: 2.5rem; color: var(--primary-blue); margin: 0 0 0.5rem; }
+    .stat-box p { margin: 0; color: var(--text-muted); }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0; }
+    .tech-badge { padding: 0.6rem 1.2rem; background: var(--accent-soft); color: var(--primary-blue); border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="primary-header">
+      <div class="logo">
+        <div class="logo__icon">AF</div>
+        <span>AutoFlux</span>
+      </div>
+      <nav class="primary-nav">
+        <a href="../index.html">← Back to Home</a>
+        <a href="../index.html#case-studies">All Case Studies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="btn btn-outline" href="../index.html#contact">Get Your Blueprint</a>
+    </header>
+
+    <main>
+      <div class="case-hero fade-in">
+        <span class="eyebrow" style="color: rgba(255,255,255,0.9);">Competitive Intelligence</span>
+        <h1>Vet Clinic Competitor Intelligence Tool</h1>
+        <p>One-click competitive landscape dashboard: input a clinic website, get an interactive map + comparison of all competitors, reviews, and ad presence—live on sales calls.</p>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Challenge</h2>
+        <p>
+          A SaaS company selling practice management software to veterinary clinics wanted to differentiate on sales calls
+          by showing prospects exactly how they stack up against nearby competitors.
+        </p>
+        <p>
+          Sales reps were manually Googling competitors, pulling reviews, checking Facebook Ads Library, and creating rough
+          comparison slides—taking 30-45 minutes per prospect. By the time the research was done, the call had already happened.
+        </p>
+        <p><strong>They needed:</strong></p>
+        <ul style="line-height: 1.8; color: var(--text-muted);">
+          <li>Instant competitor analysis during live sales calls</li>
+          <li>Interactive map showing all competitors within 20-mile radius</li>
+          <li>Review comparison (Google, Yelp, Facebook)</li>
+          <li>Ad presence detection (Google Ads, Facebook Ads)</li>
+          <li>Shareable link to send prospects after the call</li>
+        </ul>
+      </section>
+
+      <div class="case-video-placeholder fade-in">
+        📹 Video Demo Placeholder
+        <br/><small style="font-size: 0.9rem;">(Will show: clinic input → map generation → review analysis → share link)</small>
+      </div>
+
+      <section class="case-section fade-in-up">
+        <h2>The Solution</h2>
+        <p>
+          AutoFlux built a real-time competitive intelligence tool using n8n for data orchestration, Apify for scraping,
+          Google Maps API for location data, and Lovable for the interactive dashboard:
+        </p>
+
+        <h3 style="margin-top: 2rem;">How It Works:</h3>
+        <ol style="line-height: 1.8; color: var(--text-muted);">
+          <li><strong>Input:</strong>
+            <ul>
+              <li>Sales rep enters clinic website URL into simple form</li>
+              <li>System extracts business name + location from website</li>
+            </ul>
+          </li>
+          <li><strong>Competitor Discovery (Google Maps API):</strong>
+            <ul>
+              <li>Searches Google Maps for "veterinary clinics" within 20-mile radius</li>
+              <li>Pulls: name, address, phone, rating, review count, website</li>
+              <li>Returns 10-30 competitors depending on market density</li>
+            </ul>
+          </li>
+          <li><strong>Review Scraping (Apify):</strong>
+            <ul>
+              <li>Scrapes Google, Yelp, and Facebook reviews for all competitors</li>
+              <li>Calculates average ratings, total reviews, sentiment trends</li>
+              <li>Identifies top review themes (pricing, customer service, wait times)</li>
+            </ul>
+          </li>
+          <li><strong>Ad Presence Check:</strong>
+            <ul>
+              <li>Checks Google Ads for search term "vet clinic [city]"</li>
+              <li>Scrapes Facebook Ads Library for active ad campaigns</li>
+              <li>Flags which competitors are advertising (and estimated spend)</li>
+            </ul>
+          </li>
+          <li><strong>Dashboard Generation (Lovable):</strong>
+            <ul>
+              <li>Creates interactive map with all competitors plotted (color-coded by rating)</li>
+              <li>Comparison table: rating, reviews, ad presence, website quality</li>
+              <li>Shareable link generated instantly (unique URL per prospect)</li>
+            </ul>
+          </li>
+          <li><strong>Live on Sales Calls:</strong>
+            <ul>
+              <li>Rep shares screen during call to show prospect their competitive landscape</li>
+              <li>Uses data to position product ("I see 3 of your competitors are running ads—here's how we help you compete")</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3 style="margin-top: 2rem;">Tech Stack:</h3>
+        <div class="tech-stack">
+          <span class="tech-badge">n8n (orchestration)</span>
+          <span class="tech-badge">Lovable (dashboard UI)</span>
+          <span class="tech-badge">Google Maps API</span>
+          <span class="tech-badge">Apify (review scraping)</span>
+          <span class="tech-badge">Facebook Ads Library API</span>
+          <span class="tech-badge">Custom web scrapers</span>
+        </div>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Results</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3>1-click</h3>
+            <p>Competitive landscape in 30 seconds</p>
+          </div>
+          <div class="stat-box">
+            <h3>100%</h3>
+            <p>Sales calls now use competitive data</p>
+          </div>
+          <div class="stat-box">
+            <h3>30+ min</h3>
+            <p>Saved per prospect (manual research)</p>
+          </div>
+          <div class="stat-box">
+            <h3>35%</h3>
+            <p>Increase in demo-to-close rate</p>
+          </div>
+        </div>
+
+        <blockquote style="background: var(--cloud-white); padding: 2rem; border-left: 4px solid var(--primary-blue); border-radius: 0.5rem; margin: 2rem 0; font-style: italic; color: var(--text-muted);">
+          "This tool completely changed our sales process. Prospects are blown away when we show them their competitive
+          landscape live on the call. It positions us as experts and gives us a concrete reason to talk about differentiation.
+          Our close rate went up 35% after we started using it."
+          <br/><br/>
+          <strong style="color: var(--text);">– VP Sales, Vet Clinic SaaS Platform</strong>
+        </blockquote>
+      </section>
+
+      <section class="case-section fade-in-up">
+        <h2>Key Takeaways</h2>
+        <ul style="line-height: 1.8;">
+          <li><strong>Data as a Sales Tool:</strong> Turning competitive intelligence into a live, interactive experience dramatically improved prospect engagement.</li>
+          <li><strong>Shareable Links = Post-Call Value:</strong> Prospects could review the dashboard after the call and share with partners/stakeholders—extending the sales conversation.</li>
+          <li><strong>Fast Build Time:</strong> Lovable's no-code UI builder allowed us to ship the dashboard in days, not weeks.</li>
+        </ul>
+      </section>
+
+      <section class="contact fade-in" style="margin-top: 4rem;">
+        <div class="section-heading" style="text-align: center;">
+          <p class="eyebrow">Need competitive intelligence tools for your sales team?</p>
+          <h2>Let's build your custom intel dashboard.</h2>
+          <p>Book a free blueprint call to see how we can automate competitive research for your industry.</p>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+          <a class="btn pulse-glow" href="../index.html#contact" style="font-size: 1.1rem; padding: 1.1rem 2.5rem;">
+            Get Your Free Automation Blueprint
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> AutoFlux. Built for profit-first automation.</p>
+      <div class="footer-links">
+        <a href="mailto:hello@autoflux.ai">Email</a>
+        <a href="../index.html#case-studies">Case Studies</a>
+        <a href="../index.html">Home</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../scripts/main.js" defer></script>
+</body>
+</html>
