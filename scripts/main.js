@@ -260,6 +260,62 @@ if ('IntersectionObserver' in window) {
 }
 
 // ======================================
+// CAL.COM EMBED (inline + popup triggers)
+// ======================================
+const initCalEmbed = () => {
+  const inlineSelector = '#contact-cal-inline-30min';
+  const inlineTarget = document.querySelector(inlineSelector);
+  const triggerButtons = document.querySelectorAll('[data-cal-link]');
+
+  if (!inlineTarget && triggerButtons.length === 0) return;
+
+  // Cal embed loader (from Cal.com docs)
+  (function (C, A, L) {
+    const p = function (a, ar) { a.q.push(ar); };
+    const d = C.document;
+    C.Cal = C.Cal || function () {
+      const cal = C.Cal; const ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {}; cal.q = cal.q || [];
+        d.head.appendChild(d.createElement('script')).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1]; api.q = api.q || [];
+        if (typeof namespace === 'string') {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar); p(cal, ['initNamespace', namespace]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+  const namespace = '30min';
+  const calLink = 'vladimir-ilin-dq2q4k/30min';
+  const commonConfig = { layout: 'month_view', theme: 'light' };
+
+  Cal('init', namespace, { origin: 'https://app.cal.com' });
+
+  if (inlineTarget) {
+    Cal.ns[namespace]('inline', {
+      elementOrSelector: inlineSelector,
+      config: commonConfig,
+      calLink
+    });
+  }
+
+  Cal.ns[namespace]('ui', {
+    hideEventTypeDetails: false,
+    layout: 'month_view'
+  });
+};
+
+initCalEmbed();
+
+// ======================================
 // CONSOLE MESSAGE (optional branding)
 // ======================================
 console.log(

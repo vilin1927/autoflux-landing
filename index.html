@@ -75,17 +75,10 @@
               </button>
             </div>
           </div>
-
-          <!-- CAL.COM EMBED -->
-          <div class="hero__form hero__cal fade-in-up delay-400">
-            <div class="hero__form__header">
-              <p class="eyebrow eyebrow-subtle">Book your blueprint</p>
-              <h3>Pick a 30-minute slot</h3>
-              <p class="form-footnote">
-                Meet directly with our team—no back-and-forth emails.
-              </p>
-            </div>
-            <div class="cal-embed" id="my-cal-inline-30min" aria-label="Schedule a 30-minute call"></div>
+          <div class="hero__visual fade-in-up delay-300">
+            <div class="hero-visual__card hero-visual__card--primary float-animation"></div>
+            <div class="hero-visual__card hero-visual__card--secondary"></div>
+            <div class="hero-visual__card hero-visual__card--tertiary"></div>
           </div>
         </section>
 
@@ -404,26 +397,6 @@
       </footer>
     </div>
 
-    <!-- Cal inline embed code begins -->
-    <script type="text/javascript">
-      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "30min", {origin:"https://app.cal.com"});
-
-      Cal.ns["30min"]("inline", {
-        elementOrSelector:"#my-cal-inline-30min",
-        config: {"layout":"month_view","theme":"light"},
-        calLink: "vladimir-ilin-dq2q4k/30min",
-      });
-
-      Cal.ns["30min"]("inline", {
-        elementOrSelector:"#contact-cal-inline-30min",
-        config: {"layout":"month_view","theme":"light"},
-        calLink: "vladimir-ilin-dq2q4k/30min",
-      });
-
-      Cal.ns["30min"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
-    </script>
-    <!-- Cal inline embed code ends -->
     <script src="scripts/main.js" defer></script>
   </body>
 </html>
