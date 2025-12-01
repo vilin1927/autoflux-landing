@@ -85,16 +85,10 @@ a {
 }
 
 .logo__icon {
-  width: 36px;
-  height: 36px;
-  background: var(--primary-blue);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  font-size: 1.1rem;
+  height: 34px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .primary-nav {
