@@ -55,23 +55,24 @@ a {
   padding: 2rem clamp(1.5rem, 3vw, 3.25rem) 3rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 
 .primary-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
   position: sticky;
   top: 0;
-  padding: 1rem 0;
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid var(--card-border);
-  z-index: 10;
+  padding: 0.9rem 1.25rem;
+  margin: 0 -1rem 0 -1rem;
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  z-index: 12;
   transition: all 0.3s ease;
-  flex-wrap: wrap;
 }
 
 .logo {
@@ -98,9 +99,10 @@ a {
 
 .primary-nav {
   display: flex;
-  gap: 1.5rem;
-  font-size: 0.95rem;
+  gap: 1.25rem;
+  font-size: 0.98rem;
   align-items: center;
+  justify-content: center;
 }
 
 .primary-nav a {
@@ -242,28 +244,29 @@ a {
 
 .hero__visual {
   position: relative;
-  min-height: 360px;
-  display: grid;
-  place-items: center;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero__visual-stack {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 300px;
 }
 
 .hero-visual__card {
   position: absolute;
-  width: 240px;
-  height: 150px;
+  width: 465px;
+  height: 285px;
   border-radius: 18px;
   background: linear-gradient(135deg, rgba(26, 79, 246, 0.18), rgba(103, 200, 255, 0.14));
   box-shadow: 0 24px 80px rgba(15, 28, 63, 0.15);
-  border: 1px solid rgba(26, 79, 246, 0.18);
-}
-
-.hero-visual__card::after {
-  content: '';
-  position: absolute;
-  inset: 14px;
-  border-radius: 12px;
-  border: 1px dashed rgba(255, 255, 255, 0.5);
-  opacity: 0.6;
+  border: 1px solid rgba(26, 79, 246, 0);
+  transition: transform 0.8s ease, opacity 0.8s ease, z-index 0.4s ease;
 }
 
 .hero-visual__card--primary {
@@ -272,13 +275,49 @@ a {
 }
 
 .hero-visual__card--secondary {
-  transform: translate(50px, 40px) rotate(12deg);
+  transform: translate(90px, 60px) rotate(8deg);
   background: linear-gradient(140deg, rgba(103, 200, 255, 0.85), rgba(26, 79, 246, 0.4));
 }
 
 .hero-visual__card--tertiary {
-  transform: translate(-40px, -30px) rotate(4deg);
+  transform: translate(-70px, -40px) rotate(5deg);
   background: linear-gradient(130deg, rgba(15, 28, 63, 0.8), rgba(26, 79, 246, 0.6));
+}
+
+.hero-visual__media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+/* Stack shuffle positions */
+.hero-visual__card.stack-pos-1 {
+  z-index: 3;
+  transform: translate(0, -6px) rotate(-4deg) scale(1.02);
+  opacity: 1;
+}
+
+.hero-visual__card.stack-pos-2 {
+  z-index: 2;
+  transform: translate(40px, 32px) rotate(7deg) scale(0.96);
+  opacity: 0.9;
+}
+
+.hero-visual__card.stack-pos-3 {
+  z-index: 1;
+  transform: translate(-44px, -28px) rotate(4deg) scale(0.92);
+  opacity: 0.82;
+}
+
+.hero__visual-cta {
+  margin-top: 20px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  z-index: 4;
 }
 
 .eyebrow {
@@ -316,9 +355,13 @@ a {
   z-index: 1;
 }
 
+.metrics.metrics--inline {
+  margin: 0.5rem 0 1rem;
+}
+
 .metrics article {
   padding: 1rem;
-  border: 1px solid rgba(26, 79, 246, 0.12);
+  border: 1px solid rgba(26, 79, 246, 0);
   border-radius: 1rem;
   background: linear-gradient(180deg, rgba(26, 79, 246, 0.06), rgba(103, 200, 255, 0.04));
   box-shadow: 0 16px 50px rgba(15, 28, 63, 0.06);
@@ -366,11 +409,18 @@ a {
 
 .cal-embed {
   width: 100%;
-  min-height: 340px;
+  min-height: 260px;
+  max-height: 420px;
   border-radius: 1rem;
   border: 1px solid var(--card-border);
   overflow: hidden;
   background: #fff;
+}
+
+.cal-embed iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
 }
 
 .hero__form p {
@@ -430,6 +480,19 @@ textarea {
   box-shadow: var(--shadow);
 }
 
+.logos .metrics {
+  margin: 1.25rem 0 1rem;
+}
+
+.home-page > main > section + section {
+  margin-top: 2.5rem;
+}
+
+.home-page .logos {
+  margin: 2.5rem 0;
+  padding: 1.75rem;
+}
+
 .logos p {
   color: var(--text-muted);
   margin-top: 0;
@@ -451,7 +514,7 @@ textarea {
 .contact {
   border: 1px solid var(--card-border);
   border-radius: 2rem;
-  padding: clamp(2rem, 4vw, 3.5rem);
+  padding: clamp(1.75rem, 3vw, 3rem);
   background: linear-gradient(145deg, rgba(103, 200, 255, 0.06), rgba(26, 79, 246, 0.04) 45%, #ffffff 75%);
   box-shadow: var(--shadow);
   position: relative;
@@ -508,6 +571,15 @@ textarea {
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: none;
   color: var(--text-light);
+}
+
+.section-dark .grid article h3 {
+  color: #fff;
+}
+
+.section-dark .grid article p,
+.section-dark .grid article li {
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .section-dark h3 {
@@ -769,7 +841,7 @@ textarea {
   flex-direction: column;
   gap: 0.75rem;
   background: rgba(255, 255, 255, 0.95);
-  padding: 1.25rem;
+  padding: 1rem 1.1rem;
   border-radius: 1.25rem;
   border: 1px solid var(--card-border);
   box-shadow: 0 12px 40px rgba(15, 28, 63, 0.08);
@@ -916,14 +988,17 @@ textarea {
 
 @media (max-width: 960px) {
   .primary-header {
-    padding: 0.75rem 0;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
   }
 
   .primary-nav {
     display: none;
     position: absolute;
     top: 100%;
-    right: 1.5rem;
+    right: 1rem;
     flex-direction: column;
     align-items: flex-start;
     background: #fff;
@@ -931,7 +1006,7 @@ textarea {
     border-radius: 1rem;
     box-shadow: 0 18px 50px rgba(15, 28, 63, 0.14);
     border: 1px solid var(--card-border);
-    width: min(260px, 80vw);
+    width: min(320px, 86vw);
   }
 
   .primary-nav.is-open {
@@ -950,8 +1025,8 @@ textarea {
 
 @media (max-width: 720px) {
   .primary-header {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr auto;
+    align-items: center;
   }
 
   .primary-header .btn-outline {
@@ -961,6 +1036,10 @@ textarea {
 
   .hero {
     padding: 1.5rem;
+  }
+
+  .hero__visual {
+    min-height: 300px;
   }
 
   .metrics {
@@ -977,6 +1056,7 @@ textarea {
   }
 
   .cal-embed {
-    min-height: 300px;
+    min-height: 220px;
+    max-height: 360px;
   }
 }

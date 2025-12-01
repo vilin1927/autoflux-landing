@@ -75,6 +75,13 @@ const animatedElements = document.querySelectorAll(
 
 animatedElements.forEach(el => observer.observe(el));
 
+// Fallback: ensure visibility if observer fails
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    animatedElements.forEach(el => el.classList.add('visible'));
+  }, 1200);
+});
+
 // ======================================
 // NUMBER COUNTER ANIMATION
 // ======================================
@@ -314,6 +321,33 @@ const initCalEmbed = () => {
 };
 
 initCalEmbed();
+
+// ======================================
+// HERO STACK SHUFFLE
+// ======================================
+const initHeroStackShuffle = () => {
+  const cards = Array.from(document.querySelectorAll('.hero__visual .hero-visual__card'));
+  if (cards.length < 2) return;
+
+  let offset = 0;
+  const applyPositions = () => {
+    cards.forEach((card, idx) => {
+      const pos = ((idx - offset) % cards.length + cards.length) % cards.length;
+      card.classList.remove('stack-pos-1', 'stack-pos-2', 'stack-pos-3');
+      if (pos === 0) card.classList.add('stack-pos-1');
+      if (pos === 1) card.classList.add('stack-pos-2');
+      if (pos === 2) card.classList.add('stack-pos-3');
+    });
+  };
+
+  applyPositions();
+  setInterval(() => {
+    offset = (offset + 1) % cards.length;
+    applyPositions();
+  }, 4000);
+};
+
+initHeroStackShuffle();
 
 // ======================================
 // CONSOLE MESSAGE (optional branding)
