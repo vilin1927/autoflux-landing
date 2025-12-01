@@ -163,10 +163,10 @@ Edit CSS variables in [styles/main.css](styles/main.css) lines 1-21:
 - **Disable:** Remove animation classes from HTML elements
 
 ### Add More Case Studies
-1. Copy any case study HTML file
-2. Update content (title, hero gradient, challenge, solution, etc.)
-3. Add new card to [index.html](index.html) in the `#case-studies` section
-4. Update link `href="cases/your-new-case.html"`
+1. Duplicate any folder inside `cases/` (each contains its own `index.html`)
+2. Update the new folder's `index.html` content (title, hero gradient, challenge, solution, etc.)
+3. Add a new card to [index.html](index.html) in the `#case-studies` section
+4. Point the card link to `href="cases/your-new-case/"` (folder path, no `.html`)
 
 ---
 
