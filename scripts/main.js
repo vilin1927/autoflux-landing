@@ -75,6 +75,17 @@ const animatedElements = document.querySelectorAll(
 
 animatedElements.forEach(el => observer.observe(el));
 
+// Auto-apply staggered delays for grouped elements so they reveal sequentially on scroll
+const staggerGroups = document.querySelectorAll('.process__steps, .capabilities .grid, .results__grid, .metrics, .contact__grid');
+staggerGroups.forEach(group => {
+  const children = Array.from(group.children);
+  children.forEach((child, idx) => {
+    if (child.classList.contains('fade-in') || child.classList.contains('fade-in-up') || child.classList.contains('slide-in-left') || child.classList.contains('slide-in-right')) {
+      child.style.transitionDelay = `${0.12 * idx}s`;
+    }
+  });
+});
+
 // Fallback: ensure visibility if observer fails
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
@@ -344,7 +355,7 @@ const initHeroStackShuffle = () => {
   setInterval(() => {
     offset = (offset + 1) % cards.length;
     applyPositions();
-  }, 4000);
+  }, 6000);
 };
 
 initHeroStackShuffle();
