@@ -507,12 +507,27 @@ textarea {
 }
 
 .logos__marquee {
-  display: flex;
-  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+.logos__marquee-track {
+  display: inline-flex;
   gap: 1.5rem;
-  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee 18s linear infinite;
+}
+
+.logos__marquee span {
   font-weight: 600;
   color: var(--text);
+  opacity: 0.8;
+}
+
+.logos__marquee:hover .logos__marquee-track {
+  animation-play-state: paused;
 }
 
 .capabilities,
@@ -926,6 +941,11 @@ textarea {
 .slide-in-right.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* Stagger delays for sequential animations */

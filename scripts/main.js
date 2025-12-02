@@ -94,6 +94,23 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ======================================
+// AUTO-SCROLLING MARQUEES / CAROUSELS
+// ======================================
+const initAutoScroll = () => {
+  const tracks = document.querySelectorAll('[data-auto-scroll="true"] .logos__marquee-track');
+  tracks.forEach(track => {
+    track.addEventListener('pointerenter', () => {
+      track.style.animationPlayState = 'paused';
+    });
+    track.addEventListener('pointerleave', () => {
+      track.style.animationPlayState = 'running';
+    });
+  });
+};
+
+initAutoScroll();
+
+// ======================================
 // NUMBER COUNTER ANIMATION
 // ======================================
 const counterElements = document.querySelectorAll('.counter');
