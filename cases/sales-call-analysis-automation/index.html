@@ -5,23 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI-Powered Call Analysis & Coaching – AutoFlux Case Study</title>
   <meta name="description" content="How AutoFlux cut call review time from 45 to 5 minutes using LLM-powered scorecards, BigQuery analytics, and GoHighLevel CRM sync." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../styles/main.css" />
   <link rel="icon" type="image/png" href="../../assets/images/autoflux-favicon.png" />
   <style>
-    .case-hero { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 4rem 2rem; border-radius: 2rem; margin-bottom: 3rem; }
-    .case-hero h1 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); }
-    .case-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 700px; }
+    .case-hero {
+      background: linear-gradient(140deg, #0D47A1 0%, #00E5FF 100%);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 24px;
+      margin-bottom: 3rem;
+      box-shadow: 0 24px 80px rgba(10, 22, 40, 0.15);
+    }
+    .case-hero h1 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+    .case-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 700px; line-height: 1.6; }
     .case-section { margin-bottom: 3rem; }
-    .case-video-placeholder { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(103, 200, 255, 0.1), rgba(26, 79, 246, 0.1)); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--text-muted); border: 2px dashed var(--card-border); margin: 2rem 0; }
+
+    /* Enhanced video placeholder */
+    .case-video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(0, 229, 255, 0.12), transparent 60%),
+        radial-gradient(ellipse at 70% 60%, rgba(255, 179, 0, 0.08), transparent 60%),
+        linear-gradient(140deg, rgba(13, 71, 161, 0.08), rgba(0, 229, 255, 0.05));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(10, 22, 40, 0.1);
+    }
+
+    .case-video-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(0, 229, 255, 0.15), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(255, 179, 0, 0.1), transparent 60%);
+      animation: video-pulse 4s ease-in-out infinite;
+    }
+
+    .video-placeholder-content {
+      text-align: center;
+      z-index: 1;
+      position: relative;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(10, 22, 40, 0.15);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+    }
+
+    .video-placeholder-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .video-placeholder-title {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0D47A1, #00E5FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .video-placeholder-desc {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    @keyframes video-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
-    .stat-box { background: var(--cloud-white); padding: 2rem; border-radius: 1rem; border: 1px solid var(--card-border); text-align: center; }
-    .stat-box h3 { font-size: 2.5rem; color: var(--primary-blue); margin: 0 0 0.5rem; }
+    .stat-box {
+      background: var(--pearl);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(10, 22, 40, 0.08);
+    }
+    .stat-box h3 { font-size: 2.5rem; color: var(--primary); margin: 0 0 0.5rem; font-weight: 700; }
     .stat-box p { margin: 0; color: var(--text-muted); }
     .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0; }
-    .tech-badge { padding: 0.6rem 1.2rem; background: var(--accent-soft); color: var(--primary-blue); border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+    .tech-badge {
+      padding: 0.6rem 1.2rem;
+      background: rgba(0, 229, 255, 0.08);
+      color: var(--primary);
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(0, 229, 255, 0.15);
+    }
   </style>
 </head>
 <body>
@@ -73,8 +168,11 @@
       </section>
 
       <div class="case-video-placeholder fade-in">
-        📹 Video Demo Placeholder
-        <br/><small style="font-size: 0.9rem;">(Will show: transcript upload → LLM analysis → CRM sync)</small>
+        <div class="video-placeholder-content">
+          <span class="video-placeholder-icon">📹</span>
+          <h3 class="video-placeholder-title">Case Video Coming Soon</h3>
+          <p class="video-placeholder-desc">Watch the transcript upload → LLM analysis → CRM sync</p>
+        </div>
       </div>
 
       <section class="case-section fade-in-up">
