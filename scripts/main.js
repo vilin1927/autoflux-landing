@@ -330,7 +330,20 @@ const initCalEmbed = () => {
 
   const namespace = '30min';
   const calLink = 'vladimir-ilin-dq2q4k/30min';
-  const commonConfig = { layout: 'month_view', theme: 'light' };
+  const commonConfig = {
+    layout: 'month_view',
+    theme: 'light',
+    styles: {
+      branding: {
+        brandColor: '#0D47A1',
+        lightColor: '#00E5FF',
+        lighterColor: '#F8FAFC',
+        lightestColor: '#FFFFFF',
+        highlightColor: '#00E5FF',
+        medianColor: '#0A3380'
+      }
+    }
+  };
 
   Cal('init', namespace, { origin: 'https://app.cal.com' });
 
@@ -344,7 +357,13 @@ const initCalEmbed = () => {
 
   Cal.ns[namespace]('ui', {
     hideEventTypeDetails: false,
-    layout: 'month_view'
+    layout: 'month_view',
+    styles: {
+      branding: {
+        brandColor: '#0D47A1',
+        lightColor: '#00E5FF'
+      }
+    }
   });
 };
 
