@@ -23,7 +23,6 @@ export function Contact() {
         styles: {
           branding: {
             brandColor: "#1E1B4B",
-            lightColor: "#CFFF4D",
           },
         },
       });
