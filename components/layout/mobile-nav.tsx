@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { CalButton } from "@/components/ui/cal-button";
 import { cn } from "@/lib/utils";
 import { analytics } from "@/providers/posthog-provider";
 
@@ -152,11 +152,12 @@ export function MobileNav({ variant = "default" }: MobileNavProps) {
           </>
         )}
 
-        <Button asChild className="mt-3 w-full">
-          <Link href="#contact" onClick={() => handleLinkClickTracked("Book a Call")}>
-            Book a Call
-          </Link>
-        </Button>
+        <CalButton
+          className="mt-3 w-full"
+          trackingLocation="mobile-nav"
+        >
+          Book a Call
+        </CalButton>
       </nav>
     </>
   );

@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { Metadata } from "next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
 import { caseStudies, getCaseStudyBySlug } from "@/data/case-studies";
 import { CaseStudyTracker } from "@/components/tracking/case-study-tracker";
 import { MediaShowcase } from "@/components/case-study/media-showcase";
+import { CaseStudyCTA } from "@/components/case-study/case-study-cta";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -200,20 +199,12 @@ export default async function CaseStudyPage({ params }: Props) {
         </section>
 
         {/* CTA */}
-        <section className="bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] text-white rounded-[var(--radius-xl)] p-8 md:p-14 text-center mb-8">
-          <span className="inline-block text-sm font-bold uppercase tracking-widest text-[var(--accent)] mb-4">
-            {caseStudy.cta.eyebrow}
-          </span>
-          <h2 className="text-2xl md:text-4xl font-bold mb-4">
-            {caseStudy.cta.headline}
-          </h2>
-          <p className="text-white/80 mb-8 max-w-xl mx-auto">
-            {caseStudy.cta.description}
-          </p>
-          <Button asChild variant="lime" className="animate-pulse-glow">
-            <Link href="/#contact">Get Your Free Blueprint</Link>
-          </Button>
-        </section>
+        <CaseStudyCTA
+          eyebrow={caseStudy.cta.eyebrow}
+          headline={caseStudy.cta.headline}
+          description={caseStudy.cta.description}
+          caseStudySlug={caseStudy.slug}
+        />
       </main>
 
       <Footer />

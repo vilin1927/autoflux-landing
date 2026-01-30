@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { CalButton } from "@/components/ui/cal-button";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -105,15 +105,12 @@ export function Header({ variant = "default" }: HeaderProps) {
 
       <MobileNav variant={variant} />
 
-      <Button asChild className="hidden md:inline-flex">
-        <TrackedLink
-          href="#contact"
-          trackingName="Book a Call"
-          trackingLocation="header"
-        >
-          Book a Call
-        </TrackedLink>
-      </Button>
+      <CalButton
+        className="hidden md:inline-flex"
+        trackingLocation="header"
+      >
+        Book a Call
+      </CalButton>
     </header>
   );
 }

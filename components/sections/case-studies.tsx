@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Button } from "@/components/ui/button";
 import { Carousel3D } from "@/components/animated/carousel-3d";
 import { cn } from "@/lib/utils";
 import { GradientBackground } from "@/components/ui/gradient-background";
-import { TrackedLink, TrackedCaseStudyLink } from "@/components/ui/tracked-link";
+import { TrackedCaseStudyLink } from "@/components/ui/tracked-link";
+import { CalButton } from "@/components/ui/cal-button";
 import { analytics } from "@/providers/posthog-provider";
 import { useTrackSection } from "@/hooks/use-track-section";
 import {
@@ -232,15 +232,13 @@ export function CaseStudies() {
 
       {/* CTA */}
       <div className="text-center mt-12">
-        <Button asChild variant="lime" className="animate-pulse-glow">
-          <TrackedLink
-            href="#contact"
-            trackingName="Get Your Free Automation Blueprint"
-            trackingLocation="case-studies"
-          >
-            Get Your Free Automation Blueprint
-          </TrackedLink>
-        </Button>
+        <CalButton
+          variant="lime"
+          className="animate-pulse-glow"
+          trackingLocation="case-studies"
+        >
+          Get Your Free Automation Blueprint
+        </CalButton>
         <p className="mt-4 text-[var(--text-muted)] text-sm">
           See exactly which automations would save you the most time and money.
         </p>
