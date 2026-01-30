@@ -245,17 +245,91 @@ export function VideoPlaceholder({
     <div
       className={cn(
         "relative aspect-video rounded-[var(--radius-lg)] overflow-hidden",
-        "bg-gradient-to-br from-[var(--bg-light)] to-[var(--border-light)]",
-        "border-2 border-dashed border-[var(--border-light)]",
-        "flex flex-col items-center justify-center text-center p-8",
         className
       )}
     >
-      <div className="w-16 h-16 rounded-full bg-[var(--accent)]/20 flex items-center justify-center mb-4">
-        <Play className="w-8 h-8 text-[var(--accent)]" />
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1E1B4B] via-[#2D2A5B] to-[#1E1B4B]">
+        {/* Subtle pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23CFFF4D' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+        {/* Glow effect */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[var(--accent)]/10 rounded-full blur-3xl" />
       </div>
-      <h4 className="text-lg font-bold text-[var(--text-dark)] mb-2">{title}</h4>
-      <p className="text-sm text-[var(--text-muted)] max-w-sm">{description}</p>
+
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-8">
+        {/* Coming Soon Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-6"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--accent)]/20 border border-[var(--accent)]/30 rounded-full text-[var(--accent)] text-sm font-semibold">
+            <span className="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
+            Coming Soon
+          </span>
+        </motion.div>
+
+        {/* Play button icon */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.3, type: "spring" }}
+          className="mb-6"
+        >
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+            <Play className="w-8 h-8 md:w-10 md:h-10 text-[var(--accent)] ml-1" />
+          </div>
+        </motion.div>
+
+        {/* Title */}
+        <motion.h4
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="text-xl md:text-2xl font-bold text-white mb-3"
+        >
+          {title}
+        </motion.h4>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-white/70 max-w-md mb-6"
+        >
+          {description}
+        </motion.p>
+
+        {/* Team info */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="flex items-center gap-3 px-5 py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/10"
+        >
+          <div className="flex -space-x-2">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--accent)] to-[#9EE82D] border-2 border-[#1E1B4B] flex items-center justify-center text-[10px] font-bold text-[#1E1B4B]">V</div>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#3DD6D0] to-[#2BB8B2] border-2 border-[#1E1B4B] flex items-center justify-center text-[10px] font-bold text-[#1E1B4B]">A</div>
+          </div>
+          <span className="text-sm text-white/80">
+            Our team is preparing detailed case studies
+          </span>
+        </motion.div>
+      </div>
+
+      {/* Decorative corners */}
+      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[var(--accent)]/30 rounded-tl-lg" />
+      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[var(--accent)]/30 rounded-tr-lg" />
+      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[var(--accent)]/30 rounded-bl-lg" />
+      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[var(--accent)]/30 rounded-br-lg" />
     </div>
   );
 }
