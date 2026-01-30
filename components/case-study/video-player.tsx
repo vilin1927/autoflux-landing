@@ -106,7 +106,7 @@ export function VideoPlayer({
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onReady={() => console.log("Video player ready")}
-              onError={(e) => console.error("Video player error:", e)}
+              onError={(e: unknown) => console.error("Video player error:", e)}
               config={{
                 youtube: {
                   rel: 0,
