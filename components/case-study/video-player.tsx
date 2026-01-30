@@ -7,7 +7,8 @@ import { Play, X, Maximize2, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { analytics } from "@/providers/posthog-provider";
 // Dynamic import to avoid SSR issues with react-player
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }) as any;
 
 interface VideoPlayerProps {
   url: string;
