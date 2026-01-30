@@ -27,32 +27,11 @@ export function Contact() {
         },
       });
 
-      // Track Cal.com events
+      // Track Cal.com events - only bookingSuccessful is supported in current API
       cal("on", {
         action: "bookingSuccessful",
         callback: () => {
           analytics.bookingCompleted();
-        },
-      });
-
-      cal("on", {
-        action: "dateSelected",
-        callback: (e: { data: { date: string } }) => {
-          analytics.bookingDateSelected(e.data.date);
-        },
-      });
-
-      cal("on", {
-        action: "timeSelected",
-        callback: (e: { data: { time: string; date: string } }) => {
-          analytics.bookingTimeSelected(e.data.time, e.data.date);
-        },
-      });
-
-      cal("on", {
-        action: "bookingFormOpened",
-        callback: () => {
-          analytics.bookingFormStarted();
         },
       });
 
