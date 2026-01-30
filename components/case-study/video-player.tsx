@@ -6,10 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, X, Maximize2, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { analytics } from "@/providers/posthog-provider";
-import type ReactPlayerType from "react-player";
-
 // Dynamic import to avoid SSR issues with react-player
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }) as typeof ReactPlayerType;
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 interface VideoPlayerProps {
   url: string;
