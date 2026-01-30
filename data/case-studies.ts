@@ -77,35 +77,7 @@ export const caseStudies: CaseStudy[] = [
       "Spec-Driven Development: We documented exact text placement rules, scraping parameters, and output formats before building—no scope creep.",
       "Fast ROI: The system paid for itself within the first month through time savings and increased test velocity.",
     ],
-    // Sample media - replace with actual content
-    media: {
-      video: {
-        url: "https://www.youtube.com/watch?v=ZK-rNEhJIDs", // n8n automation demo
-        thumbnail: "/images/cases/tiktok-video-thumb.jpg",
-        title: "TikTok Automation Platform Demo",
-        duration: "2:15",
-      },
-      images: [
-        {
-          src: "/images/cases/tiktok-dashboard.jpg",
-          alt: "TikTok automation dashboard",
-          caption: "Main dashboard showing viral content analysis",
-          type: "screenshot",
-        },
-        {
-          src: "/images/cases/tiktok-workflow.jpg",
-          alt: "n8n workflow diagram",
-          caption: "Automated workflow in n8n",
-          type: "diagram",
-        },
-        {
-          src: "/images/cases/tiktok-variants.jpg",
-          alt: "Generated slideshow variants",
-          caption: "AI-generated slideshow variants ready for testing",
-          type: "result",
-        },
-      ],
-    },
+    // Media will be added when videos are ready
     videoPlaceholder: {
       icon: "video",
       title: "Case Video Coming Soon",
