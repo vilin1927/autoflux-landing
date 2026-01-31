@@ -66,11 +66,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "5-10x", label: "More variants per campaign for testing" },
         { value: "$0", label: "Additional designer costs" },
       ],
-      quote: {
-        text: "This platform completely changed how we approach creative production. What used to take an hour now takes 15 minutes, and we're testing way more variants than we ever could manually.",
-        author: "Head of Growth",
-        role: "E-Commerce Brand",
-      },
     },
     takeaways: [
       "AI + Automation = Scalable Creativity: By combining LLMs with workflow automation, creative production can scale without linear headcount growth.",
@@ -155,11 +150,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "10 hrs/week", label: "Saved on manual research" },
         { value: "2x", label: "Increase in qualified leads" },
       ],
-      quote: {
-        text: "We went from spending half our week on lead research to having a fresh batch of qualified prospects every Monday morning. Game changer.",
-        author: "Sales Director",
-        role: "B2B Services Company",
-      },
     },
     takeaways: [
       "Multi-source scraping catches leads that single-source approaches miss.",
@@ -247,11 +237,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "23%", label: "Improvement in close rates" },
         { value: "3x", label: "More coaching conversations" },
       ],
-      quote: {
-        text: "Now I can coach my entire team based on data, not gut feelings. The AI catches things I would have missed.",
-        author: "VP of Sales",
-        role: "SaaS Company",
-      },
     },
     takeaways: [
       "AI can match human-level call analysis at 10x the speed.",
@@ -337,11 +322,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "50+", label: "Data points per competitor" },
         { value: "Weekly", label: "Auto-refresh of data" },
       ],
-      quote: {
-        text: "I had no idea there were 12 competitors within 10 miles running Google Ads. This tool showed me exactly where to focus.",
-        author: "Clinic Owner",
-        role: "Veterinary Practice",
-      },
     },
     takeaways: [
       "One-click tools drive adoption—remove friction and users actually use it.",
@@ -426,11 +406,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "8 hrs/week", label: "Saved on manual work" },
         { value: "3x", label: "Pipeline velocity increase" },
       ],
-      quote: {
-        text: "The spec-driven approach means every lead that hits our CRM is already qualified. Our reps love it.",
-        author: "Head of Sales",
-        role: "B2B Agency",
-      },
     },
     takeaways: [
       "Spec-driven development prevents scope creep and ensures consistent output.",
@@ -515,11 +490,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "3 cadences", label: "Daily, weekly, monthly" },
         { value: "Zero errors", label: "Consistent formatting" },
       ],
-      quote: {
-        text: "Monday mornings used to start with report compilation. Now the reports are waiting in my inbox before I wake up.",
-        author: "Operations Manager",
-        role: "Communications Agency",
-      },
     },
     takeaways: [
       "Automated reporting eliminates human error and ensures consistency.",
@@ -604,11 +574,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "85%", label: "Calls handled without human" },
         { value: "2x", label: "Appointment bookings" },
       ],
-      quote: {
-        text: "We went from missing nearly half our calls to capturing almost every one. The AI handles 85% of calls completely on its own.",
-        author: "Practice Manager",
-        role: "Veterinary Clinic",
-      },
     },
     takeaways: [
       "Voice AI can match human-level call handling for routine inquiries.",
@@ -693,11 +658,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "99.5%", label: "Inventory accuracy" },
         { value: "2 hrs/day", label: "Saved on manual work" },
       ],
-      quote: {
-        text: "We went from manually copying orders to processing 500+ a day without touching anything. The WISMO automation alone saved us a part-time hire.",
-        author: "E-commerce Director",
-        role: "DTC Brand",
-      },
     },
     takeaways: [
       "Real-time sync eliminates the delays that cause customer complaints.",
@@ -782,11 +742,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "3x", label: "Faster onboarding completion" },
         { value: "50%", label: "Reduction in support tickets" },
       ],
-      quote: {
-        text: "The AI agent handles most questions instantly, and the early warning system lets us save accounts before they churn.",
-        author: "Head of Customer Success",
-        role: "B2B SaaS Company",
-      },
     },
     takeaways: [
       "Proactive onboarding beats reactive support for trial conversion.",
@@ -871,11 +826,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "< 30 sec", label: "Average response time" },
         { value: "15 min → 0", label: "Manual time per lead" },
       ],
-      quote: {
-        text: "I used to lose leads while in meetings. Now the bot qualifies and books them before I even know they messaged.",
-        author: "Agency Owner",
-        role: "Marketing Agency",
-      },
     },
     takeaways: [
       "Speed-to-lead matters—instant responses dramatically improve booking rates.",
@@ -963,11 +913,6 @@ export const caseStudies: CaseStudy[] = [
         { value: "100%", label: "Core features delivered" },
         { value: "$0", label: "Saved on extended dev costs" },
       ],
-      quote: {
-        text: "I couldn't believe we had a working product with auth, billing, and integrations in 2 weeks. It let me start customer conversations immediately.",
-        author: "Founder",
-        role: "B2B SaaS Startup",
-      },
     },
     takeaways: [
       "AI-assisted development doesn't sacrifice quality for speed.",

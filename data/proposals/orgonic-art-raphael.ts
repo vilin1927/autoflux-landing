@@ -1,0 +1,333 @@
+// Proposal data for Orgonic-Art (Raphael) - EU Regulation Discovery Tool
+
+export const proposalData = {
+  client: {
+    name: "Orgonic-Art",
+    contact: "Raphael",
+    location: "Germany",
+  },
+  // Add your Loom video ID here (the part after loom.com/share/)
+  // Example: if URL is https://www.loom.com/share/abc123def456 → use "abc123def456"
+  loomVideoId: "a20daf9e9880473cbab459284a673cdc", // Leave empty to hide the section
+  project: {
+    title: "EU Regulation Discovery Tool",
+    subtitle: "AI-powered compliance scanning for EU businesses",
+    description:
+      "A smart tool that analyzes your business profile and automatically identifies potentially relevant EU regulations, complete with summaries and direct links to official sources.",
+  },
+  stats: [
+    { value: "$540", label: "Fixed Price" },
+    { value: "5-7", label: "Days Delivery" },
+  ],
+  approach: [
+    {
+      title: "Smart Questionnaire",
+      description:
+        "Intuitive onboarding form that captures business details, operations, and compliance focus areas.",
+      icon: "clipboard-list",
+    },
+    {
+      title: "AI Business Profiling",
+      description:
+        "OpenAI GPT-5.2 analyzes your inputs to build a comprehensive understanding of your regulatory landscape.",
+      icon: "brain",
+    },
+    {
+      title: "EUR-Lex Integration",
+      description:
+        "Direct connection to the official EU law database for accurate, up-to-date regulation data.",
+      icon: "database",
+    },
+    {
+      title: "AI Matching & Summary",
+      description:
+        "Intelligent matching algorithm identifies relevant regulations and generates plain-language summaries.",
+      icon: "sparkles",
+    },
+    {
+      title: "Clean Dashboard",
+      description:
+        "Results displayed in a professional, easy-to-navigate interface with export capabilities.",
+      icon: "layout-dashboard",
+    },
+    {
+      title: "Simple Auth",
+      description:
+        "Single-user login via Supabase Auth. Email/password or magic link. No roles needed for MVP.",
+      icon: "shield-check",
+    },
+  ],
+  timeline: [
+    {
+      phase: "Days 1-2",
+      title: "Foundation",
+      tasks: [
+        "Next.js project setup",
+        "Supabase Auth integration",
+        "Questionnaire UI & validation",
+        "Database schema (minimal)",
+      ],
+    },
+    {
+      phase: "Days 3-4",
+      title: "AI + EUR-Lex",
+      tasks: [
+        "OpenAI GPT-5.2 profiling",
+        "EUR-Lex REST API search",
+        "AI regulation matching",
+        "Summary generation",
+      ],
+    },
+    {
+      phase: "Days 5-7",
+      title: "Dashboard & Deploy",
+      tasks: [
+        "Results dashboard UI",
+        "Mobile responsiveness",
+        "Vercel deployment",
+        "Testing & handoff",
+      ],
+    },
+  ],
+  techStack: [
+    { name: "Next.js 14", category: "Frontend" },
+    { name: "React", category: "Frontend" },
+    { name: "Tailwind CSS", category: "Styling" },
+    { name: "Supabase", category: "Backend + Auth" },
+    { name: "OpenAI GPT-5.2", category: "AI" },
+    { name: "EUR-Lex REST API", category: "Data Source" },
+    { name: "Vercel", category: "Hosting" },
+  ],
+  pricing: {
+    amount: "$540",
+    hours: "18 hours @ $30/hr",
+    deliverables: [
+      "Complete source code (Next.js + Supabase)",
+      "Working questionnaire with validation",
+      "GPT-5.2 business profile generation",
+      "Live EUR-Lex regulation search",
+      "AI-powered relevance matching",
+      "Clean results dashboard",
+      "Single-user authentication",
+      "Vercel deployment + handoff docs",
+    ],
+  },
+};
+
+// Demo data for RegScope
+export const demoData = {
+  appName: "RegScope",
+  tagline: "EU Regulation Discovery",
+  user: {
+    email: "demo@company.com",
+    company: "Demo Company",
+  },
+  industries: [
+    { value: "technology", label: "Technology / Software" },
+    { value: "healthcare", label: "Healthcare / Medical" },
+    { value: "finance", label: "Finance / Banking" },
+    { value: "manufacturing", label: "Manufacturing" },
+    { value: "retail", label: "Retail / E-commerce" },
+    { value: "energy", label: "Energy / Utilities" },
+    { value: "other", label: "Other" },
+  ],
+  countries: [
+    { value: "DE", label: "Germany" },
+    { value: "FR", label: "France" },
+    { value: "NL", label: "Netherlands" },
+    { value: "ES", label: "Spain" },
+    { value: "IT", label: "Italy" },
+    { value: "PL", label: "Poland" },
+    { value: "BE", label: "Belgium" },
+    { value: "AT", label: "Austria" },
+    { value: "SE", label: "Sweden" },
+    { value: "OTHER", label: "Other EU" },
+  ],
+  dataProcessingOptions: [
+    { value: "customer_data", label: "Customer personal data" },
+    { value: "employee_data", label: "Employee data" },
+    { value: "health_data", label: "Health/medical data" },
+    { value: "financial_data", label: "Financial transactions" },
+    { value: "location_data", label: "Location tracking" },
+    { value: "ai_processing", label: "AI/ML processing" },
+  ],
+};
+
+// EUR-Lex regulation data with real links
+export const regulations = [
+  {
+    id: "gdpr",
+    title: "General Data Protection Regulation (GDPR)",
+    reference: "Regulation (EU) 2016/679",
+    date: "2016-04-27",
+    summary:
+      "Comprehensive data protection law governing how personal data of EU residents must be collected, processed, stored, and transferred. Applies to any organization handling EU citizen data.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+    triggers: ["customer_data", "employee_data", "health_data", "location_data"],
+    industries: ["all"],
+  },
+  {
+    id: "dsa",
+    title: "Digital Services Act (DSA)",
+    reference: "Regulation (EU) 2022/2065",
+    date: "2022-10-19",
+    summary:
+      "Regulates digital services and online platforms, establishing accountability for content moderation, transparency requirements, and user safety measures across the EU.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/reg/2022/2065/oj",
+    triggers: ["sellsOnline"],
+    industries: ["technology", "retail"],
+  },
+  {
+    id: "nis2",
+    title: "NIS2 Directive",
+    reference: "Directive (EU) 2022/2555",
+    date: "2022-12-14",
+    summary:
+      "Network and Information Security directive requiring essential and important entities to implement cybersecurity risk management measures and report significant incidents.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/dir/2022/2555/oj",
+    triggers: ["hasEmployees"],
+    industries: ["technology", "energy", "healthcare", "finance"],
+  },
+  {
+    id: "ai_act",
+    title: "EU AI Act",
+    reference: "Regulation (EU) 2024/1689",
+    date: "2024-07-12",
+    summary:
+      "World's first comprehensive AI regulation establishing rules for AI systems based on risk levels, from minimal to unacceptable risk, with specific requirements for high-risk applications.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+    triggers: ["ai_processing"],
+    industries: ["technology", "healthcare", "finance"],
+  },
+  {
+    id: "dora",
+    title: "Digital Operational Resilience Act (DORA)",
+    reference: "Regulation (EU) 2022/2554",
+    date: "2022-12-14",
+    summary:
+      "Establishes uniform requirements for the security of network and information systems of financial entities, including ICT risk management and incident reporting.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
+    triggers: ["financial_data"],
+    industries: ["finance"],
+  },
+  {
+    id: "product_safety",
+    title: "General Product Safety Regulation",
+    reference: "Regulation (EU) 2023/988",
+    date: "2023-05-10",
+    summary:
+      "Ensures that products placed on the EU market are safe, establishing safety requirements for consumer products and obligations for economic operators in the supply chain.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/reg/2023/988/oj",
+    triggers: [],
+    industries: ["manufacturing", "retail"],
+  },
+  {
+    id: "eprivacy",
+    title: "ePrivacy Directive",
+    reference: "Directive 2002/58/EC",
+    date: "2002-07-12",
+    summary:
+      "Regulates privacy and electronic communications, including rules on cookies, direct marketing, and confidentiality of communications. Often called the 'Cookie Law'.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/dir/2002/58/oj",
+    triggers: ["sellsOnline", "location_data"],
+    industries: ["all"],
+  },
+  {
+    id: "mdr",
+    title: "Medical Devices Regulation",
+    reference: "Regulation (EU) 2017/745",
+    date: "2017-05-05",
+    summary:
+      "Establishes rules for placing medical devices on the EU market, ensuring high standards of quality and safety for medical devices and in vitro diagnostic medical devices.",
+    eurLexUrl: "https://eur-lex.europa.eu/eli/reg/2017/745/oj",
+    triggers: ["health_data"],
+    industries: ["healthcare"],
+  },
+];
+
+// Helper function to calculate relevance score
+export function calculateRelevance(
+  regulation: (typeof regulations)[0],
+  formData: {
+    industry: string;
+    dataProcessing: string[];
+    sellsOnline: boolean;
+    hasEmployees: boolean;
+  }
+): number {
+  let score = 0;
+  const maxScore = 100;
+
+  // Industry match
+  if (
+    regulation.industries.includes("all") ||
+    regulation.industries.includes(formData.industry)
+  ) {
+    score += 40;
+  }
+
+  // Data processing triggers
+  const matchingTriggers = regulation.triggers.filter((trigger) =>
+    formData.dataProcessing.includes(trigger)
+  );
+  score += matchingTriggers.length * 15;
+
+  // Boolean triggers
+  if (regulation.triggers.includes("sellsOnline") && formData.sellsOnline) {
+    score += 20;
+  }
+  if (regulation.triggers.includes("hasEmployees") && formData.hasEmployees) {
+    score += 10;
+  }
+
+  return Math.min(score, maxScore);
+}
+
+// Generate "why applies" text based on form data
+export function generateWhyApplies(
+  regulation: (typeof regulations)[0],
+  formData: {
+    companyName: string;
+    industry: string;
+    dataProcessing: string[];
+    sellsOnline: boolean;
+    hasEmployees: boolean;
+    countries: string[];
+  }
+): string {
+  const reasons: string[] = [];
+
+  if (regulation.id === "gdpr") {
+    if (formData.dataProcessing.includes("customer_data")) {
+      reasons.push("processes customer personal data");
+    }
+    if (formData.dataProcessing.includes("employee_data")) {
+      reasons.push("handles employee information");
+    }
+    if (formData.countries.length > 0) {
+      reasons.push(`operates in ${formData.countries.length} EU countries`);
+    }
+  }
+
+  if (regulation.id === "dsa" && formData.sellsOnline) {
+    reasons.push("operates an online platform/service");
+  }
+
+  if (regulation.id === "ai_act" && formData.dataProcessing.includes("ai_processing")) {
+    reasons.push("uses AI/ML in business processes");
+  }
+
+  if (regulation.id === "dora" && formData.industry === "finance") {
+    reasons.push("operates in the financial services sector");
+  }
+
+  if (regulation.id === "nis2" && formData.hasEmployees) {
+    reasons.push("has employees and IT infrastructure");
+  }
+
+  if (reasons.length === 0) {
+    reasons.push("operates within the EU market");
+  }
+
+  return `Your business ${reasons.join(", ")}, making this regulation potentially applicable.`;
+}

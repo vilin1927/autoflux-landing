@@ -161,15 +161,17 @@ export default async function CaseStudyPage({ params }: Props) {
             ))}
           </div>
 
-          {/* Quote */}
-          <blockquote className="bg-[var(--primary)] text-white p-6 rounded-[var(--radius-lg)]">
-            <p className="text-lg italic mb-4">
-              &ldquo;{caseStudy.results.quote.text}&rdquo;
-            </p>
-            <footer className="text-sm text-white/80">
-              — {caseStudy.results.quote.author}, {caseStudy.results.quote.role}
-            </footer>
-          </blockquote>
+          {/* Quote - hidden for now */}
+          {caseStudy.results.quote && (
+            <blockquote className="bg-[var(--primary)] text-white p-6 rounded-[var(--radius-lg)]">
+              <p className="text-lg italic mb-4">
+                &ldquo;{caseStudy.results.quote.text}&rdquo;
+              </p>
+              <footer className="text-sm text-white/80">
+                — {caseStudy.results.quote.author}, {caseStudy.results.quote.role}
+              </footer>
+            </blockquote>
+          )}
         </section>
 
         {/* Media Showcase - Video & Images */}

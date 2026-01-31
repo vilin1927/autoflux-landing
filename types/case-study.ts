@@ -47,7 +47,7 @@ export interface CaseStudy {
       value: string;
       label: string;
     }[];
-    quote: {
+    quote?: {
       text: string;
       author: string;
       role: string;
