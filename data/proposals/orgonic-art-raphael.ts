@@ -6,9 +6,6 @@ export const proposalData = {
     contact: "Raphael",
     location: "Germany",
   },
-  // Add your Loom video ID here (the part after loom.com/share/)
-  // Example: if URL is https://www.loom.com/share/abc123def456 → use "abc123def456"
-  loomVideoId: "ae7000629c074a1b926dc17f5d063397", // Leave empty to hide the section
   project: {
     title: "EU Regulation Discovery Tool",
     subtitle: "AI-powered compliance scanning for EU businesses",

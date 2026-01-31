@@ -296,31 +296,6 @@ export default function ProposalPage() {
           </div>
         </motion.section>
 
-        {/* Video Walkthrough Section (Loom) */}
-        {proposalData.loomVideoId && (
-          <motion.section
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
-          >
-            <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
-              Video Walkthrough
-            </h2>
-            <p className="text-[var(--text-muted)] mb-6">
-              Watch me explain the approach and demo the prototype
-            </p>
-            <div className="relative w-full aspect-video rounded-[var(--radius-lg)] overflow-hidden bg-gray-100">
-              <iframe
-                src={`https://www.loom.com/embed/${proposalData.loomVideoId}`}
-                frameBorder="0"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
-            </div>
-          </motion.section>
-        )}
-
         {/* Demo CTA Section */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
