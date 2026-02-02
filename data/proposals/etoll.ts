@@ -13,7 +13,7 @@ export const proposalData = {
       "A branded AI assistant that helps fleet managers interact with their data through natural language—asking questions, generating reports, spotting trends, and surfacing insights they might otherwise miss.",
   },
   stats: [
-    { value: "$5,500", label: "Fixed Price" },
+    { value: "$4,500", label: "Fixed Price" },
     { value: "3-4", label: "Weeks Delivery" },
   ],
   approach: [
@@ -100,7 +100,7 @@ export const proposalData = {
     { name: "React", category: "Frontend" },
   ],
   pricing: {
-    amount: "$5,500",
+    amount: "$4,500",
     hours: "Flat rate",
     deliverables: [
       "Working AI system integrated with your AWS environment",
