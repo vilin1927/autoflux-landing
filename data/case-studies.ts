@@ -360,43 +360,44 @@ export const caseStudies: CaseStudy[] = [
     ],
     solution: {
       intro:
-        "We built a spec-driven pipeline that automates the entire lead gen workflow from source to CRM:",
+        "We built a spec-driven pipeline using Python that automates the entire lead gen workflow from source to CRM:",
       steps: [
         {
           title: "Multi-Source Scraping",
           details: [
-            "Scrapes target websites and Instagram profiles",
-            "Pulls data from Google Sheets input specs",
+            "Scrapes target websites and Instagram profiles using Scrapy + BeautifulSoup",
+            "Pulls data from Google Sheets input specs via gspread",
           ],
         },
         {
           title: "ICP Filtering",
           details: [
-            "Applies hard filters (industry, size, location)",
+            "Applies hard filters (industry, size, location) with Pandas",
             "Implements tier logic for prioritization",
           ],
         },
         {
           title: "Contact Enrichment",
           details: [
-            "Enriches via Snov.io and Dropcontact",
-            "Validates emails before CRM entry",
+            "Enriches via Snov.io and Dropcontact APIs",
+            "Validates emails with email-validator before CRM entry",
           ],
         },
         {
           title: "CRM Integration",
           details: [
-            "Creates contacts in HubSpot with proper tagging",
+            "Creates contacts in HubSpot via hubspot-api-client",
             "Assigns to appropriate sales reps based on tier",
           ],
         },
       ],
       techStack: [
-        { name: "Apify", description: "web scraping" },
-        { name: "Snov.io", description: "email enrichment" },
-        { name: "Dropcontact", description: "data enrichment" },
-        { name: "HubSpot CRM" },
-        { name: "n8n", description: "orchestration" },
+        { name: "Python", description: "core orchestration" },
+        { name: "Celery + Redis", description: "async task queue" },
+        { name: "Scrapy", description: "web scraping" },
+        { name: "Pandas", description: "data processing" },
+        { name: "Snov.io API", description: "email enrichment" },
+        { name: "HubSpot API" },
       ],
     },
     results: {
@@ -424,7 +425,7 @@ export const caseStudies: CaseStudy[] = [
         "Book a free blueprint call to design your lead gen system.",
     },
     cardMetric: { number: "Zero guesswork", label: "Sheet → scrape → tier → CRM" },
-    tools: ["Apify", "Snov.io", "HubSpot"],
+    tools: ["Python", "Celery", "Scrapy"],
   },
   {
     slug: "automated-reporting-masterleads",
