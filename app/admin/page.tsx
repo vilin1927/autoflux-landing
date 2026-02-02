@@ -26,15 +26,6 @@ const proposals = [
     proposalUrl: "/proposals/orgonic-art-raphael",
     demoUrl: "/proposals/orgonic-art-raphael/demo",
   },
-  {
-    id: "alamance-property",
-    name: "Distressed Property Detection",
-    client: "Alamance County",
-    price: "$2,800",
-    status: "Active",
-    proposalUrl: "/proposals/alamance-property",
-    demoUrl: "/proposals/alamance-property/demo",
-  },
 ];
 
 export default function AdminPage() {
