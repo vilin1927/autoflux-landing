@@ -26,6 +26,15 @@ const proposals = [
     proposalUrl: "/proposals/orgonic-art-raphael",
     demoUrl: "/proposals/orgonic-art-raphael/demo",
   },
+  {
+    id: "alamance-property",
+    name: "Distressed Property Detection",
+    client: "Alamance County",
+    price: "",
+    status: "Active",
+    proposalUrl: "/proposals/alamance-property",
+    demoUrl: "/proposals/alamance-property/demo",
+  },
 ];
 
 export default function AdminPage() {
@@ -117,7 +126,7 @@ export default function AdminPage() {
                   <p className="text-gray-500 text-sm">{proposal.client}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-gray-900">{proposal.price}</p>
+                  {proposal.price && <p className="font-bold text-gray-900">{proposal.price}</p>}
                   <span className="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">
                     {proposal.status}
                   </span>
