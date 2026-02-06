@@ -174,15 +174,20 @@ export default function ProposalPage() {
                 style={{ border: `1px solid ${colors.gold}30` }}
               >
                 <div className="p-3" style={{ background: colors.navyLight, borderBottom: `1px solid ${colors.gold}20` }}>
-                  <p className="text-sm font-medium" style={{ color: colors.gold }}>
+                  <p className="text-sm font-medium text-center" style={{ color: colors.gold }}>
                     Meta Ads — V6 Hairboost Campaign
                   </p>
                 </div>
-                <img
-                  src="/proposals/globalhair/meta-ad.png"
-                  alt="GlobalHair Meta Ad"
-                  className="w-full"
-                />
+                <div
+                  className="flex items-center justify-center p-6"
+                  style={{ background: `linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)`, minHeight: "320px" }}
+                >
+                  <img
+                    src="/proposals/globalhair/meta-ad.png"
+                    alt="GlobalHair Meta Ad"
+                    className="max-w-full max-h-[280px] object-contain rounded-lg shadow-2xl"
+                  />
+                </div>
               </motion.div>
 
               <motion.div
@@ -193,15 +198,20 @@ export default function ProposalPage() {
                 style={{ border: `1px solid ${colors.gold}30` }}
               >
                 <div className="p-3" style={{ background: colors.navyLight, borderBottom: `1px solid ${colors.gold}20` }}>
-                  <p className="text-sm font-medium" style={{ color: colors.gold }}>
+                  <p className="text-sm font-medium text-center" style={{ color: colors.gold }}>
                     Google Ads — Search Campaign
                   </p>
                 </div>
-                <img
-                  src="/proposals/globalhair/google-ad.png"
-                  alt="GlobalHair Google Ad"
-                  className="w-full"
-                />
+                <div
+                  className="flex items-center justify-center p-6"
+                  style={{ background: `linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)`, minHeight: "320px" }}
+                >
+                  <img
+                    src="/proposals/globalhair/google-ad.png"
+                    alt="GlobalHair Google Ad"
+                    className="max-w-full max-h-[280px] object-contain rounded-lg shadow-2xl"
+                  />
+                </div>
               </motion.div>
             </div>
 
