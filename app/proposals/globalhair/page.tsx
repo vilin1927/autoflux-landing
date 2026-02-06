@@ -73,6 +73,14 @@ export default function ProposalPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            {/* Logo */}
+            <div className="flex justify-center mb-8">
+              <img
+                src="/proposals/globalhair/logo.png"
+                alt="GlobalHair Institute"
+                className="h-16 object-contain"
+              />
+            </div>
             <div
               className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-6"
               style={{ background: `${colors.gold}20`, color: colors.gold }}
@@ -132,6 +140,79 @@ export default function ProposalPage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* We Did Our Homework */}
+      <section className="py-16 px-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="text-3xl font-bold text-center mb-4"
+              style={{ color: colors.white }}
+            >
+              We Did Our Homework
+            </h2>
+            <p
+              className="text-center mb-8 max-w-2xl mx-auto"
+              style={{ color: colors.gray }}
+            >
+              We analyzed your current ad campaigns across Meta and Google to understand your marketing landscape.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="rounded-xl overflow-hidden"
+                style={{ border: `1px solid ${colors.gold}30` }}
+              >
+                <div className="p-3" style={{ background: colors.navyLight }}>
+                  <p className="text-sm font-medium" style={{ color: colors.gold }}>
+                    Meta Ads — V6 Hairboost Campaign
+                  </p>
+                </div>
+                <img
+                  src="/proposals/globalhair/meta-ad.png"
+                  alt="GlobalHair Meta Ad"
+                  className="w-full"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="rounded-xl overflow-hidden"
+                style={{ border: `1px solid ${colors.gold}30` }}
+              >
+                <div className="p-3" style={{ background: colors.navyLight }}>
+                  <p className="text-sm font-medium" style={{ color: colors.gold }}>
+                    Google Ads — Search Campaign
+                  </p>
+                </div>
+                <img
+                  src="/proposals/globalhair/google-ad.png"
+                  alt="GlobalHair Google Ad"
+                  className="w-full"
+                />
+              </motion.div>
+            </div>
+
+            <p
+              className="text-center text-sm"
+              style={{ color: colors.gray }}
+            >
+              Running campaigns across Meta & Google with V6 Hairboost, 98% success rate messaging, and consultation CTAs.
+              <br />
+              <span style={{ color: colors.gold }}>Now imagine seeing all this data — spend, leads, conversions — in one dashboard.</span>
+            </p>
           </motion.div>
         </div>
       </section>
