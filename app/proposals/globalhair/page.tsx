@@ -74,21 +74,12 @@ export default function ProposalPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Logo */}
-            <div className="flex justify-center items-center gap-3 mb-8">
-              <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center"
-                style={{ background: colors.navyLight, border: `1px solid ${colors.gold}30` }}
-              >
-                <span className="text-2xl">🛡️</span>
-              </div>
-              <div className="text-left">
-                <p className="text-xl font-light tracking-wide" style={{ color: colors.white }}>
-                  Hairtransplant
-                </p>
-                <p className="text-xs tracking-[0.3em] uppercase" style={{ color: colors.gray }}>
-                  GlobalHair Institute
-                </p>
-              </div>
+            <div className="flex justify-center mb-8">
+              <img
+                src="/proposals/globalhair/logo.png"
+                alt="GlobalHair Institute"
+                className="h-14 object-contain"
+              />
             </div>
             <div
               className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-6"
@@ -180,21 +171,18 @@ export default function ProposalPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="rounded-xl overflow-hidden"
-                style={{ border: `1px solid ${colors.gold}30`, background: colors.navyLight }}
+                style={{ border: `1px solid ${colors.gold}30` }}
               >
-                <div className="p-3" style={{ borderBottom: `1px solid ${colors.gold}20` }}>
+                <div className="p-3" style={{ background: colors.navyLight, borderBottom: `1px solid ${colors.gold}20` }}>
                   <p className="text-sm font-medium" style={{ color: colors.gold }}>
                     Meta Ads — V6 Hairboost Campaign
                   </p>
                 </div>
-                <div className="p-4">
-                  <p className="text-sm mb-2" style={{ color: colors.white }}>
-                    &quot;Dankzij onze stamcel technologie in combinatie met de V6 Hairboost heeft hij weer een volle bos haar...&quot;
-                  </p>
-                  <p className="text-xs" style={{ color: colors.gray }}>
-                    Video ad • v6.globalhair.nl/hair-analysis • &quot;Doe de analyse&quot; CTA
-                  </p>
-                </div>
+                <img
+                  src="/proposals/globalhair/meta-ad.png"
+                  alt="GlobalHair Meta Ad"
+                  className="w-full"
+                />
               </motion.div>
 
               <motion.div
@@ -202,21 +190,18 @@ export default function ProposalPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="rounded-xl overflow-hidden"
-                style={{ border: `1px solid ${colors.gold}30`, background: colors.navyLight }}
+                style={{ border: `1px solid ${colors.gold}30` }}
               >
-                <div className="p-3" style={{ borderBottom: `1px solid ${colors.gold}20` }}>
+                <div className="p-3" style={{ background: colors.navyLight, borderBottom: `1px solid ${colors.gold}20` }}>
                   <p className="text-sm font-medium" style={{ color: colors.gold }}>
                     Google Ads — Search Campaign
                   </p>
                 </div>
-                <div className="p-4">
-                  <p className="text-sm mb-2" style={{ color: colors.white }}>
-                    &quot;98% Slagingspercentage - Tot 4500 grafts&quot;
-                  </p>
-                  <p className="text-xs" style={{ color: colors.gray }}>
-                    Search ad • www.globalhair.nl • Consultation booking CTA
-                  </p>
-                </div>
+                <img
+                  src="/proposals/globalhair/google-ad.png"
+                  alt="GlobalHair Google Ad"
+                  className="w-full"
+                />
               </motion.div>
             </div>
 
