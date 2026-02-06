@@ -10,8 +10,6 @@ import { HowItWorksSection } from "@/components/theo/sections/how-it-works-secti
 import { ArchitectureSection } from "@/components/theo/sections/architecture-section";
 import { TimelineSection } from "@/components/theo/sections/timeline-section";
 import { WhatsIncludedSection } from "@/components/theo/sections/whats-included-section";
-import { WhyMeSection } from "@/components/theo/sections/why-me-section";
-import { NextStepsSection } from "@/components/theo/sections/next-steps-section";
 import { NavigationDots } from "@/components/theo/navigation-dots";
 
 const sections = [
@@ -24,8 +22,6 @@ const sections = [
   { id: "architecture", label: "Architecture" },
   { id: "timeline", label: "Timeline" },
   { id: "whats-included", label: "What's Included" },
-  { id: "why-me", label: "Why Me" },
-  { id: "next-steps", label: "Next Steps" },
 ];
 
 export default function TheoProposalPage() {
@@ -84,8 +80,6 @@ export default function TheoProposalPage() {
       <ArchitectureSection />
       <TimelineSection />
       <WhatsIncludedSection />
-      <WhyMeSection />
-      <NextStepsSection />
     </main>
   );
 }
