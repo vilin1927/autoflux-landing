@@ -230,7 +230,7 @@ export default function ProposalPage() {
               <FlowArrow />
               <FlowStep
                 icon={Cpu}
-                title="GPT-4o"
+                title="GPT-5.2"
                 description="Business profiling"
                 color="purple"
               />
@@ -267,7 +267,7 @@ export default function ProposalPage() {
               />
               <FlowStepMobile
                 icon={Cpu}
-                title="GPT-4o Processing"
+                title="GPT-5.2 Processing"
                 description="AI creates structured business profile from answers"
                 color="purple"
               />

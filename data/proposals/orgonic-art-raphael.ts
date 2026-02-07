@@ -11,7 +11,7 @@ export const proposalDataV1 = {
     deliverables: [
       "Complete source code (Next.js + Supabase)",
       "Working questionnaire with validation",
-      "GPT-4o business profile generation",
+      "GPT-5.2 business profile generation",
       "Live EUR-Lex regulation search",
       "AI-powered relevance matching",
       "Clean results dashboard",
@@ -34,7 +34,7 @@ export const proposalDataV1 = {
       phase: "Days 3-4",
       title: "AI + EUR-Lex",
       tasks: [
-        "OpenAI GPT-4o profiling",
+        "OpenAI GPT-5.2 profiling",
         "EUR-Lex REST API search",
         "AI regulation matching",
         "Summary generation",
@@ -72,7 +72,7 @@ export const proposalDataV2 = {
       "Everything in Version 1",
       "Complete source code (Next.js + Supabase)",
       "Working questionnaire with validation",
-      "GPT-4o business profile generation",
+      "GPT-5.2 business profile generation",
       "Live EUR-Lex regulation search",
       "AI-powered relevance matching",
       "Legal risk analysis",
@@ -99,7 +99,7 @@ export const proposalDataV2 = {
       phase: "Days 3-4",
       title: "AI + EUR-Lex + Enhanced",
       tasks: [
-        "OpenAI GPT-4o profiling",
+        "OpenAI GPT-5.2 profiling",
         "EUR-Lex REST API search",
         "AI regulation matching",
         "Legal risk analysis prompt",
@@ -135,7 +135,7 @@ export const proposalDataV2 = {
       tag: "$60",
       tagColor: "blue",
       description: "Automatically identifies potential legal problems and compliance risks specific to your business type and EU market.",
-      howItWorks: "GPT-4o analyzes your business profile against each matched regulation, identifying specific compliance gaps, deadline requirements, and potential penalty exposure. Results are categorized by severity (high/medium/low) with clear explanations.",
+      howItWorks: "GPT-5.2 analyzes your business profile against each matched regulation, identifying specific compliance gaps, deadline requirements, and potential penalty exposure. Results are categorized by severity (high/medium/low) with clear explanations.",
     },
     {
       id: "newsletter",
@@ -166,7 +166,7 @@ export const proposalDataV2 = {
     },
   ],
   apiCosts: [
-    { component: "AI Analysis", model: "GPT-4o", cost: "~$0.05 - $0.08" },
+    { component: "AI Analysis", model: "GPT-5.2", cost: "~$0.05 - $0.08" },
     { component: "Web Search", model: "OpenAI Search", cost: "~$0.03 per call" },
     { component: "EUR-Lex API", model: "SPARQL", cost: "Free" },
     { component: "Email sending", model: "Resend", cost: "Free (up to 100/day)", url: "https://resend.com/pricing" },
@@ -195,7 +195,7 @@ export const proposalData = {
     {
       title: "AI Business Profiling",
       description:
-        "OpenAI GPT-4o analyzes your inputs to build a comprehensive understanding of your regulatory landscape.",
+        "OpenAI GPT-5.2 analyzes your inputs to build a comprehensive understanding of your regulatory landscape.",
       icon: "brain",
     },
     {
@@ -228,7 +228,7 @@ export const proposalData = {
     { name: "React", category: "Frontend" },
     { name: "Tailwind CSS", category: "Styling" },
     { name: "Supabase", category: "Backend + Auth" },
-    { name: "OpenAI GPT-4o", category: "AI" },
+    { name: "OpenAI GPT-5.2", category: "AI" },
     { name: "OpenAI Web Search", category: "Fresh Data" },
     { name: "EUR-Lex REST API", category: "Data Source" },
     { name: "Resend", category: "Email" },
