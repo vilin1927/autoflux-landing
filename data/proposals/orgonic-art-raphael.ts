@@ -1,59 +1,25 @@
 // Proposal data for Orgonic-Art (Raphael) - EU Regulation Discovery Tool
 
-export const proposalData = {
-  client: {
-    name: "Orgonic-Art",
-    contact: "Raphael",
-    location: "Germany",
-  },
-  project: {
-    title: "EU Regulation Discovery Tool",
-    subtitle: "AI-powered compliance scanning for EU businesses",
-    description:
-      "A smart tool that analyzes your business profile and automatically identifies potentially relevant EU regulations, complete with summaries and direct links to official sources.",
-  },
+export const proposalDataV1 = {
   stats: [
     { value: "$540", label: "Fixed Price" },
+    { value: "18 hrs", label: "@ $30/hr" },
     { value: "5-7", label: "Days Delivery" },
   ],
-  approach: [
-    {
-      title: "Smart Questionnaire",
-      description:
-        "Intuitive onboarding form that captures business details, operations, and compliance focus areas.",
-      icon: "clipboard-list",
-    },
-    {
-      title: "AI Business Profiling",
-      description:
-        "OpenAI GPT-5.2 analyzes your inputs to build a comprehensive understanding of your regulatory landscape.",
-      icon: "brain",
-    },
-    {
-      title: "EUR-Lex Integration",
-      description:
-        "Direct connection to the official EU law database for accurate, up-to-date regulation data.",
-      icon: "database",
-    },
-    {
-      title: "AI Matching & Summary",
-      description:
-        "Intelligent matching algorithm identifies relevant regulations and generates plain-language summaries.",
-      icon: "sparkles",
-    },
-    {
-      title: "Clean Dashboard",
-      description:
-        "Results displayed in a professional, easy-to-navigate interface with export capabilities.",
-      icon: "layout-dashboard",
-    },
-    {
-      title: "Simple Auth",
-      description:
-        "Single-user login via Supabase Auth. Email/password or magic link. No roles needed for MVP.",
-      icon: "shield-check",
-    },
-  ],
+  pricing: {
+    amount: "$540",
+    hours: "18 hours @ $30/hr",
+    deliverables: [
+      "Complete source code (Next.js + Supabase)",
+      "Working questionnaire with validation",
+      "GPT-5.2 business profile generation",
+      "Live EUR-Lex regulation search",
+      "AI-powered relevance matching",
+      "Clean results dashboard",
+      "Single-user authentication",
+      "Vercel deployment + handoff docs",
+    ],
+  },
   timeline: [
     {
       phase: "Days 1-2",
@@ -86,29 +52,196 @@ export const proposalData = {
       ],
     },
   ],
+};
+
+export const proposalDataV2 = {
+  stats: [
+    { value: "$720", label: "Fixed Price" },
+    { value: "24 hrs", label: "@ $30/hr" },
+    { value: "5-7", label: "Days Delivery" },
+  ],
+  pricing: {
+    amount: "$720",
+    hours: "24 hours @ $30/hr",
+    breakdown: [
+      { item: "Core MVP foundation", price: "$540" },
+      { item: "Newsletter system", price: "$100" },
+      { item: "Company analysis fallback", price: "$40" },
+      { item: "Legal risks & recommendations", price: "$40" },
+    ],
+    deliverables: [
+      "Everything in Version 1",
+      "Complete source code (Next.js + Supabase)",
+      "Working questionnaire with validation",
+      "GPT-5.2 business profile generation",
+      "Live EUR-Lex regulation search",
+      "AI-powered relevance matching",
+      "Legal risk analysis",
+      "Company analysis with fallback recommendations",
+      "Actionable tips & next steps",
+      "Newsletter email system",
+      "Clean results dashboard",
+      "Single-user authentication",
+      "Vercel deployment + handoff docs",
+    ],
+  },
+  timeline: [
+    {
+      phase: "Days 1-2",
+      title: "Foundation",
+      tasks: [
+        "Next.js project setup",
+        "Supabase Auth integration",
+        "Questionnaire UI & validation",
+        "Database schema",
+      ],
+    },
+    {
+      phase: "Days 3-4",
+      title: "AI + EUR-Lex + Enhanced",
+      tasks: [
+        "OpenAI GPT-5.2 profiling",
+        "EUR-Lex REST API search",
+        "AI regulation matching",
+        "Legal risk analysis prompt",
+        "Company analysis fallback logic",
+        "Recommendations engine",
+      ],
+    },
+    {
+      phase: "Days 5-6",
+      title: "Dashboard & Newsletter",
+      tasks: [
+        "Results dashboard UI",
+        "Newsletter email system (Resend)",
+        "Scheduled Edge Function (cron)",
+        "Mobile responsiveness",
+      ],
+    },
+    {
+      phase: "Day 7",
+      title: "Deploy & Handoff",
+      tasks: [
+        "Vercel deployment",
+        "Testing & QA",
+        "Documentation & handoff",
+      ],
+    },
+  ],
+  newFeatures: [
+    {
+      id: "legal-risk",
+      title: "Legal Risk Analysis",
+      icon: "shield-alert",
+      tag: "Included",
+      tagColor: "green",
+      description: "Automatically identifies potential legal problems and compliance risks specific to your business type and EU market.",
+      howItWorks: "GPT-5.2 analyzes your business profile against each matched regulation, identifying specific compliance gaps, deadline requirements, and potential penalty exposure. Results are categorized by severity (high/medium/low) with clear explanations.",
+    },
+    {
+      id: "newsletter",
+      title: "Regulation Newsletter",
+      icon: "mail",
+      tag: "$100",
+      tagColor: "blue",
+      description: "Scheduled email digest (weekly/monthly) notifying you of new or changed regulations relevant to your company profile.",
+      howItWorks: "A Supabase Edge Function runs on schedule (configurable: weekly or monthly). It queries EUR-Lex for recent updates, filters by your saved profile, and sends a digest via Resend/SendGrid. You control frequency in settings.",
+    },
+    {
+      id: "company-analysis",
+      title: "Company Analysis (Fallback)",
+      icon: "building",
+      tag: "$40",
+      tagColor: "blue",
+      description: "When EUR-Lex has no clear match, the system provides industry insights, expert recommendations, and what similar companies report about the topic.",
+      howItWorks: "If EUR-Lex returns few/no results, the system activates OpenAI Web Search to find industry reports, compliance guides, and expert opinions. GPT synthesizes this into actionable context: 'Companies like yours typically face X, Y, Z...'",
+    },
+    {
+      id: "recommendations",
+      title: "Actionable Recommendations",
+      icon: "lightbulb",
+      tag: "Included",
+      tagColor: "green",
+      description: "Practical next steps including relevant insurance types, broker suggestions, and compliance action items tailored to your business.",
+      howItWorks: "Based on matched regulations and risk analysis, GPT generates a prioritized action list: specific compliance steps, recommended insurance coverage types, suggested timeline, and where to find specialized help (e.g., 'Consider professional indemnity insurance for GDPR liability').",
+    },
+  ],
+  apiCosts: [
+    { component: "AI Analysis", model: "GPT-5.2", cost: "~$0.07 - $0.10" },
+    { component: "AI Analysis (alt)", model: "GPT-4.1-mini", cost: "~$0.005" },
+    { component: "Web Search", model: "OpenAI Search", cost: "~$0.03 per call" },
+    { component: "EUR-Lex API", model: "SPARQL", cost: "Free" },
+    { component: "Email sending", model: "Resend", cost: "Free (up to 100/day)" },
+  ],
+};
+
+export const proposalData = {
+  client: {
+    name: "Orgonic-Art",
+    contact: "Raphael",
+    location: "Germany",
+  },
+  project: {
+    title: "EU Regulation Discovery Tool",
+    subtitle: "AI-powered compliance scanning for EU businesses",
+    description:
+      "A smart tool that analyzes your business profile and automatically identifies potentially relevant EU regulations, complete with summaries and direct links to official sources.",
+  },
+  approach: [
+    {
+      title: "Smart Questionnaire",
+      description:
+        "Intuitive onboarding form that captures business details, operations, and compliance focus areas.",
+      icon: "clipboard-list",
+    },
+    {
+      title: "AI Business Profiling",
+      description:
+        "OpenAI GPT-5.2 analyzes your inputs to build a comprehensive understanding of your regulatory landscape.",
+      icon: "brain",
+    },
+    {
+      title: "EUR-Lex Integration",
+      description:
+        "Direct connection to the official EU law database for accurate, up-to-date regulation data.",
+      icon: "database",
+    },
+    {
+      title: "Web Search Integration",
+      description:
+        "Real-time web search ensures regulation data is current beyond GPT's training cutoff, filling gaps with industry insights and expert sources.",
+      icon: "globe",
+    },
+    {
+      title: "AI Matching & Summary",
+      description:
+        "Intelligent matching algorithm identifies relevant regulations and generates plain-language summaries.",
+      icon: "sparkles",
+    },
+    {
+      title: "Clean Dashboard",
+      description:
+        "Results displayed in a professional, easy-to-navigate interface with export capabilities.",
+      icon: "layout-dashboard",
+    },
+  ],
   techStack: [
     { name: "Next.js 14", category: "Frontend" },
     { name: "React", category: "Frontend" },
     { name: "Tailwind CSS", category: "Styling" },
     { name: "Supabase", category: "Backend + Auth" },
     { name: "OpenAI GPT-5.2", category: "AI" },
+    { name: "OpenAI Web Search", category: "Fresh Data" },
     { name: "EUR-Lex REST API", category: "Data Source" },
+    { name: "Resend", category: "Email" },
     { name: "Vercel", category: "Hosting" },
   ],
-  pricing: {
-    amount: "$540",
-    hours: "18 hours @ $30/hr",
-    deliverables: [
-      "Complete source code (Next.js + Supabase)",
-      "Working questionnaire with validation",
-      "GPT-5.2 business profile generation",
-      "Live EUR-Lex regulation search",
-      "AI-powered relevance matching",
-      "Clean results dashboard",
-      "Single-user authentication",
-      "Vercel deployment + handoff docs",
-    ],
-  },
+  cherryPick: [
+    { scope: "Core MVP only", price: "$540" },
+    { scope: "MVP + 1 feature", price: "$580" },
+    { scope: "MVP + 2 features", price: "$620" },
+    { scope: "MVP + all 4 features", price: "$720" },
+  ],
 };
 
 // Demo data for RegScope
