@@ -99,7 +99,7 @@ export default function ProposalPage() {
                   : "text-[var(--text-muted)] hover:text-[var(--text-dark)]"
               }`}
             >
-              Version 2 — Enhanced MVP <span className="text-[#CFFF4D]">$720</span>
+              Version 2 — Enhanced MVP <span className="text-[#CFFF4D]">$760</span>
               {version !== "v2" && (
                 <span className="ml-2 px-2 py-0.5 bg-[#CFFF4D] text-[#13112F] text-xs rounded-full">
                   Recommended
@@ -475,11 +475,7 @@ export default function ProposalPage() {
             <div className="mt-6 p-4 bg-[var(--bg-light)] rounded-[var(--radius-md)] border border-[var(--border-light)]">
               <p className="text-sm text-[var(--text-muted)]">
                 <strong className="text-[var(--text-dark)]">Estimated monthly cost for 100 analyses:</strong>{" "}
-                $7-15/month with GPT-5.2, or under $1/month with GPT-4.1-mini.
-                We recommend GPT-4.1-mini as default with GPT-5.2 available as premium option.
-              </p>
-              <p className="text-xs text-[var(--text-muted)] mt-2">
-                GPT-5.2: Input $1.75/1M tokens, Output $14/1M tokens • GPT-4.1-mini: Input $0.40/1M tokens, Output $1.60/1M tokens (OpenAI Dec 2025)
+                ~$5-8/month. EUR-Lex and email are free — you only pay for AI usage.
               </p>
             </div>
           </motion.section>
@@ -555,9 +551,6 @@ export default function ProposalPage() {
                 <span className="text-5xl font-extrabold text-[#13112F]">
                   {currentData.pricing.amount}
                 </span>
-                <span className="text-[var(--text-muted)] ml-2">
-                  {currentData.pricing.hours}
-                </span>
               </div>
 
               {/* Price Breakdown for V2 */}
@@ -575,7 +568,7 @@ export default function ProposalPage() {
                     ))}
                     <div className="border-t border-[var(--border-light)] pt-2 mt-2 flex justify-between text-sm font-bold">
                       <span className="text-[var(--text-dark)]">Total</span>
-                      <span className="text-[#13112F]">$720</span>
+                      <span className="text-[#13112F]">$760</span>
                     </div>
                   </div>
                 </div>

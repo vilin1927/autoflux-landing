@@ -3,12 +3,11 @@
 export const proposalDataV1 = {
   stats: [
     { value: "$540", label: "Fixed Price" },
-    { value: "18 hrs", label: "@ $30/hr" },
     { value: "5-7", label: "Days Delivery" },
   ],
   pricing: {
     amount: "$540",
-    hours: "18 hours @ $30/hr",
+    hours: "fixed price",
     deliverables: [
       "Complete source code (Next.js + Supabase)",
       "Working questionnaire with validation",
@@ -56,18 +55,18 @@ export const proposalDataV1 = {
 
 export const proposalDataV2 = {
   stats: [
-    { value: "$720", label: "Fixed Price" },
-    { value: "24 hrs", label: "@ $30/hr" },
-    { value: "5-7", label: "Days Delivery" },
+    { value: "$760", label: "Fixed Price" },
+    { value: "7", label: "Days Deadline" },
+    { value: "9", label: "Days Redline" },
   ],
   pricing: {
-    amount: "$720",
-    hours: "24 hours @ $30/hr",
+    amount: "$760",
+    hours: "fixed price",
     breakdown: [
       { item: "Core MVP foundation", price: "$540" },
       { item: "Newsletter system", price: "$100" },
-      { item: "Company analysis fallback", price: "$40" },
-      { item: "Legal risks & recommendations", price: "$40" },
+      { item: "Company analysis fallback", price: "$60" },
+      { item: "Legal risks & recommendations", price: "$60" },
     ],
     deliverables: [
       "Everything in Version 1",
@@ -151,7 +150,7 @@ export const proposalDataV2 = {
       id: "company-analysis",
       title: "Company Analysis (Fallback)",
       icon: "building",
-      tag: "$40",
+      tag: "$60",
       tagColor: "blue",
       description: "When EUR-Lex has no clear match, the system provides industry insights, expert recommendations, and what similar companies report about the topic.",
       howItWorks: "If EUR-Lex returns few/no results, the system activates OpenAI Web Search to find industry reports, compliance guides, and expert opinions. GPT synthesizes this into actionable context: 'Companies like yours typically face X, Y, Z...'",
@@ -167,11 +166,10 @@ export const proposalDataV2 = {
     },
   ],
   apiCosts: [
-    { component: "AI Analysis", model: "GPT-5.2", cost: "~$0.07 - $0.10" },
-    { component: "AI Analysis (alt)", model: "GPT-4.1-mini", cost: "~$0.005" },
+    { component: "AI Analysis", model: "GPT-4o", cost: "~$0.05 - $0.08" },
     { component: "Web Search", model: "OpenAI Search", cost: "~$0.03 per call" },
     { component: "EUR-Lex API", model: "SPARQL", cost: "Free" },
-    { component: "Email sending", model: "Resend", cost: "Free (up to 100/day)" },
+    { component: "Email sending", model: "Resend", cost: "Free (up to 100/day)", url: "https://resend.com/pricing" },
   ],
 };
 
@@ -197,7 +195,7 @@ export const proposalData = {
     {
       title: "AI Business Profiling",
       description:
-        "OpenAI GPT-5.2 analyzes your inputs to build a comprehensive understanding of your regulatory landscape.",
+        "OpenAI GPT-4o analyzes your inputs to build a comprehensive understanding of your regulatory landscape.",
       icon: "brain",
     },
     {
@@ -230,7 +228,7 @@ export const proposalData = {
     { name: "React", category: "Frontend" },
     { name: "Tailwind CSS", category: "Styling" },
     { name: "Supabase", category: "Backend + Auth" },
-    { name: "OpenAI GPT-5.2", category: "AI" },
+    { name: "OpenAI GPT-4o", category: "AI" },
     { name: "OpenAI Web Search", category: "Fresh Data" },
     { name: "EUR-Lex REST API", category: "Data Source" },
     { name: "Resend", category: "Email" },
@@ -238,9 +236,9 @@ export const proposalData = {
   ],
   cherryPick: [
     { scope: "Core MVP only", price: "$540" },
-    { scope: "MVP + 1 feature", price: "$580" },
-    { scope: "MVP + 2 features", price: "$620" },
-    { scope: "MVP + all 4 features", price: "$720" },
+    { scope: "MVP + 1 add-on", price: "from $600" },
+    { scope: "MVP + 2 add-ons", price: "from $660" },
+    { scope: "Full V2 (all features)", price: "$760" },
   ],
 };
 
