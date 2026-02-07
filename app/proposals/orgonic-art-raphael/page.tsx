@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   ClipboardList,
   Brain,
@@ -41,12 +41,110 @@ const iconMap: Record<string, React.ElementType> = {
   lightbulb: Lightbulb,
 };
 
+const sectionsV1 = [
+  { id: "hero", label: "Overview" },
+  { id: "approach", label: "Approach" },
+  { id: "how-it-works", label: "How It Works" },
+  { id: "timeline", label: "Timeline" },
+  { id: "demo", label: "Demo" },
+  { id: "tech-stack", label: "Tech Stack" },
+  { id: "investment", label: "Investment" },
+];
+
+const sectionsV2 = [
+  { id: "hero", label: "Overview" },
+  { id: "approach", label: "Approach" },
+  { id: "how-it-works", label: "How It Works" },
+  { id: "new-features", label: "V2 Features" },
+  { id: "timeline", label: "Timeline" },
+  { id: "api-costs", label: "API Costs" },
+  { id: "demo", label: "Demo" },
+  { id: "tech-stack", label: "Tech Stack" },
+  { id: "investment", label: "Investment" },
+];
+
 export default function ProposalPage() {
   const [version, setVersion] = useState<"v1" | "v2">("v2");
+  const [activeSection, setActiveSection] = useState("hero");
   const currentData = version === "v1" ? proposalDataV1 : proposalDataV2;
+  const sections = version === "v1" ? sectionsV1 : sectionsV2;
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (element) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setActiveSection(section.id);
+              }
+            });
+          },
+          {
+            threshold: 0.3,
+            rootMargin: "-10% 0px -10% 0px",
+          }
+        );
+        observer.observe(element);
+        observers.push(observer);
+      }
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, [sections]);
+
+  const handleNavigate = useCallback((sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-cream)]">
+    <div className="min-h-screen bg-[var(--bg-cream)] relative">
+      {/* Navigation Sidebar */}
+      <motion.nav
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="fixed right-4 lg:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-end gap-4"
+      >
+        {sections.map((section) => (
+          <button
+            type="button"
+            key={section.id}
+            onClick={() => handleNavigate(section.id)}
+            className="group relative flex items-center gap-3"
+            aria-label={`Navigate to ${section.label}`}
+          >
+            {/* Label */}
+            <span
+              className={`text-xs font-medium transition-all ${
+                activeSection === section.id
+                  ? "text-[#13112F] opacity-100"
+                  : "text-[var(--text-muted)] opacity-0 group-hover:opacity-100"
+              }`}
+            >
+              {section.label}
+            </span>
+
+            {/* Dot */}
+            <div
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                activeSection === section.id
+                  ? "bg-[#CFFF4D] scale-125 ring-2 ring-[#CFFF4D]/30 ring-offset-2"
+                  : "bg-[#13112F]/20 hover:bg-[#13112F]/40"
+              }`}
+            />
+          </button>
+        ))}
+      </motion.nav>
+
       <div className="max-w-[1100px] mx-auto px-4 md:px-8 py-8">
         {/* Header */}
         <motion.header
@@ -111,10 +209,11 @@ export default function ProposalPage() {
 
         {/* Hero Section */}
         <motion.section
+          id="hero"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-gradient-to-br from-[#13112F] to-[#2D2A5E] rounded-[var(--radius-xl)] p-8 md:p-12 mb-8 text-white relative overflow-hidden"
+          className="bg-gradient-to-br from-[#13112F] to-[#2D2A5E] rounded-[var(--radius-xl)] p-8 md:p-12 mb-8 text-white relative overflow-hidden scroll-mt-8"
         >
           {/* Background decoration */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#CFFF4D] opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -164,10 +263,11 @@ export default function ProposalPage() {
 
         {/* Approach Section */}
         <motion.section
+          id="approach"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
+          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
             Our Approach
@@ -205,10 +305,11 @@ export default function ProposalPage() {
 
         {/* Architecture Flow Section */}
         <motion.section
+          id="how-it-works"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
+          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
             How It Works
@@ -305,10 +406,11 @@ export default function ProposalPage() {
         {/* V2 New Features Section */}
         {version === "v2" && (
           <motion.section
+            id="new-features"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-[#CFFF4D]/10 to-[#B8E635]/5 border-2 border-[#CFFF4D]/30 rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
+            className="bg-gradient-to-br from-[#CFFF4D]/10 to-[#B8E635]/5 border-2 border-[#CFFF4D]/30 rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
           >
             <div className="flex items-center gap-3 mb-2">
               <span className="px-3 py-1 bg-[#CFFF4D] text-[#13112F] text-xs font-bold rounded-full uppercase">
@@ -416,10 +518,11 @@ export default function ProposalPage() {
 
         {/* Timeline Section */}
         <motion.section
+          id="timeline"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
+          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
             Development Timeline
@@ -467,10 +570,11 @@ export default function ProposalPage() {
         {/* API Running Costs Section (V2 only) */}
         {version === "v2" && (
           <motion.section
+            id="api-costs"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
+            className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
           >
             <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
               Ongoing API Costs
@@ -528,10 +632,11 @@ export default function ProposalPage() {
 
         {/* Demo CTA Section */}
         <motion.section
+          id="demo"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-[#CFFF4D] to-[#B8E635] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 text-center"
+          className="bg-gradient-to-r from-[#CFFF4D] to-[#B8E635] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 text-center scroll-mt-8"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-[#13112F] mb-3">
             See It In Action
@@ -550,10 +655,11 @@ export default function ProposalPage() {
 
         {/* Tech Stack Section */}
         <motion.section
+          id="tech-stack"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
+          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
             Tech Stack
@@ -579,10 +685,11 @@ export default function ProposalPage() {
 
         {/* Pricing Section */}
         <motion.section
+          id="investment"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8"
+          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <div className="md:flex md:items-start md:justify-between gap-8">
             <div className="mb-6 md:mb-0">
