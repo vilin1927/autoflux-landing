@@ -64,7 +64,7 @@ export const proposalDataV2 = {
     hours: "fixed price",
     breakdown: [
       { item: "Core MVP foundation", price: "$540" },
-      { item: "Newsletter system", price: "$150" },
+      { item: "Newsletter (manual trigger)", price: "$150" },
       { item: "Company analysis fallback", price: "$60" },
       { item: "Legal risk analysis", price: "$60" },
     ],
@@ -136,8 +136,8 @@ export const proposalDataV2 = {
       icon: "mail",
       tag: "$150",
       tagColor: "blue",
-      description: "Automated email digest (weekly/monthly) notifying you of new or changed regulations relevant to your saved company profile.",
-      howItWorks: "A daily background job fetches new EUR-Lex regulations and stores them in the database. On your chosen schedule (weekly/monthly), the system matches new regulations against ALL saved client profiles in one batch, generates personalized digests, and sends via Resend. Scalable architecture — works for 1 or 1000 clients without per-client cron jobs.",
+      description: "Personalized email digest with new regulations matched to each user's saved profile. Manual trigger for MVP — scalable to automated later.",
+      howItWorks: "Admin triggers newsletter via dashboard button. System fetches recent EUR-Lex updates, matches against each opted-in user's profile (industry, countries, data types), generates personalized digest, and sends via Resend. Includes double opt-in consent flow. Future upgrade path: automated weekly/monthly cron scheduling.",
     },
     {
       id: "company-analysis",
