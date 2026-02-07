@@ -651,7 +651,7 @@ export default function ProposalPage() {
                 ~$5-8/month. EUR-Lex and email are free — you only pay for AI usage.
               </p>
               <p className="text-xs text-[var(--text-muted)] mt-2">
-                <em>Note: These are estimates based on current API pricing. Actual costs may vary slightly after testing, but we&apos;re talking single-digit dollars — not hundreds.</em>
+                <em>Note: These are estimates based on current API pricing. Actual costs may vary slightly after testing, but we&apos;re talking single-digit, maximum double-digit dollars — not hundreds.</em>
               </p>
             </div>
           </motion.section>
