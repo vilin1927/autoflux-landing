@@ -98,10 +98,25 @@ export default function ProposalPage() {
     };
   }, [sections]);
 
+  // Handle initial hash on page load
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          setActiveSection(hash);
+        }
+      }, 100);
+    }
+  }, []);
+
   const handleNavigate = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", `#${sectionId}`);
     }
   }, []);
 
@@ -277,7 +292,9 @@ export default function ProposalPage() {
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {proposalData.approach.map((item, i) => {
+            {proposalData.approach
+              .filter((item) => version === "v2" || item.title !== "Web Search Integration")
+              .map((item, i) => {
               const Icon = iconMap[item.icon] || Sparkles;
               return (
                 <motion.div
@@ -669,7 +686,9 @@ export default function ProposalPage() {
           </p>
 
           <div className="flex flex-wrap gap-3">
-            {proposalData.techStack.map((tech, i) => (
+            {proposalData.techStack
+              .filter((tech) => version === "v2" || tech.name !== "OpenAI Web Search")
+              .map((tech, i) => (
               <span
                 key={i}
                 className="px-4 py-2 text-sm font-medium bg-[var(--bg-light)] border border-[var(--border-light)] rounded-[var(--radius-md)] text-[var(--text-body)]"
