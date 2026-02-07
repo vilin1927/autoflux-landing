@@ -224,7 +224,7 @@ export const proposalData = {
     { name: "OpenAI GPT-5.2", category: "AI" },
     { name: "OpenAI Web Search", category: "Fresh Data" },
     { name: "EUR-Lex REST API", category: "Data Source" },
-    { name: "Resend", category: "Email" },
+    { name: "Resend", category: "Email", url: "https://resend.com" },
     { name: "Vercel", category: "Hosting" },
   ],
   cherryPick: [

@@ -688,17 +688,35 @@ export default function ProposalPage() {
           <div className="flex flex-wrap gap-3">
             {proposalData.techStack
               .filter((tech) => version === "v2" || tech.name !== "OpenAI Web Search")
-              .map((tech, i) => (
-              <span
-                key={i}
-                className="px-4 py-2 text-sm font-medium bg-[var(--bg-light)] border border-[var(--border-light)] rounded-[var(--radius-md)] text-[var(--text-body)]"
-              >
-                {tech.name}
-                <span className="text-[var(--text-muted)] ml-1">
-                  ({tech.category})
-                </span>
-              </span>
-            ))}
+              .map((tech, i) => {
+                const content = (
+                  <>
+                    {tech.name}
+                    <span className="text-[var(--text-muted)] ml-1">
+                      ({tech.category})
+                    </span>
+                  </>
+                );
+
+                return tech.url ? (
+                  <a
+                    key={i}
+                    href={tech.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm font-medium bg-[var(--bg-light)] border border-[var(--border-light)] rounded-[var(--radius-md)] text-[var(--text-body)] hover:border-[#CFFF4D] hover:bg-[#CFFF4D]/10 transition-colors"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <span
+                    key={i}
+                    className="px-4 py-2 text-sm font-medium bg-[var(--bg-light)] border border-[var(--border-light)] rounded-[var(--radius-md)] text-[var(--text-body)]"
+                  >
+                    {content}
+                  </span>
+                );
+              })}
           </div>
         </motion.section>
 
