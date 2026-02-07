@@ -425,7 +425,7 @@ export default function ProposalPage() {
             Development Timeline
           </h2>
           <p className="text-[var(--text-muted)] mb-8">
-            5-7 days from kickoff to deployment
+            {version === "v1" ? "5-7 days" : "7-9 days"} from kickoff to deployment
           </p>
 
           <div className={`grid gap-6 ${version === "v2" ? "md:grid-cols-4" : "md:grid-cols-3"}`}>
