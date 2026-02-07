@@ -162,7 +162,7 @@ export const proposalDataV2 = {
     { component: "AI Analysis", model: "GPT-5.2", cost: "~$0.05 - $0.08" },
     { component: "Web Search", model: "OpenAI Search", cost: "~$0.03 per call" },
     { component: "EUR-Lex API", model: "SPARQL", cost: "Free" },
-    { component: "Email sending", model: "Resend", cost: "Free (up to 100/day)", url: "https://resend.com/pricing" },
+    { component: "Email sending", model: "Resend", cost: "Free (3,000/mo, requires your domain)", url: "https://resend.com/pricing" },
   ],
 };
 
@@ -224,7 +224,7 @@ export const proposalData = {
     { name: "OpenAI GPT-5.2", category: "AI" },
     { name: "OpenAI Web Search", category: "Fresh Data" },
     { name: "EUR-Lex REST API", category: "Data Source" },
-    { name: "Resend", category: "Email", url: "https://resend.com" },
+    { name: "Resend", category: "Email", url: "https://resend.com/pricing" },
     { name: "Vercel", category: "Hosting" },
   ],
   cherryPick: [
