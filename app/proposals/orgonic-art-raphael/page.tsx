@@ -366,6 +366,51 @@ export default function ProposalPage() {
                 );
               })}
             </div>
+
+            {/* Questionnaire Enhancement Note */}
+            <div className="mt-8 p-6 bg-white rounded-xl border border-[var(--border-light)]">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-[#13112F] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <ClipboardList className="w-5 h-5 text-[#CFFF4D]" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-[var(--text-dark)] mb-2">
+                    Questionnaire Enhancement (V2)
+                  </h3>
+                  <p className="text-sm text-[var(--text-muted)] mb-4">
+                    The demo currently shows the basic questionnaire (V1). For V2, we&apos;ll extend it with additional fields to power the Company Analysis Fallback feature:
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-4 mb-4">
+                    <div className="p-3 bg-[var(--bg-light)] rounded-lg">
+                      <p className="text-xs font-semibold text-[var(--text-dark)] mb-2">New Fields:</p>
+                      <ul className="text-xs text-[var(--text-muted)] space-y-1">
+                        <li>• Company Size (1-10, 11-50, 51-200, 200+)</li>
+                        <li>• Annual Revenue Range</li>
+                        <li>• Years in Operation</li>
+                        <li>• Target Market (B2B, B2C, B2G)</li>
+                        <li>• Current Compliance Status</li>
+                      </ul>
+                    </div>
+                    <div className="p-3 bg-[var(--bg-light)] rounded-lg">
+                      <p className="text-xs font-semibold text-[var(--text-dark)] mb-2">Why This Helps:</p>
+                      <p className="text-xs text-[var(--text-muted)]">
+                        When EUR-Lex returns few/no results, GPT-5.2 + Web Search can give smarter fallback recommendations like: <em>&quot;Companies your size in fintech typically need X, Y, Z...&quot;</em>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                    <p className="text-xs font-semibold text-blue-800 mb-1">
+                      &quot;I don&apos;t have a company yet&quot; Flow
+                    </p>
+                    <p className="text-xs text-blue-700">
+                      A checkbox allows users to indicate they&apos;re in planning stage. The questionnaire adapts to ask about planned industry, target countries, and expected business model — outputting a <strong>&quot;Pre-launch Compliance Checklist&quot;</strong> instead of current regulations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.section>
         )}
 
