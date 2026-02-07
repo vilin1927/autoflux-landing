@@ -212,7 +212,7 @@ export default function ProposalPage() {
                   : "text-[var(--text-muted)] hover:text-[var(--text-dark)]"
               }`}
             >
-              Version 2 — Enhanced MVP <span className="text-[#CFFF4D]">$760</span>
+              Version 2 — Enhanced MVP <span className="text-[#CFFF4D]">$810</span>
               {version !== "v2" && (
                 <span className="ml-2 px-2 py-0.5 bg-[#CFFF4D] text-[#13112F] text-xs rounded-full">
                   Recommended
@@ -739,7 +739,7 @@ export default function ProposalPage() {
                     ))}
                     <div className="border-t border-[var(--border-light)] pt-2 mt-2 flex justify-between text-sm font-bold">
                       <span className="text-[var(--text-dark)]">Total</span>
-                      <span className="text-[#13112F]">$760</span>
+                      <span className="text-[#13112F]">$810</span>
                     </div>
                   </div>
                 </div>

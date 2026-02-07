@@ -55,16 +55,16 @@ export const proposalDataV1 = {
 
 export const proposalDataV2 = {
   stats: [
-    { value: "$760", label: "Fixed Price" },
+    { value: "$810", label: "Fixed Price" },
     { value: "7", label: "Days Deadline" },
     { value: "9", label: "Days Redline" },
   ],
   pricing: {
-    amount: "$760",
+    amount: "$810",
     hours: "fixed price",
     breakdown: [
       { item: "Core MVP foundation", price: "$540" },
-      { item: "Newsletter system", price: "$100" },
+      { item: "Newsletter system", price: "$150" },
       { item: "Company analysis fallback", price: "$60" },
       { item: "Legal risk analysis", price: "$60" },
     ],
@@ -134,10 +134,10 @@ export const proposalDataV2 = {
       id: "newsletter",
       title: "Regulation Newsletter",
       icon: "mail",
-      tag: "$100",
+      tag: "$150",
       tagColor: "blue",
-      description: "Scheduled email digest (weekly/monthly) notifying you of new or changed regulations relevant to your company profile.",
-      howItWorks: "A Supabase Edge Function runs on schedule (configurable: weekly or monthly). It queries EUR-Lex for recent updates, filters by your saved profile, and sends a digest via Resend/SendGrid. You control frequency in settings.",
+      description: "Automated email digest (weekly/monthly) notifying you of new or changed regulations relevant to your saved company profile.",
+      howItWorks: "A daily background job fetches new EUR-Lex regulations and stores them in the database. On your chosen schedule (weekly/monthly), the system matches new regulations against ALL saved client profiles in one batch, generates personalized digests, and sends via Resend. Scalable architecture — works for 1 or 1000 clients without per-client cron jobs.",
     },
     {
       id: "company-analysis",
@@ -231,7 +231,7 @@ export const proposalData = {
     { scope: "Core MVP only", price: "$540" },
     { scope: "MVP + 1 add-on", price: "from $600" },
     { scope: "MVP + 2 add-ons", price: "from $660" },
-    { scope: "Full V2 (all features)", price: "$760" },
+    { scope: "Full V2 (all features)", price: "$810" },
   ],
 };
 
