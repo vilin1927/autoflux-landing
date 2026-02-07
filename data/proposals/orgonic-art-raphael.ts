@@ -138,6 +138,7 @@ export const proposalDataV2 = {
       tagColor: "blue",
       description: "Personalized email digest with new regulations matched to each user's saved profile. Manual trigger for MVP — scalable to automated later.",
       howItWorks: "Admin triggers newsletter via dashboard button. System fetches recent EUR-Lex updates, matches against each opted-in user's profile (industry, countries, data types), generates personalized digest, and sends via Resend. Includes double opt-in consent flow. Future upgrade path: automated weekly/monthly cron scheduling.",
+      requirement: "Requires your own domain for email sending (e.g., regscope.eu). DNS verification needed for Resend. I can help set it up.",
     },
     {
       id: "company-analysis",

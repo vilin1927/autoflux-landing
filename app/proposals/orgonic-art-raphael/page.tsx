@@ -481,6 +481,13 @@ export default function ProposalPage() {
                         {feature.howItWorks}
                       </p>
                     </div>
+                    {feature.requirement && (
+                      <div className="mt-3 p-3 bg-amber-50 rounded-[var(--radius-md)] border border-amber-200">
+                        <p className="text-xs text-amber-800">
+                          <strong>Requirement:</strong> {feature.requirement}
+                        </p>
+                      </div>
+                    )}
                   </motion.div>
                 );
               })}
@@ -642,6 +649,9 @@ export default function ProposalPage() {
               <p className="text-sm text-[var(--text-muted)]">
                 <strong className="text-[var(--text-dark)]">Estimated monthly cost for 100 analyses:</strong>{" "}
                 ~$5-8/month. EUR-Lex and email are free — you only pay for AI usage.
+              </p>
+              <p className="text-xs text-[var(--text-muted)] mt-2">
+                <em>Note: These are estimates based on current API pricing. Actual costs may vary slightly after testing, but we&apos;re talking single-digit dollars — not hundreds.</em>
               </p>
             </div>
           </motion.section>
