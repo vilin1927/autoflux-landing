@@ -66,7 +66,7 @@ export const proposalDataV2 = {
       { item: "Core MVP foundation", price: "$540" },
       { item: "Newsletter system", price: "$100" },
       { item: "Company analysis fallback", price: "$60" },
-      { item: "Legal risks & recommendations", price: "$60" },
+      { item: "Legal risk analysis", price: "$60" },
     ],
     deliverables: [
       "Everything in Version 1",
