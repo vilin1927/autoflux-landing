@@ -732,9 +732,9 @@ export default function ProposalPage() {
                   </p>
                   <div className="space-y-2">
                     {proposalDataV2.pricing.breakdown.map((item, i) => (
-                      <div key={i} className="flex justify-between text-sm">
+                      <div key={i} className="flex justify-between gap-4 text-sm">
                         <span className="text-[var(--text-muted)]">{item.item}</span>
-                        <span className="font-medium text-[var(--text-dark)]">{item.price}</span>
+                        <span className="font-medium text-[var(--text-dark)] whitespace-nowrap">{item.price}</span>
                       </div>
                     ))}
                     <div className="border-t border-[var(--border-light)] pt-2 mt-2 flex justify-between text-sm font-bold">
