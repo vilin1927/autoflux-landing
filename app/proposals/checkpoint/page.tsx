@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -21,6 +21,8 @@ import {
   ChevronDown,
   HelpCircle,
   MessageSquare,
+  Pencil,
+  Save,
 } from "lucide-react";
 import { proposalData } from "@/data/proposals/checkpoint";
 
@@ -54,8 +56,38 @@ const sections = [
   { id: "demo", label: "Demo" },
 ];
 
+const STORAGE_KEY = "checkpoint-call-notes";
+
+function loadNotes(): Record<string, string> {
+  if (typeof window === "undefined") return {};
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function saveNotes(notes: Record<string, string>) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+}
+
 export default function CheckpointProposalPage() {
   const [activeSection, setActiveSection] = useState("hero");
+  const [callMode, setCallMode] = useState(false);
+  const [notes, setNotes] = useState<Record<string, string>>({});
+  const [saved, setSaved] = useState(false);
+
+  // Load notes from localStorage on mount
+  useEffect(() => {
+    setNotes(loadNotes());
+  }, []);
+
+  const updateNote = (key: string, value: string) => {
+    const updated = { ...notes, [key]: value };
+    setNotes(updated);
+    saveNotes(updated);
+    setSaved(false);
+  };
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -408,19 +440,38 @@ export default function CheckpointProposalPage() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-br from-[#38BDF8]/5 to-[#818CF8]/5 border-2 border-[#38BDF8]/20 rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
+          className={`rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8 transition-all duration-300 ${
+            callMode
+              ? "bg-gradient-to-br from-[#0F172A] to-[#1E293B] border-2 border-sky-500/40"
+              : "bg-gradient-to-br from-[#38BDF8]/5 to-[#818CF8]/5 border-2 border-[#38BDF8]/20"
+          }`}
         >
-          <div className="flex items-center gap-3 mb-2">
-            <HelpCircle className="w-6 h-6 text-[#38BDF8]" />
-            <h2 className="text-2xl font-bold text-[var(--text-dark)]">
-              Let&apos;s Discuss
-            </h2>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <HelpCircle className={`w-6 h-6 ${callMode ? "text-sky-400" : "text-[#38BDF8]"}`} />
+              <h2 className={`text-2xl font-bold ${callMode ? "text-white" : "text-[var(--text-dark)]"}`}>
+                {callMode ? "Call Notes" : "Let\u0027s Discuss"}
+              </h2>
+            </div>
+            <button
+              onClick={() => setCallMode(!callMode)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                callMode
+                  ? "bg-sky-500 text-white hover:bg-sky-400"
+                  : "bg-[#0F172A] text-white hover:bg-[#1E293B]"
+              }`}
+            >
+              <Pencil className="w-4 h-4" />
+              {callMode ? "Call Mode ON" : "Enable Call Mode"}
+            </button>
           </div>
-          <p className="text-[var(--text-muted)] mb-8">
-            To scope the project accurately, we&apos;d love to understand your needs better. Here are the key questions:
+          <p className={`mb-8 ${callMode ? "text-white/60" : "text-[var(--text-muted)]"}`}>
+            {callMode
+              ? "Type answers as you discuss. Notes auto-save to your browser."
+              : "To scope the project accurately, we\u0027d love to understand your needs better. Here are the key questions:"}
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className={callMode ? "space-y-6" : "grid md:grid-cols-2 gap-6"}>
             {proposalData.discoveryQuestions.map((group, i) => (
               <motion.div
                 key={i}
@@ -428,23 +479,72 @@ export default function CheckpointProposalPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white border border-[var(--border-light)] rounded-[var(--radius-lg)] p-6"
+                className={`rounded-[var(--radius-lg)] p-6 ${
+                  callMode
+                    ? "bg-white/5 border border-white/10"
+                    : "bg-white border border-[var(--border-light)]"
+                }`}
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <MessageSquare className="w-4 h-4 text-[#38BDF8]" />
-                  <h3 className="font-bold text-[var(--text-dark)]">{group.category}</h3>
+                  <MessageSquare className={`w-4 h-4 ${callMode ? "text-sky-400" : "text-[#38BDF8]"}`} />
+                  <h3 className={`font-bold ${callMode ? "text-white" : "text-[var(--text-dark)]"}`}>
+                    {group.category}
+                  </h3>
                 </div>
-                <ul className="space-y-3">
-                  {group.questions.map((q, j) => (
-                    <li key={j} className="flex items-start gap-3">
-                      <ChevronDown className="w-4 h-4 text-[#38BDF8] flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-[var(--text-muted)]">{q}</span>
-                    </li>
-                  ))}
+                <ul className="space-y-4">
+                  {group.questions.map((q, j) => {
+                    const noteKey = `${i}-${j}`;
+                    return (
+                      <li key={j}>
+                        <div className="flex items-start gap-3">
+                          <ChevronDown className={`w-4 h-4 flex-shrink-0 mt-0.5 ${callMode ? "text-sky-400" : "text-[#38BDF8]"}`} />
+                          <span className={`text-sm ${callMode ? "text-white/80" : "text-[var(--text-muted)]"}`}>{q}</span>
+                        </div>
+                        {callMode && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            className="mt-2 ml-7"
+                          >
+                            <textarea
+                              value={notes[noteKey] || ""}
+                              onChange={(e) => updateNote(noteKey, e.target.value)}
+                              rows={2}
+                              className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/30 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none resize-none"
+                              placeholder="Type answer..."
+                            />
+                          </motion.div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </motion.div>
             ))}
           </div>
+
+          {callMode && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-6 flex items-center justify-between"
+            >
+              <p className="text-xs text-white/40">
+                Notes saved to browser localStorage &middot; {Object.values(notes).filter(Boolean).length} answers recorded
+              </p>
+              <button
+                onClick={() => {
+                  saveNotes(notes);
+                  setSaved(true);
+                  setTimeout(() => setSaved(false), 2000);
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-400 rounded-lg text-sm font-medium hover:bg-green-500/30 transition-colors"
+              >
+                {saved ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
+                {saved ? "Saved!" : "Save Notes"}
+              </button>
+            </motion.div>
+          )}
         </motion.section>
 
         {/* Demo CTA Section */}
