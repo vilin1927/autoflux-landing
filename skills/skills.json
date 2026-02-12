@@ -1,0 +1,44 @@
+{
+  "version": "1.0.0",
+  "description": "Claude Code skills collection for Autoflux projects",
+  "last_updated": "2026-02-11",
+  "skills": {
+    "architecture": {
+      "type": "local",
+      "source": "consolidated from @architecture + @senior-architect + @software-architecture",
+      "files": [
+        "SKILL.md",
+        "context-discovery.md",
+        "trade-off-analysis.md",
+        "pattern-selection.md",
+        "patterns-reference.md",
+        "examples.md"
+      ]
+    },
+    "systematic-debugging": {
+      "type": "local",
+      "source": "original @systematic-debugging skill"
+    },
+    "feature-design-assistant": {
+      "type": "local",
+      "source": "original @feature-design-assistant skill"
+    },
+    "product-requirements": {
+      "type": "external",
+      "source": "https://github.com/cexll/myclaude",
+      "skill_name": "product-requirements",
+      "install_command": "npx skills add https://github.com/cexll/myclaude --skill product-requirements"
+    },
+    "find-skills": {
+      "type": "external",
+      "source": "https://github.com/vercel-labs/skills",
+      "skill_name": "find-skills",
+      "install_command": "npx skills add https://github.com/vercel-labs/skills --skill find-skills"
+    }
+  },
+  "update_instructions": {
+    "external_skills": "Run the install_command for each external skill to pull the latest version from upstream",
+    "local_skills": "Edit directly in this repository",
+    "auto_update": "To check for updates: npx skills update --check"
+  }
+}
