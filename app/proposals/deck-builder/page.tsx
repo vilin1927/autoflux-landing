@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Check,
@@ -138,9 +139,18 @@ export default function DeckBuilderProposalPage() {
           >
             AutoFlux
           </Link>
-          <span className="text-sm text-[var(--text-muted)]">
-            for {proposalData.client.contact}
-          </span>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/proposals/aleksander.jpg"
+              alt={proposalData.client.contact}
+              width={36}
+              height={36}
+              className="rounded-full object-cover"
+            />
+            <span className="text-sm text-[var(--text-muted)]">
+              for {proposalData.client.contact}
+            </span>
+          </div>
         </motion.header>
 
         {/* Hero Section */}
@@ -270,6 +280,21 @@ export default function DeckBuilderProposalPage() {
                 </motion.div>
               );
             })}
+          </div>
+
+          {/* n8n note */}
+          <div className="mt-6 p-5 bg-[#0F172A]/5 border border-[#0F172A]/10 rounded-[var(--radius-lg)] flex items-start gap-4">
+            <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span className="text-base">💡</span>
+            </div>
+            <div>
+              <p className="font-bold text-[var(--text-dark)] mb-1">
+                A note on n8n
+              </p>
+              <p className="text-sm text-[var(--text-muted)]">
+                If you want to build this strictly with n8n, we can absolutely do that. However, I strongly recommend using Claude Code instead — I use it daily to generate production-grade Python backends and polished frontend apps. The result is a real codebase that&apos;s reliable, testable, and far easier to extend than visual flows.
+              </p>
+            </div>
           </div>
         </motion.section>
 
