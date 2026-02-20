@@ -17,13 +17,42 @@ export const proposalData = {
       "A custom-built system that writes watch-content scripts with Claude AI, renders talking-head videos through HeyGen, adds branded overlays with FFmpeg, and auto-posts to Instagram, TikTok, and X — with a dashboard for full control.",
   },
   pricing: {
-    development: { min: 1200, max: 1500, label: "Development (one-time)" },
+    tiers: [
+      {
+        name: "1 Video Type",
+        price: 1200,
+        description: "Talking-head avatar videos (main format)",
+      },
+      {
+        name: "2 Video Types",
+        price: 1350,
+        description: "Talking-head + Hot or Not format included",
+        recommended: true,
+      },
+    ],
     monthly: [
       { name: "HeyGen API", cost: 99, note: "Video rendering (Creator plan)" },
-      { name: "Claude API", cost: "~$2–5", note: "Script generation (Haiku 4.5)" },
+      { name: "Claude API", cost: "~$2–5", note: "Script generation (Sonnet 4.6)" },
       { name: "VPS Hosting", cost: "~$6", note: "Hetzner / DigitalOcean" },
     ],
   },
+  videoTypes: [
+    {
+      name: "Talking Head (Main)",
+      description:
+        "Avatar delivers a 30–60s scripted take direct to camera. Market commentary, watch reviews, opinions. This is the core format.",
+      reference: "https://www.instagram.com/p/DUbzS9bEn54/?hl=en",
+      primary: true,
+    },
+    {
+      name: "Hot or Not",
+      description:
+        "Quick-verdict format: watch image slides in, avatar gives a punchy 15–20s take, verdict graphic overlays. High engagement, fast to produce.",
+      reference: "https://www.instagram.com/p/DSqgXbTjhkf/?hl=en",
+    },
+  ],
+  captionNote:
+    "We'll choose one text style / font for captions that stays consistent across all videos and platforms — clean, branded, recognizable.",
   currentContent: [
     {
       title: "Hot or Not",
@@ -56,7 +85,7 @@ export const proposalData = {
     {
       title: "Claude Script Engine",
       description:
-        "Claude Haiku 4.5 writes 30–60 second scripts in Dan's voice — punchy, opinionated, watch-nerd friendly. Topic in, teleprompter-ready script out.",
+        "Claude Sonnet 4.6 writes 30–60 second scripts in Dan's voice — punchy, opinionated, watch-nerd friendly. Topic in, teleprompter-ready script out.",
       icon: "pen-tool",
       highlight: true,
     },
@@ -105,7 +134,7 @@ export const proposalData = {
       step: "Script",
       title: "Claude Writes the Script",
       description:
-        "Claude Haiku 4.5 generates a 30–60s teleprompter-ready script in your voice.",
+        "Claude Sonnet 4.6 generates a 30–60s teleprompter-ready script in your voice.",
       icon: "sparkles",
       color: "purple",
     },
@@ -151,7 +180,7 @@ export const proposalData = {
     {
       title: "AI Script Generation",
       items: [
-        "Claude Haiku 4.5 for fast, cost-efficient scripts",
+        "Claude Sonnet 4.6 for fast, cost-efficient scripts",
         "Brand voice system trained on Dan's style",
         "30–60 second format optimized for Reels/TikTok",
         "Topic suggestions from watch market trends",
@@ -187,7 +216,7 @@ export const proposalData = {
   ],
   techStack: [
     { name: "Next.js", category: "Frontend" },
-    { name: "Claude Haiku 4.5", category: "AI Scripting" },
+    { name: "Claude Sonnet 4.6", category: "AI Scripting" },
     { name: "HeyGen API", category: "Video Rendering" },
     { name: "FFmpeg", category: "Overlays" },
     { name: "IG Graph API", category: "Posting" },
@@ -228,7 +257,6 @@ export const proposalData = {
     {
       category: "Phase 2 & Growth",
       questions: [
-        "Would you want a 'Hot or Not' template with watch image + quick verdict?",
         "Interest in a 'Market Minute' format with price tickers and charts?",
         "Would voice cloning (so the avatar sounds like you) be valuable?",
         "Do you need engagement analytics (views, likes, shares) tracked in the dashboard?",
@@ -236,11 +264,6 @@ export const proposalData = {
     },
   ],
   phase2: [
-    {
-      title: "Hot or Not Template",
-      description:
-        "Pre-built video template: watch image slides in, avatar gives a 15-second verdict, verdict graphic overlays. High engagement, fast to produce.",
-    },
     {
       title: "Market Minute",
       description:

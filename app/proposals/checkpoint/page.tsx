@@ -55,6 +55,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 const sections = [
   { id: "hero", label: "Overview" },
   { id: "your-content", label: "Your Content" },
+  { id: "video-types", label: "Video Types" },
   { id: "what-well-build", label: "What We Build" },
   { id: "how-it-works", label: "How It Works" },
   { id: "avatar", label: "Avatar" },
@@ -175,7 +176,7 @@ export default function CheckpointProposalPage() {
             </span>
             <span className="inline-block text-xs font-bold uppercase tracking-widest bg-green-500/20 text-green-300 px-4 py-2 rounded-full">
               <DollarSign className="w-3 h-3 inline -mt-0.5 mr-1" />
-              $1,200–1,500 dev
+              from $1,200
             </span>
           </div>
 
@@ -272,6 +273,80 @@ export default function CheckpointProposalPage() {
               <div>
                 <h4 className="font-bold text-[var(--text-dark)] mb-1">AI as Content Machine, Not Replacement</h4>
                 <p className="text-sm text-[var(--text-muted)]">{proposalData.positioningNote}</p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Video Types Section */}
+        <motion.section
+          id="video-types"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
+        >
+          <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
+            Video Types We&apos;ll Produce
+          </h2>
+          <p className="text-[var(--text-muted)] mb-8">
+            Two formats that match your existing content — fully automated
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            {proposalData.videoTypes.map((type, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`rounded-[var(--radius-lg)] p-6 transition-colors ${
+                  type.primary
+                    ? "bg-[#0F172A] text-white border border-[#1E293B]"
+                    : "bg-[var(--bg-light)] border border-[var(--border-light)] hover:border-[#38BDF8]/30"
+                }`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-[var(--radius-sm)] flex items-center justify-center ${type.primary ? "bg-[#38BDF8]" : "bg-[#38BDF8]/10"}`}>
+                      <Video className={`w-5 h-5 ${type.primary ? "text-[#0F172A]" : "text-[#38BDF8]"}`} />
+                    </div>
+                    <div>
+                      <h3 className={`font-bold ${type.primary ? "text-white" : "text-[var(--text-dark)]"}`}>{type.name}</h3>
+                      {type.primary && <span className="text-xs text-[#38BDF8] font-bold uppercase tracking-wider">Core Format</span>}
+                    </div>
+                  </div>
+                </div>
+                <p className={`text-sm mb-4 ${type.primary ? "text-white/70" : "text-[var(--text-muted)]"}`}>
+                  {type.description}
+                </p>
+                <a
+                  href={type.reference}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${
+                    type.primary
+                      ? "text-[#38BDF8] hover:text-[#7DD3FC]"
+                      : "text-[#38BDF8] hover:text-sky-700"
+                  }`}
+                >
+                  See reference on Instagram
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Caption note */}
+          <div className="bg-gradient-to-r from-[#38BDF8]/5 to-[#818CF8]/5 border border-[#38BDF8]/20 rounded-[var(--radius-lg)] p-5">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#38BDF8]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <PenTool className="w-4 h-4 text-[#38BDF8]" />
+              </div>
+              <div>
+                <h4 className="font-bold text-[var(--text-dark)] mb-1">Consistent Caption Style</h4>
+                <p className="text-sm text-[var(--text-muted)]">{proposalData.captionNote}</p>
               </div>
             </div>
           </div>
@@ -530,55 +605,65 @@ export default function CheckpointProposalPage() {
             One-time build + low monthly running costs
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Development */}
-            <div className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-[var(--radius-lg)] p-6 text-white">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-[#38BDF8] rounded-[var(--radius-sm)] flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 text-[#0F172A]" />
-                </div>
-                <div>
-                  <h3 className="font-bold">{proposalData.pricing.development.label}</h3>
-                  <p className="text-xs text-white/50">Build the full pipeline</p>
-                </div>
-              </div>
-              <p className="text-3xl font-extrabold text-[#38BDF8]">
-                ${proposalData.pricing.development.min.toLocaleString()}–${proposalData.pricing.development.max.toLocaleString()}
-              </p>
-              <p className="text-sm text-white/60 mt-2">
-                Includes script engine, HeyGen integration, FFmpeg overlays, dashboard, posting APIs, and deployment.
-              </p>
-            </div>
-
-            {/* Monthly Costs */}
-            <div className="bg-[var(--bg-light)] border border-[var(--border-light)] rounded-[var(--radius-lg)] p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-amber-100 rounded-[var(--radius-sm)] flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-amber-600" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-[var(--text-dark)]">Monthly Running Costs</h3>
-                  <p className="text-xs text-[var(--text-muted)]">Estimated for your usage</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                {proposalData.pricing.monthly.map((item, i) => (
-                  <div key={i} className="flex items-center justify-between py-2 border-b border-[var(--border-light)] last:border-0">
-                    <div>
-                      <p className="text-sm font-medium text-[var(--text-dark)]">{item.name}</p>
-                      <p className="text-xs text-[var(--text-muted)]">{item.note}</p>
-                    </div>
-                    <span className="text-sm font-bold text-[var(--text-dark)]">
-                      {typeof item.cost === "number" ? `$${item.cost}/mo` : `${item.cost}/mo`}
+          {/* Development Tiers */}
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            {proposalData.pricing.tiers.map((tier, i) => (
+              <div
+                key={i}
+                className={`rounded-[var(--radius-lg)] p-6 ${
+                  tier.recommended
+                    ? "bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-white border-2 border-[#38BDF8]/40"
+                    : "bg-[var(--bg-light)] border border-[var(--border-light)]"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className={`font-bold ${tier.recommended ? "text-white" : "text-[var(--text-dark)]"}`}>
+                    {tier.name}
+                  </h3>
+                  {tier.recommended && (
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-[#38BDF8] text-[#0F172A] px-2.5 py-1 rounded-full">
+                      Recommended
                     </span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-light)]">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-bold text-[var(--text-dark)]">Total Monthly</span>
-                  <span className="text-sm font-bold text-[#38BDF8]">~$107–110/mo</span>
+                  )}
                 </div>
+                <p className={`text-3xl font-extrabold mb-2 ${tier.recommended ? "text-[#38BDF8]" : "text-[var(--text-dark)]"}`}>
+                  ${tier.price.toLocaleString()}
+                </p>
+                <p className={`text-sm ${tier.recommended ? "text-white/60" : "text-[var(--text-muted)]"}`}>
+                  {tier.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Monthly Costs */}
+          <div className="bg-[var(--bg-light)] border border-[var(--border-light)] rounded-[var(--radius-lg)] p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-amber-100 rounded-[var(--radius-sm)] flex items-center justify-center">
+                <Clock className="w-5 h-5 text-amber-600" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[var(--text-dark)]">Monthly Running Costs</h3>
+                <p className="text-xs text-[var(--text-muted)]">Estimated for your usage</p>
+              </div>
+            </div>
+            <div className="space-y-3">
+              {proposalData.pricing.monthly.map((item, i) => (
+                <div key={i} className="flex items-center justify-between py-2 border-b border-[var(--border-light)] last:border-0">
+                  <div>
+                    <p className="text-sm font-medium text-[var(--text-dark)]">{item.name}</p>
+                    <p className="text-xs text-[var(--text-muted)]">{item.note}</p>
+                  </div>
+                  <span className="text-sm font-bold text-[var(--text-dark)]">
+                    {typeof item.cost === "number" ? `$${item.cost}/mo` : `${item.cost}/mo`}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 pt-3 border-t border-[var(--border-light)]">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-bold text-[var(--text-dark)]">Total Monthly</span>
+                <span className="text-sm font-bold text-[#38BDF8]">~$107–110/mo</span>
               </div>
             </div>
           </div>

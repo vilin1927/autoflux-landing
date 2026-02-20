@@ -525,7 +525,7 @@ function GenerateScreen({
                 </div>
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-sky-500" />
-                  <span className="text-xs font-medium text-sky-600">Claude Haiku 4.5</span>
+                  <span className="text-xs font-medium text-sky-600">Claude Sonnet 4.6</span>
                 </div>
               </div>
               <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 min-h-[200px]">
