@@ -52,7 +52,7 @@ export const proposalData = {
     },
   ],
   captionNote:
-    "We'll choose one text style / font for captions that stays consistent across all videos and platforms — clean, branded, recognizable.",
+    "I'll choose one text style / font for captions that stays consistent across all videos and platforms — clean, branded, recognizable.",
   currentContent: [
     {
       title: "Hot or Not",
@@ -81,7 +81,7 @@ export const proposalData = {
   ],
   positioningNote:
     "This isn't about replacing Dan on camera — it's about giving him a content machine that produces 5–10x more videos per week while he focuses on deals and clients. The AI avatar handles the volume; Dan brings the personality for key pieces.",
-  whatWellBuild: [
+  whatIllBuild: [
     {
       title: "Claude Script Engine",
       description:
@@ -230,7 +230,6 @@ export const proposalData = {
     {
       category: "Avatar & Video Style",
       questions: [
-        "Are you open to doing a quick photo session for the HeyGen Photo Avatar?",
         "Do you want the avatar to be you, or are you okay with a stock presenter for V1?",
         "Any specific background or setting you'd want (studio, office, watch display)?",
         "Should videos include watch images/b-roll overlays, or talking head only?",
@@ -242,7 +241,7 @@ export const proposalData = {
         "What are the top 5 watch brands/models you cover most?",
         "How do you want the tone — straight expert, or more casual/entertaining?",
         "Should the AI pull from any data sources for market prices (Chrono24, WatchCharts)?",
-        "Do you have existing scripts or video transcripts we can train the voice on?",
+        "Do you have existing scripts or video transcripts I can train the voice on?",
       ],
     },
     {

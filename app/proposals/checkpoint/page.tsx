@@ -56,7 +56,7 @@ const sections = [
   { id: "hero", label: "Overview" },
   { id: "your-content", label: "Your Content" },
   { id: "video-types", label: "Video Types" },
-  { id: "what-well-build", label: "What We Build" },
+  { id: "what-well-build", label: "What I Build" },
   { id: "how-it-works", label: "How It Works" },
   { id: "avatar", label: "Avatar" },
   { id: "features", label: "Features" },
@@ -236,10 +236,10 @@ export default function CheckpointProposalPage() {
           className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
-            We Know Your Content
+            I Know Your Content
           </h2>
           <p className="text-[var(--text-muted)] mb-8">
-            Here&apos;s what we see working on your channels right now
+            Here&apos;s what I see working on your channels right now
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -287,7 +287,7 @@ export default function CheckpointProposalPage() {
           className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
-            Video Types We&apos;ll Produce
+            Video Types I&apos;ll Produce
           </h2>
           <p className="text-[var(--text-muted)] mb-8">
             Two formats that match your existing content — fully automated
@@ -352,7 +352,7 @@ export default function CheckpointProposalPage() {
           </div>
         </motion.section>
 
-        {/* What We'll Build Section */}
+        {/* What I'll Build Section */}
         <motion.section
           id="what-well-build"
           initial={{ opacity: 0, y: 24 }}
@@ -361,14 +361,14 @@ export default function CheckpointProposalPage() {
           className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
         >
           <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
-            What We&apos;ll Build
+            What I&apos;ll Build
           </h2>
           <p className="text-[var(--text-muted)] mb-8">
             The full video pipeline — from topic to published Reel
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {proposalData.whatWellBuild.map((item, i) => {
+            {proposalData.whatIllBuild.map((item, i) => {
               const Icon = iconMap[item.icon] || Sparkles;
               return (
                 <motion.div
@@ -712,7 +712,7 @@ export default function CheckpointProposalPage() {
             </h2>
           </div>
           <p className="text-[var(--text-muted)] mb-8">
-            To scope the project accurately, we&apos;d love to understand your needs better
+            To scope the project accurately, I&apos;d love to understand your needs better
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
