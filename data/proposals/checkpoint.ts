@@ -1,295 +1,389 @@
-// Proposal data for CheckPoint Group Inc (Dan Gold)
-// Social Media Automation Engine — February 2026
+// Proposal data for CheckPoint Group Inc / Toronto Watch Exchange (Dan Gold)
+// AI Video Content Generator — February 2026
 
 export const proposalData = {
   client: {
-    name: "CheckPoint Group Inc",
+    name: "Toronto Watch Exchange",
     contact: "Dan Gold",
+    handle: "@torontowatchexchange",
     location: "Toronto, Canada",
   },
   project: {
-    title: "AI Social Media Automation Engine",
-    subtitle: "Claude-powered content generation & auto-posting for X and Threads",
+    title: "AI Video Content Generator",
+    appName: "ReelPilot",
+    subtitle:
+      "HeyGen avatar videos with Claude scripting, branded overlays & auto-posting",
     description:
-      "A custom-built system that generates high-quality, on-brand content using Claude AI and automatically posts to your X (Twitter) and Instagram Threads accounts on schedule — with a dashboard for full control.",
+      "A custom-built system that writes watch-content scripts with Claude AI, renders talking-head videos through HeyGen, adds branded overlays with FFmpeg, and auto-posts to Instagram, TikTok, and X — with a dashboard for full control.",
   },
-  whatWeSuggest: [
+  pricing: {
+    development: { min: 1200, max: 1500, label: "Development (one-time)" },
+    monthly: [
+      { name: "HeyGen API", cost: 99, note: "Video rendering (Creator plan)" },
+      { name: "Claude API", cost: "~$2–5", note: "Script generation (Haiku 4.5)" },
+      { name: "VPS Hosting", cost: "~$6", note: "Hetzner / DigitalOcean" },
+    ],
+  },
+  currentContent: [
     {
-      title: "Custom Web App (Not No-Code)",
+      title: "Hot or Not",
       description:
-        "Instead of chaining Zapier/IFTTT/Make.com, we build a standalone web app. Fewer moving parts = fewer breakpoints. You own the code, no monthly SaaS fees.",
-      icon: "code",
+        "Quick takes on whether a watch is worth the hype. High engagement, punchy format.",
+      icon: "flame",
+    },
+    {
+      title: "Market Updates",
+      description:
+        "Price movement breakdowns for Rolex, AP, Patek — what's up, what's down.",
+      icon: "trending-up",
+    },
+    {
+      title: "Watch Reviews",
+      description:
+        "In-depth looks at specific references. Specs, wrist presence, value proposition.",
+      icon: "eye",
+    },
+    {
+      title: "Talking Head",
+      description:
+        "Direct-to-camera commentary and opinions. Personality-driven content.",
+      icon: "user",
+    },
+  ],
+  positioningNote:
+    "This isn't about replacing Dan on camera — it's about giving him a content machine that produces 5–10x more videos per week while he focuses on deals and clients. The AI avatar handles the volume; Dan brings the personality for key pieces.",
+  whatWellBuild: [
+    {
+      title: "Claude Script Engine",
+      description:
+        "Claude Haiku 4.5 writes 30–60 second scripts in Dan's voice — punchy, opinionated, watch-nerd friendly. Topic in, teleprompter-ready script out.",
+      icon: "pen-tool",
       highlight: true,
     },
     {
-      title: "Claude API (Not Claude.ai Projects)",
+      title: "HeyGen Video Rendering",
       description:
-        "Claude.ai Projects is a consumer feature — great for chat, not for production automation. We use the API directly: full control over prompts, brand voice, rate limits, and costs.",
-      icon: "cpu",
+        "Photo Avatar speaks the script with natural lip-sync and gestures. No filming, no editing, no studio time.",
+      icon: "video",
       highlight: true,
     },
     {
-      title: "Direct API Integration",
+      title: "FFmpeg Branded Overlays",
       description:
-        "Post directly via X API v2 and Threads API. No middleman, no Zapier webhook delays, no broken automations at 2 AM.",
-      icon: "zap",
+        "TWX logo, topic caption, follow CTA, and watch images composited onto each video automatically.",
+      icon: "layers",
+    },
+    {
+      title: "Auto-Post to 3 Platforms",
+      description:
+        "One click → Instagram Reels, TikTok, and X. Captions and hashtags adapted per platform.",
+      icon: "send",
     },
     {
       title: "Approval Dashboard",
       description:
-        "A clean web UI where you review AI-generated content before it goes live. Edit, approve, schedule, or regenerate — you stay in control.",
+        "Review scripts, preview rendered videos, edit captions, approve or reject — before anything goes live.",
       icon: "layout-dashboard",
     },
     {
-      title: "Brand Voice System",
+      title: "VPS Deployment",
       description:
-        "Your tone, style, emojis, hashtags, and content pillars baked into the AI prompts. Every post sounds like you, not a robot.",
-      icon: "mic",
-    },
-    {
-      title: "VPS Deployment (Your Server)",
-      description:
-        "Deployed on a server you own. No vendor lock-in, no surprise price hikes, no data leaving your infrastructure.",
+        "Runs on your own server. No vendor lock-in, no surprise fees, full data ownership.",
       icon: "server",
     },
   ],
   howItWorks: [
     {
-      step: "Configure",
-      title: "Brand Voice & Content Pillars",
-      description: "Upload your brand guidelines, tone examples, past posts. Set content pillars and topics.",
-      icon: "settings",
+      step: "Topic",
+      title: "Pick a Topic",
+      description:
+        "Choose a watch, trend, or hot take — or let Claude suggest one from market data.",
+      icon: "pen-tool",
       color: "blue",
     },
     {
-      step: "Generate",
-      title: "Claude AI Creates Content",
-      description: "Claude Sonnet 4.5 generates platform-optimized posts matching your brand voice.",
+      step: "Script",
+      title: "Claude Writes the Script",
+      description:
+        "Claude Haiku 4.5 generates a 30–60s teleprompter-ready script in your voice.",
       icon: "sparkles",
       color: "purple",
     },
     {
-      step: "Review",
-      title: "Approve in Dashboard",
-      description: "Preview posts as they'll appear on X and Threads. Edit, approve, or regenerate.",
-      icon: "eye",
+      step: "Render",
+      title: "HeyGen Renders Video",
+      description:
+        "Photo Avatar speaks the script. FFmpeg adds logo, captions, and overlays.",
+      icon: "video",
       color: "green",
     },
     {
-      step: "Publish",
-      title: "Auto-Post on Schedule",
-      description: "Approved posts are queued and published at optimal times via X API & Threads API.",
+      step: "Post",
+      title: "Approve & Auto-Post",
+      description:
+        "Preview the final video, then one-click publish to Instagram, TikTok, and X.",
       icon: "send",
       color: "orange",
     },
   ],
+  avatarOptions: {
+    recommended: {
+      name: "Photo Avatar",
+      description:
+        "Upload a few photos of Dan → HeyGen creates a realistic talking avatar. Best quality-to-effort ratio. Looks natural, fast to set up.",
+      badge: "Recommended",
+    },
+    alternatives: [
+      {
+        name: "Digital Twin (Studio)",
+        description:
+          "Record a 2-minute calibration video → HeyGen builds a high-fidelity clone. Best quality but requires a studio session.",
+      },
+      {
+        name: "Stock Avatar",
+        description:
+          "Use a HeyGen stock presenter. Zero setup but doesn't look like Dan. Good for testing the pipeline before committing.",
+      },
+    ],
+    youtubeReference: "https://www.youtube.com/watch?v=MYUFRRfNPnA",
+  },
   features: [
     {
-      title: "AI Content Generation",
+      title: "AI Script Generation",
       items: [
-        "Claude Sonnet 4.5 for cost-efficient, high-quality output",
-        "Platform-specific formatting (X character limits, Threads styling)",
-        "Hashtag generation, emoji placement, CTA insertion",
-        "Thread/carousel support for longer content",
+        "Claude Haiku 4.5 for fast, cost-efficient scripts",
+        "Brand voice system trained on Dan's style",
+        "30–60 second format optimized for Reels/TikTok",
+        "Topic suggestions from watch market trends",
       ],
     },
     {
-      title: "Posting & Scheduling",
+      title: "Video Rendering",
       items: [
-        "Direct X API v2 integration (OAuth 2.0)",
-        "Threads via Instagram Graph API / Meta Business Suite",
-        "Cron-based scheduling with timezone support",
-        "Queue management with retry on failure",
+        "HeyGen Photo Avatar with natural lip-sync",
+        "FFmpeg overlay pipeline (logo, captions, CTAs)",
+        "9:16 vertical format for all platforms",
+        "Batch rendering for content-ahead scheduling",
+      ],
+    },
+    {
+      title: "Multi-Platform Posting",
+      items: [
+        "Instagram Reels via Graph API",
+        "TikTok via Content Posting API",
+        "X (Twitter) via API v2 video upload",
+        "Platform-specific captions and hashtags",
       ],
     },
     {
       title: "Dashboard & Control",
       items: [
-        "Content calendar view (week/month)",
-        "Post preview (see exactly what goes live)",
-        "Bulk generation and approval workflows",
-        "Post history with status tracking",
-      ],
-    },
-    {
-      title: "Safety & Reliability",
-      items: [
-        "Content moderation filters before posting",
-        "Duplicate detection to avoid repeat posts",
-        "Rate limit management for both APIs",
-        "Error alerts and auto-retry logic",
+        "Script preview and edit before rendering",
+        "Video preview before posting",
+        "Queue management with scheduling",
+        "Post history with engagement metrics",
       ],
     },
   ],
   techStack: [
     { name: "Next.js", category: "Frontend" },
-    { name: "React", category: "UI" },
-    { name: "Tailwind CSS", category: "Styling" },
-    { name: "Claude API (Sonnet 4.5)", category: "AI" },
+    { name: "Claude Haiku 4.5", category: "AI Scripting" },
+    { name: "HeyGen API", category: "Video Rendering" },
+    { name: "FFmpeg", category: "Overlays" },
+    { name: "IG Graph API", category: "Posting" },
+    { name: "TikTok API", category: "Posting" },
     { name: "X API v2", category: "Posting" },
-    { name: "Threads API", category: "Posting" },
     { name: "PostgreSQL", category: "Database" },
-    { name: "Cron / Node Schedule", category: "Scheduling" },
+    { name: "Cron", category: "Scheduling" },
     { name: "VPS (Linux)", category: "Hosting" },
   ],
   discoveryQuestions: [
     {
-      category: "Content Strategy",
+      category: "Avatar & Video Style",
       questions: [
-        "How many posts per day/week on each platform (X and Threads)?",
-        "What content types? Text-only, text + images, threads/carousels?",
-        "Do you have existing brand guidelines or tone examples we can feed the AI?",
-        "What are your main content pillars / topics?",
+        "Are you open to doing a quick photo session for the HeyGen Photo Avatar?",
+        "Do you want the avatar to be you, or are you okay with a stock presenter for V1?",
+        "Any specific background or setting you'd want (studio, office, watch display)?",
+        "Should videos include watch images/b-roll overlays, or talking head only?",
       ],
     },
     {
-      category: "Workflow & Approval",
+      category: "Content & Scripting",
       questions: [
+        "What are the top 5 watch brands/models you cover most?",
+        "How do you want the tone — straight expert, or more casual/entertaining?",
+        "Should the AI pull from any data sources for market prices (Chrono24, WatchCharts)?",
+        "Do you have existing scripts or video transcripts we can train the voice on?",
+      ],
+    },
+    {
+      category: "Posting & Schedule",
+      questions: [
+        "How many videos per week do you want to target?",
+        "Which platforms are priority — Instagram, TikTok, X, or all three equally?",
         "Do you want full autopilot or manual approval before each post?",
-        "Who on your team will be reviewing content?",
-        "Do you need role-based access (e.g., creator vs. approver)?",
+        "What time zones / posting windows work best for your audience?",
       ],
     },
     {
-      category: "Technical Requirements",
+      category: "Phase 2 & Growth",
       questions: [
-        "Do you already have X API (Twitter Developer) access?",
-        "Do you have Meta Business Suite / Instagram Graph API access for Threads?",
-        "Any existing content sources to pull from? (RSS feeds, Google Sheets, Notion, CRM)",
-        "Do you need image generation alongside text? (Flux, DALL-E, etc.)",
+        "Would you want a 'Hot or Not' template with watch image + quick verdict?",
+        "Interest in a 'Market Minute' format with price tickers and charts?",
+        "Would voice cloning (so the avatar sounds like you) be valuable?",
+        "Do you need engagement analytics (views, likes, shares) tracked in the dashboard?",
       ],
     },
+  ],
+  phase2: [
     {
-      category: "Scale & Future",
-      questions: [
-        "How many accounts do you manage? Just one X + one Threads, or multiple?",
-        "Do you need engagement automation (auto-reply, like, repost)?",
-        "Would you want analytics/reporting on post performance?",
-      ],
+      title: "Hot or Not Template",
+      description:
+        "Pre-built video template: watch image slides in, avatar gives a 15-second verdict, verdict graphic overlays. High engagement, fast to produce.",
+    },
+    {
+      title: "Market Minute",
+      description:
+        "Automated weekly market update: pulls price data from WatchCharts/Chrono24, avatar narrates the top movers with ticker graphics.",
+    },
+    {
+      title: "Analytics Dashboard",
+      description:
+        "Track views, likes, comments, shares, and follower growth across all three platforms. See which topics and formats perform best.",
+    },
+    {
+      title: "Voice Cloning",
+      description:
+        "Clone Dan's voice so the avatar sounds exactly like him. HeyGen supports this with a short voice sample. Major authenticity upgrade.",
     },
   ],
 };
 
 // Demo mock data
 export const demoData = {
-  appName: "PostPilot",
-  tagline: "AI Social Media Engine",
+  appName: "ReelPilot",
+  tagline: "AI Video Content Engine",
   user: {
     name: "Dan Gold",
-    email: "dan@checkpointgroup.com",
-    company: "CheckPoint Group",
+    company: "Toronto Watch Exchange",
     initials: "DG",
-  },
-  brandVoice: {
-    tone: "Professional yet approachable, thought-leader in tech/business",
-    emojis: "Minimal, strategic placement",
-    hashtags: ["#AI", "#Automation", "#GrowthHacking", "#TechLeadership", "#SocialMedia"],
-    contentPillars: [
-      "AI & Automation Trends",
-      "Business Growth Strategies",
-      "Tech Industry Insights",
-      "Team & Company Culture",
-    ],
+    handle: "@torontowatchexchange",
   },
   stats: {
-    postsScheduled: 12,
-    postsPublished: 47,
-    avgEngagement: "4.2%",
-    contentGenerated: 156,
+    videosGenerated: 34,
+    videosPosted: 28,
+    platformsActive: 3,
+    avgRenderTime: "2m 14s",
   },
-  scheduledPosts: [
+  sampleTopics: [
+    "Rolex Submariner 124060 — still the king?",
+    "AP Royal Oak vs Nautilus in 2026",
+    "3 watches under $5K that hold value",
+    "Why Tudor is the smart money play",
+    "Hot or Not: Cartier Santos",
+  ],
+  generationSteps: [
+    "Analyzing topic & market data...",
+    "Writing script with Claude AI...",
+    "Sending script to HeyGen...",
+    "Rendering avatar video...",
+    "Compositing branded overlays...",
+    "Encoding final 9:16 video...",
+  ],
+  sampleScript: {
+    topic: "Rolex Submariner 124060 — still the king?",
+    duration: "45s",
+    text: `Let's talk about the Rolex Submariner 124060.
+
+Is it still the king of dive watches in 2026? Short answer — yes, but it's complicated.
+
+At current market, you're looking at about fourteen-five to fifteen thousand. That's actually down from the peak, which means it's a better buy now than it was two years ago.
+
+The 41mm case, the new-gen movement, the no-date clean dial — it's Rolex at its most iconic.
+
+But here's the thing. Tudor Pelagos 39 does 90% of what this watch does at a third of the price.
+
+So is the Sub still the king? For prestige and resale — absolutely. For pure value? The crown is slipping.
+
+Follow for more watch market takes.`,
+  },
+  videoPreview: {
+    resolution: "1080x1920",
+    format: "9:16 Vertical",
+    overlays: ["TWX Logo (top-left)", "Topic Caption (bottom)", "Follow CTA (end card)"],
+  },
+  scheduledVideos: [
     {
       id: 1,
-      platform: "x" as const,
-      content: "The companies winning right now aren't the ones with the most employees — they're the ones with the smartest automations.\n\nWe just saved 23 hours/week by letting AI handle our content pipeline.\n\nHere's what we learned (thread) 🧵",
+      topic: "Rolex Submariner 124060 — still the king?",
+      platforms: ["instagram", "tiktok", "x"] as const,
       scheduledFor: "Today, 2:00 PM EST",
       status: "approved" as const,
-      type: "thread",
+      duration: "0:45",
     },
     {
       id: 2,
-      platform: "threads" as const,
-      content: "Hot take: Most \"AI tools\" are just fancy wrappers around an API call.\n\nThe real magic? Building custom workflows that actually understand YOUR business.\n\nStop renting. Start owning your automation stack.",
-      scheduledFor: "Today, 4:30 PM EST",
-      status: "approved" as const,
-      type: "single",
+      topic: "AP Royal Oak vs Nautilus in 2026",
+      platforms: ["instagram", "tiktok"] as const,
+      scheduledFor: "Today, 5:00 PM EST",
+      status: "rendering" as const,
+      duration: "0:52",
     },
     {
       id: 3,
-      platform: "x" as const,
-      content: "3 things I wish I knew before scaling our marketing team:\n\n1. Automate content creation, not creativity\n2. AI writes the first draft — humans add the soul\n3. Consistency beats virality every single time\n\nWhat would you add?",
+      topic: "3 watches under $5K that hold value",
+      platforms: ["instagram", "tiktok", "x"] as const,
       scheduledFor: "Tomorrow, 10:00 AM EST",
       status: "pending" as const,
-      type: "single",
+      duration: "1:03",
     },
     {
       id: 4,
-      platform: "threads" as const,
-      content: "We tested posting 2x/day vs 5x/day on Threads for 30 days.\n\nResults:\n→ 2x/day: Higher engagement per post\n→ 5x/day: 3x more total reach\n\nOur sweet spot? 3x/day with AI-generated content + manual curation.",
-      scheduledFor: "Tomorrow, 1:00 PM EST",
-      status: "pending" as const,
-      type: "single",
+      topic: "Why Tudor is the smart money play",
+      platforms: ["instagram", "x"] as const,
+      scheduledFor: "Tomorrow, 3:00 PM EST",
+      status: "draft" as const,
+      duration: "0:38",
     },
     {
       id: 5,
-      platform: "x" as const,
-      content: "The future of social media marketing isn't hiring more people.\n\nIt's this:\n→ AI generates 10 post variations\n→ You pick the best 3\n→ System auto-posts at peak times\n→ Analytics tell you what's working\n\nTotal time spent: 15 minutes/day.",
-      scheduledFor: "Wed, 9:00 AM EST",
-      status: "draft" as const,
-      type: "single",
+      topic: "Hot or Not: Cartier Santos",
+      platforms: ["tiktok"] as const,
+      scheduledFor: "Wed, 12:00 PM EST",
+      status: "pending" as const,
+      duration: "0:30",
     },
   ],
   postHistory: [
     {
       id: 101,
-      platform: "x" as const,
-      content: "Just deployed an AI agent that handles our entire content calendar. From idea to published post in under 30 seconds...",
+      topic: "Omega Speedmaster — overrated or underrated?",
+      platform: "instagram" as const,
       postedAt: "Yesterday, 2:00 PM",
-      likes: 142,
-      reposts: 38,
-      replies: 24,
-      views: 12400,
+      views: 14200,
+      likes: 892,
+      comments: 67,
+      shares: 43,
     },
     {
       id: 102,
-      platform: "threads" as const,
-      content: "Stop using 10 different tools for social media. Build one system that does everything...",
+      topic: "Why the watch market is cooling off",
+      platform: "tiktok" as const,
       postedAt: "Yesterday, 11:00 AM",
-      likes: 89,
-      replies: 15,
-      reposts: 12,
-      views: 5600,
+      views: 28400,
+      likes: 1340,
+      comments: 156,
+      shares: 89,
     },
     {
       id: 103,
+      topic: "Top 3 entry-level luxury watches",
       platform: "x" as const,
-      content: "AI won't replace marketers. But marketers who use AI will replace those who don't...",
       postedAt: "2 days ago",
-      likes: 267,
-      reposts: 71,
-      replies: 43,
-      views: 28900,
+      views: 8900,
+      likes: 412,
+      comments: 38,
+      shares: 71,
     },
   ],
-  generationSteps: [
-    "Loading brand voice guidelines...",
-    "Analyzing content pillars...",
-    "Generating post with Claude AI...",
-    "Optimizing for platform...",
-    "Checking content safety...",
-  ],
-  sampleGeneratedPosts: {
-    x: {
-      single: "Every company will be an AI company within 5 years.\n\nBut here's what nobody talks about:\n\nThe winners won't be the ones who adopt AI first.\nThey'll be the ones who integrate it deepest.\n\nSurface-level automation = commoditized.\nCustom AI workflows = competitive moat.\n\nWhich are you building?",
-      thread: [
-        "I've spent the last 6 months building AI automations for businesses.\n\nHere are 7 lessons that changed how I think about scaling with AI:\n\n🧵👇",
-        "1/ Start with the bottleneck, not the hype.\n\nDon't automate something because you can. Automate because it's blocking growth.\n\nOur biggest wins came from automating the boring stuff nobody wanted to do.",
-        "2/ AI-generated content needs a human filter.\n\nNot because AI is bad — it's actually really good. But your audience can tell when something has soul vs when it's just... correct.\n\nThe workflow: AI drafts → human refines → system publishes.",
-        "3/ Cost efficiency matters more than you think.\n\nWe switched from GPT-4 to Claude Sonnet and cut our API costs by 60% while maintaining quality.\n\nAlways benchmark. The most expensive model isn't always the best for your use case.",
-      ],
-    },
-    threads: {
-      single: "Built an AI that writes our social media posts.\n\nBut here's the thing — I still edit every single one.\n\nNot because the AI is bad. It's actually scary good.\n\nI edit because the best content has a human fingerprint. AI gives you speed. You add the spark.\n\nThat's the formula nobody talks about.",
-    },
-  },
 };

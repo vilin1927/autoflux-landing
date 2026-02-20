@@ -19,27 +19,27 @@ import {
   Eye,
   RefreshCw,
   Heart,
-  Repeat2,
   MessageCircle,
   BarChart3,
   ChevronRight,
-  AlertCircle,
+  Video,
+  Play,
+  Share2,
 } from "lucide-react";
 import { demoData } from "@/data/proposals/checkpoint";
 
-type Screen = "dashboard" | "generate" | "preview" | "queue" | "history";
-type GenerateStep = "platform" | "topic" | "processing" | "result";
-type Platform = "x" | "threads" | "both";
+type Screen = "dashboard" | "generate" | "queue" | "history";
+type GenerateStep = "topic" | "processing" | "script-result" | "rendering" | "video-result";
 
 export default function CheckpointDemoPage() {
   const [currentScreen, setCurrentScreen] = useState<Screen>("dashboard");
-  const [generateStep, setGenerateStep] = useState<GenerateStep>("platform");
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform>("x");
+  const [generateStep, setGenerateStep] = useState<GenerateStep>("topic");
   const [topic, setTopic] = useState("");
   const [processingStep, setProcessingStep] = useState(0);
-  const [generatedContent, setGeneratedContent] = useState("");
   const [typingIndex, setTypingIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(["instagram", "tiktok", "x"]);
+  const [scheduleTime, setScheduleTime] = useState("Today, 2:00 PM EST");
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -48,44 +48,56 @@ export default function CheckpointDemoPage() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Processing animation
+  // Script generation processing (steps 0–1)
   useEffect(() => {
     if (generateStep === "processing") {
       let step = 0;
       const interval = setInterval(() => {
         step++;
         setProcessingStep(step);
-        if (step >= demoData.generationSteps.length) {
+        if (step >= 2) {
           clearInterval(interval);
-          const content =
-            selectedPlatform === "threads"
-              ? demoData.sampleGeneratedPosts.threads.single
-              : demoData.sampleGeneratedPosts.x.single;
-          setGeneratedContent(content);
           setTypingIndex(0);
-          setTimeout(() => setGenerateStep("result"), 400);
+          setTimeout(() => setGenerateStep("script-result"), 400);
         }
-      }, 700);
+      }, 800);
       return () => clearInterval(interval);
     }
-  }, [generateStep, selectedPlatform]);
+  }, [generateStep]);
 
-  // Typing animation for result
+  // Typing animation for script result
   useEffect(() => {
-    if (generateStep === "result" && typingIndex < generatedContent.length) {
-      const speed = Math.random() * 15 + 8;
+    if (generateStep === "script-result" && typingIndex < demoData.sampleScript.text.length) {
+      const speed = Math.random() * 10 + 5;
       const timeout = setTimeout(() => {
-        setTypingIndex((prev) => Math.min(prev + 2, generatedContent.length));
+        setTypingIndex((prev) => Math.min(prev + 3, demoData.sampleScript.text.length));
       }, speed);
       return () => clearTimeout(timeout);
     }
-  }, [generateStep, typingIndex, generatedContent]);
+  }, [generateStep, typingIndex]);
+
+  // Video rendering processing (steps 2–5)
+  useEffect(() => {
+    if (generateStep === "rendering") {
+      let step = 2;
+      setProcessingStep(2);
+      const interval = setInterval(() => {
+        step++;
+        setProcessingStep(step);
+        if (step >= 6) {
+          clearInterval(interval);
+          setTimeout(() => setGenerateStep("video-result"), 400);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [generateStep]);
 
   const handleGenerate = () => {
-    setGenerateStep("platform");
+    setGenerateStep("topic");
     setProcessingStep(0);
     setTypingIndex(0);
-    setGeneratedContent("");
+    setTopic("");
     setCurrentScreen("generate");
   };
 
@@ -94,7 +106,11 @@ export default function CheckpointDemoPage() {
     setGenerateStep("processing");
   };
 
-  const handleApprovePost = () => {
+  const handleRenderVideo = () => {
+    setGenerateStep("rendering");
+  };
+
+  const handleApproveVideo = () => {
     setCurrentScreen("queue");
   };
 
@@ -128,7 +144,7 @@ export default function CheckpointDemoPage() {
         <div className="p-6 border-b border-white/10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-600 rounded-xl flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
+              <Video className="w-5 h-5 text-white" />
             </div>
             <div>
               <h1 className="font-bold text-white">{demoData.appName}</h1>
@@ -146,17 +162,17 @@ export default function CheckpointDemoPage() {
               onClick={() => setCurrentScreen("dashboard")}
             />
             <SidebarItem
-              icon={PenTool}
-              label="Generate Content"
+              icon={Video}
+              label="Generate Video"
               active={currentScreen === "generate"}
               onClick={handleGenerate}
             />
             <SidebarItem
               icon={Calendar}
-              label="Post Queue"
+              label="Video Queue"
               active={currentScreen === "queue"}
               onClick={() => setCurrentScreen("queue")}
-              badge={demoData.scheduledPosts.filter((p) => p.status === "approved").length}
+              badge={demoData.scheduledVideos.filter((v) => v.status === "approved").length}
             />
             <SidebarItem
               icon={History}
@@ -164,7 +180,7 @@ export default function CheckpointDemoPage() {
               active={currentScreen === "history"}
               onClick={() => setCurrentScreen("history")}
             />
-            <SidebarItem icon={Settings} label="Brand Voice" disabled />
+            <SidebarItem icon={Settings} label="Brand Settings" disabled />
             <SidebarItem icon={BarChart3} label="Analytics" disabled />
           </ul>
         </nav>
@@ -211,19 +227,17 @@ export default function CheckpointDemoPage() {
               <GenerateScreen
                 key="generate"
                 step={generateStep}
-                selectedPlatform={selectedPlatform}
-                setSelectedPlatform={setSelectedPlatform}
                 topic={topic}
                 setTopic={setTopic}
                 processingStep={processingStep}
-                generatedContent={generatedContent}
                 typingIndex={typingIndex}
-                onSelectPlatform={(p: Platform) => {
-                  setSelectedPlatform(p);
-                  setGenerateStep("topic");
-                }}
+                selectedPlatforms={selectedPlatforms}
+                setSelectedPlatforms={setSelectedPlatforms}
+                scheduleTime={scheduleTime}
+                setScheduleTime={setScheduleTime}
                 onStartGeneration={handleStartGeneration}
-                onApprove={handleApprovePost}
+                onRenderVideo={handleRenderVideo}
+                onApprove={handleApproveVideo}
                 onRegenerate={() => {
                   setProcessingStep(0);
                   setTypingIndex(0);
@@ -300,14 +314,14 @@ function DashboardScreen({ onGenerate, onViewQueue }: { onGenerate: () => void; 
       className="max-w-5xl mx-auto"
     >
       <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back, {demoData.user.name}</h1>
-      <p className="text-gray-500 mb-6">Here&apos;s your content overview</p>
+      <p className="text-gray-500 mb-6">Here&apos;s your video content overview</p>
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4 mb-8">
-        <StatCard value={String(demoData.stats.postsScheduled)} label="Posts Scheduled" color="sky" />
-        <StatCard value={String(demoData.stats.postsPublished)} label="Posts Published" color="green" />
-        <StatCard value={demoData.stats.avgEngagement} label="Avg Engagement" color="purple" />
-        <StatCard value={String(demoData.stats.contentGenerated)} label="Content Generated" color="amber" />
+        <StatCard value={String(demoData.stats.videosGenerated)} label="Videos Generated" color="sky" />
+        <StatCard value={String(demoData.stats.videosPosted)} label="Videos Posted" color="green" />
+        <StatCard value={String(demoData.stats.platformsActive)} label="Platforms Active" color="purple" />
+        <StatCard value={demoData.stats.avgRenderTime} label="Avg Render Time" color="amber" />
       </div>
 
       {/* Quick Actions */}
@@ -315,11 +329,11 @@ function DashboardScreen({ onGenerate, onViewQueue }: { onGenerate: () => void; 
         <div className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-2xl p-6 text-white">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
+              <Video className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="font-bold">Generate New Content</h3>
-              <p className="text-sm text-white/60">Claude AI will create on-brand posts</p>
+              <h3 className="font-bold">Generate New Video</h3>
+              <p className="text-sm text-white/60">Claude AI + HeyGen avatar pipeline</p>
             </div>
           </div>
           <button
@@ -337,8 +351,8 @@ function DashboardScreen({ onGenerate, onViewQueue }: { onGenerate: () => void; 
               <Calendar className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900">Upcoming Posts</h3>
-              <p className="text-sm text-gray-500">{demoData.scheduledPosts.filter((p) => p.status === "approved").length} posts ready to go</p>
+              <h3 className="font-bold text-gray-900">Video Queue</h3>
+              <p className="text-sm text-gray-500">{demoData.scheduledVideos.filter((v) => v.status === "approved").length} videos ready to post</p>
             </div>
           </div>
           <button
@@ -351,23 +365,31 @@ function DashboardScreen({ onGenerate, onViewQueue }: { onGenerate: () => void; 
         </div>
       </div>
 
-      {/* Recent Activity */}
+      {/* Recent Videos */}
       <div className="bg-white rounded-2xl border border-gray-200 p-6">
-        <h3 className="font-bold text-gray-900 mb-4">Next Up</h3>
+        <h3 className="font-bold text-gray-900 mb-4">Recent Videos</h3>
         <div className="space-y-3">
-          {demoData.scheduledPosts.slice(0, 3).map((post) => (
-            <div key={post.id} className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
-              <PlatformIcon platform={post.platform} />
+          {demoData.scheduledVideos.slice(0, 3).map((video) => (
+            <div key={video.id} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+              <div className="w-10 h-14 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Play className="w-4 h-4 text-white" />
+              </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-900 line-clamp-2">{post.content.slice(0, 100)}...</p>
-                <div className="flex items-center gap-3 mt-1.5">
+                <p className="text-sm text-gray-900 font-medium truncate">{video.topic}</p>
+                <div className="flex items-center gap-3 mt-1">
                   <span className="text-xs text-gray-400 flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    {post.scheduledFor}
+                    {video.scheduledFor}
                   </span>
-                  <StatusBadge status={post.status} />
+                  <div className="flex items-center gap-1">
+                    {video.platforms.map((p) => (
+                      <SmallPlatformIcon key={p} platform={p} />
+                    ))}
+                  </div>
+                  <StatusBadge status={video.status} />
                 </div>
               </div>
+              <span className="text-xs text-gray-400 font-mono">{video.duration}</span>
             </div>
           ))}
         </div>
@@ -401,30 +423,34 @@ function StatCard({ value, label, color }: { value: string; label: string; color
 // Generate Screen
 function GenerateScreen({
   step,
-  selectedPlatform,
   topic,
   setTopic,
   processingStep,
-  generatedContent,
   typingIndex,
-  onSelectPlatform,
+  selectedPlatforms,
+  setSelectedPlatforms,
+  scheduleTime,
+  setScheduleTime,
   onStartGeneration,
+  onRenderVideo,
   onApprove,
   onRegenerate,
 }: {
   step: GenerateStep;
-  selectedPlatform: Platform;
-  setSelectedPlatform: (p: Platform) => void;
   topic: string;
   setTopic: (t: string) => void;
   processingStep: number;
-  generatedContent: string;
   typingIndex: number;
-  onSelectPlatform: (p: Platform) => void;
+  selectedPlatforms: string[];
+  setSelectedPlatforms: (p: string[]) => void;
+  scheduleTime: string;
+  setScheduleTime: (t: string) => void;
   onStartGeneration: () => void;
+  onRenderVideo: () => void;
   onApprove: () => void;
   onRegenerate: () => void;
 }) {
+  // Processing steps (first 2: script generation)
   if (step === "processing") {
     return (
       <motion.div
@@ -436,10 +462,10 @@ function GenerateScreen({
         <div className="w-20 h-20 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <Loader2 className="w-10 h-10 text-sky-600 animate-spin" />
         </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Generating Content</h2>
-        <p className="text-gray-500 mb-8">Claude AI is crafting your post...</p>
+        <h2 className="text-xl font-bold text-gray-900 mb-2">Writing Script</h2>
+        <p className="text-gray-500 mb-8">Claude AI is crafting your video script...</p>
         <div className="space-y-3 text-left">
-          {demoData.generationSteps.map((s, i) => (
+          {demoData.generationSteps.slice(0, 2).map((s, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, x: -10 }}
@@ -470,38 +496,51 @@ function GenerateScreen({
     );
   }
 
-  if (step === "result") {
-    const displayContent = generatedContent.slice(0, typingIndex);
-    const isTyping = typingIndex < generatedContent.length;
+  // Script result
+  if (step === "script-result") {
+    const displayText = demoData.sampleScript.text.slice(0, typingIndex);
+    const isTyping = typingIndex < demoData.sampleScript.text.length;
 
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        className="max-w-3xl mx-auto"
+        className="max-w-4xl mx-auto"
       >
-        <h2 className="text-xl font-bold text-gray-900 mb-1">Generated Content</h2>
-        <p className="text-gray-500 mb-6">
-          Review the AI-generated post for{" "}
-          {selectedPlatform === "x" ? "X (Twitter)" : selectedPlatform === "threads" ? "Threads" : "X & Threads"}
-        </p>
+        <h2 className="text-xl font-bold text-gray-900 mb-1">Script Generated</h2>
+        <p className="text-gray-500 mb-6">Review the AI-written script before rendering</p>
 
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Post Preview */}
-          <div>
+        <div className="grid lg:grid-cols-5 gap-6">
+          {/* Script Preview (3 cols) */}
+          <div className="lg:col-span-3">
             <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wider">
-              Post Preview
+              Script Preview
             </h3>
-            <MockPostCard
-              platform={selectedPlatform === "both" ? "x" : selectedPlatform}
-              content={displayContent}
-              isTyping={isTyping}
-            />
+            <div className="bg-white rounded-2xl border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="font-bold text-gray-900">{demoData.sampleScript.topic}</p>
+                  <p className="text-xs text-gray-400">Duration: ~{demoData.sampleScript.duration}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-sky-500" />
+                  <span className="text-xs font-medium text-sky-600">Claude Haiku 4.5</span>
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-100 min-h-[200px]">
+                <p className="text-sm text-gray-800 whitespace-pre-line leading-relaxed font-mono">
+                  {displayText}
+                  {isTyping && (
+                    <span className="inline-block w-0.5 h-4 bg-sky-500 ml-0.5 animate-pulse" />
+                  )}
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Actions */}
-          <div>
+          {/* Actions (2 cols) */}
+          <div className="lg:col-span-2">
             <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wider">
               Actions
             </h3>
@@ -509,40 +548,19 @@ function GenerateScreen({
               <div className="p-4 bg-sky-50 rounded-xl border border-sky-100">
                 <div className="flex items-center gap-2 mb-2">
                   <Sparkles className="w-4 h-4 text-sky-600" />
-                  <span className="text-sm font-semibold text-sky-800">AI Confidence</span>
+                  <span className="text-sm font-semibold text-sky-800">Script Quality</span>
                 </div>
                 <div className="w-full bg-sky-200 rounded-full h-2 mb-2">
-                  <div className="bg-sky-600 h-2 rounded-full" style={{ width: "92%" }} />
+                  <div className="bg-sky-600 h-2 rounded-full" style={{ width: "94%" }} />
                 </div>
                 <p className="text-xs text-sky-700">
-                  92% brand voice match &middot; Passes content safety filters
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-gray-700">Platform</p>
-                <div className="flex items-center gap-2">
-                  <PlatformIcon platform={selectedPlatform === "both" ? "x" : selectedPlatform} />
-                  <span className="text-sm text-gray-600">
-                    {selectedPlatform === "x"
-                      ? "X (Twitter)"
-                      : selectedPlatform === "threads"
-                      ? "Threads"
-                      : "X + Threads"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-gray-700">Character Count</p>
-                <p className="text-sm text-gray-600">
-                  {generatedContent.length} / {selectedPlatform === "x" ? "280" : "500"} characters
+                  94% brand voice match &middot; 45s estimated duration
                 </p>
               </div>
 
               <div className="pt-4 border-t border-gray-100 space-y-3">
                 <button
-                  onClick={onApprove}
+                  onClick={onRenderVideo}
                   disabled={isTyping}
                   className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold transition-colors ${
                     isTyping
@@ -550,8 +568,8 @@ function GenerateScreen({
                       : "bg-sky-500 text-white hover:bg-sky-600"
                   }`}
                 >
-                  <Check className="w-5 h-5" />
-                  Approve & Schedule
+                  <Video className="w-5 h-5" />
+                  Render Video
                 </button>
                 <button
                   onClick={onRegenerate}
@@ -559,7 +577,15 @@ function GenerateScreen({
                   className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Regenerate
+                  Regenerate Script
+                </button>
+                <button
+                  disabled
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-gray-400 bg-gray-50 cursor-not-allowed"
+                >
+                  <PenTool className="w-4 h-4" />
+                  Edit Script
+                  <span className="px-1.5 py-0.5 text-[10px] font-medium bg-gray-200 text-gray-500 rounded ml-1">Soon</span>
                 </button>
               </div>
             </div>
@@ -569,6 +595,164 @@ function GenerateScreen({
     );
   }
 
+  // Rendering animation (steps 2–5)
+  if (step === "rendering") {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="max-w-md mx-auto text-center py-12"
+      >
+        <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <Loader2 className="w-10 h-10 text-purple-600 animate-spin" />
+        </div>
+        <h2 className="text-xl font-bold text-gray-900 mb-2">Rendering Video</h2>
+        <p className="text-gray-500 mb-8">HeyGen is creating your avatar video...</p>
+        <div className="space-y-3 text-left">
+          {demoData.generationSteps.slice(2).map((s, i) => {
+            const globalIdx = i + 2;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: processingStep >= globalIdx ? 1 : 0.4, x: 0 }}
+                transition={{ delay: i * 0.15 }}
+                className={`flex items-center gap-3 p-3 rounded-lg ${
+                  processingStep > globalIdx
+                    ? "bg-green-50"
+                    : processingStep === globalIdx
+                    ? "bg-purple-50"
+                    : "bg-gray-50"
+                }`}
+              >
+                {processingStep > globalIdx ? (
+                  <Check className="w-5 h-5 text-green-600" />
+                ) : processingStep === globalIdx ? (
+                  <Loader2 className="w-5 h-5 text-purple-600 animate-spin" />
+                ) : (
+                  <div className="w-5 h-5 rounded-full border-2 border-gray-300" />
+                )}
+                <span className={`text-sm ${processingStep >= globalIdx ? "text-gray-900" : "text-gray-400"}`}>
+                  {s}
+                </span>
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.div>
+    );
+  }
+
+  // Video result
+  if (step === "video-result") {
+    const togglePlatform = (p: string) => {
+      setSelectedPlatforms(
+        selectedPlatforms.includes(p)
+          ? selectedPlatforms.filter((x) => x !== p)
+          : [...selectedPlatforms, p]
+      );
+    };
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="max-w-4xl mx-auto"
+      >
+        <h2 className="text-xl font-bold text-gray-900 mb-1">Video Ready</h2>
+        <p className="text-gray-500 mb-6">Preview and approve before posting</p>
+
+        <div className="grid lg:grid-cols-5 gap-6">
+          {/* Video Preview (3 cols) */}
+          <div className="lg:col-span-3">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wider">
+              Video Preview
+            </h3>
+            <VideoPreviewMock topic={demoData.sampleScript.topic} />
+          </div>
+
+          {/* Actions (2 cols) */}
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wider">
+              Publish Settings
+            </h3>
+            <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-5">
+              {/* Platform selection */}
+              <div>
+                <p className="text-sm font-medium text-gray-700 mb-3">Platforms</p>
+                <div className="space-y-2">
+                  {(["instagram", "tiktok", "x"] as const).map((p) => (
+                    <label key={p} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={selectedPlatforms.includes(p)}
+                        onChange={() => togglePlatform(p)}
+                        className="w-4 h-4 text-sky-500 border-gray-300 rounded focus:ring-sky-500"
+                      />
+                      <SmallPlatformIcon platform={p} />
+                      <span className="text-sm text-gray-700">
+                        {p === "instagram" ? "Instagram Reels" : p === "tiktok" ? "TikTok" : "X (Twitter)"}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Schedule */}
+              <div>
+                <p className="text-sm font-medium text-gray-700 mb-2">Schedule</p>
+                <select
+                  value={scheduleTime}
+                  onChange={(e) => setScheduleTime(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none"
+                >
+                  <option>Today, 2:00 PM EST</option>
+                  <option>Today, 5:00 PM EST</option>
+                  <option>Tomorrow, 10:00 AM EST</option>
+                  <option>Tomorrow, 3:00 PM EST</option>
+                </select>
+              </div>
+
+              {/* Video info */}
+              <div className="p-3 bg-gray-50 rounded-xl">
+                <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
+                  <span>Resolution</span>
+                  <span className="font-mono">{demoData.videoPreview.resolution}</span>
+                </div>
+                <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
+                  <span>Format</span>
+                  <span className="font-mono">{demoData.videoPreview.format}</span>
+                </div>
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                  <span>Duration</span>
+                  <span className="font-mono">~{demoData.sampleScript.duration}</span>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-gray-100 space-y-3">
+                <button
+                  onClick={onApprove}
+                  disabled={selectedPlatforms.length === 0}
+                  className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold transition-colors ${
+                    selectedPlatforms.length === 0
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-sky-500 text-white hover:bg-sky-600"
+                  }`}
+                >
+                  <Check className="w-5 h-5" />
+                  Approve & Schedule
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  // Topic input (default)
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -576,225 +760,156 @@ function GenerateScreen({
       exit={{ opacity: 0, y: -20 }}
       className="max-w-2xl mx-auto"
     >
-      {/* Progress */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-900">
-            Step {step === "platform" ? "1" : "2"} of 2
-          </span>
-          <span className="text-sm text-gray-500">
-            {step === "platform" ? "Select Platform" : "Content Direction"}
-          </span>
-        </div>
-        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-sky-500 transition-all duration-300"
-            style={{ width: step === "platform" ? "50%" : "100%" }}
-          />
-        </div>
-      </div>
-
       <div className="bg-white rounded-2xl border border-gray-200 p-8">
-        <AnimatePresence mode="wait">
-          {step === "platform" && (
-            <motion.div
-              key="platform"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center">
-                  <Send className="w-5 h-5 text-sky-600" />
-                </div>
-                <div>
-                  <h2 className="text-lg font-bold text-gray-900">Select Platform</h2>
-                  <p className="text-sm text-gray-500">Where should we post?</p>
-                </div>
-              </div>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center">
+            <Video className="w-5 h-5 text-sky-600" />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold text-gray-900">Generate New Video</h2>
+            <p className="text-sm text-gray-500">Pick a topic or let Claude suggest one</p>
+          </div>
+        </div>
 
-              <div className="grid grid-cols-3 gap-4">
-                {(["x", "threads", "both"] as const).map((p) => (
-                  <button
-                    key={p}
-                    onClick={() => onSelectPlatform(p)}
-                    className="p-6 rounded-xl border-2 border-gray-200 hover:border-sky-300 hover:bg-sky-50 transition-all text-center group"
-                  >
-                    <div className="flex justify-center mb-3">
-                      {p === "x" && (
-                        <svg viewBox="0 0 24 24" className="w-8 h-8 fill-gray-800 group-hover:fill-sky-600 transition-colors">
-                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                        </svg>
-                      )}
-                      {p === "threads" && (
-                        <svg viewBox="0 0 192 192" className="w-8 h-8 fill-gray-800 group-hover:fill-sky-600 transition-colors">
-                          <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.24-38.142 34.573.504 9.789 5.271 18.234 13.415 23.773 6.876 4.672 15.727 7.007 24.907 6.583 12.108-.559 21.592-5.26 28.163-13.96 4.967-6.571 8.083-14.985 9.375-25.318 5.597 3.384 9.763 7.884 12.21 13.349 4.159 9.29 4.405 24.547-8.483 37.416-11.363 11.343-25.028 16.24-45.724 16.393-22.926-.17-40.266-7.528-51.47-21.872C31.395 140.343 25.333 120.078 25.15 96c.183-24.078 6.245-44.343 18.018-60.268 11.204-14.344 28.544-21.702 51.47-21.872 23.12.175 40.708 7.594 52.261 22.042 5.694 7.12 9.975 15.763 12.785 25.702l14.89-3.998C170.216 42.2 164.9 31.186 157.725 22.516 143.917 5.31 123.576-2.67 97.022-2.862h-.386C69.981-2.671 49.801 5.377 36.212 22.818 21.04 42.238 13.17 68.553 12.942 96.002c.228 27.449 8.098 53.764 23.27 73.184 13.589 17.441 33.769 25.489 60.424 25.68h.386c24.49-.183 41.735-6.67 56.03-21.069 18.322-18.433 17.592-40.858 11.58-54.253-4.31-9.617-12.463-17.488-23.095-22.556zM98.424 129.399c-10.153.473-20.72-3.994-21.291-15.073-.418-8.13 5.878-17.18 25.512-18.31 2.222-.128 4.39-.188 6.508-.188 6.273 0 12.13.611 17.421 1.773-1.98 27.232-17.192 31.322-28.15 31.798z" />
-                        </svg>
-                      )}
-                      {p === "both" && (
-                        <div className="flex items-center gap-1">
-                          <svg viewBox="0 0 24 24" className="w-6 h-6 fill-gray-800 group-hover:fill-sky-600 transition-colors">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                          </svg>
-                          <span className="text-gray-400">+</span>
-                          <svg viewBox="0 0 192 192" className="w-6 h-6 fill-gray-800 group-hover:fill-sky-600 transition-colors">
-                            <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.24-38.142 34.573.504 9.789 5.271 18.234 13.415 23.773 6.876 4.672 15.727 7.007 24.907 6.583 12.108-.559 21.592-5.26 28.163-13.96 4.967-6.571 8.083-14.985 9.375-25.318 5.597 3.384 9.763 7.884 12.21 13.349 4.159 9.29 4.405 24.547-8.483 37.416-11.363 11.343-25.028 16.24-45.724 16.393-22.926-.17-40.266-7.528-51.47-21.872C31.395 140.343 25.333 120.078 25.15 96c.183-24.078 6.245-44.343 18.018-60.268 11.204-14.344 28.544-21.702 51.47-21.872 23.12.175 40.708 7.594 52.261 22.042 5.694 7.12 9.975 15.763 12.785 25.702l14.89-3.998C170.216 42.2 164.9 31.186 157.725 22.516 143.917 5.31 123.576-2.67 97.022-2.862h-.386C69.981-2.671 49.801 5.377 36.212 22.818 21.04 42.238 13.17 68.553 12.942 96.002c.228 27.449 8.098 53.764 23.27 73.184 13.589 17.441 33.769 25.489 60.424 25.68h.386c24.49-.183 41.735-6.67 56.03-21.069 18.322-18.433 17.592-40.858 11.58-54.253-4.31-9.617-12.463-17.488-23.095-22.556zM98.424 129.399c-10.153.473-20.72-3.994-21.291-15.073-.418-8.13 5.878-17.18 25.512-18.31 2.222-.128 4.39-.188 6.508-.188 6.273 0 12.13.611 17.421 1.773-1.98 27.232-17.192 31.322-28.15 31.798z" />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
-                    <p className="font-bold text-gray-900 group-hover:text-sky-700 transition-colors">
-                      {p === "x" ? "X (Twitter)" : p === "threads" ? "Threads" : "Both Platforms"}
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {p === "x" ? "280 char limit" : p === "threads" ? "500 char limit" : "Adapted for each"}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          )}
+        <div className="space-y-4 mb-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Video Topic
+            </label>
+            <textarea
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              rows={3}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none resize-none"
+              placeholder="e.g., Rolex Submariner 124060 — still worth it in 2026?"
+            />
+          </div>
 
-          {step === "topic" && (
-            <motion.div
-              key="topic"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <PenTool className="w-5 h-5 text-purple-600" />
-                </div>
-                <div>
-                  <h2 className="text-lg font-bold text-gray-900">Content Direction</h2>
-                  <p className="text-sm text-gray-500">Optional: guide the AI or let it decide</p>
-                </div>
-              </div>
-
-              <div className="space-y-4 mb-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Topic or Direction (optional)
-                  </label>
-                  <textarea
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none resize-none"
-                    placeholder="e.g., Write about how AI is changing marketing in 2026..."
-                  />
-                </div>
-
-                <div>
-                  <p className="text-sm font-medium text-gray-700 mb-2">
-                    Or pick a content pillar:
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {demoData.brandVoice.contentPillars.map((pillar) => (
-                      <button
-                        key={pillar}
-                        onClick={() => setTopic(pillar)}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                          topic === pillar
-                            ? "bg-sky-100 text-sky-700 border-2 border-sky-300"
-                            : "bg-gray-100 text-gray-700 border-2 border-transparent hover:bg-gray-200"
-                        }`}
-                      >
-                        {pillar}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-6 border-t border-gray-200">
+          <div>
+            <p className="text-sm font-medium text-gray-700 mb-2">
+              Quick-select topics:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {demoData.sampleTopics.map((t) => (
                 <button
-                  onClick={() => {}}
-                  className="text-gray-500 hover:text-gray-700 font-medium"
+                  key={t}
+                  onClick={() => setTopic(t)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    topic === t
+                      ? "bg-sky-100 text-sky-700 border-2 border-sky-300"
+                      : "bg-gray-100 text-gray-700 border-2 border-transparent hover:bg-gray-200"
+                  }`}
                 >
-                  Back
+                  {t}
                 </button>
-                <button
-                  onClick={onStartGeneration}
-                  className="flex items-center gap-2 bg-sky-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-sky-600 transition-colors"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  Generate with Claude AI
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-end pt-6 border-t border-gray-200">
+          <button
+            onClick={onStartGeneration}
+            disabled={!topic.trim()}
+            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-colors ${
+              topic.trim()
+                ? "bg-sky-500 text-white hover:bg-sky-600"
+                : "bg-gray-100 text-gray-400 cursor-not-allowed"
+            }`}
+          >
+            <Sparkles className="w-4 h-4" />
+            Generate Script
+          </button>
+        </div>
       </div>
     </motion.div>
   );
 }
 
-// Mock Post Card (X/Threads style)
-function MockPostCard({
-  platform,
-  content,
-  isTyping,
-}: {
-  platform: "x" | "threads";
-  content: string;
-  isTyping: boolean;
-}) {
+// Mock 9:16 Video Preview
+function VideoPreviewMock({ topic }: { topic: string }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-      {/* Post header */}
-      <div className="p-4 flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-600 rounded-full flex items-center justify-center">
-          <span className="text-sm font-bold text-white">CG</span>
-        </div>
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-gray-900 text-sm">CheckPoint Group</span>
-            {platform === "x" && (
-              <svg viewBox="0 0 22 22" className="w-4 h-4 fill-sky-500">
-                <path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.853-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.607-.274 1.264-.144 1.897.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z" />
-              </svg>
-            )}
+    <div className="bg-white rounded-2xl border border-gray-200 p-4">
+      <div className="relative mx-auto rounded-2xl overflow-hidden bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" style={{ aspectRatio: "9/16", maxWidth: "280px" }}>
+        {/* Background gradient layers */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-900/30 to-purple-900/30" />
+
+        {/* TWX Logo - top left */}
+        <div className="absolute top-4 left-4 z-10">
+          <div className="bg-white/15 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+            <span className="text-white font-extrabold text-xs tracking-wider">TWX</span>
           </div>
-          <span className="text-xs text-gray-500">
-            {platform === "x" ? "@checkpointgroup" : "checkpointgroup"}
-          </span>
         </div>
-        <PlatformIcon platform={platform} />
+
+        {/* Duration badge - top right */}
+        <div className="absolute top-4 right-4 z-10">
+          <div className="bg-black/50 backdrop-blur-sm px-2 py-1 rounded-md">
+            <span className="text-white text-xs font-mono">0:45</span>
+          </div>
+        </div>
+
+        {/* Avatar silhouette */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-28 h-28 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-sky-400/30 to-blue-600/30 flex items-center justify-center">
+              <span className="text-white/60 text-3xl font-bold">DG</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Play button overlay */}
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors cursor-pointer">
+            <Play className="w-6 h-6 text-white ml-1" />
+          </div>
+        </div>
+
+        {/* Topic caption - bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10">
+          <p className="text-white text-sm font-bold leading-tight mb-2">{topic}</p>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-full bg-sky-500 flex items-center justify-center">
+              <span className="text-[10px] font-bold text-white">DG</span>
+            </div>
+            <span className="text-white/80 text-xs font-medium">@torontowatchexchange</span>
+          </div>
+          {/* Follow CTA */}
+          <div className="mt-3 bg-white/15 backdrop-blur-sm rounded-lg px-3 py-2 text-center">
+            <span className="text-white text-xs font-semibold">Follow for more watch takes</span>
+          </div>
+        </div>
+
+        {/* Side interaction icons (TikTok-style) */}
+        <div className="absolute right-3 bottom-36 flex flex-col items-center gap-4 z-10">
+          <div className="flex flex-col items-center">
+            <div className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center">
+              <Heart className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-white/60 text-[10px] mt-1">1.2K</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center">
+              <MessageCircle className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-white/60 text-[10px] mt-1">48</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center">
+              <Share2 className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-white/60 text-[10px] mt-1">23</span>
+          </div>
+        </div>
       </div>
 
-      {/* Post content */}
-      <div className="px-4 pb-4">
-        <p className="text-gray-900 text-sm whitespace-pre-line leading-relaxed">
-          {content}
-          {isTyping && (
-            <span className="inline-block w-0.5 h-4 bg-sky-500 ml-0.5 animate-pulse" />
-          )}
-        </p>
-      </div>
-
-      {/* Post footer / engagement */}
-      <div className="px-4 py-3 border-t border-gray-100 flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <button className="flex items-center gap-1.5 text-gray-400 hover:text-sky-500 transition-colors">
-            <MessageCircle className="w-4 h-4" />
-            <span className="text-xs">0</span>
-          </button>
-          <button className="flex items-center gap-1.5 text-gray-400 hover:text-green-500 transition-colors">
-            <Repeat2 className="w-4 h-4" />
-            <span className="text-xs">0</span>
-          </button>
-          <button className="flex items-center gap-1.5 text-gray-400 hover:text-red-500 transition-colors">
-            <Heart className="w-4 h-4" />
-            <span className="text-xs">0</span>
-          </button>
-          <button className="flex items-center gap-1.5 text-gray-400 hover:text-sky-500 transition-colors">
-            <BarChart3 className="w-4 h-4" />
-            <span className="text-xs">0</span>
-          </button>
+      {/* Overlay metadata */}
+      <div className="mt-4 space-y-1.5">
+        <div className="flex items-center gap-2 text-xs text-gray-500">
+          <span className="font-medium text-gray-700">Overlays:</span>
+          {demoData.videoPreview.overlays.map((o, i) => (
+            <span key={i} className="px-2 py-0.5 bg-gray-100 rounded text-xs">{o}</span>
+          ))}
         </div>
-        <span className="text-xs text-gray-400">Just now</span>
       </div>
     </div>
   );
@@ -811,42 +926,47 @@ function QueueScreen({ onGenerate }: { onGenerate: () => void }) {
     >
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-1">Post Queue</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">Video Queue</h1>
           <p className="text-gray-500">
-            {demoData.scheduledPosts.length} posts scheduled
+            {demoData.scheduledVideos.length} videos scheduled
           </p>
         </div>
         <button
           onClick={onGenerate}
           className="flex items-center gap-2 bg-sky-500 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-sky-600 transition-colors"
         >
-          <Sparkles className="w-4 h-4" />
+          <Video className="w-4 h-4" />
           Generate New
         </button>
       </div>
 
       <div className="space-y-3">
-        {demoData.scheduledPosts.map((post, i) => (
+        {demoData.scheduledVideos.map((video, i) => (
           <motion.div
-            key={post.id}
+            key={video.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md transition-shadow"
           >
-            <div className="flex items-start gap-4">
-              <PlatformIcon platform={post.platform} />
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-14 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Play className="w-4 h-4 text-white" />
+              </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-900 whitespace-pre-line line-clamp-3">
-                  {post.content}
-                </p>
-                <div className="flex items-center gap-4 mt-3">
+                <p className="text-sm text-gray-900 font-medium">{video.topic}</p>
+                <div className="flex items-center gap-4 mt-2">
                   <span className="text-xs text-gray-400 flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    {post.scheduledFor}
+                    {video.scheduledFor}
                   </span>
-                  <StatusBadge status={post.status} />
-                  <span className="text-xs text-gray-400 capitalize">{post.type}</span>
+                  <div className="flex items-center gap-1">
+                    {video.platforms.map((p) => (
+                      <SmallPlatformIcon key={p} platform={p} />
+                    ))}
+                  </div>
+                  <StatusBadge status={video.status} />
+                  <span className="text-xs text-gray-400 font-mono">{video.duration}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -854,7 +974,7 @@ function QueueScreen({ onGenerate }: { onGenerate: () => void }) {
                   <Eye className="w-4 h-4 text-gray-400" />
                 </button>
                 <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                  <PenTool className="w-4 h-4 text-gray-400" />
+                  <Send className="w-4 h-4 text-gray-400" />
                 </button>
               </div>
             </div>
@@ -875,7 +995,7 @@ function HistoryScreen() {
       className="max-w-4xl mx-auto"
     >
       <h1 className="text-2xl font-bold text-gray-900 mb-1">Post History</h1>
-      <p className="text-gray-500 mb-6">Track performance of published posts</p>
+      <p className="text-gray-500 mb-6">Track performance of published videos</p>
 
       <div className="space-y-3">
         {demoData.postHistory.map((post, i) => (
@@ -886,28 +1006,31 @@ function HistoryScreen() {
             transition={{ delay: i * 0.05 }}
             className="bg-white rounded-xl border border-gray-200 p-5"
           >
-            <div className="flex items-start gap-4">
-              <PlatformIcon platform={post.platform} />
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-14 bg-gray-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Play className="w-4 h-4 text-white" />
+              </div>
+              <SmallPlatformIcon platform={post.platform} />
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-900 line-clamp-2">{post.content}</p>
-                <div className="flex items-center gap-4 mt-3">
+                <p className="text-sm text-gray-900 font-medium">{post.topic}</p>
+                <div className="flex items-center gap-4 mt-2">
                   <span className="text-xs text-gray-400">{post.postedAt}</span>
                   <div className="flex items-center gap-4">
+                    <span className="text-xs text-gray-500 flex items-center gap-1">
+                      <Eye className="w-3 h-3 text-gray-400" />
+                      {post.views.toLocaleString()}
+                    </span>
                     <span className="text-xs text-gray-500 flex items-center gap-1">
                       <Heart className="w-3 h-3 text-red-400" />
                       {post.likes.toLocaleString()}
                     </span>
                     <span className="text-xs text-gray-500 flex items-center gap-1">
-                      <Repeat2 className="w-3 h-3 text-green-400" />
-                      {post.reposts.toLocaleString()}
-                    </span>
-                    <span className="text-xs text-gray-500 flex items-center gap-1">
                       <MessageCircle className="w-3 h-3 text-sky-400" />
-                      {post.replies.toLocaleString()}
+                      {post.comments.toLocaleString()}
                     </span>
                     <span className="text-xs text-gray-500 flex items-center gap-1">
-                      <BarChart3 className="w-3 h-3 text-gray-400" />
-                      {post.views.toLocaleString()} views
+                      <Share2 className="w-3 h-3 text-green-400" />
+                      {post.shares.toLocaleString()}
                     </span>
                   </div>
                 </div>
@@ -920,21 +1043,31 @@ function HistoryScreen() {
   );
 }
 
-// Shared Components
-function PlatformIcon({ platform }: { platform: "x" | "threads" }) {
-  if (platform === "x") {
+// Platform Icons
+function SmallPlatformIcon({ platform }: { platform: string }) {
+  if (platform === "instagram") {
     return (
-      <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
-        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)" }}>
+        <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-white">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
         </svg>
       </div>
     );
   }
+  if (platform === "tiktok") {
+    return (
+      <div className="w-6 h-6 bg-black rounded-md flex items-center justify-center flex-shrink-0">
+        <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-white">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z" />
+        </svg>
+      </div>
+    );
+  }
+  // X
   return (
-    <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
-      <svg viewBox="0 0 192 192" className="w-4 h-4 fill-white">
-        <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.24-38.142 34.573.504 9.789 5.271 18.234 13.415 23.773 6.876 4.672 15.727 7.007 24.907 6.583 12.108-.559 21.592-5.26 28.163-13.96 4.967-6.571 8.083-14.985 9.375-25.318 5.597 3.384 9.763 7.884 12.21 13.349 4.159 9.29 4.405 24.547-8.483 37.416-11.363 11.343-25.028 16.24-45.724 16.393-22.926-.17-40.266-7.528-51.47-21.872C31.395 140.343 25.333 120.078 25.15 96c.183-24.078 6.245-44.343 18.018-60.268 11.204-14.344 28.544-21.702 51.47-21.872 23.12.175 40.708 7.594 52.261 22.042 5.694 7.12 9.975 15.763 12.785 25.702l14.89-3.998C170.216 42.2 164.9 31.186 157.725 22.516 143.917 5.31 123.576-2.67 97.022-2.862h-.386C69.981-2.671 49.801 5.377 36.212 22.818 21.04 42.238 13.17 68.553 12.942 96.002c.228 27.449 8.098 53.764 23.27 73.184 13.589 17.441 33.769 25.489 60.424 25.68h.386c24.49-.183 41.735-6.67 56.03-21.069 18.322-18.433 17.592-40.858 11.58-54.253-4.31-9.617-12.463-17.488-23.095-22.556zM98.424 129.399c-10.153.473-20.72-3.994-21.291-15.073-.418-8.13 5.878-17.18 25.512-18.31 2.222-.128 4.39-.188 6.508-.188 6.273 0 12.13.611 17.421 1.773-1.98 27.232-17.192 31.322-28.15 31.798z" />
+    <div className="w-6 h-6 bg-black rounded-md flex items-center justify-center flex-shrink-0">
+      <svg viewBox="0 0 24 24" className="w-3 h-3 fill-white">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
       </svg>
     </div>
   );
@@ -943,6 +1076,7 @@ function PlatformIcon({ platform }: { platform: "x" | "threads" }) {
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     approved: "bg-green-100 text-green-700 border-green-200",
+    rendering: "bg-purple-100 text-purple-700 border-purple-200",
     pending: "bg-amber-100 text-amber-700 border-amber-200",
     draft: "bg-gray-100 text-gray-600 border-gray-200",
     published: "bg-sky-100 text-sky-700 border-sky-200",
