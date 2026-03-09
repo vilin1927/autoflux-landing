@@ -30,6 +30,14 @@ import {
   PlayCircle,
   BarChart2,
   Lightbulb,
+  Upload,
+  FolderOpen,
+  Image,
+  Video,
+  Send,
+  Settings,
+  Gauge,
+  Bot,
 } from "lucide-react";
 
 const colors = {
@@ -514,106 +522,105 @@ function Phase1Content() {
 }
 
 function Phase2Content() {
+  const deliverables = [
+    {
+      icon: FolderOpen,
+      title: "Brand Library",
+      description:
+        "Upload and organize your creatives — images and videos — in one place. Browse your assets, tag them, and pick exactly which ones go into your next campaign.",
+    },
+    {
+      icon: Send,
+      title: "Publish to Meta & Google",
+      description:
+        "Create campaigns on both Meta Ads and Google Ads directly from the dashboard. Set audience, budget, schedule, and creatives — no more switching between platforms.",
+    },
+    {
+      icon: Settings,
+      title: "Campaign Management",
+      description:
+        "Pause, enable, adjust budgets, swap URLs — all from one screen. Simple controls for both Meta and Google campaigns without the clutter of Business Manager.",
+    },
+    {
+      icon: Brain,
+      title: "AI Campaign Analysis",
+      description:
+        "Claude AI reads your campaign data and tells you what's winning, what's dying, and where to shift budget. Clear recommendations, not just numbers.",
+    },
+    {
+      icon: Target,
+      title: "Landing Page Tracking",
+      description:
+        "Connect your Lovable landing page and see the full funnel: Ad click → Page visit → Consultation booked. Know which ads actually drive real bookings.",
+    },
+    {
+      icon: Bell,
+      title: "Yesterday's Lead Summary",
+      description:
+        "Wake up to a daily snapshot: leads, spend, clicks, and conversions from the past 24 hours alongside the 30-day trend. Your morning briefing, done.",
+    },
+  ];
+
+  const beforeItems = [
+    "Log into Meta Business Manager to check Meta campaigns",
+    "Log into Google Ads to check Google campaigns",
+    "Open a spreadsheet to compare numbers side by side",
+    "Manually figure out which campaigns are working",
+    "Switch between 3 platforms just to pause one underperformer",
+  ];
+
+  const afterItems = [
+    "Open your dashboard — everything is already there",
+    "Meta + Google campaigns in one view with unified metrics",
+    "AI tells you what's working and what to cut",
+    "Pause, adjust, or launch campaigns in two clicks",
+    "Morning summary delivered — know where you stand before coffee",
+  ];
+
   return (
     <>
-      {/* Market Overview */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
+      {/* Hero Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6"
+              style={{
+                background: `${colors.gold}15`,
+                border: `1px solid ${colors.gold}30`,
+                color: colors.gold,
+              }}
+            >
+              <Gauge className="w-4 h-4" />
+              Phase 2 — Ad Control Hub
+            </div>
             <h2
-              className="text-3xl font-bold text-center mb-4"
+              className="text-4xl md:text-5xl font-bold mb-6"
               style={{ color: colors.white }}
             >
-              Hair Transplant Market — Where It Stands
+              Take Full Control
+              <br />
+              <span style={{ color: colors.gold }}>of Your Ads</span>
             </h2>
             <p
-              className="text-center mb-12 max-w-2xl mx-auto"
+              className="text-lg max-w-2xl mx-auto mb-4"
               style={{ color: colors.gray }}
             >
-              The global market is growing fast, but competition is intensifying
-              — especially from Turkey.
+              Manage Meta Ads and Google Ads from one dashboard.
+              Upload creatives, launch campaigns, get AI recommendations
+              — without ever opening Business Manager again.
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-              {[
-                { value: "$6.4B", label: "Global market (2025)" },
-                { value: "$10.6B", label: "Projected by 2031" },
-                { value: "8.78%", label: "Annual growth (CAGR)" },
-                { value: "1M+", label: "Patients fly to Turkey/yr" },
-              ].map((stat, i) => (
-                <div
-                  key={i}
-                  className="p-4 rounded-xl text-center"
-                  style={{
-                    background: colors.navyLight,
-                    border: `1px solid ${colors.gold}15`,
-                  }}
-                >
-                  <p
-                    className="text-2xl font-bold"
-                    style={{ color: colors.gold }}
-                  >
-                    {stat.value}
-                  </p>
-                  <p className="text-xs mt-1" style={{ color: colors.gray }}>
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Key market facts */}
-            <div className="grid md:grid-cols-3 gap-4">
-              {[
-                {
-                  icon: Users,
-                  title: "Who&apos;s buying",
-                  desc: "87.5% male, ages 30-39 largest segment. Growing trend: late 20s seeking preventive treatment. Women now 13-22% of patients.",
-                },
-                {
-                  icon: Globe,
-                  title: "Turkey dominance",
-                  desc: "5,000+ clinics in Istanbul alone. $2B/year revenue. All-inclusive packages at 60-80% less than EU pricing. They respond to leads in minutes.",
-                },
-                {
-                  icon: TrendingUp,
-                  title: "What&apos;s changing",
-                  desc: "Patients demand transparency on surgeon credentials and aftercare. Social media normalizing the procedure for younger demographics.",
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="p-5 rounded-xl"
-                  style={{
-                    background: colors.navyLight,
-                    border: `1px solid ${colors.gold}15`,
-                  }}
-                >
-                  <item.icon
-                    className="w-5 h-5 mb-3"
-                    style={{ color: colors.gold }}
-                  />
-                  <h3
-                    className="font-bold mb-2 text-sm"
-                    style={{ color: colors.white }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="text-sm" style={{ color: colors.gray }}>
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Competitor Landscape */}
+      {/* Before vs After */}
       <section className="py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -625,107 +632,115 @@ function Phase2Content() {
               className="text-3xl font-bold text-center mb-4"
               style={{ color: colors.white }}
             >
-              Competitor Landscape — Netherlands
+              Your Workflow, <span style={{ color: colors.gold }}>Simplified</span>
             </h2>
             <p
               className="text-center mb-12 max-w-2xl mx-auto"
               style={{ color: colors.gray }}
             >
-              What other clinics in the Netherlands are doing — and where
-              GlobalHair has an edge or a gap.
+              Right now you&apos;re jumping between platforms. Phase 2 puts everything in one place.
             </p>
 
-            <div className="space-y-4">
-              {[
-                {
-                  name: "Zantman Kliniek",
-                  location: "Rotterdam — Since 1976",
-                  strength: "Heritage & SEO",
-                  detail:
-                    "Ranks #1 for 'best hair transplant Netherlands'. Transparent pricing on website. Strong educational content strategy. Targets international patients from Belgium, Germany, UK.",
-                  gap: "GlobalHair has stronger Instagram presence (233K vs negligible) and proprietary tech (OFT device, V6 Hairboost).",
-                },
-                {
-                  name: "Hair Science Clinic (HASCI)",
-                  location: "12 clinics globally — Amsterdam & Maastricht",
-                  strength: "Scale & scientific credibility",
-                  detail:
-                    "Invented Hair Stem Cell Transplantation. Featured in Telegraph, Guardian, ELLE, Esquire. Premium brand, no pricing on website.",
-                  gap: "GlobalHair has the dual NL/Turkey model capturing both segments. HASCI has mixed reviews online despite premium positioning.",
-                },
-                {
-                  name: "Amsterdam Hair Institute",
-                  location: "Amsterdam — subsidiary of Hairworld Istanbul",
-                  strength: "Celebrity endorsements",
-                  detail:
-                    "'Most chosen clinic by celebrities'. Mobile-first website with strong SEO. FUE CT latest technique variant.",
-                  gap: "GlobalHair has 10,000+ treatments track record and HairScan tool for lead generation.",
-                },
-                {
-                  name: "Graft Point Nederland",
-                  location: "Rotterdam",
-                  strength: "Anti-Turkey positioning",
-                  detail:
-                    "Explicitly targets patients considering medical tourism with 'no need to go to Turkey' messaging. Competitive pricing, emphasizes Dutch medical standards.",
-                  gap: "GlobalHair actually offers both options — NL quality + Turkey pricing. This is a unique advantage none of the competitors have.",
-                },
-              ].map((competitor, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-6 rounded-xl"
-                  style={{
-                    background: colors.navyLight,
-                    border: `1px solid ${colors.gold}15`,
-                  }}
-                >
-                  <div className="flex flex-col md:flex-row md:items-start gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3
-                          className="font-bold text-lg"
-                          style={{ color: colors.white }}
-                        >
-                          {competitor.name}
-                        </h3>
-                        <span
-                          className="px-2 py-0.5 rounded-full text-xs"
-                          style={{
-                            background: `${colors.gold}15`,
-                            color: colors.gold,
-                          }}
-                        >
-                          {competitor.strength}
-                        </span>
-                      </div>
-                      <p
-                        className="text-xs mb-3"
-                        style={{ color: colors.gray }}
-                      >
-                        {competitor.location}
-                      </p>
-                      <p
-                        className="text-sm mb-3"
-                        style={{ color: colors.gray }}
-                      >
-                        {competitor.detail}
-                      </p>
-                      <p className="text-sm" style={{ color: colors.green }}>
-                        {competitor.gap}
-                      </p>
-                    </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Before */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="p-6 rounded-xl"
+                style={{
+                  background: colors.navyLight,
+                  border: `1px solid ${colors.red}30`,
+                }}
+              >
+                <div className="flex items-center gap-3 mb-5">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{ background: `${colors.red}20` }}
+                  >
+                    <AlertTriangle className="w-4 h-4" style={{ color: colors.red }} />
                   </div>
-                </motion.div>
-              ))}
+                  <h3 className="font-bold text-lg" style={{ color: colors.red }}>
+                    Today — 5 Steps, 3 Platforms
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  {beforeItems.map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 text-sm"
+                      style={{ color: colors.gray }}
+                    >
+                      <div
+                        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold"
+                        style={{ background: `${colors.red}15`, color: colors.red }}
+                      >
+                        {i + 1}
+                      </div>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <div
+                  className="mt-5 pt-4 text-sm font-medium"
+                  style={{ borderTop: `1px solid ${colors.red}15`, color: colors.red }}
+                >
+                  ~45 minutes every morning just to know where you stand
+                </div>
+              </motion.div>
+
+              {/* After */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="p-6 rounded-xl"
+                style={{
+                  background: colors.navyLight,
+                  border: `1px solid ${colors.green}30`,
+                }}
+              >
+                <div className="flex items-center gap-3 mb-5">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center"
+                    style={{ background: `${colors.green}20` }}
+                  >
+                    <CheckCircle2 className="w-4 h-4" style={{ color: colors.green }} />
+                  </div>
+                  <h3 className="font-bold text-lg" style={{ color: colors.green }}>
+                    Phase 2 — One Dashboard
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  {afterItems.map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 text-sm"
+                      style={{ color: colors.gray }}
+                    >
+                      <CheckCircle2
+                        className="w-4 h-4 flex-shrink-0 mt-0.5"
+                        style={{ color: colors.green }}
+                      />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <div
+                  className="mt-5 pt-4 text-sm font-medium"
+                  style={{ borderTop: `1px solid ${colors.green}15`, color: colors.green }}
+                >
+                  Under 5 minutes — open, review, act
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Current Problems / Gaps */}
+      {/* What's Included — 6 Cards */}
       <section className="py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -737,129 +752,46 @@ function Phase2Content() {
               className="text-3xl font-bold text-center mb-4"
               style={{ color: colors.white }}
             >
-              Current Challenges
+              What&apos;s Included
             </h2>
             <p
               className="text-center mb-12 max-w-2xl mx-auto"
               style={{ color: colors.gray }}
             >
-              Based on market research and industry data — common problems
-              clinics face today.
+              Six features that give you full control over your ad operations — all built into the dashboard you already use.
             </p>
 
             <motion.div
-              className="grid md:grid-cols-2 gap-5"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
               variants={staggerContainer}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
             >
-              {[
-                {
-                  icon: Clock,
-                  title: "Speed-to-Lead Gap",
-                  severity: "Critical",
-                  desc: "Healthcare average response time is 2 hours 5 minutes. Leads contacted within 5 minutes are 21x more likely to convert. 78% of patients go with the first clinic that responds.",
-                  data: "Every 10-minute delay lowers conversion chances by 400%.",
-                },
-                {
-                  icon: AlertTriangle,
-                  title: "Platform Concentration Risk",
-                  severity: "High",
-                  desc: "Over-reliance on Instagram (233K followers vs 2K on Facebook). Industry report from Feb 2026: clinics experienced temporary ad bans. One algorithm change = lead flow stops overnight.",
-                  data: "Instagram organic reach has declined significantly across the industry.",
-                },
-                {
-                  icon: RefreshCw,
-                  title: "No Lead Nurturing Pipeline",
-                  severity: "High",
-                  desc: "Hair transplant decisions take weeks to months. Without automated follow-up sequences, leads that don't book immediately are lost to competitors forever.",
-                  data: "It takes an average of 7.2 touches to successfully convert a lead.",
-                },
-                {
-                  icon: Search,
-                  title: "SEO / Organic Gap",
-                  severity: "Medium",
-                  desc: "Competitors like Zantman rank above GlobalHair on Google search for key terms. Currently paying for every lead via ads — competitors get organic leads for free.",
-                  data: "Educational content ('how many grafts do I need') captures patients in the research phase.",
-                },
-                {
-                  icon: MessageSquare,
-                  title: "No Automated Review Engine",
-                  severity: "Medium",
-                  desc: "No automated post-treatment review requests. 88% of patients trust online reviews as much as personal recommendations. 5-star businesses earn 39% more clicks.",
-                  data: "Review generation is the cheapest form of lead acquisition for clinics.",
-                },
-                {
-                  icon: Globe,
-                  title: "Single-Language Targeting",
-                  severity: "Opportunity",
-                  desc: "Not targeting Belgian, German, or UK patients with localized content and ads. HASCI does this across 12 locations. Turkish clinics target every EU market individually.",
-                  data: "Multi-language landing pages can unlock entirely new patient segments.",
-                },
-              ].map((problem, i) => (
+              {deliverables.map((item, i) => (
                 <motion.div
                   key={i}
                   variants={staggerItem}
-                  className="p-6 rounded-xl"
+                  className="p-6 rounded-xl group"
                   style={{
                     background: colors.navyLight,
-                    border: `1px solid ${
-                      problem.severity === "Critical"
-                        ? colors.red
-                        : problem.severity === "High"
-                        ? colors.gold
-                        : colors.gold
-                    }20`,
+                    border: `1px solid ${colors.gold}15`,
                   }}
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <problem.icon
-                      className="w-5 h-5"
-                      style={{
-                        color:
-                          problem.severity === "Critical"
-                            ? colors.red
-                            : colors.gold,
-                      }}
-                    />
-                    <h3
-                      className="font-bold"
-                      style={{ color: colors.white }}
-                    >
-                      {problem.title}
-                    </h3>
-                    <span
-                      className="ml-auto px-2 py-0.5 rounded-full text-xs"
-                      style={{
-                        background:
-                          problem.severity === "Critical"
-                            ? `${colors.red}20`
-                            : problem.severity === "High"
-                            ? `${colors.gold}20`
-                            : `${colors.blue}20`,
-                        color:
-                          problem.severity === "Critical"
-                            ? colors.red
-                            : problem.severity === "High"
-                            ? colors.gold
-                            : colors.blue,
-                      }}
-                    >
-                      {problem.severity}
-                    </span>
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                    style={{ background: `${colors.gold}15` }}
+                  >
+                    <item.icon className="w-5 h-5" style={{ color: colors.gold }} />
                   </div>
-                  <p
-                    className="text-sm mb-3"
-                    style={{ color: colors.gray }}
+                  <h3
+                    className="font-bold text-lg mb-2"
+                    style={{ color: colors.white }}
                   >
-                    {problem.desc}
-                  </p>
-                  <p
-                    className="text-xs italic"
-                    style={{ color: colors.gold }}
-                  >
-                    {problem.data}
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: colors.gray }}>
+                    {item.description}
                   </p>
                 </motion.div>
               ))}
@@ -868,9 +800,9 @@ function Phase2Content() {
         </div>
       </section>
 
-      {/* Possible Solution: AI Ad Pipeline */}
+      {/* AI Analysis Preview */}
       <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -880,500 +812,359 @@ function Phase2Content() {
               className="text-3xl font-bold text-center mb-4"
               style={{ color: colors.white }}
             >
-              Possible Direction — AI Ad Operations Pipeline
+              AI That Tells You <span style={{ color: colors.gold }}>What to Do</span>
             </h2>
             <p
               className="text-center mb-12 max-w-2xl mx-auto"
               style={{ color: colors.gray }}
             >
-              A closed-loop system that watches trends, creates ads, tests
-              them, and optimizes automatically.
+              Not just numbers — actionable recommendations from Claude AI based on your live campaign data.
             </p>
 
-            {/* Pipeline visual */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="rounded-xl overflow-hidden"
+              style={{
+                background: colors.navyLight,
+                border: `1px solid ${colors.gold}25`,
+              }}
+            >
+              {/* Mock AI Analysis Header */}
+              <div
+                className="px-6 py-4 flex items-center gap-3"
+                style={{ borderBottom: `1px solid ${colors.gold}15` }}
+              >
+                <Bot className="w-5 h-5" style={{ color: colors.gold }} />
+                <span className="font-bold text-sm" style={{ color: colors.white }}>
+                  Campaign Analysis — March 9, 2026
+                </span>
+                <span
+                  className="ml-auto px-2 py-1 rounded-full text-xs"
+                  style={{ background: `${colors.green}20`, color: colors.green }}
+                >
+                  Live Data
+                </span>
+              </div>
+
+              {/* Mock Analysis Content */}
+              <div className="p-6 space-y-5">
+                {[
+                  {
+                    campaign: "NL — Hair Transplant Confidence",
+                    roas: "4.2x",
+                    roasColor: colors.green,
+                    status: "Scale",
+                    statusColor: colors.green,
+                    analysis:
+                      "Hook 'Finally feel confident again' outperforms other variants by 3x. CPL at \u20AC18 — well below your \u20AC50 target. Strong with men 30-39 in Randstad area.",
+                    recommendation: "Increase daily budget by 40%. Duplicate campaign targeting Belgium with Dutch copy.",
+                  },
+                  {
+                    campaign: "NL — Free Consultation Generic",
+                    roas: "1.8x",
+                    roasColor: colors.red,
+                    status: "Pause",
+                    statusColor: colors.red,
+                    analysis:
+                      "Generic 'Free consultation' hook has high CPC (\u20AC4.20) and low conversion. Audience overlap with Campaign A is 62% — cannibalizing your winner.",
+                    recommendation: "Pause this campaign. Redirect budget to Campaign A and the new Turkey pricing campaign.",
+                  },
+                  {
+                    campaign: "Google — Hair Transplant Netherlands",
+                    roas: "3.1x",
+                    roasColor: colors.gold,
+                    status: "Optimize",
+                    statusColor: colors.gold,
+                    analysis:
+                      "Search campaign performing well on exact match keywords. Broad match is wasting 35% of budget on irrelevant queries like 'hair transplant training'.",
+                    recommendation: "Add 12 negative keywords (list attached). Shift broad match budget to exact match. Expected CPL improvement: 20%.",
+                  },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="p-4 rounded-lg"
+                    style={{
+                      background: colors.navyMid,
+                      border: `1px solid ${item.statusColor}20`,
+                    }}
+                  >
+                    <div className="flex items-center gap-3 mb-3 flex-wrap">
+                      <h4 className="font-bold text-sm" style={{ color: colors.white }}>
+                        {item.campaign}
+                      </h4>
+                      <span
+                        className="px-2 py-0.5 rounded-full text-xs font-bold"
+                        style={{ background: `${item.roasColor}20`, color: item.roasColor }}
+                      >
+                        {item.roas} ROAS
+                      </span>
+                      <span
+                        className="px-2 py-0.5 rounded-full text-xs font-bold ml-auto"
+                        style={{ background: `${item.statusColor}15`, color: item.statusColor }}
+                      >
+                        {item.status}
+                      </span>
+                    </div>
+                    <p className="text-sm mb-2" style={{ color: colors.gray }}>
+                      {item.analysis}
+                    </p>
+                    <div className="flex items-start gap-2">
+                      <ArrowRight
+                        className="w-3.5 h-3.5 flex-shrink-0 mt-0.5"
+                        style={{ color: colors.gold }}
+                      />
+                      <p className="text-sm font-medium" style={{ color: colors.gold }}>
+                        {item.recommendation}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div
+                className="px-6 py-3 text-center"
+                style={{ borderTop: `1px solid ${colors.gold}10` }}
+              >
+                <p className="text-xs" style={{ color: colors.gray }}>
+                  This is a preview of the AI analysis output. Your real data will populate automatically.
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* How It Works — 3 Steps */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="text-3xl font-bold text-center mb-4"
+              style={{ color: colors.white }}
+            >
+              How It Works
+            </h2>
+            <p
+              className="text-center mb-12 max-w-2xl mx-auto"
+              style={{ color: colors.gray }}
+            >
+              Three steps. One dashboard. Full control.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  icon: Eye,
                   step: "1",
-                  title: "Trend Watch",
-                  desc: "Monitor what's working now",
+                  icon: Upload,
+                  title: "Upload",
+                  description:
+                    "Drop your images and videos into the Brand Library. Organize by campaign, format, or theme. Your creative assets live in one place.",
                 },
                 {
-                  icon: Sparkles,
                   step: "2",
-                  title: "Create",
-                  desc: "AI generates ad creatives",
+                  icon: Send,
+                  title: "Publish",
+                  description:
+                    "Select creatives, set your audience, budget, and schedule. Hit publish — your campaign goes live on Meta, Google, or both. No platform switching.",
                 },
                 {
-                  icon: Layers,
                   step: "3",
-                  title: "Hook",
-                  desc: "Multiple copy angles",
-                },
-                {
-                  icon: PlayCircle,
-                  step: "4",
-                  title: "Test",
-                  desc: "Deploy A/B variations",
-                },
-                {
-                  icon: BarChart2,
-                  step: "5",
+                  icon: Brain,
                   title: "Analyze",
-                  desc: "AI reads performance",
+                  description:
+                    "AI reads your campaign performance daily. You get clear recommendations: what to scale, what to pause, where to shift budget. Act in two clicks.",
                 },
-                {
-                  icon: Target,
-                  step: "6",
-                  title: "Optimize",
-                  desc: "Scale winners, kill losers",
-                },
-              ].map((step, i) => (
+              ].map((item, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-4 rounded-xl text-center relative"
+                  transition={{ delay: i * 0.15 }}
+                  className="text-center p-6 rounded-xl relative"
                   style={{
                     background: colors.navyLight,
-                    border: `1px solid ${colors.gold}25`,
+                    border: `1px solid ${colors.gold}20`,
                   }}
                 >
                   <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 text-xs font-bold"
+                    className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold"
                     style={{
-                      background: `${colors.gold}20`,
+                      background: `${colors.gold}15`,
                       color: colors.gold,
+                      border: `2px solid ${colors.gold}40`,
                     }}
                   >
-                    {step.step}
+                    {item.step}
                   </div>
-                  <step.icon
-                    className="w-5 h-5 mx-auto mb-2"
+                  <item.icon
+                    className="w-6 h-6 mx-auto mb-3"
                     style={{ color: colors.gold }}
                   />
-                  <p
-                    className="font-bold text-sm"
+                  <h3
+                    className="font-bold text-lg mb-2"
                     style={{ color: colors.white }}
                   >
-                    {step.title}
-                  </p>
-                  <p
-                    className="text-xs mt-1"
-                    style={{ color: colors.gray }}
-                  >
-                    {step.desc}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Detailed breakdown */}
-            <div className="space-y-4">
-              {[
-                {
-                  icon: Eye,
-                  title: "Trend Watch",
-                  detail:
-                    "Monitor competitor ads via Meta Ad Library (it's public). Track what's going viral in hair transplant niche on TikTok and Instagram. Identify which formats get engagement — UGC vs. polished, before/after vs. testimonial, short-form vs. carousel. Hooks that worked 3 months ago may be dead today.",
-                },
-                {
-                  icon: Sparkles,
-                  title: "AI Creative Generation",
-                  detail:
-                    "Based on trending formats, AI generates ad creatives — video ads (short-form UGC, before/after reveals, testimonial clips) and image ads (product shots with overlay text, carousels). Multi-format output for Instagram Story, Feed, Reels, Facebook, Google Display — all aspect ratios handled.",
-                },
-                {
-                  icon: Layers,
-                  title: "Hook Variations",
-                  detail:
-                    "For each creative, generate 5-10 different hooks using strategic angles: Emotional ('Finally feel confident again'), Urgency ('Limited slots this month'), Social proof ('10,000+ happy patients'), Fear ('Every month you wait = more grafts needed'), Aspiration ('Imagine looking in the mirror and loving what you see').",
-                },
-                {
-                  icon: PlayCircle,
-                  title: "A/B Testing Deployment",
-                  detail:
-                    "Deploy multiple variations as A/B tests directly to Meta and Google via API with small initial budgets. The Meta Marketing API integration already exists from Phase 1. Let campaigns run 3-5 days to collect statistically meaningful data.",
-                },
-                {
-                  icon: BarChart2,
-                  title: "Performance Analysis",
-                  detail:
-                    "AI reads the performance data in real-time — CTR, CPL, ROAS per variation. Surfaces the winners automatically: 'Campaign A: 4.2 ROAS — recommend scaling. Campaign B: 1.8 ROAS — recommend pausing.' All visible in the existing dashboard.",
-                },
-                {
-                  icon: Target,
-                  title: "Optimization Loop",
-                  detail:
-                    "Shift budget to winners, kill underperformers. AI generates new variations based on patterns found in the top performers — what hook angle worked, what visual format converted, what CTA drove action. The loop repeats continuously.",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="p-5 rounded-xl flex gap-4"
-                  style={{
-                    background: colors.navyLight,
-                    border: `1px solid ${colors.gold}10`,
-                  }}
-                >
-                  <item.icon
-                    className="w-5 h-5 flex-shrink-0 mt-0.5"
-                    style={{ color: colors.gold }}
-                  />
-                  <div>
-                    <h3
-                      className="font-bold mb-2"
-                      style={{ color: colors.white }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="text-sm" style={{ color: colors.gray }}>
-                      {item.detail}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Industry Benchmarks */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2
-              className="text-3xl font-bold text-center mb-4"
-              style={{ color: colors.white }}
-            >
-              Industry Benchmarks
-            </h2>
-            <p
-              className="text-center mb-12 max-w-2xl mx-auto"
-              style={{ color: colors.gray }}
-            >
-              Key performance metrics from the hair transplant and aesthetics
-              industry.
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Ad Performance */}
-              <div
-                className="p-6 rounded-xl"
-                style={{
-                  background: colors.navyLight,
-                  border: `1px solid ${colors.gold}15`,
-                }}
-              >
-                <h3
-                  className="font-bold mb-4 flex items-center gap-2"
-                  style={{ color: colors.white }}
-                >
-                  <BarChart3
-                    className="w-4 h-4"
-                    style={{ color: colors.gold }}
-                  />
-                  Ad Performance
-                </h3>
-                <div className="space-y-3">
-                  {[
-                    {
-                      metric: "Google Ads CPL",
-                      value: "€62 — €108",
-                      note: "Top quartile vs laggards",
-                    },
-                    {
-                      metric: "Meta Ads CPL",
-                      value: "€15 — €50",
-                      note: "In-platform lead forms",
-                    },
-                    {
-                      metric: "Target ROAS",
-                      value: "3x — 4.1x",
-                      note: "Optimized campaigns",
-                    },
-                    {
-                      metric: "Conversion rate",
-                      value: "2-3% avg, 5.6% optimized",
-                      note: "Click to lead",
-                    },
-                    {
-                      metric: "Monthly ad budget (top clinics)",
-                      value: "€4,000 — €20,000",
-                      note: "7-12% of revenue",
-                    },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="flex justify-between items-center py-2"
-                      style={{
-                        borderBottom:
-                          i < 4
-                            ? `1px solid ${colors.gold}10`
-                            : "none",
-                      }}
-                    >
-                      <div>
-                        <p
-                          className="text-sm"
-                          style={{ color: colors.gray }}
-                        >
-                          {item.metric}
-                        </p>
-                        <p
-                          className="text-xs"
-                          style={{ color: `${colors.gray}80` }}
-                        >
-                          {item.note}
-                        </p>
-                      </div>
-                      <p
-                        className="font-bold text-sm"
-                        style={{ color: colors.gold }}
-                      >
-                        {item.value}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Lead Conversion */}
-              <div
-                className="p-6 rounded-xl"
-                style={{
-                  background: colors.navyLight,
-                  border: `1px solid ${colors.gold}15`,
-                }}
-              >
-                <h3
-                  className="font-bold mb-4 flex items-center gap-2"
-                  style={{ color: colors.white }}
-                >
-                  <TrendingUp
-                    className="w-4 h-4"
-                    style={{ color: colors.gold }}
-                  />
-                  Lead Conversion
-                </h3>
-                <div className="space-y-3">
-                  {[
-                    {
-                      metric: "Response within 5 min",
-                      value: "21x more likely",
-                      note: "To qualify the lead",
-                    },
-                    {
-                      metric: "First responder wins",
-                      value: "78%",
-                      note: "Of patients go with first clinic to reply",
-                    },
-                    {
-                      metric: "Consultation to procedure",
-                      value: "55% — 75%",
-                      note: "Top-performing clinics",
-                    },
-                    {
-                      metric: "Avg touches to convert",
-                      value: "7.2",
-                      note: "Across all channels",
-                    },
-                    {
-                      metric: "No-show reduction (automation)",
-                      value: "Up to 40%",
-                      note: "SMS/WhatsApp reminders",
-                    },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="flex justify-between items-center py-2"
-                      style={{
-                        borderBottom:
-                          i < 4
-                            ? `1px solid ${colors.gold}10`
-                            : "none",
-                      }}
-                    >
-                      <div>
-                        <p
-                          className="text-sm"
-                          style={{ color: colors.gray }}
-                        >
-                          {item.metric}
-                        </p>
-                        <p
-                          className="text-xs"
-                          style={{ color: `${colors.gray}80` }}
-                        >
-                          {item.note}
-                        </p>
-                      </div>
-                      <p
-                        className="font-bold text-sm"
-                        style={{ color: colors.gold }}
-                      >
-                        {item.value}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* What Top Clinics Use */}
-      <section className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2
-              className="text-3xl font-bold text-center mb-4"
-              style={{ color: colors.white }}
-            >
-              What Top Clinics Are Using
-            </h2>
-            <p
-              className="text-center mb-12 max-w-2xl mx-auto"
-              style={{ color: colors.gray }}
-            >
-              The tech stack powering the highest-growth hair transplant and
-              aesthetics clinics.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              {[
-                {
-                  category: "Patient CRM",
-                  tools: [
-                    "Pabau — FUE/FUT tracking, graft distribution, automated pre/post care",
-                    "LeadSquared — Lead scoring, multi-channel follow-up",
-                    "Zenoti — AI charting, unlimited HIPAA photo storage",
-                  ],
-                },
-                {
-                  category: "Marketing Automation",
-                  tools: [
-                    "GoHighLevel — CRM + email + SMS + funnels (5-10x ROI in 90 days)",
-                    "ManyChat — Instagram DM auto-responses, lead capture",
-                    "Brevo — SMS + email + WhatsApp from one place",
-                  ],
-                },
-                {
-                  category: "AI & Chat",
-                  tools: [
-                    "Clinic Convert — 24/7 AI lead qualification + booking",
-                    "Chattrix AI — Adds 5-10 extra surgeries per month",
-                    "WhatsApp Business API — Reduces no-shows by up to 40%",
-                  ],
-                },
-              ].map((group, i) => (
-                <div
-                  key={i}
-                  className="p-5 rounded-xl"
-                  style={{
-                    background: colors.navyLight,
-                    border: `1px solid ${colors.gold}15`,
-                  }}
-                >
-                  <h3
-                    className="font-bold mb-4 text-sm"
-                    style={{ color: colors.gold }}
-                  >
-                    {group.category}
+                    {item.title}
                   </h3>
-                  <ul className="space-y-3">
-                    {group.tools.map((tool, j) => (
-                      <li
-                        key={j}
-                        className="text-sm flex gap-2"
-                        style={{ color: colors.gray }}
-                      >
-                        <CheckCircle2
-                          className="w-3.5 h-3.5 flex-shrink-0 mt-0.5"
-                          style={{ color: `${colors.gold}60` }}
-                        />
-                        {tool}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <p className="text-sm" style={{ color: colors.gray }}>
+                    {item.description}
+                  </p>
+                  {i < 2 && (
+                    <ArrowRight
+                      className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 w-5 h-5 z-10"
+                      style={{ color: `${colors.gold}40` }}
+                    />
+                  )}
+                </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Discussion Points */}
+      {/* Pricing Section */}
       <section className="py-16 px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
             <div
-              className="p-8 rounded-2xl text-center"
+              className="p-8 md:p-10 rounded-2xl text-center"
               style={{
-                background: colors.navyLight,
+                background: `linear-gradient(135deg, ${colors.navyLight} 0%, ${colors.navyMid} 100%)`,
                 border: `1px solid ${colors.gold}30`,
               }}
             >
-              <Lightbulb
-                className="w-8 h-8 mx-auto mb-4"
-                style={{ color: colors.gold }}
-              />
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
+                style={{ background: `${colors.gold}15`, color: colors.gold }}
+              >
+                <Clock className="w-3.5 h-3.5" />
+                7–10 day delivery
+              </div>
+
               <h2
-                className="text-2xl font-bold mb-4"
+                className="text-3xl font-bold mb-2"
                 style={{ color: colors.white }}
               >
-                Let&apos;s Discuss
+                Phase 2 — Ad Control Hub
               </h2>
               <p className="text-sm mb-6" style={{ color: colors.gray }}>
-                This research is a starting point. The right next step depends
-                on your priorities and what&apos;s most impactful for
-                GlobalHair right now.
+                Everything you need to manage your ads from one place.
               </p>
-              <div className="space-y-3 text-left max-w-md mx-auto">
+
+              <div className="mb-8">
+                <span
+                  className="text-5xl font-bold"
+                  style={{ color: colors.gold }}
+                >
+                  $1,200
+                </span>
+                <span className="text-lg ml-2" style={{ color: colors.gray }}>
+                  one-time
+                </span>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3 text-left max-w-lg mx-auto mb-8">
                 {[
-                  "Which of these challenges is the most painful today?",
-                  "What does your current lead response process look like?",
-                  "Where do you see the biggest drop-off in your funnel?",
-                  "What would you want the dashboard to do next?",
-                ].map((q, i) => (
+                  "Brand Library — upload & organize creatives",
+                  "Publish campaigns to Meta & Google",
+                  "Campaign management — pause, adjust, control",
+                  "AI campaign analysis & recommendations",
+                  "Landing page tracking — full funnel visibility",
+                  "Yesterday's lead summary — daily snapshot",
+                  "Built into your existing dashboard",
+                  "7–10 days from start to live",
+                ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 text-sm"
+                    className="flex items-start gap-2 text-sm"
                     style={{ color: colors.gray }}
                   >
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs"
-                      style={{
-                        background: `${colors.gold}15`,
-                        color: colors.gold,
-                      }}
-                    >
-                      {i + 1}
-                    </div>
-                    {q}
+                    <CheckCircle2
+                      className="w-4 h-4 flex-shrink-0 mt-0.5"
+                      style={{ color: colors.gold }}
+                    />
+                    {item}
                   </div>
                 ))}
               </div>
+
+              <div
+                className="pt-6"
+                style={{ borderTop: `1px solid ${colors.gold}15` }}
+              >
+                <p className="text-xs" style={{ color: colors.gray }}>
+                  Same stack as Phase 1 — builds directly on top of your existing dashboard. No new logins, no new platforms.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <Zap
+              className="w-10 h-10 mx-auto mb-6"
+              style={{ color: colors.gold }}
+            />
+            <h2
+              className="text-3xl font-bold mb-4"
+              style={{ color: colors.white }}
+            >
+              Let&apos;s Build This
+            </h2>
+            <p
+              className="text-lg mb-8 max-w-xl mx-auto"
+              style={{ color: colors.gray }}
+            >
+              You already have the dashboard. Phase 2 turns it into a full ad operations hub. 7–10 days, and you&apos;ll never open Business Manager again.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="mailto:vladimir@autoflux.digital?subject=Phase%202%20—%20Let's%20Go"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-medium text-base transition-all hover:brightness-110"
+                style={{
+                  background: `linear-gradient(135deg, ${colors.gold} 0%, ${colors.goldLight} 100%)`,
+                  color: colors.navy,
+                }}
+              >
+                Ready to Start
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="https://wa.me/381601234567"
+                target="_blank"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-medium text-base transition-all"
+                style={{
+                  background: `${colors.gold}10`,
+                  color: colors.gold,
+                  border: `1px solid ${colors.gold}30`,
+                }}
+              >
+                <MessageSquare className="w-4 h-4" />
+                Questions? Let&apos;s Talk
+              </a>
             </div>
           </motion.div>
         </div>
@@ -1486,7 +1277,7 @@ export default function ProposalPage() {
         <div className="max-w-5xl mx-auto flex gap-2 justify-center">
           {[
             { key: "phase1" as const, label: "Phase 1 — Dashboard" },
-            { key: "phase2" as const, label: "Phase 2 — Market Research" },
+            { key: "phase2" as const, label: "Phase 2 — Ad Control Hub" },
           ].map((tab) => (
             <button
               key={tab.key}
