@@ -534,17 +534,10 @@ export default function RealEstatePortalDemo() {
           <h2 className="text-xl font-bold text-gray-900 mb-2">
             PropertyHub Portal Demo
           </h2>
-          <p className="text-gray-500 text-sm mb-6">
+          <p className="text-gray-500 text-sm">
             This interactive demo is best viewed on a desktop browser. The
             actual portal is fully mobile responsive.
           </p>
-          <Link
-            href="/cases/real-estate-mvp-portal"
-            className="inline-flex items-center gap-2 text-teal-600 font-medium text-sm hover:text-teal-700"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Case Study
-          </Link>
         </motion.div>
       </div>
     );
@@ -628,24 +621,6 @@ export default function RealEstatePortalDemo() {
           </div>
         </div>
 
-        {/* Demo badge */}
-        <div className="px-4 pb-4">
-          <Link
-            href="/cases/real-estate-mvp-portal"
-            className="flex items-center gap-2 text-[11px] text-white/30 hover:text-white/50 transition-colors"
-          >
-            <ArrowLeft className="w-3 h-3" />
-            Back to Case Study
-          </Link>
-          <div className="mt-2 bg-teal-500/10 border border-teal-500/20 rounded-lg px-3 py-2">
-            <p className="text-[10px] text-teal-400 font-medium">
-              INTERACTIVE DEMO
-            </p>
-            <p className="text-[10px] text-white/40 mt-0.5">
-              Sample data — not connected to real backend
-            </p>
-          </div>
-        </div>
       </motion.aside>
 
       {/* ── Main Content ──────────────────────────── */}
