@@ -848,6 +848,196 @@ export const caseStudies: CaseStudy[] = [
     tools: ["Instagram API", "OpenAI GPT", "Calendly"],
   },
   {
+    slug: "real-estate-mvp-portal",
+    title: "MVP Client Portal for Real Estate Agency",
+    category: "Full-Stack MVP",
+    categorySlug: "vibe-coding",
+    heroGradient: "linear-gradient(140deg, #0F766E 0%, #2DD4BF 100%)",
+    eyebrow: "Full-Stack MVP",
+    description:
+      "Secure client portal with property dashboards, document vaults, automated deadline tracking, and webhook-driven notifications—deployed in 3 weeks.",
+    cardDescription:
+      "Secure client portal with property dashboards, document vaults, automated deadline tracking, and webhook-driven notifications.",
+    challenge: [
+      "Clients had no self-service way to view property details, contracts, or upcoming deadlines",
+      "Admin team manually tracking lease renewals, payment dates, and inspections across spreadsheets",
+      "Documents scattered across email threads—no central, secure storage with access control",
+      "No automated reminders: missed renewal windows costing thousands in unnecessary fees",
+    ],
+    solution: {
+      intro:
+        "I built a full-stack client portal with role-based access, automated deadline logic, and a document vault—all on a modern, low-maintenance stack:",
+      steps: [
+        {
+          title: "Auth & Access Control",
+          details: [
+            "Supabase Auth with magic links and OAuth for frictionless client login",
+            "Row-level security so each client sees only their own properties and documents",
+            "Admin role for the internal team to manage everything",
+          ],
+        },
+        {
+          title: "Client Dashboard",
+          details: [
+            "Property cards with address, lease dates, status indicators (Active, Renewal Soon, Payment Pending)",
+            "Upcoming deadlines timeline with color-coded urgency",
+            "Recent activity feed showing document uploads, status changes, and notifications",
+          ],
+        },
+        {
+          title: "Document Vault",
+          details: [
+            "Secure PDF storage via Supabase Storage with signed URLs",
+            "Admin uploads contracts, invoices, receipts—client can view/download only their own",
+            "Categorized by type: Contracts, Invoices, IDs, Receipts",
+          ],
+        },
+        {
+          title: "Deadline Engine & Notifications",
+          details: [
+            "Postgres functions calculate deadlines from contract dates and configurable rule sets",
+            "Triggers webhook notifications at 30/14/7 day windows before key dates",
+            "Ready to plug into email, WhatsApp, or SMS on the other end",
+          ],
+        },
+      ],
+      techStack: [
+        { name: "Next.js", description: "frontend + API routes" },
+        { name: "Supabase", description: "auth, database, storage" },
+        { name: "PostgreSQL", description: "deadline calculations" },
+        { name: "Tailwind CSS", description: "responsive UI" },
+        { name: "Vercel", description: "deployment" },
+        { name: "Webhooks", description: "notification triggers" },
+      ],
+    },
+    results: {
+      stats: [
+        { value: "3 weeks", label: "From kickoff to production" },
+        { value: "50+", label: "Active clients onboarded" },
+        { value: "100%", label: "Deadline notifications automated" },
+        { value: "<$20/mo", label: "Hosting cost at MVP scale" },
+      ],
+    },
+    takeaways: [
+      "Supabase row-level security eliminates the need to build custom access control from scratch—each client sees only their data with zero backend code.",
+      "Postgres-native deadline calculations are faster and more reliable than application-level cron jobs.",
+      "Webhook-based notifications future-proof the system: add any channel (email, WhatsApp, SMS) without changing the core logic.",
+    ],
+    media: {
+      images: [
+        {
+          src: "/cases/real-estate-mvp-portal/demo",
+          alt: "Interactive portal demo",
+          caption: "Try the interactive demo",
+          type: "screenshot",
+        },
+      ],
+    },
+    videoPlaceholder: {
+      icon: "video",
+      title: "Interactive Demo Available",
+      description:
+        "Explore the live portal demo with mock data",
+    },
+    cta: {
+      eyebrow: "Need a client portal for your business?",
+      headline: "Let's build your MVP in weeks, not months",
+      description:
+        "Book a free blueprint call to scope your portal and get a clear timeline.",
+    },
+    cardMetric: { number: "3 weeks", label: "From kickoff to production" },
+    tools: ["Next.js", "Supabase", "PostgreSQL"],
+  },
+  {
+    slug: "ai-whatsapp-booking-assistant",
+    title: "AI WhatsApp Booking Assistant",
+    category: "CX Automation",
+    categorySlug: "cx",
+    heroGradient: "linear-gradient(140deg, #16A34A 0%, #86EFAC 100%)",
+    eyebrow: "CX Automation",
+    description:
+      "WhatsApp-based AI assistant that handles appointment booking, rescheduling, and reminders—reducing no-shows by 40% and freeing up front-desk staff.",
+    cardDescription:
+      "WhatsApp-based AI assistant that handles appointment booking, rescheduling, and reminders—reducing no-shows by 40%.",
+    challenge: [
+      "Front desk overwhelmed with booking calls and WhatsApp messages during peak hours",
+      "High no-show rate (25%) due to no automated reminders",
+      "Clients preferred WhatsApp over phone calls but staff couldn't keep up with message volume",
+      "Manual booking process error-prone: double bookings and missed confirmations",
+    ],
+    solution: {
+      intro:
+        "I built a WhatsApp-native booking assistant using the WhatsApp Business API and GPT-4 for natural conversation:",
+      steps: [
+        {
+          title: "WhatsApp Integration",
+          details: [
+            "Connected to WhatsApp Business API via official Cloud API",
+            "Handles incoming messages 24/7 with sub-second response times",
+          ],
+        },
+        {
+          title: "Natural Language Booking",
+          details: [
+            "GPT-4 understands booking requests in natural language",
+            "Checks real-time availability against the calendar system",
+            "Confirms bookings with date, time, and service details",
+          ],
+        },
+        {
+          title: "Smart Reminders",
+          details: [
+            "Automated reminders at 24h and 2h before appointments",
+            "One-tap rescheduling directly in WhatsApp",
+            "Cancellation handling with waitlist backfill",
+          ],
+        },
+        {
+          title: "Admin Dashboard",
+          details: [
+            "Real-time view of all bookings and conversations",
+            "Override and manual intervention when needed",
+            "Analytics on booking patterns and no-show rates",
+          ],
+        },
+      ],
+      techStack: [
+        { name: "WhatsApp Cloud API", description: "messaging" },
+        { name: "OpenAI GPT-4", description: "conversation AI" },
+        { name: "n8n", description: "workflow orchestration" },
+        { name: "Google Calendar API", description: "scheduling" },
+        { name: "Supabase", description: "data + admin panel" },
+      ],
+    },
+    results: {
+      stats: [
+        { value: "25% → 15%", label: "No-show rate reduction" },
+        { value: "24/7", label: "Booking availability" },
+        { value: "< 5 sec", label: "Average response time" },
+        { value: "70%", label: "Bookings handled without staff" },
+      ],
+    },
+    takeaways: [
+      "WhatsApp is the highest-engagement channel for service businesses—clients already use it daily.",
+      "Automated reminders with one-tap reschedule dramatically reduce no-shows.",
+      "Starting with email/webhook notifications and adding WhatsApp later avoids Meta approval delays.",
+    ],
+    videoPlaceholder: {
+      icon: "video",
+      title: "Case Video Coming Soon",
+      description:
+        "See the WhatsApp booking flow in action",
+    },
+    cta: {
+      eyebrow: "Ready to automate your bookings?",
+      headline: "Let's build your WhatsApp assistant",
+      description:
+        "Book a free blueprint call to design your booking automation.",
+    },
+    cardMetric: { number: "25% → 15%", label: "No-show rate reduction" },
+    tools: ["WhatsApp API", "OpenAI GPT", "n8n"],
+  },
+  {
     slug: "vibe-coding-mvp",
     title: "2-Week MVP Development with Claude Code",
     category: "Vibe Coding",
