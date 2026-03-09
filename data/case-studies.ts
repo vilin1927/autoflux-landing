@@ -923,21 +923,11 @@ export const caseStudies: CaseStudy[] = [
       "Postgres-native deadline calculations are faster and more reliable than application-level cron jobs.",
       "Webhook-based notifications future-proof the system: add any channel (email, WhatsApp, SMS) without changing the core logic.",
     ],
-    media: {
-      images: [
-        {
-          src: "/cases/real-estate-mvp-portal/demo",
-          alt: "Interactive portal demo",
-          caption: "Try the interactive demo",
-          type: "screenshot",
-        },
-      ],
-    },
     videoPlaceholder: {
       icon: "video",
-      title: "Interactive Demo Available",
+      title: "Case Video Coming Soon",
       description:
-        "Explore the live portal demo with mock data",
+        "See the client portal in action",
     },
     cta: {
       eyebrow: "Need a client portal for your business?",
