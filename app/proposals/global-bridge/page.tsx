@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Check,
@@ -201,46 +202,64 @@ export default function GlobalBridgeProposalPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#2563EB] opacity-20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-1/4 w-48 h-48 bg-[#10B981] opacity-15 rounded-full blur-3xl translate-y-1/2" />
 
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider bg-white/10 px-4 py-2 rounded-full">
-              <Building2 className="w-3.5 h-3.5" />
-              {proposalData.client.name}
-            </span>
-            <span className="inline-block text-xs font-bold uppercase tracking-widest bg-[#2563EB] px-4 py-2 rounded-full">
-              Фикс-прайс MVP
-            </span>
-            <span className="inline-flex items-center text-xs font-bold uppercase tracking-widest bg-[#10B981] px-4 py-2 rounded-full">
-              ${proposalData.pricing.total.toLocaleString()}
-            </span>
-          </div>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 relative z-10">
+            {/* Left: Content */}
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider bg-white/10 px-4 py-2 rounded-full">
+                  <Building2 className="w-3.5 h-3.5" />
+                  {proposalData.client.name}
+                </span>
+                <span className="inline-block text-xs font-bold uppercase tracking-widest bg-[#2563EB] px-4 py-2 rounded-full">
+                  Фикс-прайс MVP
+                </span>
+                <span className="inline-flex items-center text-xs font-bold uppercase tracking-widest bg-[#10B981] px-4 py-2 rounded-full">
+                  ${proposalData.pricing.total.toLocaleString()}
+                </span>
+              </div>
 
-          <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4 max-w-2xl">
-            {proposalData.project.title}
-          </h1>
+              <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4 max-w-2xl">
+                {proposalData.project.title}
+              </h1>
 
-          <p className="text-xl text-white/60 font-medium mb-2">
-            {proposalData.project.subtitle}
-          </p>
+              <p className="text-xl text-white/60 font-medium mb-2">
+                {proposalData.project.subtitle}
+              </p>
 
-          <p className="text-lg text-white/80 max-w-xl mb-8">
-            {proposalData.project.description}
-          </p>
+              <p className="text-lg text-white/80 max-w-xl mb-8">
+                {proposalData.project.description}
+              </p>
 
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={() => handleNavigate("pricing")}
-              className="inline-flex items-center gap-2 bg-white text-[#1a1a1a] px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-colors"
-            >
-              Смотреть стоимость
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <Link
-              href="/proposals/global-bridge/demo"
-              className="inline-flex items-center gap-2 bg-white/10 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition-colors"
-            >
-              Интерактивное демо
-              <ExternalLink className="w-4 h-4" />
-            </Link>
+              <div className="flex flex-wrap gap-4">
+                <button
+                  onClick={() => handleNavigate("pricing")}
+                  className="inline-flex items-center gap-2 bg-white text-[#1a1a1a] px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-colors"
+                >
+                  Смотреть стоимость
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+                <Link
+                  href="/proposals/global-bridge/demo"
+                  className="inline-flex items-center gap-2 bg-white/10 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition-colors"
+                >
+                  Интерактивное демо
+                  <ExternalLink className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right: Logo */}
+            <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
+              <div className="bg-white rounded-2xl p-6 shadow-2xl">
+                <Image
+                  src="/proposals/global-bridge/logo.png"
+                  alt="Global Bridge"
+                  width={200}
+                  height={100}
+                  className="object-contain"
+                />
+              </div>
+            </div>
           </div>
 
         </motion.section>
