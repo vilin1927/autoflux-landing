@@ -242,13 +242,6 @@ export default function GlobalBridgeProposalPage() {
                   Смотреть стоимость
                   <ArrowRight className="w-4 h-4" />
                 </button>
-                <Link
-                  href="/proposals/global-bridge/demo"
-                  className="inline-flex items-center gap-2 bg-white/10 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition-colors"
-                >
-                  Интерактивное демо
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
               </div>
             </div>
 

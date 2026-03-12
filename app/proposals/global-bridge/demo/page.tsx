@@ -544,7 +544,14 @@ export default function RealEstatePortalDemo() {
   }
 
   return (
-    <div className="h-screen flex bg-gray-50 overflow-hidden">
+    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
+      {/* ── Old Demo Banner ────────────────────────── */}
+      <div className="bg-amber-500 text-amber-950 text-center py-2 px-4 text-sm font-medium flex items-center justify-center gap-2 flex-shrink-0">
+        <span className="bg-amber-600 text-white text-xs font-bold px-2 py-0.5 rounded">СТАРОЕ ДЕМО</span>
+        <span>Это демо устарело. Актуальный функционал описан в коммерческом предложении.</span>
+      </div>
+
+      <div className="flex-1 flex overflow-hidden">
       {/* ── Sidebar ────────────────────────────────── */}
       <motion.aside
         initial={{ opacity: 0, x: -20 }}
@@ -649,6 +656,7 @@ export default function RealEstatePortalDemo() {
           )}
         </AnimatePresence>
       </main>
+      </div>
     </div>
   );
 }

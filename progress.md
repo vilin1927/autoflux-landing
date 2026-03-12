@@ -41,6 +41,12 @@
 
 ## Session Log
 
+### 2026-03-12 — Global Bridge proposal overhaul (continued)
+**Completed:**
+- Added "СТАРОЕ ДЕМО" banner to `/proposals/global-bridge/demo`
+- Removed "Интерактивное демо" link from proposal page
+- All demo link references removed from proposal
+
 ### 2026-03-12 — Global Bridge proposal overhaul
 **Discovery:** Global Bridge is NOT a real estate agency — they do company registration for expats (Russian-speaking clients from CIS countries doing business in UAE)
 
