@@ -533,14 +533,13 @@ export default function GlobalBridgeProposalPage() {
                     <th className="text-left py-3 px-4 font-semibold text-gray-500">Канал</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-500">Сервис</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-500">Статус</th>
-                    <th className="text-left py-3 px-4 font-semibold text-gray-500">Время настройки</th>
                     <th className="text-left py-3 px-4 font-semibold text-gray-500">Стоимость</th>
                   </tr>
                 </thead>
                 <tbody>
                   {proposalData.architecture.notifications.options.map((option, index) => {
                     const Icon = iconMap[option.icon] || Mail;
-                    const isPhase1 = option.status.includes("Phase 1");
+                    const isPhase1 = option.status.includes("MVP");
                     return (
                       <motion.tr
                         key={index}
@@ -569,7 +568,6 @@ export default function GlobalBridgeProposalPage() {
                             {option.status}
                           </span>
                         </td>
-                        <td className="py-4 px-4 text-gray-600">{option.setup}</td>
                         <td className="py-4 px-4 text-gray-600">{option.cost}</td>
                       </motion.tr>
                     );
