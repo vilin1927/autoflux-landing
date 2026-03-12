@@ -1258,6 +1258,26 @@ export default function GlobalBridgeProposalPage() {
               </div>
             </div>
 
+            {/* Flexibility + Communication */}
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <p className="text-sm text-amber-800">
+                  <strong>📋 Гибкость:</strong> {proposalData.timeline.flexibility}
+                </p>
+              </div>
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                <p className="text-sm text-green-800 font-semibold mb-2">💬 {proposalData.timeline.communication.title}</p>
+                <ul className="space-y-1">
+                  {proposalData.timeline.communication.items.map((item, i) => (
+                    <li key={i} className="text-sm text-green-700 flex items-center gap-2">
+                      <Check className="w-3 h-3 text-green-500" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
               {proposalData.timeline.breakdown.map((phase, index) => (
                 <motion.div
