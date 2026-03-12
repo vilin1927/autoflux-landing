@@ -50,6 +50,7 @@ const sections = [
   { id: "milestone-2", label: "Milestone 2" },
   { id: "pricing", label: "Стоимость" },
   { id: "timeline", label: "Сроки" },
+  { id: "call-notes", label: "Заметки" },
   { id: "next-steps", label: "Следующие шаги" },
 ];
 
@@ -74,8 +75,32 @@ const iconMap: Record<string, React.ElementType> = {
   file: File,
 };
 
+const STORAGE_KEY = "global-bridge-call-notes";
+
 export default function GlobalBridgeProposalPage() {
   const [activeSection, setActiveSection] = useState("hero");
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+
+  // Load answers from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        setAnswers(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse saved answers", e);
+      }
+    }
+  }, []);
+
+  // Save answers to localStorage on change
+  const handleAnswerChange = useCallback((questionId: string, value: string) => {
+    setAnswers((prev) => {
+      const updated = { ...prev, [questionId]: value };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -1064,6 +1089,80 @@ export default function GlobalBridgeProposalPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Call Notes Section */}
+        <motion.section
+          id="call-notes"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8 scroll-mt-8"
+        >
+          <div className="bg-white border border-gray-200 rounded-3xl p-8 md:p-10">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-amber-600" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-[#1a1a1a]">Вопросы для звонка</h2>
+                  <p className="text-sm text-gray-500">Заметки сохраняются автоматически</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-green-600 bg-green-50 px-3 py-1.5 rounded-full">
+                <Check className="w-3 h-3" />
+                <span>Сохранено локально</span>
+              </div>
+            </div>
+
+            {(() => {
+              const categories = [...new Set(proposalData.callQuestions.map(q => q.category))];
+              return categories.map((category, catIndex) => (
+                <div key={category} className={catIndex > 0 ? "mt-8 pt-8 border-t border-gray-100" : ""}>
+                  <h3 className="font-semibold text-[#1a1a1a] mb-4 text-sm uppercase tracking-wider">
+                    {category}
+                  </h3>
+                  <div className="space-y-4">
+                    {proposalData.callQuestions
+                      .filter(q => q.category === category)
+                      .map((q, index) => (
+                        <div key={q.id} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                          <label className="block">
+                            <span className="text-sm font-medium text-[#1a1a1a] block mb-1">
+                              {index + 1}. {q.question}
+                            </span>
+                            {q.hint && (
+                              <span className="text-xs text-gray-400 block mb-2">{q.hint}</span>
+                            )}
+                            <textarea
+                              value={answers[q.id] || ""}
+                              onChange={(e) => handleAnswerChange(q.id, e.target.value)}
+                              placeholder="Ответ..."
+                              className="w-full mt-2 px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] resize-none min-h-[60px]"
+                              rows={2}
+                            />
+                          </label>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              ));
+            })()}
+
+            <div className="mt-8 pt-6 border-t border-gray-100">
+              <h3 className="font-semibold text-[#1a1a1a] mb-4 text-sm uppercase tracking-wider">
+                Дополнительные заметки
+              </h3>
+              <textarea
+                value={answers["additional-notes"] || ""}
+                onChange={(e) => handleAnswerChange("additional-notes", e.target.value)}
+                placeholder="Любые другие заметки со звонка..."
+                className="w-full px-4 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] resize-none min-h-[120px]"
+                rows={4}
+              />
             </div>
           </div>
         </motion.section>
