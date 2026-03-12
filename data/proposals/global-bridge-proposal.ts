@@ -190,6 +190,23 @@ export const proposalData = {
     ],
     accuracy: "95%+ точность на стандартных документах ОАЭ. Если документ нестандартный, админ проверяет и корректирует.",
     cost: "~$0.01-0.03 за документ (1-3 страницы). Для 50 клиентов × 10 документов = ~$5-15 единоразово при загрузке.",
+    tested: {
+      title: "Уже протестировано и работает",
+      description: "Я загрузил реальные документы ОАЭ и система успешно извлекла все нужные данные.",
+      example: {
+        documentType: "Trade License (Dubai)",
+        extracted: [
+          { field: "Название компании", value: "NATIONAL PEST CONTROL L.L.C" },
+          { field: "Название на арабском", value: "ناشيونال لمكافحة الحشرات والحيوانات الضارة ش.ذ.م.م" },
+          { field: "Дата истечения", value: "08.09.2022" },
+          { field: "Номер лицензии", value: "123197" },
+          { field: "Владелец", value: "RYAN NEIL FLEMING" },
+          { field: "Вид деятельности", value: "Building Cleaning Services, Pest Control Services" },
+        ],
+        confidence: "Высокая точность",
+      },
+      whatWeUse: "В вашей системе мы будем использовать: дату истечения (для дашборда здоровья), название компании (для привязки к клиенту), номер документа (для идентификации).",
+    },
   },
   architecture: {
     layers: [
@@ -255,22 +272,6 @@ export const proposalData = {
           cost: "Бесплатно",
           note: "Работает на iOS 16.4+ (добавить на домашний экран) и Android. Без App Store.",
           icon: "bell",
-        },
-        {
-          channel: "SMS",
-          service: "Twilio",
-          status: "Фаза 2 (опционально)",
-          cost: "~$0.01 за сообщение",
-          note: "Подключается за 1 час, если понадобится",
-          icon: "smartphone",
-        },
-        {
-          channel: "WhatsApp",
-          service: "Meta Business API",
-          status: "Фаза 2 (опционально)",
-          cost: "~$0.005 за сообщение",
-          note: "Требует верификацию бизнеса Meta (~2-3 недели)",
-          icon: "message-circle",
         },
       ],
     },

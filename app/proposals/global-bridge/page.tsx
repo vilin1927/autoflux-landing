@@ -704,22 +704,6 @@ export default function GlobalBridgeProposalPage() {
               </table>
             </div>
 
-            <div className="mt-6 bg-blue-50 border border-blue-100 rounded-xl p-4">
-              <div className="flex items-start gap-3">
-                <MessageCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-[#1a1a1a] mb-1">Опции WhatsApp</h4>
-                  <p className="text-sm text-gray-600">
-                    <strong>Twilio WhatsApp API:</strong> Не требует одобрения Meta, работает за 1-2 дня.
-                    <br />
-                    <strong>Meta Business API:</strong> Официальный API, требует верификацию бизнеса (1-2 недели).
-                    <br />
-                    Оба варианта можно добавить в Фазе 2 без перестройки системы уведомлений.
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* Hosting Options */}
             <div className="mt-8 pt-8 border-t border-gray-100">
               <h3 className="font-semibold text-[#1a1a1a] mb-4 flex items-center gap-2">
@@ -884,6 +868,37 @@ export default function GlobalBridgeProposalPage() {
                 <p className="text-sm text-blue-700">{proposalData.ocrCapability.cost}</p>
               </div>
             </div>
+
+            {/* OCR Tested Section */}
+            {proposalData.ocrCapability.tested && (
+              <div className="mt-6 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <h3 className="font-bold text-green-800">{proposalData.ocrCapability.tested.title}</h3>
+                </div>
+                <p className="text-sm text-green-700 mb-4">{proposalData.ocrCapability.tested.description}</p>
+
+                <div className="bg-white rounded-xl p-4 border border-green-100 mb-4">
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Пример: {proposalData.ocrCapability.tested.example.documentType}</p>
+                  <div className="space-y-2">
+                    {proposalData.ocrCapability.tested.example.extracted.map((item, i) => (
+                      <div key={i} className="flex items-start gap-2 text-sm">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-600">{item.field}:</span>
+                        <span className="font-medium text-[#1a1a1a]">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-3 pt-3 border-t border-green-100">
+                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                      {proposalData.ocrCapability.tested.example.confidence}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-green-700 italic">{proposalData.ocrCapability.tested.whatWeUse}</p>
+              </div>
+            )}
           </div>
         </motion.section>
 
@@ -1206,14 +1221,18 @@ export default function GlobalBridgeProposalPage() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-3">
               {proposalData.niceToHave.items.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl p-5 border border-purple-100 flex items-start justify-between"
+                  className="bg-white rounded-xl p-4 border border-purple-100 flex items-center gap-4"
                 >
-                  <h3 className="font-semibold text-[#1a1a1a] mb-1">{item.name}</h3>
-                  <p className="text-sm text-gray-600">{item.description}</p>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0" />
+                  <div>
+                    <span className="font-semibold text-[#1a1a1a]">{item.name}</span>
+                    <span className="text-gray-400 mx-2">—</span>
+                    <span className="text-sm text-gray-600">{item.description}</span>
+                  </div>
                 </div>
               ))}
             </div>
