@@ -395,6 +395,29 @@ export default function GlobalBridgeProposalPage() {
           </div>
         </motion.section>
 
+        {/* Security Highlight */}
+        <motion.section
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 md:p-10 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500 opacity-10 rounded-full blur-3xl" />
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Shield className="w-6 h-6 text-emerald-400" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-3">{proposalData.securityHighlight.title}</h3>
+                <p className="text-white/80 leading-relaxed">
+                  {proposalData.securityHighlight.message}
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
         {/* Architecture Section */}
         <motion.section
           id="architecture"
