@@ -252,7 +252,7 @@ export default function GlobalBridgeProposalPage() {
             <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
               <div className="bg-white rounded-2xl p-6 shadow-2xl">
                 <Image
-                  src="/proposals/global-bridge/logo.png"
+                  src="/proposals/global-bridge/logo.jpg"
                   alt="Global Bridge"
                   width={200}
                   height={100}
