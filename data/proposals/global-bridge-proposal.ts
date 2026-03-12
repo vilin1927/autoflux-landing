@@ -132,7 +132,7 @@ export const proposalData = {
           "Activity Type (نوع النشاط)",
           "Issuing Authority (الجهة المصدرة)",
         ],
-        example: "/proposals/global-bridge/docs/trade-license-example.pdf",
+        example: "/proposals/global-bridge/docs/trade-license-sample.pdf",
       },
       {
         type: "Emirates ID",
@@ -145,7 +145,7 @@ export const proposalData = {
           "Expiry Date (تاريخ الانتهاء)",
           "Nationality (الجنسية)",
         ],
-        example: "/proposals/global-bridge/docs/emirates-id-example.pdf",
+        example: "/proposals/global-bridge/docs/immigration-form-sample.pdf",
       },
       {
         type: "Residence Visa",
@@ -159,7 +159,7 @@ export const proposalData = {
           "Sponsor (الكفيل)",
           "Visa Type (نوع التأشيرة)",
         ],
-        example: "/proposals/global-bridge/docs/visa-example.pdf",
+        example: "/proposals/global-bridge/docs/uae-visa-sample.pdf",
       },
       {
         type: "Establishment Card",
@@ -172,7 +172,7 @@ export const proposalData = {
           "Expiry Date (تاريخ الانتهاء)",
           "Number of Visas (عدد التأشيرات)",
         ],
-        example: "/proposals/global-bridge/docs/establishment-card-example.pdf",
+        example: "/proposals/global-bridge/docs/visa-application-form.pdf",
       },
       {
         type: "MOA (Memorandum of Association)",
@@ -185,7 +185,7 @@ export const proposalData = {
           "Share Distribution (توزيع الأسهم)",
           "Date of Incorporation (تاريخ التأسيس)",
         ],
-        example: "/proposals/global-bridge/docs/moa-example.pdf",
+        example: "/proposals/global-bridge/docs/immigration-form-sample.pdf",
       },
     ],
     accuracy: "95%+ точность на стандартных документах ОАЭ. Если документ нестандартный, админ проверяет и корректирует.",

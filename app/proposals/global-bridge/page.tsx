@@ -22,9 +22,10 @@ import {
   ExternalLink,
   ChevronRight,
   ChevronDown,
+  X,
+  Eye,
   ArrowDown,
   Zap,
-  Eye,
   Package,
   DollarSign,
   Settings,
@@ -86,6 +87,7 @@ export default function GlobalBridgeProposalPage() {
   const [activeSection, setActiveSection] = useState("hero");
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isNotesExpanded, setIsNotesExpanded] = useState(false);
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
 
   // Load answers from localStorage on mount
   useEffect(() => {
@@ -844,7 +846,7 @@ export default function GlobalBridgeProposalPage() {
                     <Clock className="w-3 h-3 text-orange-500" />
                     <span className="text-xs text-orange-600 font-medium">{doc.renewal}</span>
                   </div>
-                  <div className="border-t border-gray-200 pt-2">
+                  <div className="border-t border-gray-200 pt-2 mb-3">
                     <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Извлекается:</p>
                     <div className="flex flex-wrap gap-1">
                       {doc.fieldsExtracted.map((field, i) => (
@@ -854,6 +856,13 @@ export default function GlobalBridgeProposalPage() {
                       ))}
                     </div>
                   </div>
+                  <button
+                    onClick={() => setSelectedPdf(doc.example)}
+                    className="w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold py-2 px-3 rounded-lg transition-colors"
+                  >
+                    <Eye className="w-3 h-3" />
+                    Посмотреть пример
+                  </button>
                 </motion.div>
               ))}
             </div>
@@ -1388,6 +1397,51 @@ export default function GlobalBridgeProposalPage() {
           <p className="mt-1">Март 2026</p>
         </footer>
       </div>
+
+      {/* PDF Preview Modal */}
+      {selectedPdf && (
+        <div
+          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedPdf(null)}
+        >
+          <div
+            className="bg-white rounded-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h3 className="font-semibold text-[#1a1a1a]">Пример документа</h3>
+              <button
+                onClick={() => setSelectedPdf(null)}
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4 text-gray-600" />
+              </button>
+            </div>
+            <div className="flex-1 p-4">
+              <iframe
+                src={selectedPdf}
+                className="w-full h-full rounded-lg border border-gray-200"
+                title="PDF Preview"
+              />
+            </div>
+            <div className="p-4 border-t border-gray-200 flex justify-end gap-3">
+              <a
+                href={selectedPdf}
+                download
+                className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold py-2 px-4 rounded-lg transition-colors"
+              >
+                Скачать PDF
+              </a>
+              <button
+                onClick={() => setSelectedPdf(null)}
+                className="text-sm text-gray-600 hover:text-gray-800 py-2 px-4"
+              >
+                Закрыть
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
