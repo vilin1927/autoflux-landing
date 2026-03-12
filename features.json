@@ -1,0 +1,121 @@
+{
+  "project": "autoflux-landing",
+  "description": "AutoFlux marketing site + client proposal platform",
+  "features": [
+    {
+      "id": "F-001",
+      "title": "Homepage — Complete",
+      "status": "done",
+      "description": "Full landing page with 8 sections: Hero, TrustBar, Stats, HowItWorks, WhoWeServe, Testimonial, CaseStudies, Contact",
+      "acceptance_criteria": [
+        { "description": "All 8 sections render correctly", "done": true },
+        { "description": "Responsive design (mobile + desktop)", "done": true },
+        { "description": "PostHog analytics tracking on all CTAs and sections", "done": true },
+        { "description": "Cal.com booking popup works", "done": true },
+        { "description": "Header with mobile nav", "done": true }
+      ]
+    },
+    {
+      "id": "F-002",
+      "title": "Case Studies System",
+      "status": "done",
+      "description": "Data-driven case study pages at /cases/[slug] with SSG, media showcase, and CTA",
+      "acceptance_criteria": [
+        { "description": "Dynamic routes with generateStaticParams", "done": true },
+        { "description": "Case study data in data/case-studies.ts", "done": true },
+        { "description": "Hero, Challenge, Solution, Results, Media, Takeaways, CTA sections", "done": true },
+        { "description": "Category filtering on homepage cards", "done": true },
+        { "description": "PostHog tracking on case study views", "done": true }
+      ]
+    },
+    {
+      "id": "F-003",
+      "title": "Client Proposals",
+      "status": "done",
+      "description": "Individual proposal pages with interactive demos for each prospective client",
+      "acceptance_criteria": [
+        { "description": "eToll proposal + demo", "done": true },
+        { "description": "CheckPoint proposal + demo", "done": true },
+        { "description": "Moppity proposal + demo", "done": true },
+        { "description": "GlobalHair proposal + demo", "done": true },
+        { "description": "Deck Builder proposal + demo", "done": true },
+        { "description": "Alamance Property proposal + demo", "done": true },
+        { "description": "Orgonic Art (Raphael) proposal + demo", "done": true },
+        { "description": "Image Resize proposal + demo", "done": true },
+        { "description": "Theo proposal", "done": true },
+        { "description": "Global Bridge demo", "done": true }
+      ]
+    },
+    {
+      "id": "F-004",
+      "title": "Admin Dashboard",
+      "status": "done",
+      "description": "Password-protected page at /admin listing all proposals with links to view proposal and demo",
+      "acceptance_criteria": [
+        { "description": "Password login with localStorage persistence", "done": true },
+        { "description": "Lists proposals with client name, price, status", "done": true },
+        { "description": "Links to proposal and demo pages", "done": true }
+      ]
+    },
+    {
+      "id": "F-005",
+      "title": "Analytics & Tracking",
+      "status": "done",
+      "description": "PostHog integration with comprehensive event tracking",
+      "acceptance_criteria": [
+        { "description": "Pageview tracking", "done": true },
+        { "description": "CTA click tracking", "done": true },
+        { "description": "Section visibility tracking (IntersectionObserver)", "done": true },
+        { "description": "Case study view/click tracking", "done": true },
+        { "description": "Carousel navigation tracking", "done": true },
+        { "description": "Cal.com booking funnel tracking", "done": true },
+        { "description": "Video play tracking", "done": true }
+      ]
+    },
+    {
+      "id": "F-006",
+      "title": "Case Study Videos & Media",
+      "status": "in_progress",
+      "description": "Add real video content and images to case study pages. Currently using placeholder states.",
+      "acceptance_criteria": [
+        { "description": "Video content for TikTok Slideshow case study", "done": false },
+        { "description": "Video content for other case studies", "done": false },
+        { "description": "Before/after image comparisons where applicable", "done": false }
+      ]
+    },
+    {
+      "id": "F-007",
+      "title": "SEO & Meta Tags",
+      "status": "not_started",
+      "description": "Add Open Graph tags, Twitter cards, structured data, and sitemap for better discoverability",
+      "acceptance_criteria": [
+        { "description": "OG image and meta tags on all pages", "done": false },
+        { "description": "Twitter card tags", "done": false },
+        { "description": "JSON-LD structured data for case studies", "done": false },
+        { "description": "Sitemap.xml generation", "done": false },
+        { "description": "robots.txt", "done": false }
+      ]
+    },
+    {
+      "id": "F-008",
+      "title": "Performance Optimization",
+      "status": "not_started",
+      "description": "Image optimization, lazy loading, Core Web Vitals improvements",
+      "acceptance_criteria": [
+        { "description": "Use next/image for all images", "done": false },
+        { "description": "Lazy load below-fold sections", "done": false },
+        { "description": "Lighthouse score > 90 on all metrics", "done": false }
+      ]
+    },
+    {
+      "id": "F-009",
+      "title": "Admin Dashboard — Sync with Actual Proposals",
+      "status": "not_started",
+      "description": "Admin page currently lists only 3 proposals hardcoded. Should list all 10+ proposals.",
+      "acceptance_criteria": [
+        { "description": "All proposal routes reflected in admin dashboard", "done": false },
+        { "description": "Proposal data sourced from a shared config, not hardcoded", "done": false }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice #AF-2026-001</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page { margin: 0; size: A4; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    font-size: 12.5px;
+    line-height: 1.55;
+    padding: 52px 56px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 44px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #111;
+  }
+
+  .brand h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .brand p {
+    color: #777;
+    font-size: 12px;
+    margin-top: 1px;
+  }
+
+  .inv-meta { text-align: right; }
+
+  .inv-meta .tag {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #999;
+    font-weight: 600;
+  }
+
+  .inv-meta .number {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 2px 0 6px;
+  }
+
+  .inv-meta .date { color: #666; font-size: 12.5px; }
+
+  /* Parties */
+  .parties {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .party h3 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .party .name { font-weight: 600; font-size: 13.5px; }
+  .party p { color: #555; }
+  .party-right { text-align: right; }
+
+  /* Project bar */
+  .project {
+    background: #f4f4f5;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 28px;
+  }
+
+  .project h2 { font-size: 14px; font-weight: 600; }
+  .project p { color: #666; font-size: 11.5px; margin-top: 1px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+
+  thead th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #999;
+    font-weight: 600;
+    padding: 7px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  thead th:last-child { text-align: right; }
+
+  tbody td {
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+
+  tbody td:last-child {
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 500;
+    color: #555;
+  }
+
+  .item-t { font-weight: 600; font-size: 12.5px; }
+  .item-d { color: #666; font-size: 11.5px; margin-top: 1px; }
+
+  /* Totals */
+  .totals { display: flex; justify-content: flex-end; margin-bottom: 32px; }
+  .totals-box { width: 250px; }
+
+  .t-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 12.5px;
+  }
+
+  .t-row .t-label { color: #666; }
+
+  .t-row.total {
+    border-top: 2px solid #111;
+    margin-top: 6px;
+    padding-top: 9px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .t-row.total .t-label { color: #111; }
+
+  /* Sections */
+  .section { margin-bottom: 24px; }
+
+  .section h3 {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 8px;
+  }
+
+  .section ul { list-style: none; padding: 0; }
+
+  .section ul li {
+    padding: 3px 0 3px 14px;
+    position: relative;
+    color: #444;
+    font-size: 12px;
+  }
+
+  .section ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+
+  /* Payment box */
+  .pay-box {
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+
+  .pay-box h3 {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 7px;
+  }
+
+  .pay-box p { color: #555; font-size: 12px; margin-bottom: 3px; }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 14px;
+    color: #aaa;
+    font-size: 10.5px;
+    text-align: center;
+  }
+
+  @media print {
+    body { padding: 40px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="brand">
+    <h1>AutoFlux</h1>
+    <p>autoflux.digital</p>
+  </div>
+  <div class="inv-meta">
+    <div class="tag">Invoice</div>
+    <div class="number">#AF-2026-001</div>
+    <div class="date">February 24, 2026</div>
+  </div>
+</div>
+
+<!-- Parties -->
+<div class="parties">
+  <div class="party">
+    <h3>From</h3>
+    <p class="name">Vladimir Ilin</p>
+    <p>AutoFlux</p>
+    <p>autoflux.digital</p>
+  </div>
+  <div class="party party-right">
+    <h3>Bill To</h3>
+    <p class="name">Dan Gold</p>
+    <p>CheckPoint Group Inc</p>
+    <p>Toronto, Canada</p>
+  </div>
+</div>
+
+<!-- Project -->
+<div class="project">
+  <h2>ReelPilot — AI Video Content Generator</h2>
+  <p>Custom development for Toronto Watch Exchange</p>
+</div>
+
+<!-- Deliverables -->
+<table>
+  <thead>
+    <tr>
+      <th>Deliverable</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="item-t">1. Claude AI Script Engine</div>
+        <div class="item-d">AI-powered script generation (Claude Sonnet 4.6). Brand voice system, unique scripts per video, topic suggestions from watch market data.</div>
+      </td>
+      <td>Included</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="item-t">2. HeyGen Avatar Video Rendering</div>
+        <div class="item-d">AI-generated avatar with natural lip-sync. Two formats: Talking Head (30–60s) and Hot or Not (15–20s).</div>
+      </td>
+      <td>Included</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="item-t">3. FFmpeg Branded Overlay Pipeline</div>
+        <div class="item-d">Automated compositing: TWX logo, topic captions, follow CTA, watch images. Consistent text style across all videos and platforms.</div>
+      </td>
+      <td>Included</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="item-t">4. Auto-Post to 3 Platforms</div>
+        <div class="item-d">One-click publish to Instagram Reels, TikTok, and X (Twitter). Platform-specific captions and hashtags.</div>
+      </td>
+      <td>Included</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="item-t">5. Approval Dashboard</div>
+        <div class="item-d">Preview scripts and rendered videos, edit captions, approve or reject before posting. Queue management with scheduling.</div>
+      </td>
+      <td>Included</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="item-t">6. Daily Content Presets & Auto-Scraping</div>
+        <div class="item-d">Presets updated daily with scraped market data and trending watch topics. Ready-to-use templates for fast content creation.</div>
+      </td>
+      <td>Included</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="item-t">7. Photo Presets & Watch Image Templates</div>
+        <div class="item-d">Pre-configured photo and image templates for video overlays and Hot or Not format.</div>
+      </td>
+      <td>Included</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="item-t">8. VPS Deployment & Setup</div>
+        <div class="item-d">Full deployment on dedicated server (Linux VPS). No vendor lock-in, full data ownership.</div>
+      </td>
+      <td>Included</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Totals -->
+<div class="totals">
+  <div class="totals-box">
+    <div class="t-row">
+      <span class="t-label">Total project cost</span>
+      <span>$1,350.00</span>
+    </div>
+    <div class="t-row">
+      <span class="t-label">This invoice (50% upfront)</span>
+      <span>$675.00</span>
+    </div>
+    <div class="t-row">
+      <span class="t-label">Remaining on delivery</span>
+      <span>$675.00</span>
+    </div>
+    <div class="t-row total">
+      <span class="t-label">Amount Due</span>
+      <span>$675.00 USD</span>
+    </div>
+  </div>
+</div>
+
+<!-- Payment Terms -->
+<div class="pay-box">
+  <h3>Payment Terms</h3>
+  <p><strong>50% upfront</strong> ($675.00) — due upon acceptance, before development begins.</p>
+  <p><strong>50% on delivery</strong> ($675.00) — due upon project completion and client approval.</p>
+  <p><strong>Timeline:</strong> 7–10 business days from payment date.</p>
+</div>
+
+<!-- Required from Client -->
+<div class="section">
+  <h3>Required From Client</h3>
+  <ul>
+    <li><strong>Brand assets</strong> — TWX logo (PNG, transparent background), preferred brand colors and fonts</li>
+    <li><strong>Social media access</strong> — Instagram, TikTok, and X account credentials or API authorization</li>
+    <li><strong>Content direction</strong> — Top watch brands/models to cover, preferred tone, any existing scripts or transcripts</li>
+    <li><strong>Posting schedule</strong> — Preferred posting times and frequency per platform</li>
+    <li><strong>Monthly API & hosting costs</strong> — HeyGen ($99/mo), Claude API (~$2–5/mo), VPS hosting (~$6/mo) — covered by client</li>
+  </ul>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  AutoFlux &middot; autoflux.digital &middot; Vladimir Ilin
+</div>
+
+</body>
+</html>

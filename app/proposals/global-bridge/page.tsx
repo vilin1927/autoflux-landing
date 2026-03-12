@@ -215,15 +215,6 @@ export default function GlobalBridgeProposalPage() {
             </Link>
           </div>
 
-          {/* Differentiators */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10 pt-8 border-t border-white/10">
-            {proposalData.differentiators.map((diff, index) => (
-              <div key={index} className="text-center">
-                <p className="text-sm font-semibold text-white mb-1">{diff.title}</p>
-                <p className="text-xs text-white/50">{diff.description}</p>
-              </div>
-            ))}
-          </div>
         </motion.section>
 
         {/* The Problem Section */}
