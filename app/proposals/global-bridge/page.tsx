@@ -21,6 +21,7 @@ import {
   Headphones,
   ExternalLink,
   ChevronRight,
+  ChevronDown,
   ArrowDown,
   Zap,
   Eye,
@@ -84,6 +85,7 @@ const STORAGE_KEY = "global-bridge-call-notes";
 export default function GlobalBridgeProposalPage() {
   const [activeSection, setActiveSection] = useState("hero");
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [isNotesExpanded, setIsNotesExpanded] = useState(false);
 
   // Load answers from localStorage on mount
   useEffect(() => {
@@ -845,16 +847,11 @@ export default function GlobalBridgeProposalPage() {
                   <div className="border-t border-gray-200 pt-2">
                     <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Извлекается:</p>
                     <div className="flex flex-wrap gap-1">
-                      {doc.fieldsExtracted.slice(0, 3).map((field, i) => (
+                      {doc.fieldsExtracted.map((field, i) => (
                         <span key={i} className="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded">
                           {field.split(" (")[0]}
                         </span>
                       ))}
-                      {doc.fieldsExtracted.length > 3 && (
-                        <span className="text-[10px] text-gray-400">
-                          +{doc.fieldsExtracted.length - 3}
-                        </span>
-                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -1206,13 +1203,8 @@ export default function GlobalBridgeProposalPage() {
                   key={index}
                   className="bg-white rounded-2xl p-5 border border-purple-100 flex items-start justify-between"
                 >
-                  <div>
-                    <h3 className="font-semibold text-[#1a1a1a] mb-1">{item.name}</h3>
-                    <p className="text-sm text-gray-600">{item.description}</p>
-                  </div>
-                  <span className="text-sm font-bold text-purple-600 whitespace-nowrap ml-4">
-                    {item.estimate}
-                  </span>
+                  <h3 className="font-semibold text-[#1a1a1a] mb-1">{item.name}</h3>
+                  <p className="text-sm text-gray-600">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -1309,7 +1301,7 @@ export default function GlobalBridgeProposalPage() {
           </div>
         </motion.section>
 
-        {/* Call Notes Section */}
+        {/* Call Notes Section - Collapsible */}
         <motion.section
           id="call-notes"
           initial={{ opacity: 0, y: 24 }}
@@ -1317,63 +1309,70 @@ export default function GlobalBridgeProposalPage() {
           viewport={{ once: true }}
           className="mb-8 scroll-mt-8"
         >
-          <div className="bg-white border border-gray-200 rounded-3xl p-8 md:p-10">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
-                <FileText className="w-5 h-5 text-amber-600" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-[#1a1a1a]">Вопросы для звонка</h2>
-                <p className="text-sm text-gray-500">Заметки сохраняются автоматически</p>
-              </div>
-            </div>
-
-            {(() => {
-              const categories = [...new Set(proposalData.callQuestions.map(q => q.category))];
-              return categories.map((category, catIndex) => (
-                <div key={category} className={catIndex > 0 ? "mt-8 pt-8 border-t border-gray-100" : ""}>
-                  <h3 className="font-semibold text-[#1a1a1a] mb-4 text-sm uppercase tracking-wider">
-                    {category}
-                  </h3>
-                  <div className="space-y-4">
-                    {proposalData.callQuestions
-                      .filter(q => q.category === category)
-                      .map((q, index) => (
-                        <div key={q.id} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                          <label className="block">
-                            <span className="text-sm font-medium text-[#1a1a1a] block mb-1">
-                              {index + 1}. {q.question}
-                            </span>
-                            {q.hint && (
-                              <span className="text-xs text-gray-400 block mb-2">{q.hint}</span>
-                            )}
-                            <textarea
-                              value={answers[q.id] || ""}
-                              onChange={(e) => handleAnswerChange(q.id, e.target.value)}
-                              placeholder="Ответ..."
-                              className="w-full mt-2 px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] resize-none min-h-[60px]"
-                              rows={2}
-                            />
-                          </label>
-                        </div>
-                      ))}
-                  </div>
+          <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden">
+            <button
+              onClick={() => setIsNotesExpanded(!isNotesExpanded)}
+              className="w-full p-8 md:p-10 flex items-center justify-between hover:bg-gray-50 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                  <FileText className="w-5 h-5 text-amber-600" />
                 </div>
-              ));
-            })()}
+                <h2 className="text-2xl font-bold text-[#1a1a1a]">Вопросы для звонка</h2>
+              </div>
+              <ChevronDown className={`w-6 h-6 text-gray-400 transition-transform ${isNotesExpanded ? "rotate-180" : ""}`} />
+            </button>
 
-            <div className="mt-8 pt-6 border-t border-gray-100">
-              <h3 className="font-semibold text-[#1a1a1a] mb-4 text-sm uppercase tracking-wider">
-                Дополнительные заметки
-              </h3>
-              <textarea
-                value={answers["additional-notes"] || ""}
-                onChange={(e) => handleAnswerChange("additional-notes", e.target.value)}
-                placeholder="Любые другие заметки со звонка..."
-                className="w-full px-4 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] resize-none min-h-[120px]"
-                rows={4}
-              />
-            </div>
+            {isNotesExpanded && (
+              <div className="px-8 md:px-10 pb-8 md:pb-10">
+                {(() => {
+                  const categories = [...new Set(proposalData.callQuestions.map(q => q.category))];
+                  return categories.map((category, catIndex) => (
+                    <div key={category} className={catIndex > 0 ? "mt-8 pt-8 border-t border-gray-100" : ""}>
+                      <h3 className="font-semibold text-[#1a1a1a] mb-4 text-sm uppercase tracking-wider">
+                        {category}
+                      </h3>
+                      <div className="space-y-4">
+                        {proposalData.callQuestions
+                          .filter(q => q.category === category)
+                          .map((q, index) => (
+                            <div key={q.id} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                              <label className="block">
+                                <span className="text-sm font-medium text-[#1a1a1a] block mb-1">
+                                  {index + 1}. {q.question}
+                                </span>
+                                {q.hint && (
+                                  <span className="text-xs text-gray-400 block mb-2">{q.hint}</span>
+                                )}
+                                <textarea
+                                  value={answers[q.id] || ""}
+                                  onChange={(e) => handleAnswerChange(q.id, e.target.value)}
+                                  placeholder="Ответ..."
+                                  className="w-full mt-2 px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] resize-none min-h-[60px]"
+                                  rows={2}
+                                />
+                              </label>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  ));
+                })()}
+
+                <div className="mt-8 pt-6 border-t border-gray-100">
+                  <h3 className="font-semibold text-[#1a1a1a] mb-4 text-sm uppercase tracking-wider">
+                    Дополнительные заметки
+                  </h3>
+                  <textarea
+                    value={answers["additional-notes"] || ""}
+                    onChange={(e) => handleAnswerChange("additional-notes", e.target.value)}
+                    placeholder="Любые другие заметки со звонка..."
+                    className="w-full px-4 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] resize-none min-h-[120px]"
+                    rows={4}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </motion.section>
 
