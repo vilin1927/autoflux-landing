@@ -42,7 +42,7 @@ import { proposalData } from "@/data/proposals/global-bridge-proposal";
 const sections = [
   { id: "hero", label: "Обзор" },
   { id: "problem", label: "Проблема" },
-  { id: "solution", label: "Решение" },
+  { id: "capabilities", label: "Возможности" },
   { id: "architecture", label: "Архитектура" },
   { id: "notifications", label: "Уведомления" },
   { id: "data-flow", label: "Как работает" },
@@ -51,7 +51,6 @@ const sections = [
   { id: "pricing", label: "Стоимость" },
   { id: "timeline", label: "Сроки" },
   { id: "call-notes", label: "Заметки" },
-  { id: "next-steps", label: "Следующие шаги" },
 ];
 
 const iconMap: Record<string, React.ElementType> = {
@@ -298,46 +297,100 @@ export default function GlobalBridgeProposalPage() {
           </div>
         </motion.div>
 
-        {/* The Solution Section */}
+        {/* Capabilities Section */}
         <motion.section
-          id="solution"
+          id="capabilities"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-8 scroll-mt-8"
         >
           <div className="bg-green-50 border border-green-100 rounded-3xl p-8 md:p-10">
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
                 <CheckCircle className="w-5 h-5 text-green-600" />
               </div>
-              <h2 className="text-2xl font-bold text-[#1a1a1a]">Что вы получите</h2>
+              <div>
+                <h2 className="text-2xl font-bold text-[#1a1a1a]">{proposalData.capabilities.title}</h2>
+                <p className="text-sm text-gray-600">{proposalData.capabilities.subtitle}</p>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              {proposalData.solutions.map((solution, index) => {
-                const Icon = iconMap[solution.icon] || CheckCircle;
-                return (
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* For Clients */}
+              <div className="bg-white rounded-2xl p-6 border border-green-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <LayoutDashboard className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <h3 className="font-bold text-[#1a1a1a]">{proposalData.capabilities.forClients.title}</h3>
+                </div>
+                <ul className="space-y-2.5">
+                  {proposalData.capabilities.forClients.items.map((item, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex items-start gap-2.5 text-sm text-gray-700"
+                    >
+                      <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* For Admin */}
+              <div className="bg-white rounded-2xl p-6 border border-green-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Settings className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <h3 className="font-bold text-[#1a1a1a]">{proposalData.capabilities.forAdmin.title}</h3>
+                </div>
+                <ul className="space-y-2.5">
+                  {proposalData.capabilities.forAdmin.items.map((item, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex items-start gap-2.5 text-sm text-gray-700"
+                    >
+                      <Check className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Security */}
+            <div className="mt-6 bg-white rounded-2xl p-6 border border-green-100">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-emerald-600" />
+                </div>
+                <h3 className="font-bold text-[#1a1a1a]">{proposalData.capabilities.security.title}</h3>
+              </div>
+              <div className="grid md:grid-cols-2 gap-2.5">
+                {proposalData.capabilities.security.items.map((item, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-2xl p-5 border border-green-100"
+                    transition={{ delay: index * 0.05 }}
+                    className="flex items-start gap-2.5 text-sm text-gray-700"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-5 h-5 text-green-600" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-[#1a1a1a] mb-1">{solution.title}</h3>
-                        <p className="text-sm text-gray-600">{solution.description}</p>
-                      </div>
-                    </div>
+                    <Lock className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <span>{item}</span>
                   </motion.div>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         </motion.section>
@@ -1157,49 +1210,6 @@ export default function GlobalBridgeProposalPage() {
                 className="w-full px-4 py-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] resize-none min-h-[120px]"
                 rows={4}
               />
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Next Steps */}
-        <motion.section
-          id="next-steps"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-8 scroll-mt-8"
-        >
-          <div className="bg-[#2563EB] rounded-3xl p-8 md:p-10 text-white">
-            <h2 className="text-2xl font-bold mb-8">Следующие шаги</h2>
-
-            <div className="grid md:grid-cols-3 gap-4 mb-8">
-              {proposalData.nextSteps.map((step) => (
-                <div
-                  key={step.step}
-                  className="bg-white/10 border border-white/10 rounded-2xl p-5"
-                >
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl font-bold mb-4">
-                    {step.step}
-                  </div>
-                  <h3 className="font-semibold mb-1">{step.title}</h3>
-                  <p className="text-sm text-white/70">{step.description}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/proposals/global-bridge/demo"
-                  className="inline-flex items-center gap-2 bg-white text-[#2563EB] px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-colors"
-                >
-                  Интерактивное демо
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
-              </div>
-              <p className="text-xs text-white/50">
-                Демо использует примерные данные для иллюстрации. Финальный продукт будет готовым к production клиентским порталом.
-              </p>
             </div>
           </div>
         </motion.section>
