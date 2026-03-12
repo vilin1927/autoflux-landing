@@ -41,6 +41,35 @@
 
 ## Session Log
 
+### 2026-03-12 — Global Bridge proposal overhaul
+**Discovery:** Global Bridge is NOT a real estate agency — they do company registration for expats (Russian-speaking clients from CIS countries doing business in UAE)
+
+**Updated proposal (`/proposals/global-bridge`):**
+- Changed client role from "Real estate" to "Company registration for expats"
+- Added TOP 5 hosting providers (Serverspace, Fornex, Aeza, YourServer, MVPS) with:
+  - Country, locations, pros/cons, verdict for each
+  - Serverspace marked as "ЛУЧШИЙ ВЫБОР" — UAE/Kazakhstan/Uzbekistan data centers
+- Added new OCR section with:
+  - 5 UAE document types: Trade License, Emirates ID, Residence Visa, Establishment Card, MOA
+  - Arabic names (رخصة تجارية, etc.) and renewal periods
+  - Fields extracted from each document type
+  - How OCR works (5-step process using Claude API)
+  - Accuracy (95%+) and cost (~$15-50 one-time for 50 clients × 10 docs)
+- Added "ocr" to navigation sections
+
+**Files changed:**
+- `data/proposals/global-bridge-proposal.ts` — full data restructure
+- `app/proposals/global-bridge/page.tsx` — hosting + OCR section rendering
+- `docs/global-bridge-call-transcript-mar12.md` — full call transcript (requirements)
+
+**Key requirements from call:**
+- ~50 clients, ~10 documents per company
+- Company health dashboard (green/orange/red)
+- Email-only notifications for MVP (Resend free tier)
+- PWA (add to home screen)
+- 30% clients in Russia — hosting must be accessible from RF but NOT Russian company
+- OCR to extract expiry dates from uploaded documents
+
 ### 2026-03-11 — LyncPath logistics demo
 - Built full interactive demo at `/proposals/lyncpath/demo` for Upwork lead
 - Product: end-to-end container shipment visibility SaaS

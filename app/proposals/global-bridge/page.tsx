@@ -36,6 +36,9 @@ import {
   CheckCircle,
   Layers,
   File,
+  ScanLine,
+  FileCheck,
+  Languages,
 } from "lucide-react";
 import { proposalData } from "@/data/proposals/global-bridge-proposal";
 
@@ -44,6 +47,7 @@ const sections = [
   { id: "problem", label: "Проблема" },
   { id: "capabilities", label: "Возможности" },
   { id: "architecture", label: "Архитектура" },
+  { id: "ocr", label: "OCR" },
   { id: "notifications", label: "Уведомления" },
   { id: "data-flow", label: "Как работает" },
   { id: "milestone-1", label: "Milestone 1" },
@@ -697,46 +701,163 @@ export default function GlobalBridgeProposalPage() {
             <div className="mt-8 pt-8 border-t border-gray-100">
               <h3 className="font-semibold text-[#1a1a1a] mb-4 flex items-center gap-2">
                 <Server className="w-4 h-4 text-gray-400" />
-                Варианты хостинга
+                {proposalData.architecture.hosting.title}
               </h3>
-              <div className="grid md:grid-cols-2 gap-4">
+              <p className="text-sm text-gray-500 mb-4">{proposalData.architecture.hosting.description}</p>
+              <div className="space-y-4">
                 {proposalData.architecture.hosting.options.map((option, index) => (
                   <div
                     key={index}
                     className={`rounded-xl p-5 border ${
                       index === 0
-                        ? "bg-blue-50 border-blue-100"
+                        ? "bg-green-50 border-green-200"
                         : "bg-gray-50 border-gray-100"
                     }`}
                   >
-                    <div className="flex items-center gap-2 mb-2">
-                      {index === 0 ? (
-                        <Cloud className="w-5 h-5 text-blue-600" />
-                      ) : (
-                        <Server className="w-5 h-5 text-gray-600" />
-                      )}
-                      <h4 className="font-semibold text-[#1a1a1a]">{option.name}</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        {index === 0 ? (
+                          <Check className="w-5 h-5 text-green-600" />
+                        ) : (
+                          <Server className="w-5 h-5 text-gray-500" />
+                        )}
+                        <h4 className="font-semibold text-[#1a1a1a]">{option.name}</h4>
+                        <span className="text-xs bg-gray-200 px-2 py-0.5 rounded">{option.country}</span>
+                      </div>
+                      <span className="text-lg font-bold text-[#1a1a1a]">{option.cost}</span>
                     </div>
-                    <p className="text-sm text-gray-500 mb-2">{option.services}</p>
-                    <p className="text-lg font-bold text-[#1a1a1a] mb-3">{option.cost}</p>
-                    <div className="space-y-1">
-                      {option.pros.map((pro, i) => (
-                        <p key={i} className="text-xs text-green-600 flex items-center gap-1">
-                          <Check className="w-3 h-3" /> {pro}
-                        </p>
-                      ))}
-                      {option.cons.map((con, i) => (
-                        <p key={i} className="text-xs text-gray-400">
-                          — {con}
-                        </p>
-                      ))}
+                    <p className="text-sm text-gray-500 mb-2">📍 {option.locations}</p>
+                    <div className="grid md:grid-cols-2 gap-2 mb-2">
+                      <div>
+                        {option.pros.map((pro, i) => (
+                          <p key={i} className="text-xs text-green-600 flex items-center gap-1">
+                            <Check className="w-3 h-3" /> {pro}
+                          </p>
+                        ))}
+                      </div>
+                      <div>
+                        {option.cons.map((con, i) => (
+                          <p key={i} className="text-xs text-red-400 flex items-center gap-1">
+                            <span className="w-3 h-3">−</span> {con}
+                          </p>
+                        ))}
+                      </div>
                     </div>
+                    <p className={`text-xs font-semibold ${index === 0 ? "text-green-700" : "text-gray-600"}`}>
+                      → {option.verdict}
+                    </p>
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-gray-500 mt-4 text-center">
-                <strong>Рекомендация:</strong> {proposalData.architecture.hosting.recommendation}
+              <p className="text-sm text-gray-500 mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                <strong>💡 Рекомендация:</strong> {proposalData.architecture.hosting.recommendation}
               </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* OCR Capability Section */}
+        <motion.section
+          id="ocr"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8 scroll-mt-8"
+        >
+          <div className="bg-white border border-gray-200 rounded-3xl p-8 md:p-10">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                <ScanLine className="w-5 h-5 text-purple-600" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-[#1a1a1a]">{proposalData.ocrCapability.title}</h2>
+                <p className="text-sm text-gray-500">{proposalData.ocrCapability.subtitle}</p>
+              </div>
+            </div>
+
+            <p className="text-gray-600 mb-6">{proposalData.ocrCapability.description}</p>
+
+            {/* How OCR Works */}
+            <div className="bg-purple-50 border border-purple-100 rounded-2xl p-6 mb-8">
+              <h3 className="font-semibold text-[#1a1a1a] mb-4 flex items-center gap-2">
+                <Zap className="w-4 h-4 text-purple-600" />
+                Как это работает
+              </h3>
+              <div className="space-y-3">
+                {proposalData.ocrCapability.howItWorks.map((step, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <span className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                      {index + 1}
+                    </span>
+                    <p className="text-sm text-gray-700">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Document Types Grid */}
+            <h3 className="font-semibold text-[#1a1a1a] mb-4 flex items-center gap-2">
+              <FileCheck className="w-4 h-4 text-purple-600" />
+              Типы документов ОАЭ
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              {proposalData.ocrCapability.documents.map((doc, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-gray-50 border border-gray-100 rounded-xl p-4"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileText className="w-4 h-4 text-purple-600" />
+                    <h4 className="font-semibold text-sm text-[#1a1a1a]">{doc.type}</h4>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Languages className="w-3 h-3 text-gray-400" />
+                    <span className="text-xs text-gray-500 font-arabic">{doc.nameAr}</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mb-2">{doc.description}</p>
+                  <div className="flex items-center gap-1 mb-3">
+                    <Clock className="w-3 h-3 text-orange-500" />
+                    <span className="text-xs text-orange-600 font-medium">{doc.renewal}</span>
+                  </div>
+                  <div className="border-t border-gray-200 pt-2">
+                    <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Извлекается:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {doc.fieldsExtracted.slice(0, 3).map((field, i) => (
+                        <span key={i} className="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded">
+                          {field.split(" (")[0]}
+                        </span>
+                      ))}
+                      {doc.fieldsExtracted.length > 3 && (
+                        <span className="text-[10px] text-gray-400">
+                          +{doc.fieldsExtracted.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Accuracy & Cost */}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-green-50 border border-green-100 rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Check className="w-4 h-4 text-green-600" />
+                  <span className="font-semibold text-sm text-green-800">Точность</span>
+                </div>
+                <p className="text-sm text-green-700">{proposalData.ocrCapability.accuracy}</p>
+              </div>
+              <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <DollarSign className="w-4 h-4 text-blue-600" />
+                  <span className="font-semibold text-sm text-blue-800">Стоимость OCR</span>
+                </div>
+                <p className="text-sm text-blue-700">{proposalData.ocrCapability.cost}</p>
+              </div>
             </div>
           </div>
         </motion.section>
