@@ -1,6 +1,6 @@
 # AutoFlux Landing — Progress Log
 
-## Current State (2026-03-10)
+## Current State (2026-03-13)
 
 ### What Exists
 - **Homepage:** Fully built with 8 sections (Hero, TrustBar, Stats, HowItWorks, WhoWeServe, Testimonial, CaseStudies, Contact)
@@ -10,7 +10,7 @@
 - **Analytics:** Full PostHog integration (pageviews, CTAs, section visibility, carousel, booking funnel, video)
 - **Booking:** Cal.com embed popup working (namespace "blueprint")
 - **Design System:** CSS custom properties in globals.css, Tailwind v4, shadcn/ui components
-- **Deployment:** VPS at 194.36.88.191, PM2 process "autoflux", deploy via git pull + npm build
+- **Deployment:** Vercel (auto-deploy from GitHub main branch)
 
 ### Active Proposals (routes under /proposals/)
 1. eToll — AI Assistant ($4,500)
@@ -22,13 +22,13 @@
 7. Deck Builder — AI pitch deck (Aleksander Johansen)
 8. Image Resize — AI image resizing tool
 9. Theo — Custom proposal
-10. Global Bridge — Real estate portal demo
+10. Global Bridge — Company registration for expats (UAE), document/deadline management ($1,600)
 11. **LyncPath** — Logistics SaaS container shipment visibility (Upwork lead)
 
 ### Git
 - **Branch:** main
 - **Remote:** git@github.com:vilin1927/autoflux-landing.git
-- **Latest commit:** c1a78e6 — "Remove broken media image from real estate case study"
+- **Latest commit:** d25cf66 — "Global Bridge: fix storage and VPS pricing"
 
 ### Known Issues / Gaps
 - Admin dashboard only lists 3 proposals (eToll, Orgonic Art, Alamance) — should list all 10+
@@ -41,11 +41,30 @@
 
 ## Session Log
 
-### 2026-03-12 — Global Bridge proposal overhaul (continued)
-**Completed:**
-- Added "СТАРОЕ ДЕМО" banner to `/proposals/global-bridge/demo`
-- Removed "Интерактивное демо" link from proposal page
-- All demo link references removed from proposal
+### 2026-03-13 — Global Bridge proposal finalization
+
+**Demo cleanup:**
+- Removed "Интерактивное демо" button from proposal page
+- Added "СТАРОЕ ДЕМО" amber banner to demo page (`/proposals/global-bridge/demo`)
+- Banner says: "Это демо устарело. Актуальный функционал описан в коммерческом предложении."
+
+**Storage decision:**
+- Changed "Локальное / S3" to "Локальное (на VPS)" — no S3, files stored on VPS disk
+- Rationale: 50 clients × 10 docs = ~500 PDFs (~1-2GB) — local storage is plenty
+
+**VPS pricing updated to ranges:**
+- Serverspace: ~$5/месяц → $5-10/месяц
+- Fornex: €4.68/месяц → €5-10/месяц
+- Aeza: €4.94/месяц → €5-10/месяц
+- Summary: $5-10/месяц → $5-15/месяц
+- Total monthly: ~$10-15/месяц → ~$10-20/месяц
+- Rationale: realistic range for 2GB+ RAM VPS needed for Next.js + PostgreSQL + files
+
+**Commits:**
+- `556a8f5` — Global Bridge: remove demo link, add old demo badge
+- `d25cf66` — Global Bridge: fix storage and VPS pricing
+
+---
 
 ### 2026-03-12 — Global Bridge proposal overhaul
 **Discovery:** Global Bridge is NOT a real estate agency — they do company registration for expats (Russian-speaking clients from CIS countries doing business in UAE)
