@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const PROPOSAL_PASSWORD = "globalhair2026";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -1175,6 +1177,90 @@ function Phase2Content() {
 
 export default function ProposalPage() {
   const [activeTab, setActiveTab] = useState<"phase1" | "phase2">("phase1");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("globalhair_auth") === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  if (!isAuthenticated) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center px-4"
+        style={{ background: colors.navy }}
+      >
+        <div
+          className="w-full max-w-sm rounded-2xl p-8"
+          style={{
+            background: colors.navyLight,
+            border: `1px solid ${colors.gold}30`,
+          }}
+        >
+          <div className="text-center mb-8">
+            <div
+              className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
+              style={{ background: `${colors.gold}20`, border: `1px solid ${colors.gold}40` }}
+            >
+              <Shield size={20} style={{ color: colors.gold }} />
+            </div>
+            <h1 className="text-xl font-bold mb-1" style={{ color: colors.white }}>
+              Proposal Access
+            </h1>
+            <p className="text-sm" style={{ color: colors.gray }}>
+              Enter the password to view this proposal
+            </p>
+          </div>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                if (password === PROPOSAL_PASSWORD) {
+                  sessionStorage.setItem("globalhair_auth", "true");
+                  setIsAuthenticated(true);
+                  setError("");
+                } else {
+                  setError("Incorrect password");
+                }
+              }
+            }}
+            placeholder="Password"
+            className="w-full px-4 py-3 rounded-xl text-sm outline-none mb-3"
+            style={{
+              background: colors.navyMid,
+              border: `1px solid ${error ? colors.red : colors.gold}30`,
+              color: colors.white,
+            }}
+          />
+          {error && (
+            <p className="text-xs mb-3" style={{ color: colors.red }}>
+              {error}
+            </p>
+          )}
+          <button
+            onClick={() => {
+              if (password === PROPOSAL_PASSWORD) {
+                sessionStorage.setItem("globalhair_auth", "true");
+                setIsAuthenticated(true);
+                setError("");
+              } else {
+                setError("Incorrect password");
+              }
+            }}
+            className="w-full py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
+            style={{ background: colors.gold, color: colors.navy }}
+          >
+            Access Proposal
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen" style={{ background: colors.navy }}>
