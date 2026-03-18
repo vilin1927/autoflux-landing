@@ -41,6 +41,34 @@
 
 ## Session Log
 
+### 2026-03-13 — Global Bridge deal status check
+
+**Current probability: ~40-45%**
+
+**Positive signals:**
+- Made it to top 3 out of 50+ proposals on Upwork
+- Had Zoom call + they asked for OCR details = serious interest
+- "Ruzel studied everything" — they reviewed proposal thoroughly
+- They tested live sites (fluxx.ru, smart-lex.de) from Russia
+
+**Red flags:**
+- "Need time to get back" without timeline — comparison mode
+- 3 people interviewing = 2 active competitors
+- Last viewed Upwork 2 days ago — checking other bids
+- $1,600 bid is at average ($1,721) — risk of undercut by $800-1,000 bid
+
+**What's likely happening:**
+Comparing 2-3 finalists. Ruzel (tech lead/decision-maker) reviewed all proposals. Either:
+1. Waiting for internal budget approval
+2. Negotiating with cheaper contractor first
+3. Actually busy with operations
+
+**Next action:**
+Wait 3-4 days (until ~March 17), then soft follow-up:
+"Ирина, добрый день! Если возникнут вопросы по предложению — всегда на связи. Удачи с решением!"
+
+---
+
 ### 2026-03-13 — Global Bridge proposal finalization
 
 **Demo cleanup:**
