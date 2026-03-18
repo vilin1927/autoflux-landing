@@ -85,7 +85,6 @@ const sections = [
   { id: "live-preview", label: "Live Preview" },
   { id: "what-we-need", label: "What We Need" },
   { id: "pricing-brain", label: "Pricing" },
-  { id: "why-this-price", label: "Why This Price" },
   { id: "timeline", label: "Timeline" },
   { id: "tech-stack-brain", label: "Tech Stack" },
   { id: "phase2-brain", label: "Phase 2" },
@@ -790,45 +789,6 @@ export default function AIBrainProposal() {
               </p>
             </div>
           </div>
-        </div>
-      </motion.section>
-
-      {/* Why This Price Section */}
-      <motion.section
-        id="why-this-price"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
-      >
-        <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
-          Why $1,200 Is a Steal
-        </h2>
-        <p className="text-[var(--text-muted)] mb-8">
-          Here&apos;s what you&apos;re actually getting for the price
-        </p>
-
-        <div className="space-y-4">
-          {aiBrainProposalData.whyThisPrice.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex items-start gap-4 p-4 bg-[var(--bg-light)] border border-[var(--border-light)] rounded-[var(--radius-lg)]"
-            >
-              <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
-                <Check className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <h3 className="font-bold text-[var(--text-dark)] mb-1">
-                  {item.point}
-                </h3>
-                <p className="text-sm text-[var(--text-muted)]">{item.detail}</p>
-              </div>
-            </motion.div>
-          ))}
         </div>
       </motion.section>
 
