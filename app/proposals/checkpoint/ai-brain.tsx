@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   Check,
@@ -29,6 +29,10 @@ import {
   Shield,
   Zap,
   ArrowRight,
+  Smartphone,
+  Settings,
+  BarChart3,
+  Trash2,
 } from "lucide-react";
 import {
   aiBrainProposalData,
@@ -83,12 +87,406 @@ const sections = [
   { id: "what-you-get", label: "What You Get" },
   { id: "how-it-works-brain", label: "How It Works" },
   { id: "live-preview", label: "Live Preview" },
-  { id: "what-we-need", label: "What We Need" },
+  { id: "what-i-need", label: "What I Need" },
   { id: "pricing-brain", label: "Pricing" },
   { id: "timeline", label: "Timeline" },
   { id: "tech-stack-brain", label: "Tech Stack" },
   { id: "phase2-brain", label: "Phase 2" },
 ];
+
+function LivePreviewSection() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const slides = ["chat", "admin"] as const;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  return (
+    <motion.section
+      id="live-preview"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
+    >
+      <div className="flex items-start justify-between mb-2">
+        <h2 className="text-2xl font-bold text-[var(--text-dark)]">
+          What It Looks Like
+        </h2>
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full">
+          <Smartphone className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="text-xs font-medium text-emerald-700">
+            Mobile-friendly
+          </span>
+        </div>
+      </div>
+      <p className="text-[var(--text-muted)] mb-6">
+        Your team uses it from any device — desktop, tablet, or phone
+      </p>
+
+      {/* Slide indicators */}
+      <div className="flex items-center gap-3 mb-6">
+        {[
+          { key: "chat", label: "Chat Interface", icon: MessageSquare },
+          { key: "admin", label: "Admin Panel", icon: Settings },
+        ].map((slide, i) => {
+          const Icon = slide.icon;
+          return (
+            <button
+              key={slide.key}
+              onClick={() => setActiveSlide(i)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                activeSlide === i
+                  ? "bg-[#0F172A] text-white"
+                  : "bg-[var(--bg-light)] text-[var(--text-muted)] hover:bg-[var(--border-light)]"
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              {slide.label}
+            </button>
+          );
+        })}
+        {/* Auto-slide progress */}
+        <div className="ml-auto hidden sm:flex items-center gap-1.5">
+          {slides.map((_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                activeSlide === i
+                  ? "w-6 bg-emerald-500"
+                  : "w-1.5 bg-[var(--border-light)]"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Slider content */}
+      <AnimatePresence mode="wait">
+        {activeSlide === 0 && (
+          <motion.div
+            key="chat"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Chat Preview */}
+            <div className="bg-[#0F172A] rounded-[var(--radius-lg)] overflow-hidden border border-[#1E293B]">
+              {/* Browser bar */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-[#1E293B] border-b border-[#334155]">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                </div>
+                <div className="flex-1 text-center">
+                  <span className="text-xs text-slate-400 font-mono">
+                    brain.watchcash.com
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex min-h-[420px]">
+                {/* Sidebar */}
+                <div className="hidden md:flex w-60 flex-col bg-[#1E293B] border-r border-[#334155] p-4">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+                      <Brain className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white">WatchCash Brain</p>
+                      <p className="text-xs text-slate-400">AI Knowledge Base</p>
+                    </div>
+                  </div>
+
+                  <button className="w-full flex items-center gap-2 px-3 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-sm font-medium mb-4">
+                    <MessageSquare className="w-4 h-4" />
+                    New Chat
+                  </button>
+
+                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-2 px-1">
+                    Recent
+                  </p>
+                  {aiBrainDemoData.recentQuestions.slice(0, 4).map((q, i) => (
+                    <div
+                      key={i}
+                      className={`px-3 py-2 rounded-lg text-xs text-slate-400 mb-1 truncate ${
+                        i === 0 ? "bg-white/5" : ""
+                      }`}
+                    >
+                      {q}
+                    </div>
+                  ))}
+
+                  <div className="mt-auto pt-4 border-t border-[#334155]">
+                    <div className="flex items-center gap-2 px-2">
+                      <div className="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                        <span className="text-xs font-bold text-emerald-400">
+                          {aiBrainDemoData.user.initials}
+                        </span>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-white">
+                          {aiBrainDemoData.user.name}
+                        </p>
+                        <p className="text-[10px] text-slate-500">Admin</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Chat area */}
+                <div className="flex-1 flex flex-col">
+                  <div className="flex items-center gap-6 px-6 py-3 border-b border-[#334155]">
+                    <div className="flex items-center gap-2">
+                      <FileText className="w-3.5 h-3.5 text-slate-500" />
+                      <span className="text-xs text-slate-400">
+                        <span className="text-white font-bold">
+                          {aiBrainDemoData.stats.documentsIndexed}
+                        </span>{" "}
+                        docs indexed
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Headphones className="w-3.5 h-3.5 text-slate-500" />
+                      <span className="text-xs text-slate-400">
+                        <span className="text-white font-bold">
+                          {aiBrainDemoData.stats.hoursTranscribed}
+                        </span>{" "}
+                        hrs transcribed
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex-1 p-6 space-y-6 overflow-y-auto">
+                    {aiBrainDemoData.sampleConversation.map((msg, i) => (
+                      <div
+                        key={i}
+                        className={`flex gap-3 ${
+                          msg.role === "user" ? "justify-end" : ""
+                        }`}
+                      >
+                        {msg.role === "assistant" && (
+                          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                            <Brain className="w-4 h-4 text-white" />
+                          </div>
+                        )}
+                        <div
+                          className={`max-w-lg rounded-xl px-4 py-3 ${
+                            msg.role === "user"
+                              ? "bg-emerald-500 text-white"
+                              : "bg-[#1E293B] text-slate-200"
+                          }`}
+                        >
+                          <p className="text-sm whitespace-pre-line leading-relaxed">
+                            {msg.message}
+                          </p>
+                          {"sources" in msg && msg.sources && (
+                            <div className="mt-3 pt-3 border-t border-slate-600/50">
+                              <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1.5">
+                                Sources
+                              </p>
+                              {msg.sources.map((s: string, j: number) => (
+                                <p
+                                  key={j}
+                                  className="text-xs text-emerald-400/80 flex items-center gap-1.5 mb-1"
+                                >
+                                  <FileText className="w-3 h-3" />
+                                  {s}
+                                </p>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        {msg.role === "user" && (
+                          <div className="w-8 h-8 rounded-full bg-slate-600 flex items-center justify-center flex-shrink-0">
+                            <span className="text-xs font-bold text-white">DG</span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="p-4 border-t border-[#334155]">
+                    <div className="flex items-center gap-3 bg-[#1E293B] rounded-xl px-4 py-3">
+                      <input
+                        type="text"
+                        placeholder="Ask anything about your business..."
+                        className="flex-1 bg-transparent text-sm text-slate-300 placeholder-slate-500 outline-none"
+                        disabled
+                      />
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+                        <ArrowRight className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {activeSlide === 1 && (
+          <motion.div
+            key="admin"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Admin Panel Preview */}
+            <div className="bg-[#0F172A] rounded-[var(--radius-lg)] overflow-hidden border border-[#1E293B]">
+              {/* Browser bar */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-[#1E293B] border-b border-[#334155]">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                </div>
+                <div className="flex-1 text-center">
+                  <span className="text-xs text-slate-400 font-mono">
+                    brain.watchcash.com/admin
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex min-h-[420px]">
+                {/* Admin Sidebar */}
+                <div className="hidden md:flex w-56 flex-col bg-[#1E293B] border-r border-[#334155] p-4">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+                      <Settings className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white">Admin Panel</p>
+                      <p className="text-xs text-slate-400">Manage your Brain</p>
+                    </div>
+                  </div>
+
+                  {[
+                    { icon: BarChart3, label: "Overview", active: true },
+                    { icon: FileText, label: "Documents", active: false },
+                    { icon: Headphones, label: "Calls", active: false },
+                    { icon: Upload, label: "Upload", active: false },
+                    { icon: Users, label: "Team", active: false },
+                    { icon: Settings, label: "Settings", active: false },
+                  ].map((item, i) => {
+                    const Icon = item.icon;
+                    return (
+                      <div
+                        key={i}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm mb-1 ${
+                          item.active
+                            ? "bg-emerald-500/10 text-emerald-400 font-medium"
+                            : "text-slate-400"
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {item.label}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Admin content */}
+                <div className="flex-1 p-6">
+                  <h3 className="text-lg font-bold text-white mb-1">
+                    Knowledge Base Overview
+                  </h3>
+                  <p className="text-xs text-slate-400 mb-6">
+                    Manage documents, calls, and team access
+                  </p>
+
+                  {/* Stats grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                    {[
+                      { label: "Documents", value: "156", color: "text-blue-400" },
+                      { label: "Hours Transcribed", value: "47h", color: "text-emerald-400" },
+                      { label: "Questions Asked", value: "892", color: "text-purple-400" },
+                      { label: "Team Members", value: "4", color: "text-amber-400" },
+                    ].map((stat, i) => (
+                      <div
+                        key={i}
+                        className="bg-[#1E293B] rounded-lg p-3"
+                      >
+                        <p className={`text-xl font-bold ${stat.color}`}>
+                          {stat.value}
+                        </p>
+                        <p className="text-[11px] text-slate-500">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Recent documents table */}
+                  <div className="bg-[#1E293B] rounded-lg overflow-hidden">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-[#334155]">
+                      <p className="text-sm font-medium text-white">
+                        Recent Documents
+                      </p>
+                      <button className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
+                        <Upload className="w-3 h-3" />
+                        Upload New
+                      </button>
+                    </div>
+                    {[
+                      { name: "Watch Authentication SOP v3.pdf", type: "SOP", date: "Mar 15", size: "2.4 MB" },
+                      { name: "Team Training — Feb 12 Call.mp3", type: "Call", date: "Feb 12", size: "48 MB" },
+                      { name: "Consignment Process Flowchart.pdf", type: "Guide", date: "Feb 8", size: "1.1 MB" },
+                      { name: "Sales Script — AP Royal Oak.docx", type: "Script", date: "Jan 28", size: "340 KB" },
+                    ].map((doc, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center justify-between px-4 py-2.5 border-b border-[#334155]/50 last:border-0"
+                      >
+                        <div className="flex items-center gap-3">
+                          <FileText className="w-4 h-4 text-slate-500" />
+                          <div>
+                            <p className="text-xs text-slate-300">{doc.name}</p>
+                            <p className="text-[10px] text-slate-500">
+                              {doc.type} &middot; {doc.size}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-[10px] text-slate-500">
+                            {doc.date}
+                          </span>
+                          <Trash2 className="w-3.5 h-3.5 text-slate-600" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Example questions */}
+      <div className="mt-6">
+        <p className="text-sm font-bold text-[var(--text-dark)] mb-3">
+          Example questions your team can ask:
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {aiBrainProposalData.exampleQuestions.map((q, i) => (
+            <span
+              key={i}
+              className="px-3 py-1.5 text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full"
+            >
+              &ldquo;{q}&rdquo;
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.section>
+  );
+}
 
 export default function AIBrainProposal() {
   const [activeSection, setActiveSection] = useState("brain-hero");
@@ -407,212 +805,12 @@ export default function AIBrainProposal() {
         </div>
       </motion.section>
 
-      {/* Live Preview Section — Chat Demo */}
+      {/* Live Preview Section — Auto-Sliding Chat + Admin */}
+      <LivePreviewSection />
+
+      {/* What I Need From You Section */}
       <motion.section
-        id="live-preview"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="bg-[var(--bg-white)] border border-[var(--border-light)] rounded-[var(--radius-xl)] p-8 md:p-10 mb-8 scroll-mt-8"
-      >
-        <h2 className="text-2xl font-bold text-[var(--text-dark)] mb-2">
-          What It Looks Like
-        </h2>
-        <p className="text-[var(--text-muted)] mb-8">
-          Your team will use a clean chat interface — here&apos;s a preview
-        </p>
-
-        {/* Chat Preview — Desktop */}
-        <div className="bg-[#0F172A] rounded-[var(--radius-lg)] overflow-hidden border border-[#1E293B]">
-          {/* Browser bar */}
-          <div className="flex items-center gap-2 px-4 py-3 bg-[#1E293B] border-b border-[#334155]">
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-red-500/60" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-              <div className="w-3 h-3 rounded-full bg-green-500/60" />
-            </div>
-            <div className="flex-1 text-center">
-              <span className="text-xs text-slate-400 font-mono">
-                brain.watchcash.com
-              </span>
-            </div>
-          </div>
-
-          <div className="flex min-h-[480px]">
-            {/* Sidebar */}
-            <div className="hidden md:flex w-64 flex-col bg-[#1E293B] border-r border-[#334155] p-4">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
-                  <Brain className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-white">WatchCash Brain</p>
-                  <p className="text-xs text-slate-400">AI Knowledge Base</p>
-                </div>
-              </div>
-
-              <button className="w-full flex items-center gap-2 px-3 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-sm font-medium mb-4">
-                <MessageSquare className="w-4 h-4" />
-                New Chat
-              </button>
-
-              <p className="text-xs text-slate-500 uppercase tracking-wider mb-2 px-1">
-                Recent
-              </p>
-              {aiBrainDemoData.recentQuestions.slice(0, 4).map((q, i) => (
-                <div
-                  key={i}
-                  className={`px-3 py-2 rounded-lg text-xs text-slate-400 mb-1 truncate ${
-                    i === 0 ? "bg-white/5" : "hover:bg-white/5"
-                  }`}
-                >
-                  {q}
-                </div>
-              ))}
-
-              <div className="mt-auto pt-4 border-t border-[#334155]">
-                <div className="flex items-center gap-2 px-2">
-                  <div className="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-xs font-bold text-emerald-400">
-                      {aiBrainDemoData.user.initials}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium text-white">
-                      {aiBrainDemoData.user.name}
-                    </p>
-                    <p className="text-[10px] text-slate-500">Admin</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Chat area */}
-            <div className="flex-1 flex flex-col">
-              {/* Stats bar */}
-              <div className="flex items-center gap-6 px-6 py-3 border-b border-[#334155]">
-                <div className="flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5 text-slate-500" />
-                  <span className="text-xs text-slate-400">
-                    <span className="text-white font-bold">
-                      {aiBrainDemoData.stats.documentsIndexed}
-                    </span>{" "}
-                    docs indexed
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Headphones className="w-3.5 h-3.5 text-slate-500" />
-                  <span className="text-xs text-slate-400">
-                    <span className="text-white font-bold">
-                      {aiBrainDemoData.stats.hoursTranscribed}
-                    </span>{" "}
-                    hrs transcribed
-                  </span>
-                </div>
-                <div className="hidden sm:flex items-center gap-2">
-                  <Users className="w-3.5 h-3.5 text-slate-500" />
-                  <span className="text-xs text-slate-400">
-                    <span className="text-white font-bold">
-                      {aiBrainDemoData.stats.teamMembers}
-                    </span>{" "}
-                    team members
-                  </span>
-                </div>
-              </div>
-
-              {/* Messages */}
-              <div className="flex-1 p-6 space-y-6 overflow-y-auto">
-                {aiBrainDemoData.sampleConversation.map((msg, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.3 }}
-                    className={`flex gap-3 ${
-                      msg.role === "user" ? "justify-end" : ""
-                    }`}
-                  >
-                    {msg.role === "assistant" && (
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0">
-                        <Brain className="w-4 h-4 text-white" />
-                      </div>
-                    )}
-                    <div
-                      className={`max-w-lg rounded-xl px-4 py-3 ${
-                        msg.role === "user"
-                          ? "bg-emerald-500 text-white"
-                          : "bg-[#1E293B] text-slate-200"
-                      }`}
-                    >
-                      <p className="text-sm whitespace-pre-line leading-relaxed">
-                        {msg.message}
-                      </p>
-                      {"sources" in msg && msg.sources && (
-                        <div className="mt-3 pt-3 border-t border-slate-600/50">
-                          <p className="text-[10px] uppercase tracking-wider text-slate-500 mb-1.5">
-                            Sources
-                          </p>
-                          {msg.sources.map((s: string, j: number) => (
-                            <p
-                              key={j}
-                              className="text-xs text-emerald-400/80 flex items-center gap-1.5 mb-1"
-                            >
-                              <FileText className="w-3 h-3" />
-                              {s}
-                            </p>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    {msg.role === "user" && (
-                      <div className="w-8 h-8 rounded-full bg-slate-600 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xs font-bold text-white">DG</span>
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Input */}
-              <div className="p-4 border-t border-[#334155]">
-                <div className="flex items-center gap-3 bg-[#1E293B] rounded-xl px-4 py-3">
-                  <input
-                    type="text"
-                    placeholder="Ask anything about your business..."
-                    className="flex-1 bg-transparent text-sm text-slate-300 placeholder-slate-500 outline-none"
-                    disabled
-                  />
-                  <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
-                    <ArrowRight className="w-4 h-4 text-white" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Example questions */}
-        <div className="mt-6">
-          <p className="text-sm font-bold text-[var(--text-dark)] mb-3">
-            Example questions your team can ask:
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {aiBrainProposalData.exampleQuestions.map((q, i) => (
-              <span
-                key={i}
-                className="px-3 py-1.5 text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full"
-              >
-                &ldquo;{q}&rdquo;
-              </span>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* What We Need From You Section */}
-      <motion.section
-        id="what-we-need"
+        id="what-i-need"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -621,16 +819,16 @@ export default function AIBrainProposal() {
         <div className="flex items-center gap-3 mb-2">
           <Upload className="w-6 h-6 text-emerald-600" />
           <h2 className="text-2xl font-bold text-[var(--text-dark)]">
-            What We Need From You
+            What I Need From You
           </h2>
         </div>
         <p className="text-[var(--text-muted)] mb-8">
-          Send us these files and we handle everything else — transcription,
+          Send me these files and I handle everything else — transcription,
           indexing, setup, deployment
         </p>
 
         <div className="grid md:grid-cols-2 gap-4">
-          {aiBrainProposalData.whatWeNeedFromYou.map((item, i) => {
+          {aiBrainProposalData.whatINeedFromYou.map((item, i) => {
             const Icon = iconMap[item.icon] || Sparkles;
             return (
               <motion.div
@@ -804,10 +1002,10 @@ export default function AIBrainProposal() {
           Timeline
         </h2>
         <p className="text-[var(--text-muted)] mb-8">
-          From start to live system in ~3 weeks
+          From start to live system in ~2 weeks
         </p>
 
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           {aiBrainProposalData.timeline.map((phase, i) => (
             <motion.div
               key={i}
@@ -816,7 +1014,7 @@ export default function AIBrainProposal() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
               className={`rounded-[var(--radius-lg)] p-6 ${
-                i === 2
+                i === 1
                   ? "bg-[#064E3B] text-white border border-[#065F46]"
                   : "bg-[var(--bg-light)] border border-[var(--border-light)]"
               }`}
@@ -824,12 +1022,12 @@ export default function AIBrainProposal() {
               <div className="flex items-center gap-2 mb-4">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    i === 2 ? "bg-emerald-400" : "bg-emerald-500/10"
+                    i === 1 ? "bg-emerald-400" : "bg-emerald-500/10"
                   }`}
                 >
                   <span
                     className={`text-xs font-bold ${
-                      i === 2 ? "text-[#064E3B]" : "text-emerald-600"
+                      i === 1 ? "text-[#064E3B]" : "text-emerald-600"
                     }`}
                   >
                     {i + 1}
@@ -838,7 +1036,7 @@ export default function AIBrainProposal() {
                 <div>
                   <p
                     className={`text-xs font-bold uppercase tracking-wider ${
-                      i === 2 ? "text-emerald-400" : "text-emerald-600"
+                      i === 1 ? "text-emerald-400" : "text-emerald-600"
                     }`}
                   >
                     {phase.week}
@@ -847,7 +1045,7 @@ export default function AIBrainProposal() {
               </div>
               <h3
                 className={`font-bold mb-3 ${
-                  i === 2 ? "text-white" : "text-[var(--text-dark)]"
+                  i === 1 ? "text-white" : "text-[var(--text-dark)]"
                 }`}
               >
                 {phase.title}
@@ -857,12 +1055,12 @@ export default function AIBrainProposal() {
                   <li key={j} className="flex items-start gap-2">
                     <Check
                       className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                        i === 2 ? "text-emerald-400" : "text-emerald-500"
+                        i === 1 ? "text-emerald-400" : "text-emerald-500"
                       }`}
                     />
                     <span
                       className={`text-sm ${
-                        i === 2 ? "text-white/80" : "text-[var(--text-muted)]"
+                        i === 1 ? "text-white/80" : "text-[var(--text-muted)]"
                       }`}
                     >
                       {task}
@@ -920,7 +1118,7 @@ export default function AIBrainProposal() {
           </h2>
         </div>
         <p className="text-[var(--text-muted)] mb-8">
-          Where we can take this once V1 is running
+          Where I can take this once V1 is running
         </p>
 
         <div className="grid md:grid-cols-3 gap-4">
@@ -960,14 +1158,14 @@ export default function AIBrainProposal() {
           Ready to Build Your AI Brain?
         </h2>
         <p className="text-white/80 mb-2 max-w-md mx-auto">
-          $600 to start &middot; 3 weeks to delivery &middot; $5-10/mo to run
+          $600 to start &middot; 2 weeks to delivery &middot; $5-10/mo to run
         </p>
         <p className="text-white/60 text-sm mb-6 max-w-md mx-auto">
           Your business knowledge — searchable, instant, always available
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
-            onClick={() => handleNavigate("what-we-need")}
+            onClick={() => handleNavigate("what-i-need")}
             className="inline-flex items-center gap-2 bg-white text-[#064E3B] px-8 py-4 rounded-[var(--radius-md)] font-bold hover:bg-white/90 transition-colors text-lg"
           >
             Let&apos;s Get Started

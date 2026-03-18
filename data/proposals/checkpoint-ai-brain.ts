@@ -134,9 +134,9 @@ export const aiBrainProposalData = {
   howItWorks: [
     {
       step: "Ingest",
-      title: "We Load Your Knowledge",
+      title: "I Load Your Knowledge",
       description:
-        "You send us your calls, Zoom recordings, scripts, SOPs, and mind maps. We transcribe everything and index it into the AI Brain.",
+        "You send me your calls, Zoom recordings, scripts, SOPs, and mind maps. I transcribe everything and index it into the AI Brain.",
       icon: "database",
       color: "blue",
     },
@@ -173,11 +173,11 @@ export const aiBrainProposalData = {
     "What did we decide about the new consignment process?",
     "Summarize the top 3 takeaways from last month's sales calls",
   ],
-  whatWeNeedFromYou: [
+  whatINeedFromYou: [
     {
       title: "Recorded Calls & Zoom Meetings",
       description:
-        "Any format works — MP3, MP4, WAV, Zoom cloud recordings, or even transcripts you already have. We handle all conversions.",
+        "Any format works — MP3, MP4, WAV, Zoom cloud recordings, or even transcripts you already have. I handle all conversions.",
       format: "Audio/video files or existing transcripts",
       icon: "mic",
     },
@@ -198,36 +198,9 @@ export const aiBrainProposalData = {
     {
       title: "5 Minutes of Your Time",
       description:
-        "Quick call to set up access to your VPS and walk through how your team will use it. That's it — we handle everything else.",
+        "Quick call to set up access to your VPS and walk through how your team will use it. That's it — I handle everything else.",
       format: "One short call",
       icon: "clock",
-    },
-  ],
-  whyThisPrice: [
-    {
-      point: "Custom-built for WatchCash",
-      detail:
-        "Not a generic chatbot template. Built specifically for your business, your team, your data.",
-    },
-    {
-      point: "Industry-leading AI stack",
-      detail:
-        "Gemini 3.1 Flash (outperforms ChatGPT on benchmarks), Deepgram Nova-3 (best transcription accuracy), Pinecone (fastest vector search).",
-    },
-    {
-      point: "Runs on your own server",
-      detail:
-        "No vendor lock-in, no surprise fees, full data ownership. Your business knowledge stays on your VPS — private and secure.",
-    },
-    {
-      point: "Near-zero ongoing costs",
-      detail:
-        "~$5-10/month total. Compare: ChatGPT Teams is $25/user/month. For a 5-person team, that's $125/mo vs your $5-10/mo.",
-    },
-    {
-      point: "Saves hours every week",
-      detail:
-        "Team members get instant answers instead of waiting for you. New hires onboard 10x faster. Knowledge never walks out the door.",
     },
   ],
   techStack: [
@@ -248,24 +221,17 @@ export const aiBrainProposalData = {
         "Transcribe all audio/video files",
         "Process all documents and SOPs",
         "Set up vector database with embeddings",
+        "Build RAG chat backend",
       ],
     },
     {
       week: "Week 2",
-      title: "AI Chat & Upload Panel",
+      title: "Chat UI, Deploy & Handoff",
       tasks: [
-        "Build RAG chat interface",
-        "Build document upload panel",
+        "Build chat interface + upload panel",
         "Multi-user authentication",
-      ],
-    },
-    {
-      week: "Week 3",
-      title: "Deploy & Polish",
-      tasks: [
         "Deploy to your VPS",
-        "Testing with your real data",
-        "Team walkthrough and handoff",
+        "Testing with your real data + team walkthrough",
       ],
     },
   ],
