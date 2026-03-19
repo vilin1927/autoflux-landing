@@ -109,9 +109,9 @@ const v2Roadmap = [
     est: "$500–800",
   },
   {
-    feature: "Mobile App (PWA)",
-    note: "Progressive Web App that installs on your phone like a native app. Push notifications for new deals.",
-    est: "$800–1,200",
+    feature: "Native-Like Mobile App (PWA)",
+    note: "V1 already works fully in your phone's browser — responsive design, all features accessible. This upgrade adds: install to home screen with a real app icon, push notifications for new deals (\"Sony XM4 for $89 just posted\"), offline access, and background syncing so deals load instantly when you open the app.",
+    est: "$650",
   },
   {
     feature: "Walmart + Target + More",
