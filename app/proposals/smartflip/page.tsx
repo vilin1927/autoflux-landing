@@ -79,17 +79,17 @@ const techStack = [
   { name: "Stripe", role: "$1 Trial, then $49/mo", icon: CreditCard },
   { name: "Claude Vision AI", role: "Smart Scan (Product ID)", icon: Eye },
   { name: "eBay Browse API", role: "Deals + Prices + Affiliates", icon: Globe },
-  { name: "Amazon Creators API", role: "Cross-Platform Pricing", icon: Package },
+  { name: "Amazon Creators API", role: "Added when Associates qualifies", icon: Package },
   { name: "eBay Partner Network", role: "Affiliate Revenue", icon: CircleDollarSign },
 ];
 
 const v1Features = [
-  "Smart Scan: photo to exact product, model, SKU, prices across eBay + Amazon",
-  "AI Deal Finder: live deals from eBay + Amazon with profit margins + confidence scores",
+  "Smart Scan: photo to exact product, model, SKU, prices on eBay (Amazon added when Associates account qualifies)",
+  "AI Deal Finder: live deals from eBay with profit margins + confidence scores (Amazon added alongside)",
   "Built-in Marketplace: list items, AI-suggested pricing, 5% transaction fee",
   "Affiliate links: every 'Buy' link earns revenue (eBay Partner Network)",
   "Profit Pool: funded from affiliates + marketplace fees, distributed monthly",
-  "$1 trial for 7 days, then auto-renew $49/mo (Stripe)",
+  "$1 trial for 7 days, then $49/mo auto-renew (Stripe) with clear disclosures and one-click cancel",
   "User accounts, profiles, scan history",
   "Revenue dashboard: your Profit Pool + affiliate earnings (no company numbers)",
   "Admin panel: user management, revenue tracking, pool controls",
@@ -98,6 +98,11 @@ const v1Features = [
 ];
 
 const v2Roadmap = [
+  {
+    feature: "Amazon Integration",
+    note: "Amazon's old product API shuts down April 30, 2026. The replacement (Creators API) requires an active Amazon Associates account with 10+ qualifying sales. Once your account qualifies, I add Amazon pricing and deals alongside eBay. Included in the original price, no extra charge.",
+    est: "Included",
+  },
   {
     feature: "Facebook Marketplace",
     note: "Facebook has no official API. Scraping breaks their Terms of Service and accounts get banned. I'll add this in v2 when there's a reliable, sustainable approach, likely through a third-party data provider.",
@@ -434,14 +439,14 @@ const milestones: MilestoneData[] = [
     num: 1,
     tag: "Scan & Price",
     title: "You snap a photo, AI tells you the profit",
-    price: "$1,200",
+    price: "$1,000",
     days: "Days 1-5",
     scenario:
-      "You're at a yard sale. You spot a pair of Air Jordans on the shelf for $40. You pull out your phone, open SmartFlip, snap a photo. Seconds later, the app tells you: \"Air Jordan 4 Retro Military Black, SKU CT8527-100. eBay value: $190-220. Amazon: $210-240. Quick flip: $170. Demand: High. Sells in ~3 days.\" You buy them on the spot. That's $130-200 profit from one photo. You can do this with anything. Sneakers, electronics, vintage furniture, kitchen gear. Walk into any thrift store or yard sale with confidence.",
+      "You're at a yard sale. You spot a pair of Air Jordans on the shelf for $40. You pull out your phone, open SmartFlip, snap a photo. Seconds later, the app tells you: \"Air Jordan 4 Retro Military Black, SKU CT8527-100. eBay value: $190-220. Quick flip: $170. Demand: High. Sells in ~3 days.\" You buy them on the spot. That's $130-170 profit from one photo. You can do this with anything. Sneakers, electronics, vintage furniture, kitchen gear. Walk into any thrift store or yard sale with confidence.",
     deliverables: [
       "Working web app with user accounts and authentication",
       "Smart Scan: photo upload to Claude Vision AI identifies product, brand, model, SKU",
-      "Cross-platform pricing: eBay Browse API + Amazon for market value lookup",
+      "Cross-platform pricing: eBay Browse API for market value lookup (Amazon added when Associates account qualifies)",
       "Scan results: quick-flip price, max-hold price, demand level, avg days to sell, similar listings count",
       "Scan history: every item you've ever scanned, saved to your account",
       "Responsive UI: works on your phone's browser at a thrift store",
@@ -453,16 +458,16 @@ const milestones: MilestoneData[] = [
     num: 2,
     tag: "Find Deals",
     title: "Deals come to you, not the other way around",
-    price: "$1,200",
+    price: "$1,000",
     days: "Days 6-10",
     scenario:
       "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, >30% margin, within 50 miles. There's a Sony WH-1000XM4 listed on eBay for $89, sells for $179, 50% margin, 94% confidence score. You tap \"Buy on eBay\" and the link takes you straight to the listing. You just found a $90 profit deal in moments. And that click? It was an affiliate link. It just earned revenue that flows into the Profit Pool. You're making money even when you're browsing.",
     deliverables: [
-      "AI Deal Finder: scans eBay and Amazon in real-time for underpriced items",
+      "AI Deal Finder: scans eBay in real-time for underpriced items (Amazon added when Associates account qualifies)",
       "Deal scoring algorithm: profit margin, confidence score, demand level, time sensitivity",
       "Category and location filtering: find deals near you or nationwide",
       "Every \"Buy\" link is an affiliate link (eBay Partner Network), earns revenue automatically",
-      "Amazon cross-referencing: same product, different price on Amazon vs eBay",
+      "Amazon price comparison: added once your Amazon Associates account has 10+ qualifying sales",
       "Dashboard with deal stats: active deals, avg profit margin, total opportunities",
       "Auto-refresh: new deals appear throughout the day via background scanning",
     ],
@@ -472,7 +477,7 @@ const milestones: MilestoneData[] = [
     num: 3,
     tag: "Sell & Earn",
     title: "List, sell, and watch your earnings grow",
-    price: "$1,100",
+    price: "$800",
     days: "Days 11-15",
     scenario:
       "You flipped 5 items this week. Now you want to sell them. You open SmartFlip's marketplace, tap \"New Listing\" and the AI auto-fills the title, description, and suggested price based on your scan data. Your Air Jordans go live at $195. Other SmartFlip users see them. Meanwhile, you check your earnings tab: $32.40 from the Profit Pool, $15.40 from affiliate clicks. That's $47.80 in passive income this month, on top of your flip profits. Your friend signs up through your link, pays $1 for a trial, and auto-renews at $49/mo next week.",
@@ -785,7 +790,7 @@ export default function SmartFlipProposal() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
           <motion.div variants={fadeUp} className="text-center mb-12">
             <span className="text-xs font-medium text-emerald-400 uppercase tracking-wider">Investment</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3">$3,500 flat, everything included</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3">$2,800 flat, everything included</h2>
             <p className="text-sm text-slate-400 mt-3 max-w-xl mx-auto">
               Flat price with clear milestones. You see working software after each milestone.
               No hourly billing, no surprises, no scope creep.
@@ -811,7 +816,7 @@ export default function SmartFlipProposal() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               <div>
                 <p className="text-sm text-slate-400">Total Investment</p>
-                <p className="text-4xl font-bold text-white">$3,500</p>
+                <p className="text-4xl font-bold text-white">$2,800</p>
               </div>
               <div className="hidden md:block w-px h-12 bg-white/10" />
               <div>

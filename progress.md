@@ -1,41 +1,60 @@
 # AutoFlux Landing — Progress Log
 
-## Current State (2026-03-19)
+## Current Session: 2026-03-19
 
-### Session: 2026-03-19 — SmartFlip Market Research
+### SmartFlip (Justin Connell) — Full Proposal Ready to Send
 
-**What was researched:**
-- Competitor landscape (Tactical Arbitrage, BuyBotPro, AMZScout, WorthPoint, Flipify, Flippr, FlipMine)
-- eBay Browse API (endpoints, rate limits, image search, access requirements)
-- Amazon PA-API 5.0 (deprecating April 2026, migrating to Creators API)
-- Facebook Marketplace (NO official API — scraping only)
-- Google Vision API vs Claude Vision (pricing, product recognition capabilities)
-- Stripe $1 trial → subscription implementation (add_invoice_items approach)
+**Status:** Proposal and demo built, audited, priced. Ready to send link + record Loom.
 
-**Key decisions:**
-- Claude Vision is the better choice for SmartFlip product recognition (flexible, can extract brand/model/SKU from context, ~$0.004/image with Sonnet)
-- Facebook Marketplace has NO API — must use scraping tools (Apify, Bright Data) or skip FB for MVP
-- Amazon PA-API is being deprecated April 2026 — must plan for Creators API migration
-- eBay Browse API is free but limited to 5,000 calls/day (can request increase to 100K)
-- Stripe $1 trial is technically a subscription with add_invoice_items for $1 upfront charge during trial period
+**What was built:**
+1. Full proposal page at `/proposals/smartflip` with 11 sections: Problem, Solution, How It Works, 3 tangible milestones with app mockups, V1/V2 scope, Tech Stack, Profit Pool math, Pricing, Next Steps
+2. Updated demo at `/proposals/smartflip/demo` with 5 tabs: Dashboard, Deal Finder, Smart Scan (SKU matching), Marketplace (5% fee), Earnings (profit pool + affiliate only)
+3. All Justin's confirmed requirements mapped to milestones
+
+**Pricing decision: $2,800 (down from $3,500)**
+- M1 "Scan & Price": $1,000 (days 1-5)
+- M2 "Find Deals": $1,000 (days 6-10)
+- M3 "Sell & Earn": $800 (days 11-15)
+- Rationale: Justin's max fixed-price ever was $500. His avg hourly is $18.67. At $2,800 we're ~$23/hr equivalent, closer to his anchor. Win probability ~65-70% vs ~45-50% at $3,500.
+- Floor: $2,200. If he offers upfront: $2,500.
+
+**Technical audit (March 2026):**
+- eBay Browse API: ACTIVE, 5K/day limit (request increase during dev)
+- Amazon PA-API 5.0: DYING April 30, 2026. Replacement (Creators API) requires Associates account with 10+ sales
+- BLOCKER: Amazon integration depends on Justin having active Associates account. eBay is primary for MVP, Amazon added when account qualifies (included in price, no extra charge)
+- eBay Partner Network: ACTIVE, 1-4% commissions
+- Claude Vision: ACTIVE, ~$0.005/scan, best option for Smart Scan
+- Stripe $1 trial: WORKING, need clear disclosures + one-click cancel for state law compliance
+- Stripe Connect: ACTIVE for 5% marketplace fee
+- Next.js 16.2 released March 18 — clean upgrade
+
+**Must ask Justin on call:**
+1. Do you have an active Amazon Associates account? (blocker for Amazon API)
+2. Flat price or do you want to discuss further?
+
+**Commits this session:**
+- `6e03272` — Full proposal page (milestones, pricing, app previews)
+- `38988f8` — Demo update (earnings tab, SKU matching, mobile support)
+- `9ee1da6` — PWA clarification ($650, V1 is responsive)
+- `5e3fc88` — Remove em dashes and arrows from text
+- `8d54c48` — Remove specific time promises
+- Current — Price update to $2,800, Amazon blocker noted in proposal
 
 **What comes next:**
-- Wait for Justin's answers to 5 clarifying questions
-- When he responds: schedule call, prepare final proposal with pricing
-- Use this research to inform technical scope and API cost estimates in proposal
+- Push final version to GitHub
+- Send Justin the proposal link
+- Record Loom walkthrough
+- Schedule call to align on scope + pricing
 
-### Session: 2026-03-19 — SmartFlip Monetization & Pricing Research
+---
 
-**What was researched:**
-- Revenue sharing / profit pool models (Honeygain, Sweatcoin, X creator fund, YouTube model)
-- Affiliate programs: eBay Partner Network (1-4%, API via Browse API), Amazon Associates (1-20%, PA-API deprecated April 2026 → Creators API), Walmart (1-4% via Impact)
-- Marketplace listing fees: Poshmark (20%), Mercari (10%+3%), eBay (13.25%), OfferUp (free), Facebook (6%)
-- Marketplace take rates: avg 10-30%, startups should start 5-10% to build liquidity
-- Competitor pricing: FlipHero ($5/mo), Flipify ($5-10/mo per watchlist), Underpriced AI ($9-99/mo), Vendoo ($9-70/mo), List Perfectly ($29-249/mo), SellerAmp ($20-30/mo), WorthPoint ($29-47/mo)
+### Previous Research (2026-03-19)
 
-**Key decision:** Justin's $49/mo is competitive — it sits in the mid-range, above basic deal finders ($5-10) but below full cross-listing platforms ($50-250). The value prop must clearly exceed what $9-30 tools offer.
+**Competitor landscape:** Tactical Arbitrage ($59-129/mo, Amazon only), BuyBotPro ($40-130/mo), Underpriced AI ($9-99/mo), Flipify ($5-10/mo), WorthPoint ($29-47/mo). Nobody does the full loop: photo scan to identify to cross-platform pricing to profit calc. SmartFlip's differentiator.
 
-**Profit pool sustainability analysis:** Must be funded from affiliate commissions + listing fees, NOT subscription revenue. At 2-3% affiliate commission avg and $49/mo subscription, profit pool should be capped at 10-20% of platform affiliate earnings, distributed proportional to user activity.
+**Profit pool model:** Funded from affiliate commissions (30% of eBay Partner Network earnings) + marketplace fees (15% of 5% transaction fees). Never from subscriptions. Self-correcting: if revenue drops, pool shrinks. At 1,000 subscribers, pool ~$2,625/mo, avg user payout $6-15/mo.
+
+**$49/mo pricing:** Competitive. Above basic deal finders ($5-10), on par with Underpriced AI Plus ($49), below full platforms ($70-250). Justified by scan + deals + marketplace + profit pool combo.
 
 ---
 
