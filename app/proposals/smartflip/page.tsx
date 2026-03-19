@@ -437,7 +437,7 @@ const milestones: MilestoneData[] = [
     price: "$1,200",
     days: "Days 1-5",
     scenario:
-      "You're at a yard sale. You spot a pair of Air Jordans on the shelf for $40. You pull out your phone, open SmartFlip, snap a photo. In 5 seconds flat, the app tells you: \"Air Jordan 4 Retro Military Black, SKU CT8527-100. eBay value: $190-220. Amazon: $210-240. Quick flip: $170. Demand: High. Sells in ~3 days.\" You buy them on the spot. That's $130-200 profit from one photo. You can do this with anything. Sneakers, electronics, vintage furniture, kitchen gear. Walk into any thrift store or yard sale with confidence.",
+      "You're at a yard sale. You spot a pair of Air Jordans on the shelf for $40. You pull out your phone, open SmartFlip, snap a photo. Seconds later, the app tells you: \"Air Jordan 4 Retro Military Black, SKU CT8527-100. eBay value: $190-220. Amazon: $210-240. Quick flip: $170. Demand: High. Sells in ~3 days.\" You buy them on the spot. That's $130-200 profit from one photo. You can do this with anything. Sneakers, electronics, vintage furniture, kitchen gear. Walk into any thrift store or yard sale with confidence.",
     deliverables: [
       "Working web app with user accounts and authentication",
       "Smart Scan: photo upload to Claude Vision AI identifies product, brand, model, SKU",
@@ -456,7 +456,7 @@ const milestones: MilestoneData[] = [
     price: "$1,200",
     days: "Days 6-10",
     scenario:
-      "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, >30% margin, within 50 miles. There's a Sony WH-1000XM4 listed on eBay for $89, sells for $179, 50% margin, 94% confidence score. You tap \"Buy on eBay\" and the link takes you straight to the listing. You just found a $90 profit deal in 30 seconds. And that click? It was an affiliate link. It just earned revenue that flows into the Profit Pool. You're making money even when you're browsing.",
+      "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, >30% margin, within 50 miles. There's a Sony WH-1000XM4 listed on eBay for $89, sells for $179, 50% margin, 94% confidence score. You tap \"Buy on eBay\" and the link takes you straight to the listing. You just found a $90 profit deal in moments. And that click? It was an affiliate link. It just earned revenue that flows into the Profit Pool. You're making money even when you're browsing.",
     deliverables: [
       "AI Deal Finder: scans eBay and Amazon in real-time for underpriced items",
       "Deal scoring algorithm: profit margin, confidence score, demand level, time sensitivity",
