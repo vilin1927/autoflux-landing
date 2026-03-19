@@ -127,7 +127,7 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-sm font-bold text-emerald-400">+${d.profit}</p>
-                  <p className="text-[10px] text-slate-500">${d.buyPrice} → ${d.sellPrice}</p>
+                  <p className="text-[10px] text-slate-500">${d.buyPrice} to ${d.sellPrice}</p>
                 </div>
               </div>
             ))}
@@ -194,7 +194,7 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
               </div>
               <div className="flex justify-between text-[11px]">
                 <span className="text-slate-400">Trial</span>
-                <span className="text-slate-500">$1 for 7 days → $49/mo</span>
+                <span className="text-slate-500">$1 for 7 days, then $49/mo</span>
               </div>
             </div>
           </GlassCard>
@@ -350,7 +350,7 @@ function DealFinderView() {
                   <button className="w-full py-3 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-400 transition flex items-center justify-center gap-2">
                     Buy on {selectedDeal.source} <ExternalLink className="w-3.5 h-3.5" />
                   </button>
-                  <p className="text-[10px] text-center text-slate-500">Affiliate link — earns revenue for the Profit Pool</p>
+                  <p className="text-[10px] text-center text-slate-500">Affiliate link, earns revenue for the Profit Pool</p>
                 </GlassCard>
               </motion.div>
             ) : (
@@ -389,7 +389,7 @@ function SmartScanView() {
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-white">Smart Scan</h1>
-        <p className="text-slate-400 text-sm mt-1">Snap a photo at a thrift store or yard sale — AI identifies the product, model, and SKU instantly</p>
+        <p className="text-slate-400 text-sm mt-1">Snap a photo at a thrift store or yard sale. AI identifies the product, model, and SKU instantly</p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">
@@ -608,7 +608,7 @@ function SmartScanView() {
                 </div>
 
                 <button className="w-full py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-400 transition">
-                  List This Item on Marketplace →
+                  List This Item on Marketplace
                 </button>
               </GlassCard>
             </motion.div>
@@ -730,7 +730,7 @@ function EarningsView() {
     <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white">Your Earnings</h1>
-        <p className="text-slate-400 text-sm mt-1">Profit Pool share + affiliate revenue — what you actually earn</p>
+        <p className="text-slate-400 text-sm mt-1">Profit Pool share + affiliate revenue. What you actually earn</p>
       </div>
 
       {/* Earnings summary */}
@@ -859,7 +859,7 @@ function EarningsView() {
             <div className="space-y-2 text-[11px] text-slate-400">
               <p>The Profit Pool is funded from <span className="text-emerald-400 font-medium">affiliate commissions</span> and <span className="text-cyan-400 font-medium">marketplace transaction fees</span> only.</p>
               <p>Subscription revenue ($49/mo) covers operating costs and is <span className="text-white font-medium">never</span> put into the pool.</p>
-              <p>If revenue goes up, the pool grows. If it dips, payouts shrink proportionally. No fixed promises — only real revenue.</p>
+              <p>If revenue goes up, the pool grows. If it dips, payouts shrink proportionally. No fixed promises, only real revenue.</p>
             </div>
           </GlassCard>
         </div>
@@ -906,7 +906,7 @@ export default function SmartFlipDemo() {
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-medium hidden sm:inline">MVP Demo</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 hidden sm:inline">$1 trial → $49/mo</span>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 hidden sm:inline">$1 trial, then $49/mo</span>
           <a
             href="/proposals/smartflip"
             className="text-xs text-slate-400 hover:text-white transition flex items-center gap-1"

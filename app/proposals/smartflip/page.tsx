@@ -36,7 +36,7 @@ const problems = [
   {
     icon: AlertTriangle,
     title: "No way to price on the spot",
-    desc: "You're at a yard sale holding a vintage mixer. Is it worth $20 or $200? You Google it, check eBay sold listings, compare prices — all while the seller waits. You either overpay or walk away from profit.",
+    desc: "You're at a yard sale holding a vintage mixer. Is it worth $20 or $200? You Google it, check eBay sold listings, compare prices, all while the seller waits. You either overpay or walk away from profit.",
   },
   {
     icon: PiggyBank,
@@ -49,25 +49,25 @@ const solutions = [
   {
     icon: Search,
     title: "AI Deal Finder",
-    desc: "Scans eBay and Amazon in real-time, surfaces profitable opportunities with confidence scores. Deals come to you — you don't hunt for them.",
+    desc: "Scans eBay and Amazon in real-time, surfaces profitable opportunities with confidence scores. Deals come to you, not the other way around.",
     solves: "Hours of manual searching",
   },
   {
     icon: Camera,
     title: "Smart Scan",
-    desc: "Point your phone at any item. AI identifies the exact product, model, SKU — returns market value, quick-flip price, and demand level in seconds. Built for thrift stores and yard sales.",
+    desc: "Point your phone at any item. AI identifies the exact product, model, SKU and returns market value, quick-flip price, and demand level in seconds. Built for thrift stores and yard sales.",
     solves: "No way to price on the spot",
   },
   {
     icon: DollarSign,
     title: "Profit Pool + Marketplace",
-    desc: "Built-in marketplace to sell your finds. Every affiliate click and marketplace sale feeds the Profit Pool — real money distributed monthly to active members.",
+    desc: "Built-in marketplace to sell your finds. Every affiliate click and marketplace sale feeds the Profit Pool. Real money distributed monthly to active members.",
     solves: "Flipping is a solo game",
   },
 ];
 
 const steps = [
-  { num: "01", label: "Scan", desc: "Snap a photo of any item — get instant pricing and profit potential", icon: Camera },
+  { num: "01", label: "Scan", desc: "Snap a photo of any item, get instant pricing and profit potential", icon: Camera },
   { num: "02", label: "Find", desc: "Browse AI-curated deals from eBay and Amazon with real profit margins", icon: Search },
   { num: "03", label: "Sell & Earn", desc: "List items, earn from affiliate links, and collect your Profit Pool share", icon: TrendingUp },
 ];
@@ -76,7 +76,7 @@ const techStack = [
   { name: "Next.js", role: "Frontend & App Shell", icon: Monitor },
   { name: "FastAPI (Python)", role: "Backend & AI Logic", icon: Code2 },
   { name: "PostgreSQL", role: "Database", icon: Database },
-  { name: "Stripe", role: "$1 Trial → $49/mo Billing", icon: CreditCard },
+  { name: "Stripe", role: "$1 Trial, then $49/mo", icon: CreditCard },
   { name: "Claude Vision AI", role: "Smart Scan (Product ID)", icon: Eye },
   { name: "eBay Browse API", role: "Deals + Prices + Affiliates", icon: Globe },
   { name: "Amazon Creators API", role: "Cross-Platform Pricing", icon: Package },
@@ -84,23 +84,23 @@ const techStack = [
 ];
 
 const v1Features = [
-  "Smart Scan — photo → exact product, model, SKU, prices across eBay + Amazon",
-  "AI Deal Finder — live deals from eBay + Amazon with profit margins + confidence scores",
-  "Built-in Marketplace — list items, AI-suggested pricing, 5% transaction fee",
-  "Affiliate links — every 'Buy' link earns revenue (eBay Partner Network)",
-  "Profit Pool — funded from affiliates + marketplace fees, distributed monthly",
-  "$1 trial for 7 days → auto-renew $49/mo (Stripe)",
+  "Smart Scan: photo to exact product, model, SKU, prices across eBay + Amazon",
+  "AI Deal Finder: live deals from eBay + Amazon with profit margins + confidence scores",
+  "Built-in Marketplace: list items, AI-suggested pricing, 5% transaction fee",
+  "Affiliate links: every 'Buy' link earns revenue (eBay Partner Network)",
+  "Profit Pool: funded from affiliates + marketplace fees, distributed monthly",
+  "$1 trial for 7 days, then auto-renew $49/mo (Stripe)",
   "User accounts, profiles, scan history",
-  "Revenue dashboard — your Profit Pool + affiliate earnings (no company numbers)",
-  "Admin panel — user management, revenue tracking, pool controls",
+  "Revenue dashboard: your Profit Pool + affiliate earnings (no company numbers)",
+  "Admin panel: user management, revenue tracking, pool controls",
   "Location-based deal filtering",
-  "Deployed and live — ready for real users",
+  "Deployed and live, ready for real users",
 ];
 
 const v2Roadmap = [
   {
     feature: "Facebook Marketplace",
-    note: "Facebook has no official API. Scraping breaks their Terms of Service and accounts get banned. I'll add this in v2 when there's a reliable, sustainable approach — likely through a third-party data provider.",
+    note: "Facebook has no official API. Scraping breaks their Terms of Service and accounts get banned. I'll add this in v2 when there's a reliable, sustainable approach, likely through a third-party data provider.",
     est: "$500–800",
   },
   {
@@ -110,7 +110,7 @@ const v2Roadmap = [
   },
   {
     feature: "Native-Like Mobile App (PWA)",
-    note: "V1 already works fully in your phone's browser — responsive design, all features accessible. This upgrade adds: install to home screen with a real app icon, push notifications for new deals (\"Sony XM4 for $89 just posted\"), offline access, and background syncing so deals load instantly when you open the app.",
+    note: "V1 already works fully in your phone's browser with responsive design and all features accessible. This upgrade adds: install to home screen with a real app icon, push notifications for new deals (\"Sony XM4 for $89 just posted\"), offline access, and background syncing so deals load instantly when you open the app.",
     est: "$650",
   },
   {
@@ -433,18 +433,18 @@ const milestones: MilestoneData[] = [
   {
     num: 1,
     tag: "Scan & Price",
-    title: "You snap a photo — AI tells you the profit",
+    title: "You snap a photo, AI tells you the profit",
     price: "$1,200",
-    days: "Days 1–5",
+    days: "Days 1-5",
     scenario:
-      "You're at a yard sale. You spot a pair of Air Jordans on the shelf for $40. You pull out your phone, open SmartFlip, snap a photo. In 5 seconds flat, the app tells you: \"Air Jordan 4 Retro Military Black, SKU CT8527-100. eBay value: $190–220. Amazon: $210–240. Quick flip: $170. Demand: High. Sells in ~3 days.\" You buy them on the spot. That's $130–200 profit from one photo. You can do this with anything — sneakers, electronics, vintage furniture, kitchen gear. Walk into any thrift store or yard sale with confidence.",
+      "You're at a yard sale. You spot a pair of Air Jordans on the shelf for $40. You pull out your phone, open SmartFlip, snap a photo. In 5 seconds flat, the app tells you: \"Air Jordan 4 Retro Military Black, SKU CT8527-100. eBay value: $190-220. Amazon: $210-240. Quick flip: $170. Demand: High. Sells in ~3 days.\" You buy them on the spot. That's $130-200 profit from one photo. You can do this with anything. Sneakers, electronics, vintage furniture, kitchen gear. Walk into any thrift store or yard sale with confidence.",
     deliverables: [
       "Working web app with user accounts and authentication",
-      "Smart Scan — photo upload → Claude Vision AI identifies product, brand, model, SKU",
-      "Cross-platform pricing — eBay Browse API + Amazon for market value lookup",
+      "Smart Scan: photo upload to Claude Vision AI identifies product, brand, model, SKU",
+      "Cross-platform pricing: eBay Browse API + Amazon for market value lookup",
       "Scan results: quick-flip price, max-hold price, demand level, avg days to sell, similar listings count",
-      "Scan history — every item you've ever scanned, saved to your account",
-      "Responsive UI — works on your phone's browser at a thrift store",
+      "Scan history: every item you've ever scanned, saved to your account",
+      "Responsive UI: works on your phone's browser at a thrift store",
       "PostgreSQL database with user and scan data",
     ],
     preview: <ScanPreview />,
@@ -452,19 +452,19 @@ const milestones: MilestoneData[] = [
   {
     num: 2,
     tag: "Find Deals",
-    title: "Deals come to you — you don't hunt for them",
+    title: "Deals come to you, not the other way around",
     price: "$1,200",
-    days: "Days 6–10",
+    days: "Days 6-10",
     scenario:
-      "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, >30% margin, within 50 miles. There's a Sony WH-1000XM4 listed on eBay for $89 — sells for $179, 50% margin, 94% confidence score. You tap \"Buy on eBay\" — the link takes you straight to the listing. You just found a $90 profit deal in 30 seconds. And that click? It was an affiliate link. It just earned revenue that flows into the Profit Pool. You're making money even when you're browsing.",
+      "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, >30% margin, within 50 miles. There's a Sony WH-1000XM4 listed on eBay for $89, sells for $179, 50% margin, 94% confidence score. You tap \"Buy on eBay\" and the link takes you straight to the listing. You just found a $90 profit deal in 30 seconds. And that click? It was an affiliate link. It just earned revenue that flows into the Profit Pool. You're making money even when you're browsing.",
     deliverables: [
-      "AI Deal Finder — scans eBay and Amazon in real-time for underpriced items",
-      "Deal scoring algorithm — profit margin, confidence score, demand level, time sensitivity",
-      "Category and location filtering — find deals near you or nationwide",
-      "Every \"Buy\" link is an affiliate link (eBay Partner Network) — earns revenue automatically",
-      "Amazon cross-referencing — same product, different price on Amazon vs eBay",
-      "Dashboard with deal stats — active deals, avg profit margin, total opportunities",
-      "Auto-refresh — new deals appear throughout the day via background scanning",
+      "AI Deal Finder: scans eBay and Amazon in real-time for underpriced items",
+      "Deal scoring algorithm: profit margin, confidence score, demand level, time sensitivity",
+      "Category and location filtering: find deals near you or nationwide",
+      "Every \"Buy\" link is an affiliate link (eBay Partner Network), earns revenue automatically",
+      "Amazon cross-referencing: same product, different price on Amazon vs eBay",
+      "Dashboard with deal stats: active deals, avg profit margin, total opportunities",
+      "Auto-refresh: new deals appear throughout the day via background scanning",
     ],
     preview: <DealFinderPreview />,
   },
@@ -473,17 +473,17 @@ const milestones: MilestoneData[] = [
     tag: "Sell & Earn",
     title: "List, sell, and watch your earnings grow",
     price: "$1,100",
-    days: "Days 11–15",
+    days: "Days 11-15",
     scenario:
-      "You flipped 5 items this week. Now you want to sell them. You open SmartFlip's marketplace, tap \"New Listing\" — the AI auto-fills the title, description, and suggested price based on your scan data. Your Air Jordans go live at $195. Other SmartFlip users see them. Meanwhile, you check your earnings tab: $32.40 from the Profit Pool, $15.40 from affiliate clicks. That's $47.80 in passive income this month — on top of your flip profits. Your friend signs up through your link, pays $1 for a trial, and auto-renews at $49/mo next week.",
+      "You flipped 5 items this week. Now you want to sell them. You open SmartFlip's marketplace, tap \"New Listing\" and the AI auto-fills the title, description, and suggested price based on your scan data. Your Air Jordans go live at $195. Other SmartFlip users see them. Meanwhile, you check your earnings tab: $32.40 from the Profit Pool, $15.40 from affiliate clicks. That's $47.80 in passive income this month, on top of your flip profits. Your friend signs up through your link, pays $1 for a trial, and auto-renews at $49/mo next week.",
     deliverables: [
-      "Built-in marketplace — create listings with AI-suggested pricing from scan data",
+      "Built-in marketplace: create listings with AI-suggested pricing from scan data",
       "5% transaction fee on completed sales (listing is free)",
-      "Profit Pool system — funded from affiliate revenue + marketplace fees, never from subscriptions",
-      "Revenue dashboard — shows your Profit Pool share + affiliate earnings only (no company numbers)",
-      "Stripe billing — $1 trial for 7 days, auto-renews to $49/mo, cancel anytime",
-      "Admin panel — user management, revenue tracking, Profit Pool controls, payout history",
-      "Full deployment — live and ready for real users",
+      "Profit Pool system: funded from affiliate revenue + marketplace fees, never from subscriptions",
+      "Revenue dashboard: shows your Profit Pool share + affiliate earnings only (no company numbers)",
+      "Stripe billing: $1 trial for 7 days, auto-renews to $49/mo, cancel anytime",
+      "Admin panel: user management, revenue tracking, Profit Pool controls, payout history",
+      "Full deployment: live and ready for real users",
     ],
     preview: <MarketplacePreview />,
   },
@@ -626,7 +626,7 @@ export default function SmartFlipProposal() {
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">3 milestones. Each one you can touch.</h2>
           <p className="text-sm text-slate-400 max-w-2xl mx-auto">
             Every milestone delivers a working product you can open, test, and use.
-            No black boxes — you see exactly what you&apos;re getting at each stage.
+            No black boxes. You see exactly what you&apos;re getting at each stage.
           </p>
         </motion.div>
       </section>
@@ -733,7 +733,7 @@ export default function SmartFlipProposal() {
               <p className="text-xs text-slate-400 leading-relaxed">
                 The pool is funded from two sources only: affiliate commissions (every &quot;Buy on eBay&quot; click) and
                 marketplace transaction fees (5% on completed sales). Subscription revenue ($49/mo) goes to operating
-                costs — never into the pool.
+                costs, never into the pool.
               </p>
             </div>
             <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0f172a]/80 to-[#1e293b]/60 border border-white/[0.06]">
@@ -741,7 +741,7 @@ export default function SmartFlipProposal() {
               <h4 className="text-sm font-semibold text-white mb-2">How it&apos;s split</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
                 30% of affiliate revenue + 15% of marketplace fees flow into the pool each month.
-                Distribution is proportional to your activity — items sold, deals bought, and marketplace
+                Distribution is proportional to your activity: items sold, deals bought, and marketplace
                 engagement. More active = bigger share.
               </p>
             </div>
@@ -750,7 +750,7 @@ export default function SmartFlipProposal() {
               <h4 className="text-sm font-semibold text-white mb-2">Why it can&apos;t fail</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
                 The pool is self-correcting: if affiliate revenue drops, payouts shrink proportionally.
-                If it grows, payouts grow. There&apos;s no fixed promise — only a share of real revenue.
+                If it grows, payouts grow. There&apos;s no fixed promise, only a share of real revenue.
                 I&apos;ll stress-test the formula before launch with simulated loads.
               </p>
             </div>
@@ -785,7 +785,7 @@ export default function SmartFlipProposal() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
           <motion.div variants={fadeUp} className="text-center mb-12">
             <span className="text-xs font-medium text-emerald-400 uppercase tracking-wider">Investment</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3">$3,500 flat — everything included</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3">$3,500 flat, everything included</h2>
             <p className="text-sm text-slate-400 mt-3 max-w-xl mx-auto">
               Flat price with clear milestones. You see working software after each milestone.
               No hourly billing, no surprises, no scope creep.
@@ -849,7 +849,7 @@ export default function SmartFlipProposal() {
               {
                 icon: MessageSquare,
                 title: "We align on scope",
-                desc: "You review this proposal. If anything needs adjusting — features, pricing, timeline — I'll update it same day. Once we're aligned, I start immediately.",
+                desc: "You review this proposal. If anything needs adjusting (features, pricing, timeline) I'll update it same day. Once we're aligned, I start immediately.",
               },
               {
                 icon: Milestone,
@@ -864,7 +864,7 @@ export default function SmartFlipProposal() {
               {
                 icon: Zap,
                 title: "Iterate fast",
-                desc: "After launch, I'm available for V2 add-ons — Facebook Marketplace, mobile app, direct purchasing, additional marketplaces. We grow it based on what real users need.",
+                desc: "After launch, I'm available for V2 add-ons: Facebook Marketplace, mobile app, direct purchasing, additional marketplaces. We grow it based on what real users need.",
               },
             ].map((step, i) => {
               const Icon = step.icon;
