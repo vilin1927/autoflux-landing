@@ -1,6 +1,45 @@
 # AutoFlux Landing — Progress Log
 
-## Current State (2026-03-13)
+## Current State (2026-03-19)
+
+### Session: 2026-03-19 — SmartFlip Market Research
+
+**What was researched:**
+- Competitor landscape (Tactical Arbitrage, BuyBotPro, AMZScout, WorthPoint, Flipify, Flippr, FlipMine)
+- eBay Browse API (endpoints, rate limits, image search, access requirements)
+- Amazon PA-API 5.0 (deprecating April 2026, migrating to Creators API)
+- Facebook Marketplace (NO official API — scraping only)
+- Google Vision API vs Claude Vision (pricing, product recognition capabilities)
+- Stripe $1 trial → subscription implementation (add_invoice_items approach)
+
+**Key decisions:**
+- Claude Vision is the better choice for SmartFlip product recognition (flexible, can extract brand/model/SKU from context, ~$0.004/image with Sonnet)
+- Facebook Marketplace has NO API — must use scraping tools (Apify, Bright Data) or skip FB for MVP
+- Amazon PA-API is being deprecated April 2026 — must plan for Creators API migration
+- eBay Browse API is free but limited to 5,000 calls/day (can request increase to 100K)
+- Stripe $1 trial is technically a subscription with add_invoice_items for $1 upfront charge during trial period
+
+**What comes next:**
+- Wait for Justin's answers to 5 clarifying questions
+- When he responds: schedule call, prepare final proposal with pricing
+- Use this research to inform technical scope and API cost estimates in proposal
+
+### Session: 2026-03-19 — SmartFlip Monetization & Pricing Research
+
+**What was researched:**
+- Revenue sharing / profit pool models (Honeygain, Sweatcoin, X creator fund, YouTube model)
+- Affiliate programs: eBay Partner Network (1-4%, API via Browse API), Amazon Associates (1-20%, PA-API deprecated April 2026 → Creators API), Walmart (1-4% via Impact)
+- Marketplace listing fees: Poshmark (20%), Mercari (10%+3%), eBay (13.25%), OfferUp (free), Facebook (6%)
+- Marketplace take rates: avg 10-30%, startups should start 5-10% to build liquidity
+- Competitor pricing: FlipHero ($5/mo), Flipify ($5-10/mo per watchlist), Underpriced AI ($9-99/mo), Vendoo ($9-70/mo), List Perfectly ($29-249/mo), SellerAmp ($20-30/mo), WorthPoint ($29-47/mo)
+
+**Key decision:** Justin's $49/mo is competitive — it sits in the mid-range, above basic deal finders ($5-10) but below full cross-listing platforms ($50-250). The value prop must clearly exceed what $9-30 tools offer.
+
+**Profit pool sustainability analysis:** Must be funded from affiliate commissions + listing fees, NOT subscription revenue. At 2-3% affiliate commission avg and $49/mo subscription, profit pool should be capped at 10-20% of platform affiliate earnings, distributed proportional to user activity.
+
+---
+
+## Previous State (2026-03-13)
 
 ### What Exists
 - **Homepage:** Fully built with 8 sections (Hero, TrustBar, Stats, HowItWorks, WhoWeServe, Testimonial, CaseStudies, Contact)
@@ -39,7 +78,47 @@
 
 ---
 
+### Active Proposals (routes under /proposals/) — updated
+1. eToll — AI Assistant ($4,500)
+2. Orgonic Art / Raphael — EU Regulation Discovery ($540)
+3. Alamance Property — Distressed Property Detection
+4. CheckPoint — Social media automation (TWX)
+5. Moppity — Data intelligence platform
+6. GlobalHair — Phase 2 Ad Control Hub ($1,200)
+7. Deck Builder — AI pitch deck (Aleksander Johansen)
+8. Image Resize — AI image resizing tool
+9. Theo — Custom proposal
+10. Global Bridge — Company registration for expats (UAE), document/deadline management ($1,600)
+11. LyncPath — Logistics SaaS container shipment visibility (Upwork lead)
+12. **SmartFlip (Justin)** — AI product flipping platform (deal finder + smart scan + marketplace + profit pool). Demo sent, awaiting response.
+
+---
+
 ## Session Log
+
+### 2026-03-19 — SmartFlip demo for Justin
+
+**What was built:**
+- Interactive demo at `/proposals/smartflip/demo` with 5 screens: Dashboard, Deal Finder, Smart Scan, Marketplace, Questions
+- Landing page at `/proposals/smartflip` with features, MVP scope, tech stack, CTA
+- Mock data: 10 deals, 3 scan results, 6 marketplace listings, profit pool stats
+- Questions section explains hardcoded template vs real MVP backend work + 5 clarifying questions
+
+**Files created:**
+- `app/proposals/smartflip/page.tsx` — landing page
+- `app/proposals/smartflip/demo/page.tsx` — interactive demo
+- `data/proposals/smartflip.ts` — all mock data
+
+**Message sent to Justin:**
+- Demo link + 5 clarifying questions (marketplace priority, profit pool admin, payment flow, image recognition, onboarding)
+- Timeline: 3-4 weeks for MVP
+- Next step: Justin answers questions → call → final proposal with pricing
+
+**Commit:** `09338f5` — Add SmartFlip demo for Justin
+
+**Decision:** Sent demo within 30 minutes of receiving spec. Speed is a competitive advantage — shows we build fast, which is exactly what we're selling.
+
+---
 
 ### 2026-03-13 — Global Bridge deal status check
 
