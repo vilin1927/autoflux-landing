@@ -1,5 +1,6 @@
 // ============================================================
 // SmartFlip Mock Data — AI Product Flipping Platform
+// Updated to reflect Justin's confirmed requirements
 // ============================================================
 
 export interface Deal {
@@ -7,7 +8,7 @@ export interface Deal {
   title: string;
   category: string;
   image: string;
-  source: string;
+  source: "eBay" | "Amazon";
   buyPrice: number;
   sellPrice: number;
   profit: number;
@@ -21,9 +22,12 @@ export interface Deal {
 export interface ScanResult {
   id: string;
   title: string;
+  sku: string;
+  matchType: "exact" | "closest";
   category: string;
   image: string;
-  marketValue: number;
+  ebayPrice: number;
+  amazonPrice: number;
   quickFlipPrice: number;
   maxValuePrice: number;
   condition: string;
@@ -50,13 +54,20 @@ export interface Listing {
 
 export interface ProfitPoolData {
   totalPool: number;
-  basePool: number;
-  growthPool: number;
-  yourBaseShare: number;
-  yourGrowthShare: number;
+  fromAffiliates: number;
+  fromMarketplace: number;
+  yourShare: number;
+  yourAffiliateEarnings: number;
   totalMembers: number;
-  membersAfterYou: number;
-  monthlyEarningCap: number;
+  yourRank: number;
+}
+
+export interface EarningsData {
+  profitPoolShare: number;
+  affiliateEarnings: number;
+  totalThisMonth: number;
+  lastMonth: number;
+  history: { month: string; pool: number; affiliate: number }[];
 }
 
 // ============================================================
@@ -66,15 +77,14 @@ export const dashboardKPIs = {
   activeDeals: 47,
   avgProfitMargin: 38,
   itemsListed: 12,
-  monthlyEarnings: 2340,
+  monthlyEarnings: 47.80,
   totalMembers: 1284,
-  profitPoolTotal: 18750,
   scansToday: 23,
   dealsFlipped: 8,
 };
 
 // ============================================================
-// Deals
+// Deals — eBay + Amazon only (no Facebook for v1)
 // ============================================================
 export const deals: Deal[] = [
   {
@@ -97,7 +107,7 @@ export const deals: Deal[] = [
     title: "Nintendo Switch OLED (White)",
     category: "Gaming",
     image: "🎮",
-    source: "Facebook Marketplace",
+    source: "Amazon",
     buyPrice: 195,
     sellPrice: 310,
     profit: 115,
@@ -127,7 +137,7 @@ export const deals: Deal[] = [
     title: "Air Jordan 4 Retro 'Military Black'",
     category: "Sneakers",
     image: "👟",
-    source: "OfferUp",
+    source: "eBay",
     buyPrice: 140,
     sellPrice: 220,
     profit: 80,
@@ -142,7 +152,7 @@ export const deals: Deal[] = [
     title: "iPad Air 5th Gen 64GB",
     category: "Electronics",
     image: "📱",
-    source: "Craigslist",
+    source: "Amazon",
     buyPrice: 280,
     sellPrice: 430,
     profit: 150,
@@ -172,7 +182,7 @@ export const deals: Deal[] = [
     title: "KitchenAid Stand Mixer — Artisan",
     category: "Home",
     image: "🍳",
-    source: "Facebook Marketplace",
+    source: "Amazon",
     buyPrice: 95,
     sellPrice: 199,
     profit: 104,
@@ -217,7 +227,7 @@ export const deals: Deal[] = [
     title: "Herman Miller Aeron Chair",
     category: "Furniture",
     image: "🪑",
-    source: "Craigslist",
+    source: "eBay",
     buyPrice: 350,
     sellPrice: 650,
     profit: 300,
@@ -230,15 +240,18 @@ export const deals: Deal[] = [
 ];
 
 // ============================================================
-// Scan Results (pre-loaded examples)
+// Scan Results — with SKU + match type + dual pricing
 // ============================================================
 export const scanResults: ScanResult[] = [
   {
     id: "s1",
     title: "Nike Dunk Low 'Panda'",
+    sku: "DD1391-100",
+    matchType: "exact",
     category: "Sneakers",
     image: "👟",
-    marketValue: 135,
+    ebayPrice: 135,
+    amazonPrice: 145,
     quickFlipPrice: 110,
     maxValuePrice: 155,
     condition: "New with Box",
@@ -257,9 +270,12 @@ export const scanResults: ScanResult[] = [
   {
     id: "s2",
     title: "PS5 DualSense Controller (Cosmic Red)",
+    sku: "CFI-ZCT1G-02",
+    matchType: "exact",
     category: "Gaming",
     image: "🎮",
-    marketValue: 52,
+    ebayPrice: 52,
+    amazonPrice: 59,
     quickFlipPrice: 40,
     maxValuePrice: 58,
     condition: "Like New",
@@ -278,9 +294,12 @@ export const scanResults: ScanResult[] = [
   {
     id: "s3",
     title: "Apple AirPods Pro 2nd Gen",
+    sku: "MTJV3AM/A",
+    matchType: "exact",
     category: "Electronics",
     image: "🎧",
-    marketValue: 185,
+    ebayPrice: 185,
+    amazonPrice: 199,
     quickFlipPrice: 155,
     maxValuePrice: 199,
     condition: "Sealed",
@@ -294,6 +313,30 @@ export const scanResults: ScanResult[] = [
       { month: "Jan", price: 190 },
       { month: "Feb", price: 188 },
       { month: "Mar", price: 185 },
+    ],
+  },
+  {
+    id: "s4",
+    title: "Vintage KitchenAid Mixer (est. K45SS)",
+    sku: "~K45SS",
+    matchType: "closest",
+    category: "Home",
+    image: "🍳",
+    ebayPrice: 85,
+    amazonPrice: 0,
+    quickFlipPrice: 60,
+    maxValuePrice: 110,
+    condition: "Good — some wear",
+    demandLevel: "Medium",
+    avgDaysToSell: 7,
+    similarListings: 48,
+    priceHistory: [
+      { month: "Oct", price: 90 },
+      { month: "Nov", price: 85 },
+      { month: "Dec", price: 95 },
+      { month: "Jan", price: 80 },
+      { month: "Feb", price: 82 },
+      { month: "Mar", price: 85 },
     ],
   },
 ];
@@ -389,26 +432,34 @@ export const listings: Listing[] = [
 ];
 
 // ============================================================
-// Profit Pool
+// Profit Pool — funded from affiliates + marketplace ONLY
 // ============================================================
 export const profitPool: ProfitPoolData = {
-  totalPool: 18750,
-  basePool: 9375,
-  growthPool: 9375,
-  yourBaseShare: 7.31,
-  yourGrowthShare: 42.80,
+  totalPool: 2625,
+  fromAffiliates: 1875,
+  fromMarketplace: 750,
+  yourShare: 32.40,
+  yourAffiliateEarnings: 15.40,
   totalMembers: 1284,
-  membersAfterYou: 847,
-  monthlyEarningCap: 10000,
+  yourRank: 142,
 };
 
 // ============================================================
-// Revenue Breakdown
+// User Earnings — profit pool + affiliate only (no company numbers)
 // ============================================================
-export const revenueBreakdown = {
-  subscriptions: { total: 62951, profitPool: 25180, company: 25180, affiliates: 12590 },
-  affiliates: { total: 8420, profitPool: 3368, company: 3368, reserve: 1684 },
-  marketplace: { total: 4180, profitPool: 2090, company: 2090 },
+export const userEarnings: EarningsData = {
+  profitPoolShare: 32.40,
+  affiliateEarnings: 15.40,
+  totalThisMonth: 47.80,
+  lastMonth: 38.20,
+  history: [
+    { month: "Oct", pool: 18.50, affiliate: 8.20 },
+    { month: "Nov", pool: 22.10, affiliate: 10.40 },
+    { month: "Dec", pool: 28.80, affiliate: 12.60 },
+    { month: "Jan", pool: 25.40, affiliate: 11.80 },
+    { month: "Feb", pool: 30.20, affiliate: 14.00 },
+    { month: "Mar", pool: 32.40, affiliate: 15.40 },
+  ],
 };
 
 // ============================================================
