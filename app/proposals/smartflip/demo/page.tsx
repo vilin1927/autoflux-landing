@@ -122,12 +122,13 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
                   </div>
                   <div className="flex items-center gap-2 mt-0.5">
                     <SourceBadge source={d.source} />
-                    <span className="text-[11px] text-slate-500">{d.location} · {d.timeFound}</span>
+                    <span className="text-[10px] text-slate-500">Buy ${d.buyPrice}</span>
+                    <span className="text-[10px] text-emerald-400/60">Sell on {d.sellPlatform} ${d.sellPrice}</span>
                   </div>
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-sm font-bold text-emerald-400">+${d.profit}</p>
-                  <p className="text-[10px] text-slate-500">${d.buyPrice} to ${d.sellPrice}</p>
+                  <p className="text-[9px] text-slate-500">{d.recentlySoldSource}</p>
                 </div>
               </div>
             ))}
@@ -210,21 +211,25 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
 function DealFinderView() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState<"profit" | "confidence" | "margin">("profit");
+  const [conditionFilter, setConditionFilter] = useState<"all" | "Used" | "New">("all");
+  const [budgetMax, setBudgetMax] = useState<number>(0);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
 
   const filtered = deals
     .filter(d => selectedCategory === "All" || d.category === selectedCategory)
+    .filter(d => conditionFilter === "all" || d.condition === conditionFilter || (conditionFilter === "Used" && (d.condition === "Used" || d.condition === "Like New" || d.condition === "Refurbished")))
+    .filter(d => budgetMax === 0 || d.buyPrice <= budgetMax)
     .sort((a, b) => sortBy === "profit" ? b.profit - a.profit : sortBy === "confidence" ? b.confidence - a.confidence : b.margin - a.margin);
 
   return (
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-white">AI Deal Finder</h1>
-        <p className="text-slate-400 text-sm mt-1">Real-time profitable opportunities from eBay + Amazon</p>
+        <p className="text-slate-400 text-sm mt-1">Real arbitrage across eBay, Amazon, and Facebook. Buy here, sell there.</p>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
+      <div className="flex flex-wrap items-center gap-3 mb-4">
         <div className="flex items-center gap-1 bg-[#0f172a]/60 border border-white/[0.06] rounded-xl px-1 py-1 overflow-x-auto">
           {categories.map(cat => (
             <button
@@ -244,6 +249,33 @@ function DealFinderView() {
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition capitalize ${sortBy === s ? "bg-cyan-500/20 text-cyan-400" : "text-slate-400 hover:text-white"}`}
             >
               {s}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Budget + Condition filters */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <div className="flex items-center gap-1 bg-[#0f172a]/60 border border-white/[0.06] rounded-xl px-1 py-1">
+          {(["all", "Used", "New"] as const).map(c => (
+            <button
+              key={c}
+              onClick={() => setConditionFilter(c)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${conditionFilter === c ? "bg-amber-500/20 text-amber-400" : "text-slate-400 hover:text-white"}`}
+            >
+              {c === "all" ? "All Conditions" : c}
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-2 bg-[#0f172a]/60 border border-white/[0.06] rounded-xl px-3 py-1.5">
+          <span className="text-[11px] text-slate-500">Budget:</span>
+          {[0, 50, 100, 200, 500].map(b => (
+            <button
+              key={b}
+              onClick={() => setBudgetMax(b)}
+              className={`px-2 py-0.5 rounded text-[10px] font-medium transition ${budgetMax === b ? "bg-emerald-500/20 text-emerald-400" : "text-slate-500 hover:text-white"}`}
+            >
+              {b === 0 ? "Any" : `<$${b}`}
             </button>
           ))}
         </div>
@@ -275,8 +307,11 @@ function DealFinderView() {
                     </div>
                     <div className="flex items-center gap-2 mt-0.5">
                       <SourceBadge source={d.source} />
-                      <span className="text-[11px] text-slate-500">{d.location} · {d.timeFound}</span>
+                      <span className="text-[10px] text-slate-500">${d.buyPrice}</span>
+                      <span className="text-[10px] text-slate-600">sell on {d.sellPlatform}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{d.condition}</span>
                     </div>
+                    <p className="text-[9px] text-slate-500 mt-0.5">{d.recentlySoldSource}</p>
                   </div>
                   <div className="text-right shrink-0 space-y-1">
                     <p className="text-sm font-bold text-emerald-400">+${d.profit}</p>
@@ -305,16 +340,18 @@ function DealFinderView() {
                     <div className="flex items-center justify-center gap-2 mt-2">
                       <SourceBadge source={selectedDeal.source} />
                       <span className="text-xs text-slate-400">{selectedDeal.category}</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{selectedDeal.condition}</span>
                     </div>
+                    <p className="text-[10px] text-slate-500 mt-1.5">{selectedDeal.recentlySoldSource}</p>
                   </div>
 
                   <div className="grid grid-cols-3 gap-3">
                     <div className="text-center p-3 rounded-xl bg-rose-500/10 border border-rose-500/10">
-                      <p className="text-[10px] text-slate-500 uppercase">Buy</p>
+                      <p className="text-[10px] text-slate-500 uppercase">Buy on {selectedDeal.source}</p>
                       <p className="text-lg font-bold text-rose-400">${selectedDeal.buyPrice}</p>
                     </div>
                     <div className="text-center p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/10">
-                      <p className="text-[10px] text-slate-500 uppercase">Sell</p>
+                      <p className="text-[10px] text-slate-500 uppercase">Sell on {selectedDeal.sellPlatform}</p>
                       <p className="text-lg font-bold text-emerald-400">${selectedDeal.sellPrice}</p>
                     </div>
                     <div className="text-center p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/10">
@@ -636,7 +673,7 @@ function MarketplaceView() {
       <div className="mb-6 flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Marketplace</h1>
-          <p className="text-slate-400 text-sm mt-1">Buy & sell with AI-powered pricing</p>
+          <p className="text-slate-400 text-sm mt-1">Sell your stuff for quick cash. Free to list, no membership needed.</p>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -693,15 +730,17 @@ function MarketplaceView() {
                 <div className="flex items-end justify-between">
                   <div>
                     <p className="text-xl font-bold text-white">${l.price}</p>
-                    {l.price < l.aiSuggestedPrice && (
-                      <p className="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5">
-                        <Sparkles className="w-3 h-3" /> AI suggests ${l.aiSuggestedPrice}
-                      </p>
-                    )}
+                    <p className="text-[10px] text-emerald-400 flex items-center gap-0.5 mt-0.5">
+                      <Sparkles className="w-3 h-3" /> Resale value: ${l.resaleValue}
+                    </p>
+                    <p className="text-[9px] text-slate-500">{l.resaleSource}</p>
                   </div>
-                  <div className="flex items-center gap-2 text-[11px] text-slate-500">
-                    <span className="flex items-center gap-0.5"><Eye className="w-3 h-3" /> {l.views}</span>
-                    <span className="flex items-center gap-0.5"><Heart className="w-3 h-3" /> {l.saves}</span>
+                  <div className="text-right">
+                    <p className="text-sm font-bold text-emerald-400">+{l.profitMargin}%</p>
+                    <div className="flex items-center gap-2 text-[11px] text-slate-500 mt-0.5">
+                      <span className="flex items-center gap-0.5"><Eye className="w-3 h-3" /> {l.views}</span>
+                      <span className="flex items-center gap-0.5"><Heart className="w-3 h-3" /> {l.saves}</span>
+                    </div>
                   </div>
                 </div>
 
@@ -742,6 +781,17 @@ function EarningsView() {
             <ArrowUp className="w-3 h-3 text-emerald-400" />
             <span className="text-xs text-emerald-400">+${(e.totalThisMonth - e.lastMonth).toFixed(2)} vs last month</span>
           </div>
+          {/* $10K cap progress */}
+          <div className="mt-3">
+            <div className="flex justify-between text-[9px] text-slate-500 mb-1">
+              <span>$0</span>
+              <span>$10K cap</span>
+            </div>
+            <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
+              <div className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400" style={{ width: `${(e.totalThisMonth / 10000) * 100}%` }} />
+            </div>
+            <p className="text-[9px] text-slate-500 mt-1">{((e.totalThisMonth / 10000) * 100).toFixed(1)}% of monthly cap</p>
+          </div>
         </GlassCard>
         <GlassCard className="p-5 text-center">
           <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Profit Pool Share</p>
@@ -749,9 +799,9 @@ function EarningsView() {
           <p className="text-[11px] text-slate-500 mt-1.5">Rank #{p.yourRank} of {p.totalMembers}</p>
         </GlassCard>
         <GlassCard className="p-5 text-center">
-          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Affiliate Revenue</p>
+          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Affiliate + Referral</p>
           <p className="text-3xl font-bold text-amber-400">${e.affiliateEarnings}</p>
-          <p className="text-[11px] text-slate-500 mt-1.5">From &quot;Buy&quot; link clicks</p>
+          <p className="text-[11px] text-slate-500 mt-1.5">Affiliate clicks + 20% referral on new members</p>
         </GlassCard>
       </div>
 

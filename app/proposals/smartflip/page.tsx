@@ -49,7 +49,7 @@ const solutions = [
   {
     icon: Search,
     title: "AI Deal Finder",
-    desc: "Scans eBay and Amazon in real-time, surfaces profitable opportunities with confidence scores. Deals come to you, not the other way around.",
+    desc: "Scans eBay, Amazon, and Facebook in real-time. Shows real arbitrage: \"Listed on Facebook for $5, recently sold on eBay for $50, potential profit $45.\" With source links so you can verify. Budget, category, and used vs new filters built in.",
     solves: "Hours of manual searching",
   },
   {
@@ -61,15 +61,15 @@ const solutions = [
   {
     icon: DollarSign,
     title: "Profit Pool + Marketplace",
-    desc: "Built-in marketplace to sell your finds. Every affiliate click and marketplace sale feeds the Profit Pool. Real money distributed monthly to active members.",
+    desc: "Free marketplace where anyone can list items for quick cash. AI suggests pricing and shows resale value for flippers. No membership needed to sell. Every listing fee and affiliate click feeds the Profit Pool, distributed monthly to active members. $10K monthly cap per user.",
     solves: "Flipping is a solo game",
   },
 ];
 
 const steps = [
   { num: "01", label: "Scan", desc: "Snap a photo of any item, get instant pricing and profit potential", icon: Camera },
-  { num: "02", label: "Find", desc: "Browse AI-curated deals from eBay and Amazon with real profit margins", icon: Search },
-  { num: "03", label: "Sell & Earn", desc: "List items, earn from affiliate links, and collect your Profit Pool share", icon: TrendingUp },
+  { num: "02", label: "Find", desc: "Browse real arbitrage deals from eBay, Amazon, and Facebook with source data and profit margins", icon: Search },
+  { num: "03", label: "Sell & Earn", desc: "List items for quick cash on the free marketplace, earn from affiliate links, and collect your Profit Pool share", icon: TrendingUp },
 ];
 
 const techStack = [
@@ -84,44 +84,49 @@ const techStack = [
 ];
 
 const v1Features = [
-  "Smart Scan: photo to exact product, model, SKU, prices on eBay (Amazon added when Associates account qualifies)",
-  "AI Deal Finder: live deals from eBay with profit margins + confidence scores (Amazon added alongside)",
-  "Built-in Marketplace: list items, AI-suggested pricing, 5% transaction fee",
+  "Smart Scan: photo to exact product, model, SKU with resale value and source data",
+  "AI Deal Finder: real arbitrage across eBay, Amazon, Facebook. \"Found on FB for $5, sells on eBay for $50\"",
+  "Free Marketplace: anyone can list items for quick cash, no membership needed. AI pricing + resale value shown",
+  "Filters: budget range, category, location (local/global), used vs new, custom item search",
   "Affiliate links: every 'Buy' link earns revenue (eBay Partner Network)",
-  "Profit Pool: funded from affiliates + marketplace fees, distributed monthly",
-  "$1 trial for 7 days, then $49/mo auto-renew (Stripe) with clear disclosures and one-click cancel",
-  "User accounts, profiles, scan history",
-  "Revenue dashboard: your Profit Pool + affiliate earnings (no company numbers)",
+  "Profit Pool: pie chart dashboard, $10K monthly cap, progress bar, 20% referral commission",
+  "$1 trial for 7 days, then $49/mo (Stripe) with clear disclosures and one-click cancel",
+  "Seller ratings and report/dispute system",
+  "Revenue dashboard: Profit Pool + affiliate earnings only (no company numbers)",
   "Admin panel: user management, revenue tracking, pool controls",
-  "Location-based deal filtering",
   "Deployed and live, ready for real users",
 ];
 
 const v2Roadmap = [
   {
-    feature: "Amazon Integration",
-    note: "Amazon's old product API shuts down April 30, 2026. The replacement (Creators API) requires an active Amazon Associates account with 10+ qualifying sales. Once your account qualifies, I add Amazon pricing and deals alongside eBay. Included in the original price, no extra charge.",
+    feature: "Amazon Full API Integration",
+    note: "Amazon pricing is available from day one through an alternative data source. Once your Associates account hits 10+ qualifying sales (SmartFlip itself will drive this), I switch to the official Creators API for full access. Included in the original price.",
     est: "Included",
   },
   {
-    feature: "Facebook Marketplace",
-    note: "Facebook has no official API. Scraping breaks their Terms of Service and accounts get banned. I'll add this in v2 when there's a reliable, sustainable approach, likely through a third-party data provider.",
-    est: "$500–800",
+    feature: "$97/mo Pro Tier",
+    note: "Post items directly from SmartFlip to eBay, Etsy, and Shopify. Track sales stats across all platforms in one dashboard. Great upsell once v1 proves the core value.",
+    est: "$800-1,200",
   },
   {
     feature: "Direct In-App Purchasing",
-    note: "Buy items directly within SmartFlip instead of redirecting to eBay/Amazon. Requires payment escrow and buyer protection system.",
-    est: "$500–800",
+    note: "Buy items directly within the marketplace instead of connecting externally. In-app messaging between buyer and seller, payment processing with escrow, automated dispute resolution.",
+    est: "$500-800",
+  },
+  {
+    feature: "Smart Coupon Extractor",
+    note: "When purchasing from a website, AI scans for the best available coupon or discount codes and auto-applies them. Saves buyers money on every purchase.",
+    est: "$400-600",
+  },
+  {
+    feature: "Smart Cashback",
+    note: "Cashback rewards on purchases made through SmartFlip links. Additional revenue stream that feeds the Profit Pool.",
+    est: "$400-600",
   },
   {
     feature: "Native-Like Mobile App (PWA)",
-    note: "V1 already works fully in your phone's browser with responsive design and all features accessible. This upgrade adds: install to home screen with a real app icon, push notifications for new deals (\"Sony XM4 for $89 just posted\"), offline access, and background syncing so deals load instantly when you open the app.",
+    note: "V1 already works fully in your phone's browser with responsive design and all features accessible. This upgrade adds: install to home screen with a real app icon, push notifications for new deals, offline access, and background syncing.",
     est: "$650",
-  },
-  {
-    feature: "Walmart + Target + More",
-    note: "Additional marketplace integrations. Each marketplace adds a new deal source and affiliate revenue stream.",
-    est: "$400–600 each",
   },
 ];
 
@@ -461,14 +466,14 @@ const milestones: MilestoneData[] = [
     price: "$1,000",
     days: "Days 6-10",
     scenario:
-      "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, >30% margin, within 50 miles. There's a Sony WH-1000XM4 listed on eBay for $89, sells for $179, 50% margin, 94% confidence score. You tap \"Buy on eBay\" and the link takes you straight to the listing. You just found a $90 profit deal in moments. And that click? It was an affiliate link. It just earned revenue that flows into the Profit Pool. You're making money even when you're browsing.",
+      "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, budget under $100, used items. There's a Sony WH-1000XM4 listed on Facebook Marketplace for $45. SmartFlip shows: \"Recently sold on eBay for $135, potential profit $90.\" You tap \"View on Facebook,\" buy it, and list on eBay. That \"Buy\" click was an affiliate link, earning revenue that flows into the Profit Pool. You're making money even when you're browsing.",
     deliverables: [
-      "AI Deal Finder: scans eBay in real-time for underpriced items (Amazon added when Associates account qualifies)",
-      "Deal scoring algorithm: profit margin, confidence score, demand level, time sensitivity",
-      "Category and location filtering: find deals near you or nationwide",
+      "AI Deal Finder: scans eBay, Amazon, and Facebook for real arbitrage opportunities",
+      "Real arbitrage data: \"Listed on Facebook for $5, recently sold on eBay for $50, potential profit $45\" with source links",
+      "Filters: budget range, category, location (local/global), used vs new products",
+      "Custom search: search for a specific item or category on top of auto-scanning",
       "Every \"Buy\" link is an affiliate link (eBay Partner Network), earns revenue automatically",
-      "Amazon price comparison: added once your Amazon Associates account has 10+ qualifying sales",
-      "Dashboard with deal stats: active deals, avg profit margin, total opportunities",
+      "Deal scoring: profit margin, confidence score, demand level, time sensitivity",
       "Auto-refresh: new deals appear throughout the day via background scanning",
     ],
     preview: <DealFinderPreview />,
@@ -480,12 +485,12 @@ const milestones: MilestoneData[] = [
     price: "$800",
     days: "Days 11-15",
     scenario:
-      "You flipped 5 items this week. Now you want to sell them. You open SmartFlip's marketplace, tap \"New Listing\" and the AI auto-fills the title, description, and suggested price based on your scan data. Your Air Jordans go live at $195. Other SmartFlip users see them. Meanwhile, you check your earnings tab: $32.40 from the Profit Pool, $15.40 from affiliate clicks. That's $47.80 in passive income this month, on top of your flip profits. Your friend signs up through your link, pays $1 for a trial, and auto-renews at $49/mo next week.",
+      "Someone wants to sell their old KitchenAid mixer fast. They open SmartFlip's free marketplace (no membership needed), tap \"New Listing\" and the AI suggests a quick-sale price of $45, showing \"resale value: $85-110 on eBay\" so flippers see the margin instantly. You're a member. You spot it, buy it, and relist on eBay for $95. Meanwhile, you check your earnings tab: $32.40 from the Profit Pool, $15.40 from affiliate clicks, and your referral brought in a new member earning you 20%. That's passive income on top of your flip profits.",
     deliverables: [
-      "Built-in marketplace: create listings with AI-suggested pricing from scan data",
-      "5% transaction fee on completed sales (listing is free)",
-      "Profit Pool system: funded from affiliate revenue + marketplace fees, never from subscriptions",
-      "Revenue dashboard: shows your Profit Pool share + affiliate earnings only (no company numbers)",
+      "Free marketplace: anyone can list items for quick cash, no membership needed. AI suggests quick-sale price + shows resale value with data source",
+      "5% transaction fee on completed sales (listing is free). Seller ratings and report/dispute system",
+      "Profit Pool dashboard: pie chart analytics, $10K monthly cap with progress bar, 20% referral commission for new member sales",
+      "Revenue display: Profit Pool share + affiliate earnings only (no company numbers)",
       "Stripe billing: $1 trial for 7 days, auto-renews to $49/mo, cancel anytime",
       "Admin panel: user management, revenue tracking, Profit Pool controls, payout history",
       "Full deployment: live and ready for real users",
@@ -746,8 +751,8 @@ export default function SmartFlipProposal() {
               <h4 className="text-sm font-semibold text-white mb-2">How it&apos;s split</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
                 30% of affiliate revenue + 15% of marketplace fees flow into the pool each month.
-                Distribution is proportional to your activity: items sold, deals bought, and marketplace
-                engagement. More active = bigger share.
+                Distribution is proportional to your activity. Plus 20% referral commission on
+                every new member you bring in directly. $10K monthly cap per user.
               </p>
             </div>
             <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0f172a]/80 to-[#1e293b]/60 border border-white/[0.06]">
