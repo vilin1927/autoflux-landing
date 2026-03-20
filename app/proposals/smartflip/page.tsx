@@ -826,7 +826,7 @@ export default function SmartFlipProposal() {
               <div className="hidden md:block w-px h-12 bg-white/10" />
               <div>
                 <p className="text-sm text-slate-400">Timeline</p>
-                <p className="text-4xl font-bold text-white">15 days</p>
+                <p className="text-4xl font-bold text-white">15 business days</p>
               </div>
               <div className="hidden md:block w-px h-12 bg-white/10" />
               <div>
