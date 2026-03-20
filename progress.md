@@ -40,11 +40,23 @@
 - `8d54c48` — Remove specific time promises
 - Current — Price update to $2,800, Amazon blocker noted in proposal
 
+**Justin's additional requirements (from late-night conversation 2026-03-19):**
+- Marketplace: FREE access for sellers (no membership), $49/mo only for AI tools. More inventory = better for paid flippers
+- Deal Finder: scan Facebook Marketplace alongside eBay + Amazon. Real arbitrage: "found on FB for $10, sells for $20 on eBay"
+- Custom search: users can search specific items/categories on top of auto-scan
+- Profit pool dashboard: pie chart, analytics breakdown, $10K cap with progress bar, % calculator
+- Affiliate: 20% referral commission for direct new member sales, rest splits business/pool
+- Marketplace listings: show current price, profit margin, recently sold data, filter local/global
+- Budget filter in deal finder (price range)
+- V2 ideas: $97/mo Pro tier (post to eBay/Etsy/Shopify + sales tracking), smart coupon extractor, cashback feature
+- ProductChimp and Keepa shared as reference competitors
+- Justin HAS Amazon Associates account (no activity yet, will qualify once SmartFlip drives traffic)
+- Ongoing API costs: ~$40-60/mo (AI, scraping, hosting) — discuss on call
+
 **What comes next:**
-- Push final version to GitHub
-- Send Justin the proposal link
-- Record Loom walkthrough
-- Schedule call to align on scope + pricing
+- Schedule call (offered today 8-12:30 PM his time or weekend 8-1:30 PM)
+- Close the deal at $2,800
+- Start building
 
 ---
 
