@@ -116,6 +116,87 @@
         { "description": "All proposal routes reflected in admin dashboard", "done": false },
         { "description": "Proposal data sourced from a shared config, not hardcoded", "done": false }
       ]
+    },
+    {
+      "id": "F-010",
+      "title": "SmartFlip Demo — Deal Finder Fixes",
+      "status": "not_started",
+      "description": "Justin's feedback: deal finder needs search bar, budget filter visibility, source links, location picker",
+      "last_updated": "2026-03-20",
+      "acceptance_criteria": [
+        { "description": "Search bar for specific item/category search", "done": false },
+        { "description": "Budget filter more prominent (currently in code but not visible enough)", "done": false },
+        { "description": "Clickable source links on deals (link to actual eBay/Amazon/Facebook listing)", "done": false },
+        { "description": "Location picker/setting so app knows what local means", "done": false },
+        { "description": "Trending deals on dashboard clickable to expand with full details", "done": false }
+      ]
+    },
+    {
+      "id": "F-011",
+      "title": "SmartFlip Demo — Subscription Split Fix",
+      "status": "not_started",
+      "description": "Justin confirmed: 40% of subscriptions go to profit pool, 20% direct referral commission, 40% company. Current demo says subscriptions never go to pool — WRONG.",
+      "last_updated": "2026-03-20",
+      "acceptance_criteria": [
+        { "description": "Update profit pool funding: 40% subscriptions + affiliate + marketplace fees", "done": false },
+        { "description": "Update proposal page Profit Pool section with correct 40/20/40 split", "done": false },
+        { "description": "Update demo earnings tab to reflect correct split", "done": false },
+        { "description": "Remove all 'never from subscriptions' language", "done": false }
+      ]
+    },
+    {
+      "id": "F-012",
+      "title": "SmartFlip Demo — Earnings Page Rebuild",
+      "status": "not_started",
+      "description": "Rebuild earnings tab to match Justin's screenshot layout: Base Pool / Growth Pool split, monthly cap progress, revenue sources bar chart, referral tracking, earnings history",
+      "last_updated": "2026-03-20",
+      "acceptance_criteria": [
+        { "description": "Top row: Total Revenue, Base Pool, Growth Pool", "done": false },
+        { "description": "Estimated Monthly Payout: Base Pool Share + Growth Pool Share + Est. Next Payout + Total Earned", "done": false },
+        { "description": "Monthly Cap Progress: $10K cap with progress bar and % label", "done": false },
+        { "description": "Platform Revenue Sources: bar chart showing Marketplace, Subscription, Affiliate amounts", "done": false },
+        { "description": "How the Profit Pool Works: 3-step explanation (revenue collected, 40% to pool, monthly payouts)", "done": false },
+        { "description": "20% referral commission section: total referrals, names, earnings per referral", "done": false },
+        { "description": "Earnings History: monthly rows with date, amount, paid/pending status", "done": false }
+      ]
+    },
+    {
+      "id": "F-013",
+      "title": "SmartFlip Demo — Marketplace Updates",
+      "status": "not_started",
+      "description": "Update marketplace to reflect free quick-sell concept with resale value data and better language",
+      "last_updated": "2026-03-20",
+      "acceptance_criteria": [
+        { "description": "Update marketplace description: 'built-in marketplace to find flipping deals from people selling for quick cash'", "done": false },
+        { "description": "Each listing shows resale value with data source link", "done": false },
+        { "description": "AI price suggestions: lower price = faster sale, show resale margin for flippers", "done": false },
+        { "description": "Local only vs ships filter visible", "done": false },
+        { "description": "Seller ratings and report/dispute button on listings", "done": false }
+      ]
+    },
+    {
+      "id": "F-014",
+      "title": "SmartFlip Demo — Visual Polish",
+      "status": "not_started",
+      "description": "Replace emoji placeholders with real product images, improve visual quality",
+      "last_updated": "2026-03-20",
+      "acceptance_criteria": [
+        { "description": "Replace emojis with stock product images or better placeholders", "done": false },
+        { "description": "List Item button shows demo tooltip or disabled state instead of doing nothing", "done": false },
+        { "description": "What makes trending explanation/indicator on dashboard", "done": false }
+      ]
+    },
+    {
+      "id": "F-015",
+      "title": "SmartFlip Proposal Page Updates",
+      "status": "not_started",
+      "description": "Update proposal page language and profit pool section per Justin's feedback",
+      "last_updated": "2026-03-20",
+      "acceptance_criteria": [
+        { "description": "Marketplace language: 'built-in marketplace to find flipping deals from people selling for quick cash'", "done": false },
+        { "description": "Profit Pool section: update to 40% pool, 20% referral, 40% company split", "done": false },
+        { "description": "Add clear V1 vs V2 features comparison table (scannable)", "done": false }
+      ]
     }
   ]
 }
