@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutGrid, Search, Camera, ShoppingBag, DollarSign, TrendingUp,
@@ -8,7 +8,7 @@ import {
   Upload, Sparkles, Clock, Star, BarChart3, Users,
   Zap, Target, Shield, CheckCircle2, ArrowUpRight,
   ArrowLeft, Package, Flame, Tag, PiggyBank, Percent,
-  ExternalLink,
+  ExternalLink, Info, Flag, ChevronDown,
 } from "lucide-react";
 import {
   deals, scanResults, listings, dashboardKPIs, profitPool, userEarnings, categories,
@@ -80,6 +80,25 @@ function SourceBadge({ source }: { source: string }) {
   return <span className={`${color} px-2 py-0.5 rounded-full text-[10px] font-medium`}>{source}</span>;
 }
 
+function ProductEmoji({ emoji }: { emoji: string }) {
+  return (
+    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-xl shrink-0 shadow-lg shadow-black/20">
+      {emoji}
+    </div>
+  );
+}
+
+function ProductEmojiLarge({ emoji, showDemoWatermark = false }: { emoji: string; showDemoWatermark?: boolean }) {
+  return (
+    <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 shadow-lg shadow-black/30">
+      <span className="text-4xl">{emoji}</span>
+      {showDemoWatermark && (
+        <span className="absolute bottom-1 right-1 text-[8px] font-bold text-white/20 uppercase tracking-wider">DEMO</span>
+      )}
+    </div>
+  );
+}
+
 // ============================================================
 // Dashboard View
 // ============================================================
@@ -105,16 +124,23 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
         {/* Trending Deals */}
         <GlassCard className="lg:col-span-2 overflow-hidden">
           <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Flame className="w-4 h-4 text-orange-400" />
-              <h2 className="text-sm font-semibold text-white">Trending Deals</h2>
+            <div>
+              <div className="flex items-center gap-2">
+                <Flame className="w-4 h-4 text-orange-400" />
+                <h2 className="text-sm font-semibold text-white">Trending Deals</h2>
+              </div>
+              <p className="text-[10px] text-slate-500 mt-0.5 ml-6">High demand + selling fast + strong margin</p>
             </div>
             <button onClick={() => onNavigate("deals")} className="text-xs text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1">View all <ChevronRight className="w-3 h-3" /></button>
           </div>
           <div className="divide-y divide-white/[0.03]">
             {topDeals.map(d => (
-              <div key={d.id} className="flex items-center gap-3.5 px-5 py-3.5 hover:bg-white/[0.02] transition">
-                <span className="text-2xl">{d.image}</span>
+              <button
+                key={d.id}
+                onClick={() => onNavigate("deals")}
+                className="flex items-center gap-3.5 px-5 py-3.5 hover:bg-white/[0.02] transition w-full text-left cursor-pointer"
+              >
+                <ProductEmoji emoji={d.image} />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-white">{d.title}</span>
@@ -130,7 +156,7 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
                   <p className="text-sm font-bold text-emerald-400">+${d.profit}</p>
                   <p className="text-[9px] text-slate-500">{d.recentlySoldSource}</p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </GlassCard>
@@ -265,6 +291,15 @@ function DealFinderView() {
         </div>
       </div>
 
+      {/* Location indicator */}
+      <div className="flex items-center gap-2 mb-3 px-1">
+        <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+        <span className="text-[11px] text-slate-400">
+          Showing deals near: <span className="text-white font-medium">Los Angeles, CA</span>{" "}
+          <span className="text-emerald-400 hover:underline cursor-pointer transition">(change)</span>
+        </span>
+      </div>
+
       {/* Condition + Budget filters */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <div className="flex items-center gap-1 bg-[#0f172a]/60 border border-white/[0.06] rounded-xl px-1 py-1">
@@ -310,7 +345,7 @@ function DealFinderView() {
                   onClick={() => setSelectedDeal(d)}
                   className={`flex items-center gap-3.5 px-5 py-4 hover:bg-white/[0.02] transition w-full text-left ${selectedDeal?.id === d.id ? "bg-white/[0.03]" : ""}`}
                 >
-                  <span className="text-2xl shrink-0">{d.image}</span>
+                  <ProductEmoji emoji={d.image} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium text-white">{d.title}</span>
@@ -322,7 +357,9 @@ function DealFinderView() {
                       <span className="text-[10px] text-slate-600">sell on {d.sellPlatform}</span>
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{d.condition}</span>
                     </div>
-                    <p className="text-[9px] text-slate-500 mt-0.5">{d.recentlySoldSource}</p>
+                    <span className="text-[9px] text-slate-500 mt-0.5 inline-flex items-center gap-1 hover:text-emerald-400 hover:underline transition cursor-pointer">
+                      {d.recentlySoldSource} <ExternalLink className="w-2.5 h-2.5" />
+                    </span>
                   </div>
                   <div className="text-right shrink-0 space-y-1">
                     <p className="text-sm font-bold text-emerald-400">+${d.profit}</p>
@@ -345,15 +382,17 @@ function DealFinderView() {
                 exit={{ opacity: 0, y: -10 }}
               >
                 <GlassCard className="p-5 space-y-5">
-                  <div className="text-center">
-                    <span className="text-5xl">{selectedDeal.image}</span>
+                  <div className="text-center flex flex-col items-center">
+                    <ProductEmojiLarge emoji={selectedDeal.image} />
                     <h3 className="text-lg font-bold text-white mt-3">{selectedDeal.title}</h3>
                     <div className="flex items-center justify-center gap-2 mt-2">
                       <SourceBadge source={selectedDeal.source} />
                       <span className="text-xs text-slate-400">{selectedDeal.category}</span>
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{selectedDeal.condition}</span>
                     </div>
-                    <p className="text-[10px] text-slate-500 mt-1.5">{selectedDeal.recentlySoldSource}</p>
+                    <span className="text-[10px] text-slate-500 mt-1.5 inline-flex items-center gap-1 hover:text-emerald-400 hover:underline transition cursor-pointer">
+                      {selectedDeal.recentlySoldSource} <ExternalLink className="w-2.5 h-2.5" />
+                    </span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-3">
@@ -398,6 +437,9 @@ function DealFinderView() {
                   <button className="w-full py-3 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-400 transition flex items-center justify-center gap-2">
                     Buy on {selectedDeal.source} <ExternalLink className="w-3.5 h-3.5" />
                   </button>
+                  <span className="flex items-center justify-center gap-1 text-[11px] text-slate-400 hover:text-emerald-400 hover:underline transition cursor-pointer">
+                    <ExternalLink className="w-3 h-3" /> View source listing
+                  </span>
                   <p className="text-[10px] text-center text-slate-500">Affiliate link, earns revenue for the Profit Pool</p>
                 </GlassCard>
               </motion.div>
@@ -542,7 +584,7 @@ function SmartScanView() {
                   onClick={() => { setSelectedResult(sr); setScanned(true); setScanning(false); }}
                   className={`p-4 flex items-center gap-3 ${selectedResult.id === sr.id ? "border-emerald-500/30" : ""}`}
                 >
-                  <span className="text-2xl">{sr.image}</span>
+                  <ProductEmoji emoji={sr.image} />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-white">{sr.title}</p>
                     <div className="flex items-center gap-2 mt-0.5">
@@ -569,8 +611,8 @@ function SmartScanView() {
               exit={{ opacity: 0, y: -10 }}
             >
               <GlassCard className="p-5 space-y-5">
-                <div className="text-center pb-4 border-b border-white/[0.04]">
-                  <span className="text-5xl">{selectedResult.image}</span>
+                <div className="text-center pb-4 border-b border-white/[0.04] flex flex-col items-center">
+                  <ProductEmojiLarge emoji={selectedResult.image} />
                   <h3 className="text-lg font-bold text-white mt-3">{selectedResult.title}</h3>
                   <div className="flex items-center justify-center gap-2 mt-2">
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-mono">
@@ -672,6 +714,12 @@ function SmartScanView() {
 // ============================================================
 function MarketplaceView() {
   const [filter, setFilter] = useState<"all" | "shipping" | "local">("all");
+  const [showListToast, setShowListToast] = useState(false);
+
+  const handleListItem = useCallback(() => {
+    setShowListToast(true);
+    setTimeout(() => setShowListToast(false), 2000);
+  }, []);
 
   const filtered = listings.filter(l => {
     if (filter === "shipping") return l.shippingAvailable;
@@ -681,6 +729,21 @@ function MarketplaceView() {
 
   return (
     <div>
+      {/* Demo toast notification */}
+      <AnimatePresence>
+        {showListToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="mb-4 px-4 py-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/20 flex items-center gap-2"
+          >
+            <Info className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span className="text-xs text-emerald-400">Demo mode - listing flow available in the real app</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="mb-6 flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Marketplace</h1>
@@ -690,7 +753,10 @@ function MarketplaceView() {
           <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
             5% fee on sales
           </span>
-          <button className="px-4 py-2 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-400 transition flex items-center gap-2">
+          <button
+            onClick={handleListItem}
+            className="px-4 py-2 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-400 transition flex items-center gap-2"
+          >
             <Tag className="w-4 h-4" /> List Item
           </button>
         </div>
@@ -721,11 +787,19 @@ function MarketplaceView() {
           >
             <GlassCard className="overflow-hidden hover:border-white/[0.12] transition-all cursor-pointer group">
               <div className="h-36 bg-gradient-to-br from-[#0c1222] to-[#1a2744] flex items-center justify-center relative">
-                <span className="text-5xl group-hover:scale-110 transition-transform">{l.image}</span>
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-lg shadow-black/30 group-hover:scale-110 transition-transform">
+                  <span className="text-4xl">{l.image}</span>
+                </div>
+                <span className="absolute top-2 right-2 text-[9px] font-bold text-white/15 uppercase tracking-widest">DEMO</span>
               </div>
               <div className="p-4 space-y-3">
                 <div>
                   <h3 className="text-sm font-medium text-white group-hover:text-emerald-400 transition">{l.title}</h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[10px] text-slate-400 flex items-center gap-1">
+                      {l.seller} <Star className="w-3 h-3 text-amber-400 fill-amber-400" /> <span className="text-amber-400 font-medium">{(4.5 + (l.id.charCodeAt(l.id.length - 1) % 5) * 0.1).toFixed(1)}</span>
+                    </span>
+                  </div>
                   <div className="flex items-center gap-2 mt-1">
                     <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${l.condition === "New" ? "bg-emerald-500/15 text-emerald-400" : l.condition === "Like New" ? "bg-cyan-500/15 text-cyan-400" : "bg-slate-500/15 text-slate-400"}`}>
                       {l.condition}
@@ -757,7 +831,12 @@ function MarketplaceView() {
 
                 <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-white/[0.04]">
                   <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {l.location}</span>
-                  <span>{l.daysListed}d ago</span>
+                  <div className="flex items-center gap-3">
+                    <span>{l.daysListed}d ago</span>
+                    <span className="flex items-center gap-0.5 text-slate-600 hover:text-rose-400 cursor-pointer transition">
+                      <Flag className="w-2.5 h-2.5" /> Report
+                    </span>
+                  </div>
                 </div>
               </div>
             </GlassCard>
@@ -1023,6 +1102,11 @@ export default function SmartFlipDemo() {
           <span className="text-xl">💰</span>
           <span className="text-sm font-bold tracking-tight">SmartFlip</span>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-medium hidden sm:inline">MVP Demo</span>
+          <span className="hidden md:flex items-center gap-1.5 text-[11px] text-slate-400 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] cursor-pointer hover:border-white/[0.12] transition">
+            <MapPin className="w-3 h-3 text-emerald-400" />
+            <span>Los Angeles, CA</span>
+            <ChevronDown className="w-3 h-3 text-slate-500" />
+          </span>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 hidden sm:inline">$1 trial, then $49/mo</span>

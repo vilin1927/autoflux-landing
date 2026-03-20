@@ -2,6 +2,24 @@
 
 ## Current Session: 2026-03-20
 
+### SmartFlip Demo — UX Improvements Round 2 (F-010 / F-013)
+
+**What was done:**
+- Clickable source links on deals: `recentlySoldSource` text now shows ExternalLink icon and hover underline in both deal list and deal detail panel. Added "View source listing" link below the Buy button in deal detail.
+- Location picker: Added MapPin + "Los Angeles, CA" dropdown-styled indicator in the sticky top bar (between MVP Demo badge and Proposal link). Added "Showing deals near: Los Angeles, CA (change)" indicator in Deal Finder view above condition/budget filters.
+- Trending deals clickable: Dashboard trending deal rows are now `<button>` elements that navigate to Deal Finder tab via `onNavigate("deals")`.
+- Seller ratings on marketplace: Each listing card shows seller name with star rating (e.g., "QuickSell_Sarah 4.8"). Added Flag "Report" link in footer of each listing card.
+- TypeScript check: zero errors
+
+**Files changed:**
+- `app/proposals/smartflip/demo/page.tsx` - all four changes
+
+**What comes next:**
+- Wait for Justin's feedback
+- Deploy when approved
+
+---
+
 ### SmartFlip Proposal Page — Subscription Split Fix (F-011 / F-015)
 
 **What was done:**
