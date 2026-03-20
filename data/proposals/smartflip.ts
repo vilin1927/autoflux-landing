@@ -59,20 +59,29 @@ export interface Listing {
 
 export interface ProfitPoolData {
   totalPool: number;
-  fromAffiliates: number;
+  basePool: number;
+  growthPool: number;
+  fromSubscriptions: number;
   fromMarketplace: number;
-  yourShare: number;
-  yourAffiliateEarnings: number;
+  fromAffiliates: number;
   totalMembers: number;
   yourRank: number;
+  monthlyCap: number;
 }
 
 export interface EarningsData {
-  profitPoolShare: number;
-  affiliateEarnings: number;
-  totalThisMonth: number;
-  lastMonth: number;
-  history: { month: string; pool: number; affiliate: number }[];
+  totalRevenue: number;
+  basePoolShare: number;
+  growthPoolShare: number;
+  estNextPayout: number;
+  totalEarnedAllTime: number;
+  earnedThisMonth: number;
+  monthlyCap: number;
+  referralCommissionRate: number;
+  totalReferrals: number;
+  referrals: { name: string; earned: number }[];
+  history: { month: string; type: string; amount: number; status: "paid" | "pending" }[];
+  revenueSources: { label: string; amount: number }[];
 }
 
 // ============================================================
@@ -361,7 +370,7 @@ export const scanResults: ScanResult[] = [
     amazonPrice: 0,
     quickFlipPrice: 60,
     maxValuePrice: 110,
-    condition: "Good — some wear",
+    condition: "Good - some wear",
     demandLevel: "Medium",
     avgDaysToSell: 7,
     similarListings: 48,
@@ -479,33 +488,47 @@ export const listings: Listing[] = [
 ];
 
 // ============================================================
-// Profit Pool — funded from affiliates + marketplace ONLY
+// Profit Pool — 40% subscriptions, 10% marketplace, affiliates
 // ============================================================
 export const profitPool: ProfitPoolData = {
-  totalPool: 2625,
-  fromAffiliates: 1875,
-  fromMarketplace: 750,
-  yourShare: 32.40,
-  yourAffiliateEarnings: 15.40,
+  totalPool: 4850,
+  basePool: 970,
+  growthPool: 970,
+  fromSubscriptions: 147.00,
+  fromMarketplace: 224.90,
+  fromAffiliates: 35.50,
   totalMembers: 1284,
   yourRank: 142,
+  monthlyCap: 10000,
 };
 
 // ============================================================
-// User Earnings — profit pool + affiliate only (no company numbers)
+// User Earnings — pool shares, referrals, history
 // ============================================================
 export const userEarnings: EarningsData = {
-  profitPoolShare: 32.40,
-  affiliateEarnings: 15.40,
-  totalThisMonth: 47.80,
-  lastMonth: 38.20,
+  totalRevenue: 4850.00,
+  basePoolShare: 485.00,
+  growthPoolShare: 0,
+  estNextPayout: 485.00,
+  totalEarnedAllTime: 165.60,
+  earnedThisMonth: 55.80,
+  monthlyCap: 10000,
+  referralCommissionRate: 20,
+  totalReferrals: 3,
+  referrals: [
+    { name: "Alex M.", earned: 9.80 },
+    { name: "Sarah K.", earned: 9.80 },
+    { name: "Jordan T.", earned: 9.80 },
+  ],
   history: [
-    { month: "Oct", pool: 18.50, affiliate: 8.20 },
-    { month: "Nov", pool: 22.10, affiliate: 10.40 },
-    { month: "Dec", pool: 28.80, affiliate: 12.60 },
-    { month: "Jan", pool: 25.40, affiliate: 11.80 },
-    { month: "Feb", pool: 30.20, affiliate: 14.00 },
-    { month: "Mar", pool: 32.40, affiliate: 15.40 },
+    { month: "2026-01", type: "Pool Payout", amount: 47.50, status: "paid" },
+    { month: "2026-02", type: "Pool Payout", amount: 62.30, status: "paid" },
+    { month: "2026-03", type: "Pool Payout", amount: 55.80, status: "pending" },
+  ],
+  revenueSources: [
+    { label: "Marketplace", amount: 224.90 },
+    { label: "Subscription", amount: 147.00 },
+    { label: "Affiliate", amount: 35.50 },
   ],
 };
 

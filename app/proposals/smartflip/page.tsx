@@ -61,7 +61,7 @@ const solutions = [
   {
     icon: DollarSign,
     title: "Profit Pool + Marketplace",
-    desc: "Free marketplace where anyone can list items for quick cash. AI suggests pricing and shows resale value for flippers. No membership needed to sell. Every listing fee and affiliate click feeds the Profit Pool, distributed monthly to active members. $10K monthly cap per user.",
+    desc: "Built-in marketplace to find flipping deals from people selling for quick cash. AI suggests pricing and shows resale value for flippers. No membership needed to sell. 40% of subscription revenue, affiliate clicks, and listing fees all feed the Profit Pool, distributed monthly to active members. $10K monthly cap per user.",
     solves: "Flipping is a solo game",
   },
 ];
@@ -86,10 +86,10 @@ const techStack = [
 const v1Features = [
   "Smart Scan: photo to exact product, model, SKU with resale value and source data",
   "AI Deal Finder: real arbitrage across eBay, Amazon, Facebook. \"Found on FB for $5, sells on eBay for $50\"",
-  "Free Marketplace: anyone can list items for quick cash, no membership needed. AI pricing + resale value shown",
+  "Built-in Marketplace: find flipping deals from people selling for quick cash, no membership needed to sell. AI pricing + resale value shown",
   "Filters: budget range, category, location (local/global), used vs new, custom item search",
   "Affiliate links: every 'Buy' link earns revenue (eBay Partner Network)",
-  "Profit Pool: pie chart dashboard, $10K monthly cap, progress bar, 20% referral commission",
+  "Profit Pool: 40% of subscriptions go to the pool, 20% referral commissions, 40% company. Pie chart dashboard, $10K monthly cap, progress bar",
   "$1 trial for 7 days, then $49/mo (Stripe) with clear disclosures and one-click cancel",
   "Seller ratings and report/dispute system",
   "Revenue dashboard: Profit Pool + affiliate earnings only (no company numbers)",
@@ -487,9 +487,9 @@ const milestones: MilestoneData[] = [
     scenario:
       "Someone wants to sell their old KitchenAid mixer fast. They open SmartFlip's free marketplace (no membership needed), tap \"New Listing\" and the AI suggests a quick-sale price of $45, showing \"resale value: $85-110 on eBay\" so flippers see the margin instantly. You're a member. You spot it, buy it, and relist on eBay for $95. Meanwhile, you check your earnings tab: $32.40 from the Profit Pool, $15.40 from affiliate clicks, and your referral brought in a new member earning you 20%. That's passive income on top of your flip profits.",
     deliverables: [
-      "Free marketplace: anyone can list items for quick cash, no membership needed. AI suggests quick-sale price + shows resale value with data source",
+      "Built-in marketplace to find flipping deals from people selling for quick cash. No membership needed to sell. AI suggests quick-sale price + shows resale value with data source",
       "5% transaction fee on completed sales (listing is free). Seller ratings and report/dispute system",
-      "Profit Pool dashboard: pie chart analytics, $10K monthly cap with progress bar, 20% referral commission for new member sales",
+      "Profit Pool dashboard: 40/20/40 subscription split (pool/referral/company), pie chart analytics, $10K monthly cap with progress bar",
       "Revenue display: Profit Pool share + affiliate earnings only (no company numbers)",
       "Stripe billing: $1 trial for 7 days, auto-renews to $49/mo, cancel anytime",
       "Admin panel: user management, revenue tracking, Profit Pool controls, payout history",
@@ -662,7 +662,7 @@ export default function SmartFlipProposal() {
                   <CheckCircle2 className="w-4 h-4 text-white" />
                 </div>
                 <h3 className="text-xl font-bold">What&apos;s in V1</h3>
-                <span className="text-xs text-emerald-400 ml-2">Included in $3,500</span>
+                <span className="text-xs text-emerald-400 ml-2">Included in $2,800</span>
               </div>
               <div className="space-y-2.5">
                 {v1Features.map((f, i) => (
@@ -741,18 +741,18 @@ export default function SmartFlipProposal() {
               <CircleDollarSign className="w-6 h-6 text-emerald-400 mb-3" />
               <h4 className="text-sm font-semibold text-white mb-2">Where the money comes from</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                The pool is funded from two sources only: affiliate commissions (every &quot;Buy on eBay&quot; click) and
-                marketplace transaction fees (5% on completed sales). Subscription revenue ($49/mo) goes to operating
-                costs, never into the pool.
+                The pool is funded from three sources: 40% of all subscription revenue ($49/mo),
+                affiliate commissions (every &quot;Buy on eBay&quot; click), and marketplace transaction fees
+                (5% on completed sales). Subscriptions are the largest and most predictable source.
               </p>
             </div>
             <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0f172a]/80 to-[#1e293b]/60 border border-white/[0.06]">
               <Percent className="w-6 h-6 text-emerald-400 mb-3" />
               <h4 className="text-sm font-semibold text-white mb-2">How it&apos;s split</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                30% of affiliate revenue + 15% of marketplace fees flow into the pool each month.
-                Distribution is proportional to your activity. Plus 20% referral commission on
-                every new member you bring in directly. $10K monthly cap per user.
+                Every dollar of subscription revenue splits 40/20/40: 40% goes to the Profit Pool,
+                20% goes to direct referral commissions, and 40% goes to the company for operations
+                and growth. Affiliate and marketplace revenue add on top. $10K monthly cap per user.
               </p>
             </div>
             <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0f172a]/80 to-[#1e293b]/60 border border-white/[0.06]">
@@ -770,22 +770,25 @@ export default function SmartFlipProposal() {
             <h4 className="text-sm font-semibold text-white mb-3">Example at scale (1,000 subscribers)</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
-                <p className="text-[10px] text-slate-500">Monthly Affiliate Revenue</p>
-                <p className="text-lg font-bold text-white">$6,250</p>
+                <p className="text-[10px] text-slate-500">Subscription Revenue</p>
+                <p className="text-lg font-bold text-white">$49,000/mo</p>
               </div>
               <div>
-                <p className="text-[10px] text-slate-500">Marketplace Fees</p>
-                <p className="text-lg font-bold text-white">$5,000</p>
+                <p className="text-[10px] text-slate-500">40% to Profit Pool</p>
+                <p className="text-lg font-bold text-emerald-400">$19,600</p>
               </div>
               <div>
-                <p className="text-[10px] text-slate-500">Monthly Pool</p>
-                <p className="text-lg font-bold text-emerald-400">$2,625</p>
+                <p className="text-[10px] text-slate-500">20% Referral Commissions</p>
+                <p className="text-lg font-bold text-white">$9,800</p>
               </div>
               <div>
-                <p className="text-[10px] text-slate-500">Avg User Payout</p>
-                <p className="text-lg font-bold text-emerald-400">$6–15/mo</p>
+                <p className="text-[10px] text-slate-500">40% Company</p>
+                <p className="text-lg font-bold text-white">$19,600</p>
               </div>
             </div>
+            <p className="text-[10px] text-slate-500 text-center mt-3">
+              Plus affiliate commissions and marketplace fees on top. Pool distributed monthly to active members.
+            </p>
           </motion.div>
         </motion.div>
       </section>

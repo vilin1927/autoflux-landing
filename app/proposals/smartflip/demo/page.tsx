@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import {
   deals, scanResults, listings, dashboardKPIs, profitPool, userEarnings, categories,
-  type Deal, type ScanResult,
+  type Deal, type ScanResult, type EarningsData, type ProfitPoolData,
 } from "@/data/proposals/smartflip";
 
 // ============================================================
@@ -97,7 +97,7 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
         <KPICard label="Active Deals" value={k.activeDeals} color="text-emerald-400" icon={Zap} sub="Found today" />
         <KPICard label="Avg Margin" value={k.avgProfitMargin} suffix="%" color="text-cyan-400" icon={TrendingUp} sub="+5% vs last week" />
-        <KPICard label="Your Earnings" value={`$${k.monthlyEarnings}`} color="text-emerald-400" icon={DollarSign} sub="Pool + affiliate" />
+        <KPICard label="Your Earnings" value={`$${k.monthlyEarnings}`} color="text-emerald-400" icon={DollarSign} sub="Pool + referrals" />
         <KPICard label="Items Listed" value={k.itemsListed} color="text-white" icon={Package} sub="3 selling fast" />
       </div>
 
@@ -147,29 +147,26 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
             </div>
             <div className="p-5 space-y-4">
               <div className="text-center">
-                <p className="text-3xl font-bold text-emerald-400">${userEarnings.totalThisMonth}</p>
+                <p className="text-3xl font-bold text-emerald-400">${userEarnings.earnedThisMonth}</p>
                 <p className="text-[11px] text-slate-500 mt-1">This month</p>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-slate-400 flex items-center gap-1.5">
-                    <PiggyBank className="w-3 h-3" /> Profit Pool
+                    <PiggyBank className="w-3 h-3" /> Base Pool
                   </span>
-                  <span className="text-xs font-medium text-emerald-400">${userEarnings.profitPoolShare}</span>
+                  <span className="text-xs font-medium text-emerald-400">${userEarnings.basePoolShare}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-slate-400 flex items-center gap-1.5">
-                    <Target className="w-3 h-3" /> Affiliate
+                    <Target className="w-3 h-3" /> Growth Pool
                   </span>
-                  <span className="text-xs font-medium text-cyan-400">${userEarnings.affiliateEarnings}</span>
+                  <span className="text-xs font-medium text-cyan-400">${userEarnings.growthPoolShare}</span>
                 </div>
               </div>
               <div className="pt-3 border-t border-white/[0.04] flex items-center justify-between">
-                <span className="text-[11px] text-slate-500">vs last month</span>
-                <span className="text-xs font-medium text-emerald-400 flex items-center gap-1">
-                  <ArrowUp className="w-3 h-3" />
-                  +${(userEarnings.totalThisMonth - userEarnings.lastMonth).toFixed(2)}
-                </span>
+                <span className="text-[11px] text-slate-500">All time</span>
+                <span className="text-xs font-medium text-emerald-400">${userEarnings.totalEarnedAllTime}</span>
               </div>
             </div>
           </GlassCard>
@@ -209,6 +206,7 @@ function DashboardView({ onNavigate }: { onNavigate: (v: View) => void }) {
 // Deal Finder View
 // ============================================================
 function DealFinderView() {
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState<"profit" | "confidence" | "margin">("profit");
   const [conditionFilter, setConditionFilter] = useState<"all" | "Used" | "New">("all");
@@ -216,6 +214,7 @@ function DealFinderView() {
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
 
   const filtered = deals
+    .filter(d => searchQuery === "" || d.title.toLowerCase().includes(searchQuery.toLowerCase()))
     .filter(d => selectedCategory === "All" || d.category === selectedCategory)
     .filter(d => conditionFilter === "all" || d.condition === conditionFilter || (conditionFilter === "Used" && (d.condition === "Used" || d.condition === "Like New" || d.condition === "Refurbished")))
     .filter(d => budgetMax === 0 || d.buyPrice <= budgetMax)
@@ -226,6 +225,18 @@ function DealFinderView() {
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-white">AI Deal Finder</h1>
         <p className="text-slate-400 text-sm mt-1">Real arbitrage across eBay, Amazon, and Facebook. Buy here, sell there.</p>
+      </div>
+
+      {/* Search bar */}
+      <div className="relative mb-4">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search for specific items..."
+          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0f172a]/60 border border-white/[0.06] text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500/30 transition"
+        />
       </div>
 
       {/* Filters */}
@@ -254,7 +265,7 @@ function DealFinderView() {
         </div>
       </div>
 
-      {/* Budget + Condition filters */}
+      {/* Condition + Budget filters */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <div className="flex items-center gap-1 bg-[#0f172a]/60 border border-white/[0.06] rounded-xl px-1 py-1">
           {(["all", "Used", "New"] as const).map(c => (
@@ -267,13 +278,13 @@ function DealFinderView() {
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-2 bg-[#0f172a]/60 border border-white/[0.06] rounded-xl px-3 py-1.5">
-          <span className="text-[11px] text-slate-500">Budget:</span>
+        <div className="flex items-center gap-1.5 bg-[#0f172a]/60 border border-white/[0.06] rounded-xl px-2 py-1">
+          <span className="text-[11px] text-slate-500 font-medium">Budget:</span>
           {[0, 50, 100, 200, 500].map(b => (
             <button
               key={b}
               onClick={() => setBudgetMax(b)}
-              className={`px-2 py-0.5 rounded text-[10px] font-medium transition ${budgetMax === b ? "bg-emerald-500/20 text-emerald-400" : "text-slate-500 hover:text-white"}`}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${budgetMax === b ? "bg-emerald-500/20 text-emerald-400" : "text-slate-400 hover:text-white"}`}
             >
               {b === 0 ? "Any" : `<$${b}`}
             </button>
@@ -673,7 +684,7 @@ function MarketplaceView() {
       <div className="mb-6 flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Marketplace</h1>
-          <p className="text-slate-400 text-sm mt-1">Sell your stuff for quick cash. Free to list, no membership needed.</p>
+          <p className="text-slate-400 text-sm mt-1">Find flipping deals from people selling for quick cash. Free to list, no membership needed.</p>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -758,162 +769,220 @@ function MarketplaceView() {
 }
 
 // ============================================================
-// Earnings View — Profit Pool + Affiliate only (no company numbers)
+// Earnings View — Rebuilt to match Justin's layout
 // ============================================================
 function EarningsView() {
   const e = userEarnings;
   const p = profitPool;
-  const maxEarning = Math.max(...e.history.map(h => h.pool + h.affiliate));
+  const maxRevenueSource = Math.max(...e.revenueSources.map(s => s.amount));
+  const capPercent = (e.earnedThisMonth / e.monthlyCap) * 100;
 
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-white">Your Earnings</h1>
-        <p className="text-slate-400 text-sm mt-1">Profit Pool share + affiliate revenue. What you actually earn</p>
+        <p className="text-slate-400 text-sm mt-1">Profit Pool share + referral revenue. What you actually earn</p>
       </div>
 
-      {/* Earnings summary */}
-      <div className="grid md:grid-cols-3 gap-4 mb-8">
+      {/* Section 1: Top row - 3 cards */}
+      <div className="grid md:grid-cols-3 gap-4 mb-6">
         <GlassCard className="p-5 text-center">
-          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">This Month</p>
-          <p className="text-3xl font-bold text-emerald-400">${e.totalThisMonth}</p>
-          <div className="flex items-center justify-center gap-1 mt-1.5">
-            <ArrowUp className="w-3 h-3 text-emerald-400" />
-            <span className="text-xs text-emerald-400">+${(e.totalThisMonth - e.lastMonth).toFixed(2)} vs last month</span>
-          </div>
-          {/* $10K cap progress */}
-          <div className="mt-3">
-            <div className="flex justify-between text-[9px] text-slate-500 mb-1">
-              <span>$0</span>
-              <span>$10K cap</span>
-            </div>
-            <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
-              <div className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400" style={{ width: `${(e.totalThisMonth / 10000) * 100}%` }} />
-            </div>
-            <p className="text-[9px] text-slate-500 mt-1">{((e.totalThisMonth / 10000) * 100).toFixed(1)}% of monthly cap</p>
-          </div>
+          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Total Revenue</p>
+          <p className="text-3xl font-bold text-emerald-400">${e.totalRevenue.toLocaleString("en-US", { minimumFractionDigits: 2 })}</p>
         </GlassCard>
         <GlassCard className="p-5 text-center">
-          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Profit Pool Share</p>
-          <p className="text-3xl font-bold text-cyan-400">${e.profitPoolShare}</p>
-          <p className="text-[11px] text-slate-500 mt-1.5">Rank #{p.yourRank} of {p.totalMembers}</p>
+          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Base Pool</p>
+          <p className="text-3xl font-bold text-cyan-400">${p.basePool.toLocaleString("en-US", { minimumFractionDigits: 2 })}</p>
+          <p className="text-[11px] text-slate-500 mt-1.5">Split equally among subscribers</p>
         </GlassCard>
         <GlassCard className="p-5 text-center">
-          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Affiliate + Referral</p>
-          <p className="text-3xl font-bold text-amber-400">${e.affiliateEarnings}</p>
-          <p className="text-[11px] text-slate-500 mt-1.5">Affiliate clicks + 20% referral on new members</p>
+          <p className="text-[11px] text-slate-500 uppercase tracking-wider mb-2">Growth Pool</p>
+          <p className="text-3xl font-bold text-amber-400">${p.growthPool.toLocaleString("en-US", { minimumFractionDigits: 2 })}</p>
+          <p className="text-[11px] text-slate-500 mt-1.5">Weighted by seniority</p>
         </GlassCard>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-5">
-        {/* Earnings chart */}
+      {/* Section 2: Your Payout + Cap Progress */}
+      <div className="grid md:grid-cols-2 gap-4 mb-6">
         <GlassCard className="overflow-hidden">
-          <div className="px-5 py-3.5 border-b border-white/[0.04]">
-            <h2 className="text-sm font-semibold text-white">6-Month Earnings Trend</h2>
+          <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center gap-2">
+            <DollarSign className="w-4 h-4 text-emerald-400" />
+            <h2 className="text-sm font-semibold text-white">Your Estimated Monthly Payout</h2>
           </div>
-          <div className="p-5">
-            <div className="flex items-end gap-3 h-48">
-              {e.history.map((h, i) => {
-                const total = h.pool + h.affiliate;
-                const height = (total / maxEarning) * 100;
-                const poolHeight = (h.pool / total) * height;
-                const affHeight = (h.affiliate / total) * height;
-                return (
-                  <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                    <span className="text-[10px] text-white font-medium">${total.toFixed(0)}</span>
-                    <div className="w-full flex flex-col gap-0.5" style={{ height: `${height}%` }}>
-                      <motion.div
-                        className="w-full rounded-t bg-gradient-to-t from-emerald-600 to-emerald-400"
-                        initial={{ height: 0 }}
-                        animate={{ height: `${poolHeight}%` }}
-                        transition={{ delay: i * 0.1, duration: 0.4 }}
-                        style={{ flexBasis: `${poolHeight}%` }}
-                      />
-                      <motion.div
-                        className="w-full rounded-b bg-gradient-to-t from-amber-600/60 to-amber-400/80"
-                        initial={{ height: 0 }}
-                        animate={{ height: `${affHeight}%` }}
-                        transition={{ delay: i * 0.1 + 0.2, duration: 0.4 }}
-                        style={{ flexBasis: `${affHeight}%` }}
-                      />
-                    </div>
-                    <span className="text-[10px] text-slate-600">{h.month}</span>
-                  </div>
-                );
-              })}
+          <div className="p-5 space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-slate-400">Base Pool Share</span>
+              <span className="text-sm font-medium text-emerald-400">${e.basePoolShare.toFixed(2)}</span>
             </div>
-            <div className="flex items-center justify-center gap-6 mt-4">
-              <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-sm bg-emerald-500" />
-                <span className="text-[10px] text-slate-400">Profit Pool</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-sm bg-amber-500" />
-                <span className="text-[10px] text-slate-400">Affiliate</span>
-              </div>
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-slate-400">Growth Pool Share</span>
+              <span className="text-sm font-medium text-cyan-400">${e.growthPoolShare.toFixed(2)}</span>
+            </div>
+            <div className="border-t border-white/[0.04] pt-3 flex justify-between items-center">
+              <span className="text-xs text-slate-400">Est. Next Payout</span>
+              <span className="text-sm font-bold text-emerald-400">${e.estNextPayout.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-slate-400">Total Earned All Time</span>
+              <span className="text-sm font-medium text-white">${e.totalEarnedAllTime.toFixed(2)}</span>
             </div>
           </div>
         </GlassCard>
 
-        {/* Profit Pool breakdown */}
-        <div className="space-y-5">
-          <GlassCard className="overflow-hidden">
-            <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center gap-2">
-              <PiggyBank className="w-4 h-4 text-emerald-400" />
-              <h2 className="text-sm font-semibold text-white">Profit Pool This Month</h2>
+        <GlassCard className="overflow-hidden">
+          <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center gap-2">
+            <BarChart3 className="w-4 h-4 text-cyan-400" />
+            <h2 className="text-sm font-semibold text-white">Monthly Cap Progress</h2>
+          </div>
+          <div className="p-5 space-y-4">
+            <div className="text-center">
+              <p className="text-2xl font-bold text-white">${e.earnedThisMonth.toFixed(2)}</p>
+              <p className="text-[11px] text-slate-500 mt-1">earned of ${(e.monthlyCap).toLocaleString()} cap</p>
             </div>
-            <div className="p-5 space-y-4">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-white">${p.totalPool.toLocaleString()}</p>
-                <p className="text-[11px] text-slate-500 mt-1">Total pool distributed to members</p>
+            <div>
+              <div className="w-full h-3 rounded-full bg-slate-800 overflow-hidden">
+                <motion.div
+                  className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${Math.min(capPercent, 100)}%` }}
+                  transition={{ duration: 0.6 }}
+                />
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-slate-400">From affiliate links (30%)</span>
-                  <span className="text-xs font-medium text-emerald-400">${p.fromAffiliates.toLocaleString()}</span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400" style={{ width: `${(p.fromAffiliates / p.totalPool) * 100}%` }} />
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-slate-400">From marketplace fees (15%)</span>
-                  <span className="text-xs font-medium text-cyan-400">${p.fromMarketplace.toLocaleString()}</span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400" style={{ width: `${(p.fromMarketplace / p.totalPool) * 100}%` }} />
-                </div>
-              </div>
-              <div className="border-t border-white/[0.04] pt-3 space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-xs text-slate-400">Your share</span>
-                  <span className="text-xs font-bold text-emerald-400">${p.yourShare}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-xs text-slate-400">Your rank</span>
-                  <span className="text-xs font-medium text-white">#{p.yourRank} of {p.totalMembers}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-xs text-slate-400">Active members</span>
-                  <span className="text-xs font-medium text-white">{p.totalMembers.toLocaleString()}</span>
-                </div>
-              </div>
+              <p className="text-[11px] text-slate-500 mt-2 text-center">{capPercent.toFixed(0)}% of cap</p>
             </div>
-          </GlassCard>
-
-          {/* How it works */}
-          <GlassCard className="p-5">
-            <div className="flex items-center gap-2 mb-3">
-              <Shield className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-medium text-white">How the Pool is funded</span>
-            </div>
-            <div className="space-y-2 text-[11px] text-slate-400">
-              <p>The Profit Pool is funded from <span className="text-emerald-400 font-medium">affiliate commissions</span> and <span className="text-cyan-400 font-medium">marketplace transaction fees</span> only.</p>
-              <p>Subscription revenue ($49/mo) covers operating costs and is <span className="text-white font-medium">never</span> put into the pool.</p>
-              <p>If revenue goes up, the pool grows. If it dips, payouts shrink proportionally. No fixed promises, only real revenue.</p>
-            </div>
-          </GlassCard>
-        </div>
+          </div>
+        </GlassCard>
       </div>
+
+      {/* Section 3: Platform Revenue Sources */}
+      <GlassCard className="overflow-hidden mb-6">
+        <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center gap-2">
+          <TrendingUp className="w-4 h-4 text-emerald-400" />
+          <h2 className="text-sm font-semibold text-white">Platform Revenue Sources</h2>
+        </div>
+        <div className="p-5 space-y-4">
+          {e.revenueSources.map((src, i) => {
+            const barWidth = (src.amount / maxRevenueSource) * 100;
+            const colors = ["from-emerald-600 to-emerald-400", "from-cyan-600 to-cyan-400", "from-amber-600 to-amber-400"];
+            const textColors = ["text-emerald-400", "text-cyan-400", "text-amber-400"];
+            return (
+              <div key={i} className="space-y-1.5">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-slate-400">{src.label}</span>
+                  <span className={`text-xs font-medium ${textColors[i]}`}>${src.amount.toFixed(2)}</span>
+                </div>
+                <div className="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                  <motion.div
+                    className={`h-full rounded-full bg-gradient-to-r ${colors[i]}`}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${barWidth}%` }}
+                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </GlassCard>
+
+      {/* Section 4: How the Profit Pool Works */}
+      <GlassCard className="overflow-hidden mb-6">
+        <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center gap-2">
+          <Shield className="w-4 h-4 text-emerald-400" />
+          <h2 className="text-sm font-semibold text-white">How the Profit Pool Works</h2>
+        </div>
+        <div className="p-5">
+          <div className="space-y-5">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/15 flex items-center justify-center">
+                <span className="text-sm font-bold text-emerald-400">1</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-white">Revenue is collected</p>
+                <p className="text-[11px] text-slate-400 mt-1">From subscriptions (40%), marketplace fees (10%), and affiliate commissions</p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/15 flex items-center justify-center">
+                <span className="text-sm font-bold text-emerald-400">2</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-white">40% goes to the Profit Pool</p>
+                <p className="text-[11px] text-slate-400 mt-1">Split into Base Pool (equal share) and Growth Pool (seniority-weighted)</p>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/15 flex items-center justify-center">
+                <span className="text-sm font-bold text-emerald-400">3</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-white">Monthly payouts up to $10,000/mo</p>
+                <p className="text-[11px] text-slate-400 mt-1">Earlier members earn more from Growth Pool. Excess is redistributed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </GlassCard>
+
+      {/* Section 5: Referral Program */}
+      <GlassCard className="overflow-hidden mb-6">
+        <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center gap-2">
+          <Users className="w-4 h-4 text-cyan-400" />
+          <h2 className="text-sm font-semibold text-white">Referral Program</h2>
+        </div>
+        <div className="p-5 space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/10 text-center flex-1">
+              <p className="text-2xl font-bold text-cyan-400">{e.referralCommissionRate}%</p>
+              <p className="text-[11px] text-slate-500 mt-1">Commission on direct referrals</p>
+            </div>
+            <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/10 text-center flex-1">
+              <p className="text-2xl font-bold text-emerald-400">{e.totalReferrals}</p>
+              <p className="text-[11px] text-slate-500 mt-1">Total referrals</p>
+            </div>
+          </div>
+          {e.referrals.length > 0 && (
+            <div className="space-y-2">
+              <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Your Referrals</p>
+              {e.referrals.map((ref, i) => (
+                <div key={i} className="flex justify-between items-center py-2 px-3 rounded-lg bg-white/[0.02]">
+                  <span className="text-xs text-white">{ref.name}</span>
+                  <span className="text-xs font-medium text-emerald-400">${ref.earned.toFixed(2)}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </GlassCard>
+
+      {/* Section 6: Earnings History */}
+      <GlassCard className="overflow-hidden">
+        <div className="px-5 py-3.5 border-b border-white/[0.04] flex items-center gap-2">
+          <Clock className="w-4 h-4 text-slate-400" />
+          <h2 className="text-sm font-semibold text-white">Earnings History</h2>
+        </div>
+        <div className="divide-y divide-white/[0.03]">
+          {/* Header row */}
+          <div className="flex items-center px-5 py-2.5 text-[10px] text-slate-500 uppercase tracking-wider">
+            <span className="flex-1">Date</span>
+            <span className="flex-1">Type</span>
+            <span className="flex-1 text-right">Amount</span>
+            <span className="w-20 text-right">Status</span>
+          </div>
+          {e.history.map((row, i) => (
+            <div key={i} className="flex items-center px-5 py-3.5 hover:bg-white/[0.02] transition">
+              <span className="flex-1 text-xs text-white font-mono">{row.month}</span>
+              <span className="flex-1 text-xs text-slate-400">{row.type}</span>
+              <span className="flex-1 text-xs font-medium text-emerald-400 text-right">${row.amount.toFixed(2)}</span>
+              <span className="w-20 text-right">
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${row.status === "paid" ? "bg-emerald-500/15 text-emerald-400" : "bg-amber-500/15 text-amber-400"}`}>
+                  {row.status}
+                </span>
+              </span>
+            </div>
+          ))}
+        </div>
+      </GlassCard>
     </div>
   );
 }
@@ -1030,7 +1099,7 @@ export default function SmartFlipDemo() {
                     <Icon className="w-4 h-4" />
                     {item.label}
                     {item.key === "earnings" && (
-                      <span className="ml-auto text-[10px] font-medium text-emerald-400">${userEarnings.totalThisMonth}</span>
+                      <span className="ml-auto text-[10px] font-medium text-emerald-400">${userEarnings.earnedThisMonth}</span>
                     )}
                   </button>
                 );

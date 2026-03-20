@@ -1,6 +1,51 @@
 # AutoFlux Landing — Progress Log
 
-## Current Session: 2026-03-19
+## Current Session: 2026-03-20
+
+### SmartFlip Proposal Page — Subscription Split Fix (F-011 / F-015)
+
+**What was done:**
+- Fixed profit pool subscription split on proposal page (`/proposals/smartflip`)
+- Old (WRONG): "Subscription revenue goes to operating costs, never into the pool" with 30% affiliate / 15% marketplace fees
+- New (CORRECT): 40% of subscriptions go to Profit Pool, 20% referral commissions, 40% company
+- Updated 7 locations in `app/proposals/smartflip/page.tsx`:
+  1. Solutions array: marketplace desc changed to "Built-in marketplace to find flipping deals from people selling for quick cash"
+  2. v1Features: Profit Pool line now shows 40/20/40 split
+  3. v1Features: Marketplace line updated to match new language
+  4. Profit Pool "Where the money comes from" card: removed "never into the pool", added subscriptions as largest source
+  5. Profit Pool "How it's split" card: replaced 30%/15% with 40/20/40 breakdown
+  6. "Example at scale" section: recalculated for 1,000 subs at $49/mo = $49K, showing $19,600 pool / $9,800 referral / $19,600 company
+  7. Milestone 3 deliverables: updated marketplace and profit pool lines
+- Fixed V1 price label from "$3,500" to "$2,800"
+- Verified: no em dashes or arrows added, pricing unchanged ($2,800 = $1,000 + $1,000 + $800)
+- TypeScript check: no errors in proposal page (pre-existing errors in demo/page.tsx remain)
+
+### SmartFlip Demo Page — Major Earnings Rebuild + UX Improvements
+
+**What was done:**
+- Fixed subscription split in demo earnings view: removed "subscription revenue covers operating costs and is never put into the pool", replaced with correct 40% subscriptions to profit pool, 20% direct referral commission, 40% company
+- Added search bar to Deal Finder view with real-time title filtering
+- Made budget filter buttons bigger (matching category filter button sizing)
+- Completely rebuilt Earnings page with 6 sections matching Justin's screenshot:
+  1. Top row: Total Revenue ($4,850), Base Pool ($970), Growth Pool ($970)
+  2. Your Estimated Monthly Payout + Monthly Cap Progress with animated bar
+  3. Platform Revenue Sources horizontal bar chart (Marketplace, Subscription, Affiliate)
+  4. How the Profit Pool Works - 3 numbered steps explaining 40/20/40 split
+  5. Referral Program - 20% commission, referral list with earnings
+  6. Earnings History - table with date, type, amount, paid/pending status
+- Updated data types in smartflip.ts: ProfitPoolData and EarningsData interfaces expanded with basePool, growthPool, revenueSources, referrals, history, monthlyCap, etc.
+- Updated marketplace subtitle: "Find flipping deals from people selling for quick cash"
+- Fixed em dash in scan result condition ("Good - some wear")
+- Dashboard sidebar earnings card updated to use new data fields (basePoolShare, growthPoolShare)
+- TypeScript: zero errors after all changes
+
+**What comes next:**
+- Wait for Justin's feedback on demo
+- Deploy when approved
+
+---
+
+## Previous Session: 2026-03-19
 
 ### SmartFlip (Justin Connell) — Full Proposal Ready to Send
 
