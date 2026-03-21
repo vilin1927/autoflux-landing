@@ -622,15 +622,8 @@ export default function BuilderMatchProposal() {
 
           {/* CTA */}
           <motion.div variants={fadeUp} className="text-center">
-            <button
-              data-cal-namespace="blueprint"
-              data-cal-link="autoflux/blueprint"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-cyan-500 text-white font-semibold hover:bg-cyan-400 transition text-sm shadow-lg shadow-cyan-500/20 cursor-pointer"
-            >
-              Book a Call <ArrowRight className="w-4 h-4" />
-            </button>
-            <p className="text-xs text-slate-500 mt-3">
-              30-minute call to align on scope and start building
+            <p className="text-sm text-slate-400">
+              Reply to this proposal with your answers and I&apos;ll get started.
             </p>
           </motion.div>
         </motion.div>
