@@ -1,6 +1,75 @@
 # AutoFlux Landing — Progress Log
 
-## Current Session: 2026-03-20
+## Current Session: 2026-03-21
+
+### SmartFlip Proposal Page -- Deal Sources, Affiliate, Costs Update (F-016)
+
+**What was done:**
+- Updated Deal Finder solution description: buy-side (FB Marketplace, Walmart clearance/rollback, SlickDeals, DealNews, thrift stores, eBay underpriced) and sell-side (eBay, Amazon via Keepa, Shopify)
+- Updated v1Features: expanded Deal Finder sources, added Keepa for Amazon price history, added user profiles, changed affiliate to pluggable module starting with Amazon Associates Canada
+- Updated tech stack: added Walmart API, Keepa API, SlickDeals + DealNews RSS; changed Amazon Creators API to "Amazon (via Keepa)"
+- Updated API costs from ~$10-15/month to ~$75-95/month (Keepa is main additional cost)
+- Updated Profit Pool "Where the money comes from" card: affiliate system is pluggable, starting with Amazon Associates Canada, eBay/Walmart added when available for Canada
+- Updated V2 roadmap: Amazon integration note now mentions Keepa from day one, Creators API at no extra charge when Associates qualifies; added Sales Landing Page ($200)
+- Updated M1 deliverables: added user profiles with name, email, phone, address, affiliate link, payout settings
+- Updated M2 deliverables: deal finder lists all sources (Walmart clearance, SlickDeals, DealNews alongside eBay/Facebook); added Keepa integration line
+- Updated M3 deliverables: added pluggable affiliate module starting with Amazon Associates Canada
+- TypeScript check: zero errors
+- Pricing unchanged: $2,800 = $1,000 + $1,000 + $800
+
+**Files changed:**
+- `app/proposals/smartflip/page.tsx` -- all updates
+
+---
+
+### BuilderMatch.ai — Proposal & Demo Build (for Raj Kumar)
+
+**Client:** Raj Kumar, Coventry UK. Upwork job "AI Marketplace Development Specialist".
+**Project:** BuilderMatch.ai — two-sided marketplace connecting UK homeowners with tradespeople. AI-enhanced matching, lead unlock monetization.
+**Budget:** $4,000 posted, competing proposal at $5,000 (8-10 weeks). Our bid: $3,000 (4-5 weeks).
+**Status:** Building proposal page + interactive demo. Strategy: demo first, questions embedded.
+
+**Docs analyzed:**
+- BuilderMatch_RFP.docx — full vision (massive scope, 5 AI agents, native apps, SEO pages)
+- BuilderMatch MVP Spec v4.docx — cut to $5K, 8-10 weeks, still 5 agents
+- FRD.pdf — another dev's proposal at $5K with 5 milestones
+
+**What's being built:**
+- Data file: `data/proposals/buildermatch.ts` ✅
+- Proposal page: `app/proposals/buildermatch/page.tsx` (in progress)
+- Demo page: `app/proposals/buildermatch/demo/page.tsx` (in progress)
+
+**Key decisions:**
+- Dark theme (like SmartFlip) for premium feel
+- "Every Feature in Plain English" section — super clear, no jargon, with examples
+- 3 milestones: $1,000 + $1,200 + $800 = $3,000 total
+- 7 questions embedded at bottom of proposal
+- Demo: 5 tabs (Job Wizard, Dashboard, Quotes, Lead Unlock, Admin)
+
+---
+
+### SmartFlip — API & Data Source Verification (for Justin build)
+
+**Research completed:** Verified 5 APIs/data sources for SmartFlip MVP feasibility.
+
+**Findings:**
+1. **Walmart Affiliate API (walmart.io)** — ACTIVE. Supports Search, Catalog Product, Special Feeds (clearance, rollback, special buy). Old walmartlabs.com deprecated, migrated to walmart.io. Open for new registrations. Commission: up to 4% via Impact Radius.
+2. **Slickdeals RSS** — ACTIVE. Frontpage feed at `slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1`. Also has a partner API (paid, they pay YOU) with deals, coupons, articles. 5,000+ deals/month.
+3. **DealNews RSS** — ACTIVE. Main feed at `dealnews.com/?rss=1`. Category-specific feeds available. RSS page at dealnews.com/pages/rss.html.
+4. **Keepa API** — ACTIVE. Starts at 19 EUR/mo (1 token/min basic). Full API plans: 49 EUR (20 tokens/min) to 4,499 EUR (4,000 tokens/min). Open to new devs. Token-based system, tokens expire after 60 min.
+5. **Walmart Developer Portal** — ACTIVE. Open for new registrations. Separate from walmart.io (marketplace vs affiliate). Migrated to Global APIs by Jan 31, 2026.
+
+**Decision:** All 5 data sources are confirmed real and active as of March 2026. No blockers for SmartFlip build.
+
+**What comes next:**
+- Use these confirmed APIs in SmartFlip architecture
+- Walmart.io for clearance/rollback deal feeds
+- Slickdeals + DealNews RSS for cross-platform deal aggregation
+- Keepa for Amazon price history (start with 19 EUR basic plan)
+
+---
+
+## Previous Session: 2026-03-20
 
 ### SmartFlip Demo — UX Improvements Round 2 (F-010 / F-013)
 

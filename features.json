@@ -120,82 +120,107 @@
     {
       "id": "F-010",
       "title": "SmartFlip Demo — Deal Finder Fixes",
-      "status": "not_started",
+      "status": "done",
       "description": "Justin's feedback: deal finder needs search bar, budget filter visibility, source links, location picker",
-      "last_updated": "2026-03-20",
+      "last_updated": "2026-03-21",
       "acceptance_criteria": [
-        { "description": "Search bar for specific item/category search", "done": false },
-        { "description": "Budget filter more prominent (currently in code but not visible enough)", "done": false },
-        { "description": "Clickable source links on deals (link to actual eBay/Amazon/Facebook listing)", "done": false },
-        { "description": "Location picker/setting so app knows what local means", "done": false },
-        { "description": "Trending deals on dashboard clickable to expand with full details", "done": false }
+        { "description": "Search bar for specific item/category search", "done": true },
+        { "description": "Budget filter more prominent", "done": true },
+        { "description": "Clickable source links on deals with ExternalLink icon", "done": true },
+        { "description": "Location picker in header + deal finder", "done": true },
+        { "description": "Trending deals on dashboard clickable to expand", "done": true }
       ]
     },
     {
       "id": "F-011",
       "title": "SmartFlip Demo — Subscription Split Fix",
-      "status": "not_started",
-      "description": "Justin confirmed: 40% of subscriptions go to profit pool, 20% direct referral commission, 40% company. Current demo says subscriptions never go to pool — WRONG.",
-      "last_updated": "2026-03-20",
+      "status": "done",
+      "description": "40% subscriptions to profit pool, 20% referral, 40% company. Fixed everywhere.",
+      "last_updated": "2026-03-21",
       "acceptance_criteria": [
-        { "description": "Update profit pool funding: 40% subscriptions + affiliate + marketplace fees", "done": false },
-        { "description": "Update proposal page Profit Pool section with correct 40/20/40 split", "done": false },
-        { "description": "Update demo earnings tab to reflect correct split", "done": false },
-        { "description": "Remove all 'never from subscriptions' language", "done": false }
+        { "description": "Update profit pool funding: 40% subscriptions + affiliate + marketplace fees", "done": true },
+        { "description": "Update proposal page Profit Pool section with correct 40/20/40 split", "done": true },
+        { "description": "Update demo earnings tab to reflect correct split", "done": true },
+        { "description": "Remove all 'never from subscriptions' language", "done": true }
       ]
     },
     {
       "id": "F-012",
       "title": "SmartFlip Demo — Earnings Page Rebuild",
-      "status": "not_started",
-      "description": "Rebuild earnings tab to match Justin's screenshot layout: Base Pool / Growth Pool split, monthly cap progress, revenue sources bar chart, referral tracking, earnings history",
-      "last_updated": "2026-03-20",
+      "status": "done",
+      "description": "Rebuilt to match Justin's screenshot: Base/Growth Pool, cap progress, revenue sources, referral tracking, history",
+      "last_updated": "2026-03-21",
       "acceptance_criteria": [
-        { "description": "Top row: Total Revenue, Base Pool, Growth Pool", "done": false },
-        { "description": "Estimated Monthly Payout: Base Pool Share + Growth Pool Share + Est. Next Payout + Total Earned", "done": false },
-        { "description": "Monthly Cap Progress: $10K cap with progress bar and % label", "done": false },
-        { "description": "Platform Revenue Sources: bar chart showing Marketplace, Subscription, Affiliate amounts", "done": false },
-        { "description": "How the Profit Pool Works: 3-step explanation (revenue collected, 40% to pool, monthly payouts)", "done": false },
-        { "description": "20% referral commission section: total referrals, names, earnings per referral", "done": false },
-        { "description": "Earnings History: monthly rows with date, amount, paid/pending status", "done": false }
+        { "description": "Top row: Total Revenue, Base Pool, Growth Pool", "done": true },
+        { "description": "Estimated Monthly Payout with Base/Growth Pool shares", "done": true },
+        { "description": "Monthly Cap Progress: $10K cap with progress bar", "done": true },
+        { "description": "Platform Revenue Sources bar chart", "done": true },
+        { "description": "How the Profit Pool Works: 3-step explanation with 40/20/40", "done": true },
+        { "description": "20% referral section: names, earnings per referral", "done": true },
+        { "description": "Earnings History: monthly rows with paid/pending", "done": true }
       ]
     },
     {
       "id": "F-013",
       "title": "SmartFlip Demo — Marketplace Updates",
-      "status": "not_started",
-      "description": "Update marketplace to reflect free quick-sell concept with resale value data and better language",
-      "last_updated": "2026-03-20",
+      "status": "done",
+      "description": "Free quick-sell marketplace with resale value, seller ratings, report button",
+      "last_updated": "2026-03-21",
       "acceptance_criteria": [
-        { "description": "Update marketplace description: 'built-in marketplace to find flipping deals from people selling for quick cash'", "done": false },
-        { "description": "Each listing shows resale value with data source link", "done": false },
-        { "description": "AI price suggestions: lower price = faster sale, show resale margin for flippers", "done": false },
-        { "description": "Local only vs ships filter visible", "done": false },
-        { "description": "Seller ratings and report/dispute button on listings", "done": false }
+        { "description": "Marketplace description: find flipping deals from people selling for quick cash", "done": true },
+        { "description": "Each listing shows resale value with data source", "done": true },
+        { "description": "Profit margin % shown on listings", "done": true },
+        { "description": "Local only vs ships filter", "done": true },
+        { "description": "Seller ratings and report/dispute button", "done": true }
       ]
     },
     {
       "id": "F-014",
       "title": "SmartFlip Demo — Visual Polish",
-      "status": "not_started",
-      "description": "Replace emoji placeholders with real product images, improve visual quality",
-      "last_updated": "2026-03-20",
+      "status": "done",
+      "description": "Styled emoji containers, List Item toast, trending explanation",
+      "last_updated": "2026-03-21",
       "acceptance_criteria": [
-        { "description": "Replace emojis with stock product images or better placeholders", "done": false },
-        { "description": "List Item button shows demo tooltip or disabled state instead of doing nothing", "done": false },
-        { "description": "What makes trending explanation/indicator on dashboard", "done": false }
+        { "description": "Product emoji containers with gradient backgrounds", "done": true },
+        { "description": "DEMO watermark on marketplace listing images", "done": true },
+        { "description": "List Item button shows toast notification", "done": true },
+        { "description": "Trending explanation subtitle on dashboard", "done": true }
       ]
     },
     {
       "id": "F-015",
       "title": "SmartFlip Proposal Page Updates",
-      "status": "not_started",
-      "description": "Update proposal page language and profit pool section per Justin's feedback",
-      "last_updated": "2026-03-20",
+      "status": "done",
+      "description": "Marketplace language, 40/20/40 split, scale examples recalculated",
+      "last_updated": "2026-03-21",
       "acceptance_criteria": [
-        { "description": "Marketplace language: 'built-in marketplace to find flipping deals from people selling for quick cash'", "done": false },
-        { "description": "Profit Pool section: update to 40% pool, 20% referral, 40% company split", "done": false },
-        { "description": "Add clear V1 vs V2 features comparison table (scannable)", "done": false }
+        { "description": "Marketplace language updated", "done": true },
+        { "description": "Profit Pool section: 40/20/40 split everywhere", "done": true },
+        { "description": "Scale example: 1,000 subs = $49K/mo, $19.6K pool", "done": true },
+        { "description": "V1 price label corrected to $2,800", "done": true }
+      ]
+    },
+    {
+      "id": "F-016",
+      "title": "SmartFlip Proposal — Deal Sources + Affiliate + Costs Update",
+      "status": "not_started",
+      "description": "Update proposal and demo to reflect expanded deal sources, Canada affiliate situation, and corrected running costs per Justin's March 21 feedback",
+      "last_updated": "2026-03-21",
+      "acceptance_criteria": [
+        { "description": "Deal Finder sources updated: eBay + Facebook + Walmart clearance API + SlickDeals RSS + DealNews RSS", "done": false },
+        { "description": "Keepa API added for Amazon price history and deal validation", "done": false },
+        { "description": "Deal finder explains buy-side vs sell-side: buy from FB/Walmart clearance, sell on eBay/Amazon", "done": false },
+        { "description": "Used items sources: Facebook, Smart Scan (thrift/yard sales), eBay underpriced", "done": false },
+        { "description": "New items sources: Walmart clearance/rollback, SlickDeals, DealNews (500+ stores)", "done": false },
+        { "description": "Affiliate system described as pluggable module (not hardcoded to one provider)", "done": false },
+        { "description": "Amazon Associates Canada noted as primary affiliate source (available, Justin has account)", "done": false },
+        { "description": "eBay Partner Network noted as restricted for Canada, added later with US entity", "done": false },
+        { "description": "Walmart affiliate noted as US only", "done": false },
+        { "description": "Rakuten and CJ Affiliate noted as Canadian-friendly alternatives", "done": false },
+        { "description": "Running costs updated from $40-60/mo to $75-95/mo (Keepa EUR 49/mo added)", "done": false },
+        { "description": "Tech stack updated: add Walmart API, Keepa API, SlickDeals RSS, DealNews RSS", "done": false },
+        { "description": "User profile section listed in deliverables (name, email, phone, address, affiliate link, payout)", "done": false },
+        { "description": "Sales landing page ($200) noted as separate deliverable", "done": false }
       ]
     }
   ]

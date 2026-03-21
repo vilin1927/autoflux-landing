@@ -49,7 +49,7 @@ const solutions = [
   {
     icon: Search,
     title: "AI Deal Finder",
-    desc: "Scans eBay, Amazon, and Facebook in real-time. Shows real arbitrage: \"Listed on Facebook for $5, recently sold on eBay for $50, potential profit $45.\" With source links so you can verify. Budget, category, and used vs new filters built in.",
+    desc: "Buy side: finds cheap inventory from Facebook Marketplace, Walmart clearance and rollback deals, SlickDeals, DealNews, thrift stores (via Smart Scan), and underpriced eBay listings. Sell side: shows what items sell for on eBay, Amazon (via Keepa price history), and Shopify. Real arbitrage with source links so you can verify. Budget, category, and used vs new filters built in.",
     solves: "Hours of manual searching",
   },
   {
@@ -79,16 +79,21 @@ const techStack = [
   { name: "Stripe", role: "$1 Trial, then $49/mo", icon: CreditCard },
   { name: "Claude Vision AI", role: "Smart Scan (Product ID)", icon: Eye },
   { name: "eBay Browse API", role: "Deals + Prices + Affiliates", icon: Globe },
-  { name: "Amazon Creators API", role: "Added when Associates qualifies", icon: Package },
+  { name: "Amazon (via Keepa)", role: "Price History + Validation", icon: Package },
+  { name: "Keepa API", role: "Amazon Price History", icon: BarChart3 },
+  { name: "Walmart API", role: "Clearance + Rollback Deals", icon: Globe },
+  { name: "SlickDeals + DealNews", role: "Deal Aggregation (RSS)", icon: Target },
   { name: "eBay Partner Network", role: "Affiliate Revenue", icon: CircleDollarSign },
 ];
 
 const v1Features = [
   "Smart Scan: photo to exact product, model, SKU with resale value and source data",
-  "AI Deal Finder: real arbitrage across eBay, Amazon, Facebook. \"Found on FB for $5, sells on eBay for $50\"",
+  "AI Deal Finder: real arbitrage across eBay, Facebook Marketplace, Walmart clearance/rollback, SlickDeals, and DealNews. \"Found on FB for $5, sells on eBay for $50\"",
+  "Keepa integration for Amazon price history validation and sell-side pricing",
   "Built-in Marketplace: find flipping deals from people selling for quick cash, no membership needed to sell. AI pricing + resale value shown",
   "Filters: budget range, category, location (local/global), used vs new, custom item search",
-  "Affiliate links: every 'Buy' link earns revenue (eBay Partner Network)",
+  "User profiles: name, email, phone, address, affiliate link, payout settings",
+  "Pluggable affiliate module, starting with Amazon Associates Canada. eBay and Walmart affiliates added when available for Canada",
   "Profit Pool: 40% of subscriptions go to the pool, 20% referral commissions, 40% company. Pie chart dashboard, $10K monthly cap, progress bar",
   "$1 trial for 7 days, then $49/mo (Stripe) with clear disclosures and one-click cancel",
   "Seller ratings and report/dispute system",
@@ -100,8 +105,13 @@ const v1Features = [
 const v2Roadmap = [
   {
     feature: "Amazon Full API Integration",
-    note: "Amazon pricing is available from day one through an alternative data source. Once your Associates account hits 10+ qualifying sales (SmartFlip itself will drive this), I switch to the official Creators API for full access. Included in the original price.",
-    est: "Included",
+    note: "Amazon pricing is available from day one via Keepa API for price history and deal validation. Full Creators API integration included at no extra charge when your Associates account qualifies (10+ sales, SmartFlip itself will drive this).",
+    est: "Included (Keepa from day one)",
+  },
+  {
+    feature: "Sales Landing Page",
+    note: "Custom marketing page for SmartFlip. Conversion-optimized design with feature breakdown, pricing, testimonials, and signup flow. Drives organic traffic and paid ads to subscriptions.",
+    est: "$200",
   },
   {
     feature: "$97/mo Pro Tier",
@@ -450,6 +460,7 @@ const milestones: MilestoneData[] = [
       "You're at a yard sale. You spot a pair of Air Jordans on the shelf for $40. You pull out your phone, open SmartFlip, snap a photo. Seconds later, the app tells you: \"Air Jordan 4 Retro Military Black, SKU CT8527-100. eBay value: $190-220. Quick flip: $170. Demand: High. Sells in ~3 days.\" You buy them on the spot. That's $130-170 profit from one photo. You can do this with anything. Sneakers, electronics, vintage furniture, kitchen gear. Walk into any thrift store or yard sale with confidence.",
     deliverables: [
       "Working web app with user accounts and authentication",
+      "User profiles with name, email, phone, address, affiliate link, payout settings",
       "Smart Scan: photo upload to Claude Vision AI identifies product, brand, model, SKU",
       "Cross-platform pricing: eBay Browse API for market value lookup (Amazon added when Associates account qualifies)",
       "Scan results: quick-flip price, max-hold price, demand level, avg days to sell, similar listings count",
@@ -468,11 +479,12 @@ const milestones: MilestoneData[] = [
     scenario:
       "You're on your couch on a Tuesday evening. You open SmartFlip and see 47 live deals the AI found while you were at work. You filter: Electronics, budget under $100, used items. There's a Sony WH-1000XM4 listed on Facebook Marketplace for $45. SmartFlip shows: \"Recently sold on eBay for $135, potential profit $90.\" You tap \"View on Facebook,\" buy it, and list on eBay. That \"Buy\" click was an affiliate link, earning revenue that flows into the Profit Pool. You're making money even when you're browsing.",
     deliverables: [
-      "AI Deal Finder: scans eBay, Amazon, and Facebook for real arbitrage opportunities",
+      "AI Deal Finder: scans eBay, Facebook Marketplace, Walmart clearance/rollback, SlickDeals, and DealNews for real arbitrage opportunities",
       "Real arbitrage data: \"Listed on Facebook for $5, recently sold on eBay for $50, potential profit $45\" with source links",
+      "Keepa integration for Amazon price history and deal validation",
       "Filters: budget range, category, location (local/global), used vs new products",
       "Custom search: search for a specific item or category on top of auto-scanning",
-      "Every \"Buy\" link is an affiliate link (eBay Partner Network), earns revenue automatically",
+      "Every \"Buy\" link is an affiliate link, earns revenue automatically",
       "Deal scoring: profit margin, confidence score, demand level, time sensitivity",
       "Auto-refresh: new deals appear throughout the day via background scanning",
     ],
@@ -489,6 +501,7 @@ const milestones: MilestoneData[] = [
     deliverables: [
       "Built-in marketplace to find flipping deals from people selling for quick cash. No membership needed to sell. AI suggests quick-sale price + shows resale value with data source",
       "5% transaction fee on completed sales (listing is free). Seller ratings and report/dispute system",
+      "Pluggable affiliate module starting with Amazon Associates Canada. eBay and Walmart affiliates added when available for Canada",
       "Profit Pool dashboard: 40/20/40 subscription split (pool/referral/company), pie chart analytics, $10K monthly cap with progress bar",
       "Revenue display: Profit Pool share + affiliate earnings only (no company numbers)",
       "Stripe billing: $1 trial for 7 days, auto-renews to $49/mo, cancel anytime",
@@ -720,8 +733,9 @@ export default function SmartFlipProposal() {
           </motion.div>
           <motion.div variants={fadeUp} className="p-5 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 text-center">
             <p className="text-sm text-slate-300">
-              <span className="text-emerald-400 font-semibold">API costs at launch: ~$10–15/month.</span>{" "}
-              eBay Browse API is free (5,000 calls/day). Claude Vision AI is ~$0.004 per scan.
+              <span className="text-emerald-400 font-semibold">API costs at launch: ~$75-95/month.</span>{" "}
+              Keepa API is the main cost (~$50/mo for Amazon price history). eBay Browse API is free (5,000 calls/day).
+              Claude Vision AI is ~$0.004 per scan. Walmart API and RSS feeds (SlickDeals, DealNews) are free.
               Stripe charges standard 2.9% + $0.30 per transaction. Everything else is included in hosting.
             </p>
           </motion.div>
@@ -742,8 +756,10 @@ export default function SmartFlipProposal() {
               <h4 className="text-sm font-semibold text-white mb-2">Where the money comes from</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
                 The pool is funded from three sources: 40% of all subscription revenue ($49/mo),
-                affiliate commissions (every &quot;Buy on eBay&quot; click), and marketplace transaction fees
-                (5% on completed sales). Subscriptions are the largest and most predictable source.
+                affiliate commissions, and marketplace transaction fees
+                (5% on completed sales). The affiliate system is pluggable, starting with Amazon Associates Canada.
+                eBay and Walmart affiliates are added when available for Canada.
+                Subscriptions are the largest and most predictable source.
               </p>
             </div>
             <div className="p-5 rounded-2xl bg-gradient-to-br from-[#0f172a]/80 to-[#1e293b]/60 border border-white/[0.06]">
