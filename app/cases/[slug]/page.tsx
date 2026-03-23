@@ -6,6 +6,8 @@ import { caseStudies, getCaseStudyBySlug } from "@/data/case-studies";
 import { CaseStudyTracker } from "@/components/tracking/case-study-tracker";
 import { MediaShowcase } from "@/components/case-study/media-showcase";
 import { CaseStudyCTA } from "@/components/case-study/case-study-cta";
+import { AppScreensCarousel } from "@/components/case-study/app-screens-carousel";
+import { SeeAppButton } from "@/components/case-study/see-app-button";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -63,6 +65,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <p className="text-lg md:text-xl text-white/90 max-w-2xl">
             {caseStudy.description}
           </p>
+          <SeeAppButton />
         </section>
 
         {/* Challenge */}
@@ -173,6 +176,9 @@ export default async function CaseStudyPage({ params }: Props) {
             </blockquote>
           )}
         </section>
+
+        {/* App Screenshots Carousel */}
+        <AppScreensCarousel slug={caseStudy.slug} />
 
         {/* Media Showcase - Video & Images */}
         <MediaShowcase
