@@ -1,6 +1,155 @@
 # AutoFlux Landing — Progress Log
 
-## Current Session: 2026-03-21
+## Current Session: 2026-04-21
+
+### Convento Arcádia (Sven Olaf Lorz) — Demo scoping + API verification
+
+**Deal context:** Upwork job was anchored $600–1000 n8n integration (Deli ↔ Cloudbeds). After reading full 13-page spec "Integração entre Deli e Cloudbeds - EN.pdf", real scope is $2.5–3.5k: 10 user stories, LGPD, CPF/passport auth with rate-limit, minor/guardian flow (US-10), adult-not-owner (US-09), 24-month searchable audit, Fudo/Deli (fu.do) + Cloudbeds two-way sync.
+
+**Demo architecture decision — Option C (two-page split):**
+1. `/proposals/convento-arcadia/demo/integration` — ⭐ the main sell. Animated Cloudbeds → n8n → Deli pipeline, all US-01 through US-10 as clickable nodes, Cloudbeds folio constraint visualized, audit table with LGPD masking, "Escopo desta demo" card as price-proxy.
+2. `/proposals/convento-arcadia/demo/guest` — optional Convento-branded mobile cinematic (Pedro/Maria split-screen guardian moment) framed as "camada de UX opcional sobre QR do Deli".
+
+Proposal page: hardcoded "Proposta em preparação" banner in Convento brand.
+
+**Verified API claims (2026-04-21):**
+- **Cloudbeds folio constraint: CONFIRMED.** Source: integrations.cloudbeds.com/hc/en-us/articles/360006426054-Point-of-sale. Quote: "you will always post all transactions under the main guest name and the reservationID they have." Multi-folio is on roadmap but not shipped. Pitch as "as of April 2026" — forward-compatible framing.
+- **subReservationID / roomID nuance:** For multi-room reservations, charges CAN target a specific room even though folio is the reservation owner's. Worth a line in the architecture page.
+- **Deli = Fudo (fu.do).** Argentine/LatAm POS SaaS. Real API, real dev portal. Pitch as "Fudo (Deli)" not just "Deli."
+- **NOT verified:** exact postCharge field schema, Fudo endpoint names, LGPD CPF retention specifics. Call follow-up items. Don't assert field names in the Loom.
+
+**Pricing decision:** NO PRICE in the delivery message. Send demo + Loom + ask for call. Let Olaf name the number or force him into the call to get one. "Escopo desta demo" card on integration page acts as price-proxy (what's included/excluded) without a dollar figure.
+
+**Brand (sampled from convento-arcadia.com screenshots):**
+- Primary CTA: `#D4E157` lime yellow
+- Accent: `#E8553A` coral (special offers block)
+- Teal: `#A8D5DB` (footer, logo bg)
+- Cream: `#FAF7F1`
+- Ink: `#1A1A1A`
+- Display: condensed wide serif; Body: Inter
+- Logo: `/Users/elizavetapirozkova/Downloads/logo-mobile-240x70-1-2.webp`
+
+**Defaults for build:** mock data (no Supabase), PT-only copy, split-screen guardian moment on /guest, port 3939 dev.
+
+**What comes next:**
+- Build Option C (both pages + proposal placeholder)
+- Record Loom with Cloudbeds folio reveal + "as of April 2026" framing
+- Send demo link, no price, ask for 20-min call
+
+---
+
+## Previous Session: 2026-04-02
+
+### SmartFlip — V1 Scope Confirmed, Still No Contract
+
+**Justin confirmed V1 scope swap (Apr 2, 12:46 AM his time):**
+- Marketplace OUT of V1 — Justin agrees it's "a big beast" and better to launch last with all features in place
+- V1 is now: Deal Finder + Heat Meter + Smart Scan + Profit Tracker + Sales Page + Affiliate + Subscriptions
+- Sales Page with "Join Waitlist" goes first (Vladimir offered within couple days)
+
+**Justin's late-night research (1:29-2:21 AM):**
+- Found Karrot (local community marketplace, 10M+ users) — studying competitor models
+- Asking about gamified referral mechanics (spin-to-win cash rewards like Temu/Karrot)
+- Question: "would the company be fronting that out of pocket?" — answer is yes, it's a user acquisition loss leader
+- This is V2/V3 territory, not V1
+
+**Deal status:**
+- V1 scope: CONFIRMED
+- V1 price: $2,500 (milestones $1,000 / $1,000 / $500)
+- Contract: STILL NOT SENT (now 9+ days since agreement)
+- Win probability: ~40-45% (continuing to decay)
+- Justin still in research/ideas mode — positive for engagement, negative for urgency
+- Apr 7 soft deadline for follow-up still stands
+
+**Vladimir's reply sent (Apr 2):**
+- Confirmed marketplace makes more sense later when users are on platform
+- Acknowledged Karrot — "clean local-first model, worth studying for V2 marketplace"
+- Explained spin rewards = company-funded user acquisition, Temu burns billions on it
+- Suggested simple referral bonus instead of gimmicky spin mechanics
+- Closed with: "I'm ready to start on the sales page whenever you want to kick this off"
+- Tone: short, confident, no pressure — ball is in Justin's court
+
+**What comes next:**
+- Wait for Justin to respond and send Upwork contract
+- If no contract by Apr 7, one follow-up then move on
+
+---
+
+## Previous Session: 2026-04-01
+
+### SmartFlip — Deal Negotiation Update
+
+**Status:** Justin accepted V1 scope and pricing. Moving forward WITHOUT 10% rev share.
+
+**Win probability: ~45-50%** (drops ~2-3% per day without contract)
+
+**Key outcomes:**
+- V1 price confirmed: **$2,500** ($1,000 / $1,000 / $500 milestones)
+- **10% rev share is OFF the table.** Vladimir rejected it, Justin accepted. All work is flat rate only.
+- V2 rough estimate shared with Justin: **$5,000 - $8,000** for all 16 features
+- Justin confirmed V1 spec looks good and fair
+- Created clean spec doc: `docs/smartflip-spec.md` with all V1 + V2 features organized
+
+**Full negotiation timeline:**
+- Mar 19: Demo sent to Justin, 5 screens (Dashboard, Deal Finder, Smart Scan, Marketplace, Questions)
+- Mar 22-24: Back and forth on profit pool split (40/20/40), subscription pricing ($49/mo, $397/yr, $1 trial), competitor research (ResaleScan, Underpriced AI, ThriftFlip, Resale Wizard, Flipl)
+- Mar 24: Justin proposed 10% rev share for lower upfront. Vladimir countered $2,700 + 10%. Justin countered $2,500 + 10% covers all future work. Vladimir said 10% on top of paid work, not instead. Justin said "okay"
+- Mar 25: Justin's sister feedback — AI listing description for copy/paste. Agreed to start "next week"
+- Mar 26: Competitor research shared. Justin wants 50% off for life pre-launch. Asked to kick off — Justin said "next week" (again)
+- Mar 30: Justin's 1-3 AM brain dump — 20+ messages with new feature ideas from talking to real flippers. Key new requests: local deal priority (FB/Kijiji/Craigslist), AI Trend Heat Meter, condition tips, tax calculator, public success feed, 3 audience targeting, education sponsors, advanced affiliate, marketplace profiles/ratings/messaging
+- Mar 31: Vladimir organized all notes into V1/V2 split, sent to Justin. Justin pushed back — said scope hasn't changed, 10% was always for ongoing build. Vladimir pushed back — "can't work on big scope for 10%". Miscommunication resolved. Justin asked for clean document.
+- Mar 31 (evening): Vladimir firmly rejected 10% rev share. Reasons given: no control over business, no users yet, no timeline to acquire users, not a close partnership. Justin accepted.
+- Apr 1: Created `docs/smartflip-spec.md` with complete V1 (10 categories) + V2 (16 features). Justin confirmed "looks good and fair". V2 estimate shared: $5-8k. Justin asked about marketplace trade.
+
+**V1 scope change under discussion:**
+- Justin proposed: drop Marketplace from V1, swap in AI Trend Heat Meter instead
+- Justin wants Sales Page built first with "Join Waitlist" button so he can start marketing while app is built
+- Marketplace moves to V2 (makes sense — needs users to be valuable, chicken-and-egg with zero users)
+- Awaiting Justin's final confirmation on this swap
+- If swap happens, V1 becomes: Deal Finder + Heat Meter + Smart Scan + Profit Tracker + Sales Page + Affiliate + Stripe (pure tool, no marketplace)
+
+**V2 pricing breakdown (internal, not shared with Justin in detail):**
+- Simple extensions (7 features): $650-950 — value tips, auto-negotiate, promoted listings, reservation hold, education, training, success feed
+- Medium complexity (5 features): $1,400-1,975 — heat meter, pro images, "looking for" listings, tax calc, advertising
+- Heavy builds (4 features): $2,875-4,125 — full marketplace, in-app payments, AI auto-listing (4 platforms), advanced affiliate
+- Total: $5,000-7,000 realistic (shared as $5,000-8,000 with buffer)
+
+**Deal terms (final):**
+- V1: $2,500 flat, 3 milestones ($1,000 / $1,000 / $500)
+- V2: flat rate, same structure, priced per feature/phase ($2,000-3,000 per phase)
+- No rev share, no equity, no partnership — pure contractor
+- Upwork contract still not sent by Justin (8+ days since "agreed")
+
+**Positive signals:**
+- Accepted dropping 10% without a fight
+- Asking practical build questions (marketplace trade, sales page first)
+- Confirmed spec "looks good and fair"
+- Talked to real flippers, has distribution plan (500k YouTube influencer friend)
+- 2+ weeks consistent engagement
+- His sister is a flipper — personal investment in the product
+
+**Red flags:**
+- No Upwork contract sent — 8+ days since agreement
+- His biggest Upwork job ever was $500 (this is 5x)
+- Every time pushed for contract, responds with more ideas/questions
+- Scope kept expanding before any money changed hands
+- Sends 20 messages at 1-3 AM — impulsive communication style
+
+**What comes next:**
+- Justin confirms V1 scope (with or without marketplace swap)
+- **Justin sends Upwork contract** (blocker — nothing starts without this)
+- Build sales page with waitlist first
+- Then build core app
+- If no contract by ~Apr 7, follow up once then move on
+
+**Active decisions:**
+- Rejected 10% rev share because: no control over business, no users, no revenue, could take months/never to pay out
+- Proposed marketplace-for-heat-meter swap because: marketplace with zero users is useless, heat meter works from day one and is Justin's stated #1 differentiator
+- Sales page first strategy accepted: low effort (1-2 days), gives Justin something to market, builds momentum toward contract
+
+---
+
+## Previous Session: 2026-03-21
 
 ### SmartFlip Proposal Page -- Deal Sources, Affiliate, Costs Update (F-016)
 
