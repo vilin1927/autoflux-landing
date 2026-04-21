@@ -301,21 +301,26 @@ function sceneIndex(screen: Screen): number {
 function ContextBanner() {
   return (
     <div
-      className="mt-8 rounded-2xl px-5 py-3 border flex items-center justify-between gap-4"
+      className="mt-8 rounded-2xl px-5 py-4 border flex flex-wrap items-center justify-between gap-x-4 gap-y-2"
       style={{
         backgroundColor: "rgba(168,213,219,0.15)",
         borderColor: "rgba(168,213,219,0.5)",
       }}
     >
-      <div
-        className="text-[11px] font-bold uppercase tracking-[0.2em]"
-        style={{ color: "#1A4E54" }}
-      >
-        Guest flow walkthrough
+      <div>
+        <div
+          className="text-[11px] font-bold uppercase tracking-[0.2em] mb-1"
+          style={{ color: "#1A4E54" }}
+        >
+          Guest flow walkthrough
+        </div>
+        <div className="text-[12px] opacity-70 leading-snug max-w-2xl">
+          Illustrating how the flow works, not the final UI. Deli&apos;s existing app handles scenes 1–3; scenes 4–7 are the new authorisation logic layered on top.
+        </div>
       </div>
       <Link
         href="/proposals/convento-arcadia/demo/integration"
-        className="text-[11px] uppercase tracking-[0.2em] opacity-60 hover:opacity-100 transition-opacity"
+        className="text-[11px] uppercase tracking-[0.2em] opacity-60 hover:opacity-100 transition-opacity shrink-0"
       >
         architecture
       </Link>
