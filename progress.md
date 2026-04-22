@@ -1,6 +1,42 @@
 # AutoFlux Landing — Progress Log
 
-## Current Session: 2026-04-21
+## Current Session: 2026-04-22
+
+### Convento Arcádia — Demo built, tone-polished, delivery message ready
+
+**What shipped (commits `df08cce`, `de85ae3`):**
+- 4 pages live: `/proposals/convento-arcadia` (placeholder), `/demo` (landing), `/demo/integration` (architecture), `/demo/guest` (mobile walkthrough)
+- Mock data file `data/proposals/convento-arcadia.ts`: 10 guests (Silva family protagonist), 5 reservations, 30 seeded charges, 10 user stories each with `acceptanceCriteria` + `decisionsTaken` + `openQuestions`
+- English-only copy (Olaf is German). Brand: lime `#D4E157`, coral `#E8553A`, teal `#A8D5DB`, cream `#FAF7F1`, ink `#1A1A1A`
+- Split-screen guardian moment on guest flow (Pedro waiting / Maria approving, US-10)
+
+**Tone passes (multiple iterations driven by Olaf-aware Vladimir feedback):**
+1. First build had "MATCHES YOUR SPEC" badges + sales framing → stripped
+2. Vladimir: "dont include sales language here dont push and dont show aggressively pros cons" → removed all theatrical framing, changed eyebrows to neutral "01/02/03..."
+3. Vladimir: "exlcude ai slop language long captions and arrow" → removed every narrator subtitle, every `ArrowRight`/`ArrowLeft`, all unicode `→←↔`, killed FlowLegend + PipelineArrow unused components
+4. Vladimir: "change all the language everywhere to simple english in my tone of voice" → "Integration architecture & scope" → "How it fits together", "Every charge, provable" → "Audit log", "What's here, what's not." → "What's in the demo", etc.
+5. Visual bug fix: hero gradient on demo landing was fading text to cream mid-paragraph → `from-black/30 via-black/50 via-60% to-[#FAF7F1]` + `pb-24`
+6. Guest flow banner clarifier added: "Illustrating how the flow works, not the final UI. Deli's existing app handles scenes 1–3; scenes 4–7 are the new authorisation logic layered on top." — prevents Olaf assuming we're rebuilding the Deli app
+
+**Delivery message drafted (not yet sent):**
+- Opens with TL;DR: n8n possible + Cloudbeds folio caveat; suggested custom build ~2 weeks; n8n-only path also offered
+- 11 blockers listed by US number (not all 20 open questions — rest are in the demo cards)
+- NO price quoted. "Happy to jump on a call" close.
+
+**Active decisions:**
+- NO price in delivery message — let Olaf name first or force the call
+- Pitch Fudo (Deli) not just Deli
+- Cloudbeds folio constraint framed "as of April 2026" (forward-compatible)
+- Open questions live inside user-story cards in the demo; email only names the 11 blockers
+
+**What comes next:**
+- Send delivery message + demo link to Olaf on Upwork
+- Record Loom walkthrough (optional, decide after his first reply)
+- On reply asking for price: give a range on the call only ("~$1k lean / $3–4k production")
+
+---
+
+## Previous Session: 2026-04-21
 
 ### Convento Arcádia (Sven Olaf Lorz) — Demo scoping + API verification
 
