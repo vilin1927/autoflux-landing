@@ -29,6 +29,51 @@
 **What comes next:**
 - Move to Dawson Wells Gallery deal — meeting Thursday Apr 30. Hard red flag: requested WordPress (excluded stack). Need to either decline-and-refer or counter-propose modern stack (Next.js + Sanity / Webflow).
 
+### Dawson Wells Gallery — design concept demo built (counter-propose strategy)
+
+**Context:** Dawson Wells (gallery startup) booked a Cal meeting for Thursday Apr 30 via Upwork. Brief: modern gallery website with WordPress CMS, ~100 artworks across 5 categories (Photography, Paintings, Drawings, Ceramics, Prints), reference site `guidomauas.com`, "flexible on budget and timeline." Polite, formal, no online presence yet, just-launching gallery. Wants visitors driven to the physical gallery — inquiry-only, not e-commerce.
+
+**Strategic call:** WordPress is on our hard exclusion list. Three options were on the table — decline + refer / counter-propose modern stack / take WP against principles. Picked **hybrid (counter-propose Next.js + Sanity)** because Dawson is otherwise a great client signal (booked the meeting, formal comms, "flexible budget", clean brief, decision-maker). Rather than email a stack pitch before the meeting, decided to **build a real demo first** — same playbook as Convento, SmartFlip, BuilderMatch.
+
+**What got built (commits `74e9757`, `92ad906`, `e411651`):**
+- Data file `data/proposals/dawson-wells-gallery.ts`: 17 mock artworks across all 5 categories with realistic titles / artists / mediums / dimensions, 4 news posts, full sitemap matching Dawson's brief (Home / Artworks / News / About / Mission & Vision / Company Overview / Contact), gallery info (mission, vision, hours, email)
+- Proposal placeholder `/proposals/dawson-wells-gallery` — "Proposal in preparation" badge, links to demo
+- Full demo `/proposals/dawson-wells-gallery/demo` with: Hero, Homepage preview (in browser frame), Artworks page (live category filter), Single piece detail, News list, Mission/Contact previews, Black sitemap section, 3-step CMS preview (Sanity-style), "How it's built" reasoning
+- Aesthetic: white + near-black + Playfair Display serif headlines, generous whitespace, browser-frame mockups — referenced from `guidomauas.com`
+- Mock images via `picsum.photos` with deterministic seeds (stable but varied)
+- No price quoted anywhere in the demo
+
+**Iteration 1 — Vladimir said "too much given away":**
+- Locked sections 03, 04, 05, 06, 07, 09 with "Walked through on our call" cards
+- Locked CMS steps 2 (Edit) and 3 (Publish) with locked panels
+- Section nav marks locked items with dimmed text + small lock glyph
+- Only fully visible: Hero, Homepage preview, CMS Step 1 (list view)
+
+**Iteration 2 — Vladimir said "don't mention call, explain use cases instead":**
+- Replaced "Walked through on our call" with "Part of the build" badge + checklist of plain-English use cases per section (4 bullets each)
+- CMS step 2/3 locked panels also show use cases (drop image / crop / live preview / auto-save for edit; publish / schedule / draft / version history for publish)
+- Updated CMS section subtitle: "click them to see what they cover" (no call language)
+- All copy is human-direct, no AI slop ("Hit publish. The piece is live in five seconds. No plugins to fight.")
+
+**Active decisions:**
+- Counter-propose modern stack at the meeting, not WordPress — demo IS the pitch
+- No price in the demo (anchor at meeting: $5,500 Next.js + Sanity / refer out if WP non-negotiable)
+- Use cases sell the build — not the meeting reveal
+- Mock images use picsum.photos (replace with real artwork later if deal closes)
+
+**Files / commits:**
+- `8a588c3` — Niche & ICP positioning doc
+- `74e9757` — Dawson Wells Gallery proposal + interactive demo
+- `92ad906` — Lock most sections + CMS steps 2/3
+- `e411651` — Locked sections show use cases, not call language
+
+**What comes next:**
+- Walk through the demo before the meeting Apr 30
+- Use the demo on screen during the call to drive the stack-conversion pitch
+- If Dawson agrees to Next.js + Sanity → send full proposal at $5,500 fixed
+- If Dawson insists on WordPress → refer out politely, keep relationship for future
+- Replace picsum mock images with real artwork after deal closes
+
 ---
 
 ## Previous Session: 2026-04-22
