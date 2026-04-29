@@ -1,6 +1,37 @@
 # AutoFlux Landing — Progress Log
 
-## Current Session: 2026-04-22
+## Current Session: 2026-04-29
+
+### Upwork Niche & ICP positioning — defined and saved
+
+**Context:** Vladimir is onboarding with an agency that will help automate Upwork outreach. Their form asks for primary niche, secondary niches, ICP, compromise client profile, and red flags. Generic answers would route low-quality leads — needed precise positioning grounded in real shipped work.
+
+**What was done:**
+- Spawned 9 parallel research agents to inventory shipped/active client projects: GlobalHair, CPA tool, CheckPoint/ReelPilot, SmartFlip, Tyler, Trucks (NTS), Moppity Vineyards, Aleksander/TasteForge, TikTok Slideshow
+- Synthesized common pattern across all projects: AI integration + full-stack builds for non-technical SMB operators drowning in fragmented tools, replacing 5–15 hours/week of manual coordination
+- Wrote top priority niche (with Moppity/Vinsight as named example)
+- Wrote 10 secondary niches (down from 15 after merging commerce, document/compliance, hospitality+booking clusters), each with named flagship project and detailed real-life example
+- Wrote IDEAL CLIENT profile (post-revenue SMB, 5-100 ppl, $1.5K-$5K fixed, decision <14 days)
+- Wrote COMPROMISE CLIENT profile
+- Wrote RED FLAGS list — grounded in SmartFlip/Justin stall pattern (equity/rev-share offers, scope expansion before payment, no contract 27+ days, 1–3 AM message bursts) and CLAUDE.md hard stack exclusions
+
+**Files saved:**
+- `docs/upwork-niche-positioning.md` — canonical reference, copy-paste ready
+- Memory: `niche-icp.md` + `MEMORY.md` updated with pointer
+
+**Active decisions:**
+- Top niche is HORIZONTAL (captures all 10+ verticals), secondaries are vertical-specific to catch keyword-matched jobs
+- 10 niches, not 15 — merged commerce (marketplace+arbitrage+Shopify), document/compliance (CPA+immigration+regulation), and hospitality+booking
+- Every named example uses real client name, real geography, real stack, real outcome — no aspirational claims
+- Don't market Claude Code anywhere (internal tool, not public offering)
+- "Real signal vs false signal" insight: low Upwork spend ≠ red flag. The real signal is "won't commit to milestone 1 in writing within 7–10 days." TasteForge $600 → shipped clean. SmartFlip $2,500 → stalled at no-contract.
+
+**What comes next:**
+- Move to Dawson Wells Gallery deal — meeting Thursday Apr 30. Hard red flag: requested WordPress (excluded stack). Need to either decline-and-refer or counter-propose modern stack (Next.js + Sanity / Webflow).
+
+---
+
+## Previous Session: 2026-04-22
 
 ### Convento Arcádia — Demo built, tone-polished, delivery message ready
 
