@@ -61,38 +61,74 @@ export default function DawsonWellsDemoPage() {
         id="artworks"
         index="03"
         title="The artworks page"
-        tease="Browsable grid with category filter — Photography, Paintings, Drawings, Ceramics, Prints. Designed for the full hundred pieces."
+        tease="Where visitors browse the full collection. The page that earns its keep with a hundred pieces."
+        useCases={[
+          "Visitors see all artwork on one page, laid out so even a hundred pieces feel browsable",
+          "Filter by category — Photography, Paintings, Drawings, Ceramics, Prints",
+          "Search by title or artist name",
+          "Click any piece to open its own full page",
+        ]}
       />
       <LockedSection
         id="piece"
         index="04"
         title="A single piece"
-        tease="Each artwork has its own page — full image, artist, medium, dimensions, and an inquiry button that lands in your inbox."
+        tease="Each artwork has its own page — generous space for the image, clear metadata, one button to inquire."
+        useCases={[
+          "Full-size image of the artwork, with title, artist, year, medium, and dimensions clearly shown",
+          "An 'Inquire about this piece' button that sends an email straight to the gallery inbox",
+          "Other works by the same artist shown below, so visitors keep browsing",
+          "Each piece has its own clean URL — easy to share with a collector or send by email",
+        ]}
       />
       <LockedSection
         id="news"
         index="05"
         title="News"
-        tease="List view for exhibitions, acquisitions, artist conversations. Each post is its own readable page."
+        tease="A space for exhibition openings, new acquisitions, and artist conversations."
+        useCases={[
+          "Posts for exhibitions, new acquisitions, artist interviews, and gallery updates",
+          "Each post is its own readable page with full layout and large images",
+          "Filter the list by category — Exhibition, Acquisition, Artist, Gallery",
+          "Most recent posts shown first, with image and excerpt",
+        ]}
       />
       <LockedSection
         id="pages"
         index="06"
         title="The rest of the site"
-        tease="About, Mission & Vision, Company Overview, Contact. Each is editable as a single page in the CMS, on the same typographic system."
+        tease="About, Mission & Vision, Company Overview, Contact. Same typographic system as the rest of the site."
+        useCases={[
+          "About — gallery history, the team, the space, opening hours",
+          "Mission & Vision — editable as a single page in the CMS",
+          "Company Overview — press coverage, partners, exhibition history, downloadable press kit",
+          "Contact — inquiry form that lands in your inbox, address with map, opening hours, social links",
+        ]}
       />
       <LockedSection
         id="sitemap"
         index="07"
         title="Structure"
-        tease="Sitemap of every page in your brief, mapped to where it lives in the CMS. Same nav across every page."
+        tease="Every page in your brief, where it lives, and how the navigation holds it together."
+        useCases={[
+          "The same navigation appears on every page, exactly as you specified in the brief",
+          "Mobile menu mirrors desktop — no broken patterns on small screens",
+          "Every page has its own clean URL: /artworks, /news, /about, /contact, and so on",
+          "Search engines see the full structure, so the gallery shows up in Google for the right searches",
+        ]}
       />
       <CMSSection />
       <LockedSection
         id="stack"
         index="09"
         title="How it's built"
-        tease="The four reasons this match the reference site — image performance, design ceiling, the CMS feel, and email inquiries."
+        tease="The four reasons the build matches the reference site quality — written for you, not for a developer."
+        useCases={[
+          "The site loads fast even with a hundred high-resolution images",
+          "Custom design — the look matches your reference, not a stock theme",
+          "The CMS feels like Notion, not WordPress — no plugins to fight, no theme dashboard to wrestle",
+          "Email inquiries land directly in your inbox — no third-party form service, no spam, no signup walls",
+        ]}
       />
       <Footer />
     </main>
@@ -794,7 +830,7 @@ function CMSSection() {
       <p className="text-base text-black/65 max-w-2xl mb-10 leading-relaxed">
         This is the content management system you'll use day to day. Step one
         is below — the list view, where every piece lives. Steps two and three
-        are built; we'll walk through them together on our call.
+        are part of the build; click them to see what they cover.
       </p>
 
       {/* Step tabs */}
@@ -896,9 +932,9 @@ function CMSSection() {
         {(step === "edit" || step === "publish") && (
           <>
             <strong className="text-black/80">
-              Step {step === "edit" ? "2" : "3"} is built —
+              Step {step === "edit" ? "2" : "3"} is part of the build —
             </strong>{" "}
-            kept off-screen here so we have something to walk through together.
+            see what it covers in the panel above.
           </>
         )}
       </div>
@@ -911,25 +947,46 @@ function CMSLockedPanel({ step }: { step: "edit" | "publish" }) {
     step === "edit"
       ? {
           title: "The edit form, with live preview",
-          body: "Drop in the image, fill out the fields, see exactly how the piece will look on the site before anything goes live. We'll walk it through together on the call.",
+          useCases: [
+            "Drop in the image, fill out title, artist, year, medium, and dimensions",
+            "Crop the image inside the editor — no Photoshop needed",
+            "Live preview shows exactly how the piece will look on the website",
+            "Changes save automatically as drafts so nothing gets lost",
+          ],
         }
       : {
           title: "The publish flow",
-          body: "Publish now, schedule for later, save as draft, roll back any change. Every revision is logged. We'll walk it through together on the call.",
+          useCases: [
+            "Publish now — the piece is live on the site in about five seconds",
+            "Schedule for later, e.g. next Monday morning before the gallery opens",
+            "Save as draft and come back to it whenever",
+            "Every revision is logged — roll back any change at any time",
+          ],
         };
   return (
-    <div className="bg-white p-12 flex items-center justify-center min-h-[640px]">
-      <div className="text-center max-w-md">
-        <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center mx-auto mb-6">
-          <Lock className="w-5 h-5 text-black/55" />
+    <div className="bg-white p-10 min-h-[640px] flex items-center">
+      <div className="max-w-lg mx-auto w-full">
+        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-black/45 mb-5">
+          <Lock className="w-3 h-3" />
+          Part of the build
         </div>
         <div
           style={{ fontFamily: "var(--font-playfair)" }}
-          className="text-2xl font-medium mb-3"
+          className="text-2xl font-medium mb-6"
         >
           {copy.title}
         </div>
-        <p className="text-sm text-black/60 leading-relaxed">{copy.body}</p>
+        <ul className="space-y-3">
+          {copy.useCases.map((u, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-3 text-[14px] text-black/70 leading-relaxed"
+            >
+              <Check className="w-4 h-4 text-black/45 mt-0.5 flex-shrink-0" />
+              <span>{u}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -1374,11 +1431,13 @@ function LockedSection({
   index,
   title,
   tease,
+  useCases,
 }: {
   id: string;
   index: string;
   title: string;
   tease: string;
+  useCases: string[];
 }) {
   return (
     <section
@@ -1389,11 +1448,25 @@ function LockedSection({
       <p className="text-base text-black/55 max-w-2xl mb-8 leading-relaxed">
         {tease}
       </p>
-      <div className="rounded-2xl border border-dashed border-black/15 bg-[#FAFAF8] py-16 px-6 flex items-center justify-center">
-        <div className="flex items-center gap-3 text-sm text-black/55">
-          <Lock className="w-4 h-4" />
-          Walked through on our call.
+      <div className="rounded-2xl border border-black/10 bg-[#FAFAF8] p-10 max-w-3xl">
+        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-black/45 mb-5">
+          <Lock className="w-3 h-3" />
+          Part of the build
         </div>
+        <div className="text-sm font-medium mb-4 text-black/80">
+          What this section will do:
+        </div>
+        <ul className="space-y-3">
+          {useCases.map((u, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-3 text-[15px] text-black/70 leading-relaxed"
+            >
+              <Check className="w-4 h-4 text-black/45 mt-1 flex-shrink-0" />
+              <span>{u}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
