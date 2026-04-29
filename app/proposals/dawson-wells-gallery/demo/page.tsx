@@ -19,6 +19,7 @@ import {
   Upload,
   Crop,
   Eye,
+  Lock,
 } from "lucide-react";
 import {
   artworks,
@@ -37,14 +38,14 @@ const playfair = Playfair_Display({
 });
 
 const sections = [
-  { id: "preview", label: "The website" },
-  { id: "artworks", label: "Artworks page" },
-  { id: "piece", label: "A single piece" },
-  { id: "news", label: "News" },
-  { id: "pages", label: "The rest" },
-  { id: "sitemap", label: "Structure" },
-  { id: "cms", label: "Behind the scenes" },
-  { id: "stack", label: "How it's built" },
+  { id: "preview", label: "The website", locked: false },
+  { id: "artworks", label: "Artworks page", locked: true },
+  { id: "piece", label: "A single piece", locked: true },
+  { id: "news", label: "News", locked: true },
+  { id: "pages", label: "The rest", locked: true },
+  { id: "sitemap", label: "Structure", locked: true },
+  { id: "cms", label: "Behind the scenes", locked: false },
+  { id: "stack", label: "How it's built", locked: true },
 ];
 
 export default function DawsonWellsDemoPage() {
@@ -56,13 +57,43 @@ export default function DawsonWellsDemoPage() {
       <Hero />
       <SectionNav />
       <HomepagePreview />
-      <ArtworksSection />
-      <PieceSection />
-      <NewsSection />
-      <OtherPagesSection />
-      <SitemapSection />
+      <LockedSection
+        id="artworks"
+        index="03"
+        title="The artworks page"
+        tease="Browsable grid with category filter — Photography, Paintings, Drawings, Ceramics, Prints. Designed for the full hundred pieces."
+      />
+      <LockedSection
+        id="piece"
+        index="04"
+        title="A single piece"
+        tease="Each artwork has its own page — full image, artist, medium, dimensions, and an inquiry button that lands in your inbox."
+      />
+      <LockedSection
+        id="news"
+        index="05"
+        title="News"
+        tease="List view for exhibitions, acquisitions, artist conversations. Each post is its own readable page."
+      />
+      <LockedSection
+        id="pages"
+        index="06"
+        title="The rest of the site"
+        tease="About, Mission & Vision, Company Overview, Contact. Each is editable as a single page in the CMS, on the same typographic system."
+      />
+      <LockedSection
+        id="sitemap"
+        index="07"
+        title="Structure"
+        tease="Sitemap of every page in your brief, mapped to where it lives in the CMS. Same nav across every page."
+      />
       <CMSSection />
-      <StackSection />
+      <LockedSection
+        id="stack"
+        index="09"
+        title="How it's built"
+        tease="The four reasons this match the reference site — image performance, design ceiling, the CMS feel, and email inquiries."
+      />
       <Footer />
     </main>
   );
@@ -141,12 +172,17 @@ function SectionNav() {
           <a
             key={s.id}
             href={`#${s.id}`}
-            className="text-black/55 hover:text-black transition-colors"
+            className={`flex items-center gap-1.5 transition-colors ${
+              s.locked
+                ? "text-black/35 hover:text-black/55"
+                : "text-black/65 hover:text-black"
+            }`}
           >
-            <span className="text-black/30 mr-1.5">
-              {String(i + 1).padStart(2, "0")}
+            <span className="text-black/25">
+              {String(i + 2).padStart(2, "0")}
             </span>
             {s.label}
+            {s.locked && <Lock className="w-2.5 h-2.5 text-black/30" />}
           </a>
         ))}
       </div>
@@ -753,12 +789,12 @@ function CMSSection() {
         style={{ fontFamily: "var(--font-playfair)" }}
         className="text-3xl md:text-4xl font-medium mb-5 max-w-3xl"
       >
-        Adding an artwork — three clicks, no plugins.
+        Adding an artwork — three steps, no plugins.
       </h3>
       <p className="text-base text-black/65 max-w-2xl mb-10 leading-relaxed">
-        This is the content management system you'll use day to day. Click the
-        steps below to walk through how a piece goes from a folder on your
-        laptop to live on the website.
+        This is the content management system you'll use day to day. Step one
+        is below — the list view, where every piece lives. Steps two and three
+        are built; we'll walk through them together on our call.
       </p>
 
       {/* Step tabs */}
@@ -776,6 +812,7 @@ function CMSSection() {
           active={step === "edit"}
           onClick={() => setStep("edit")}
           icon={<Crop className="w-4 h-4" />}
+          locked
         />
         <CMSTab
           number="3"
@@ -783,6 +820,7 @@ function CMSSection() {
           active={step === "publish"}
           onClick={() => setStep("publish")}
           icon={<Globe className="w-4 h-4" />}
+          locked
         />
       </div>
 
@@ -838,8 +876,9 @@ function CMSSection() {
           {/* Main panel */}
           <div className="col-span-9 bg-white">
             {step === "list" && <CMSListView />}
-            {step === "edit" && <CMSEditView />}
-            {step === "publish" && <CMSPublishView />}
+            {(step === "edit" || step === "publish") && (
+              <CMSLockedPanel step={step} />
+            )}
           </div>
         </div>
       </div>
@@ -850,27 +889,49 @@ function CMSSection() {
           <>
             <strong className="text-black/80">Step 1.</strong> The artworks
             list. Search, filter by category, drag to reorder. Click any piece
-            to edit it. Hit "+" to add a new one — that's the next step.
+            to edit it. Hit "+" to add a new one — and that's where steps 2
+            and 3 take over.
           </>
         )}
-        {step === "edit" && (
+        {(step === "edit" || step === "publish") && (
           <>
-            <strong className="text-black/80">Step 2.</strong> Drop in the
-            image, fill out the fields. The crop happens here, not in
-            Photoshop. The preview on the right shows exactly how it will look
-            on the website before anything goes live.
-          </>
-        )}
-        {step === "publish" && (
-          <>
-            <strong className="text-black/80">Step 3.</strong> Hit publish.
-            The piece is live in five seconds. You can also schedule it for
-            later, save as draft, or roll back to a previous version. Every
-            change is logged.
+            <strong className="text-black/80">
+              Step {step === "edit" ? "2" : "3"} is built —
+            </strong>{" "}
+            kept off-screen here so we have something to walk through together.
           </>
         )}
       </div>
     </section>
+  );
+}
+
+function CMSLockedPanel({ step }: { step: "edit" | "publish" }) {
+  const copy =
+    step === "edit"
+      ? {
+          title: "The edit form, with live preview",
+          body: "Drop in the image, fill out the fields, see exactly how the piece will look on the site before anything goes live. We'll walk it through together on the call.",
+        }
+      : {
+          title: "The publish flow",
+          body: "Publish now, schedule for later, save as draft, roll back any change. Every revision is logged. We'll walk it through together on the call.",
+        };
+  return (
+    <div className="bg-white p-12 flex items-center justify-center min-h-[640px]">
+      <div className="text-center max-w-md">
+        <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center mx-auto mb-6">
+          <Lock className="w-5 h-5 text-black/55" />
+        </div>
+        <div
+          style={{ fontFamily: "var(--font-playfair)" }}
+          className="text-2xl font-medium mb-3"
+        >
+          {copy.title}
+        </div>
+        <p className="text-sm text-black/60 leading-relaxed">{copy.body}</p>
+      </div>
+    </div>
   );
 }
 
@@ -880,12 +941,14 @@ function CMSTab({
   active,
   onClick,
   icon,
+  locked = false,
 }: {
   number: string;
   label: string;
   active: boolean;
   onClick: () => void;
   icon: React.ReactNode;
+  locked?: boolean;
 }) {
   return (
     <button
@@ -893,18 +956,33 @@ function CMSTab({
       className={`flex items-center gap-3 px-5 py-3 rounded-xl text-sm transition-all ${
         active
           ? "bg-[#0A0A0A] text-white shadow-lg shadow-black/15"
+          : locked
+          ? "bg-white border border-dashed border-black/15 text-black/45 hover:bg-black/[0.02]"
           : "bg-white border border-black/10 text-black/65 hover:bg-black/5"
       }`}
     >
       <span
         className={`flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-medium ${
-          active ? "bg-white/15 text-white" : "bg-black/5 text-black/55"
+          active
+            ? "bg-white/15 text-white"
+            : locked
+            ? "bg-black/5 text-black/40"
+            : "bg-black/5 text-black/55"
         }`}
       >
         {number}
       </span>
-      <span className={active ? "text-white" : "text-black/65"}>{icon}</span>
+      <span
+        className={
+          active ? "text-white" : locked ? "text-black/35" : "text-black/65"
+        }
+      >
+        {icon}
+      </span>
       <span>{label}</span>
+      {locked && !active && (
+        <Lock className="w-3 h-3 text-black/35 ml-1" />
+      )}
     </button>
   );
 }
@@ -1288,6 +1366,36 @@ function SectionLabel({ index, title }: { index: string; title: string }) {
         {index} — {title}
       </div>
     </div>
+  );
+}
+
+function LockedSection({
+  id,
+  index,
+  title,
+  tease,
+}: {
+  id: string;
+  index: string;
+  title: string;
+  tease: string;
+}) {
+  return (
+    <section
+      id={id}
+      className="max-w-7xl mx-auto px-6 py-16 scroll-mt-20"
+    >
+      <SectionLabel index={index} title={title} />
+      <p className="text-base text-black/55 max-w-2xl mb-8 leading-relaxed">
+        {tease}
+      </p>
+      <div className="rounded-2xl border border-dashed border-black/15 bg-[#FAFAF8] py-16 px-6 flex items-center justify-center">
+        <div className="flex items-center gap-3 text-sm text-black/55">
+          <Lock className="w-4 h-4" />
+          Walked through on our call.
+        </div>
+      </div>
+    </section>
   );
 }
 
